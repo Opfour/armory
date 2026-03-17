@@ -1,6 +1,6 @@
-# praxis-skills
+# armory
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE) [![skills: 49](https://img.shields.io/badge/skills-49-informational)](skills/) [![evals: 100%](https://img.shields.io/badge/eval_coverage-100%25-success)](skills/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE) [![skills: 50](https://img.shields.io/badge/skills-50-informational)](skills/) [![evals: 100%](https://img.shields.io/badge/eval_coverage-100%25-success)](skills/)
 
 Curated, production-grade skills for AI coding agents. No magic, no demos — battle-tested workflows built for developers who use AI seriously.
 
@@ -8,7 +8,7 @@ Curated, production-grade skills for AI coding agents. No magic, no demos — ba
 
 ## Overview
 
-`praxis-skills` is a collection of custom skills for [Claude Code](https://claude.ai/code) and Claude.ai. Each skill is a self-contained prompt package that extends Claude with a repeatable, opinionated workflow for a specific task domain.
+`armory` is a collection of custom skills for [Claude Code](https://claude.ai/code) and Claude.ai. Each skill is a self-contained prompt package that extends Claude with a repeatable, opinionated workflow for a specific task domain.
 
 **Philosophy:** Skills in this collection are practical and context-free. They define the _how_, not just the _what_ — covering inputs, outputs, edge cases, and failure modes. They are tested in real workloads, not constructed as examples.
 
@@ -32,6 +32,7 @@ Intended for developers who treat AI coding agents as a serious part of their wo
 | [debug-investigator](skills/debug-investigator/) | Systematic debugging framework — hypothesis-driven investigation with bisection, log analysis, instrumentation, and minimal reproduction    |
 | [to-markdown](skills/to-markdown/)               | Convert any file or URL to clean Markdown via MarkItDown — PDF, DOCX, XLSX, PPTX, HTML, images, audio, CSV, JSON, XML, YouTube, EPub       |
 | [web-fetch](skills/web-fetch/)                   | Web content fetching via curl and WebFetch — replaces the Fetch MCP server with native HTTP operations and jq parsing                       |
+| [skill-library](skills/skill-library/)           | Agent-native catalog for browsing, installing, updating, syncing, and removing armory skills from within a Claude Code session              |
 
 ### Research & Analysis
 
@@ -124,20 +125,20 @@ Install any skill directly using [`npx skills`](https://github.com/vercel-labs/s
 
 ```bash
 # Install all skills
-npx skills add Mathews-Tom/praxis-skills
+npx skills add Mathews-Tom/armory
 
 # Install a specific skill
-npx skills add Mathews-Tom/praxis-skills -s architecture-reviewer
+npx skills add Mathews-Tom/armory -s architecture-reviewer
 
 # List available skills without installing
-npx skills add Mathews-Tom/praxis-skills -l
+npx skills add Mathews-Tom/armory -l
 ```
 
 **Option 2 — TUI Installer**
 
 ```bash
-git clone https://github.com/Mathews-Tom/praxis-skills.git
-cd praxis-skills
+git clone https://github.com/Mathews-Tom/armory.git
+cd armory
 uv run scripts/install_skills.py
 ```
 
@@ -145,11 +146,11 @@ Displays a version-aware table of all skills, detects installed versions, and le
 
 **Option 3 — Manual**
 
-Clone the repo and point Claude Code at individual skill folders:
+Clone the repo and symlink individual skill folders:
 
 ```bash
-git clone https://github.com/Mathews-Tom/praxis-skills.git
-claude --add-dir praxis-skills/skills/architecture-reviewer
+git clone https://github.com/Mathews-Tom/armory.git
+ln -s "$(pwd)/armory/skills/architecture-reviewer" ~/.claude/skills/architecture-reviewer
 ```
 
 Or download `.skill` archives from the [Releases](../../releases) page.
@@ -196,13 +197,6 @@ Every skill is evaluated against 6 dimensions using the [skill-evaluator](skills
 | Consistency & Integrity | 12%    | Name matching, file references, description-body alignment  |
 | CONTRIBUTING Compliance | 8%     | Naming conventions, length limits, YAML validity            |
 
-Run a full audit:
-
-```bash
-claude --add-dir skills/skill-evaluator
-# Then: "Run a full skill audit on this repo"
-```
-
 ---
 
 ## Eval Coverage
@@ -212,8 +206,8 @@ Every skill has eval cases in `skills/<name>/evals/cases.yaml` — positive trig
 **Validation:**
 
 ```bash
-python scripts/validate_evals.py    # Schema validation for all eval files
-python scripts/generate_manifest.py # Regenerate skills.yaml manifest
+uv run scripts/validate_evals.py    # Schema validation for all eval files
+uv run scripts/generate_manifest.py # Regenerate skills.yaml manifest
 ```
 
 **CI pipeline** (`.github/workflows/skill-evals.yml`):
@@ -259,4 +253,6 @@ MIT. See [LICENSE](LICENSE) for details.
 
 ---
 
-<sub>#AIPraxisPulse</sub>
+> **Migrated from praxis-skills.** If you had skills installed from the previous repo,
+> re-run the installer to update paths. Existing skills continue to work — the content
+> is unchanged.
