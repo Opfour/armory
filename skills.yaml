@@ -212,6 +212,16 @@ skills:
     code review or PR review — use pr-review instead. NOT for security audits of repositories — use repo-sentinel instead.'
   path: skills/immune
   source: https://github.com/Mathews-Tom/armory/blob/main/skills/immune/SKILL.md
+- name: lightpanda-browser
+  version: 1.0.0
+  description: Lightweight headless browser automation using Lightpanda as the backend engine with agent-browser CLI. 9x lower
+    memory, 11x faster than Chromium. Use for web scraping, DOM interaction, data extraction, form automation, and API testing
+    where visual rendering is not required. Triggers on "lightpanda", "lightweight browser", "fast headless browser", "headless
+    scraping", "low memory browser", "browser without rendering", "is lightpanda faster than chromium", "which headless browser
+    uses less memory", "how do I scrape without chromium", or any browser automation task where speed and resource efficiency
+    matter more than visual fidelity.
+  path: skills/lightpanda-browser
+  source: https://github.com/Mathews-Tom/armory/blob/main/skills/lightpanda-browser/SKILL.md
 - name: linkedin-post-style
   version: 1.2.1
   description: Write LinkedIn posts matching a specific technical author's voice — direct, analytical, dry-humored, and precise.
