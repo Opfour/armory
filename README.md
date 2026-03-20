@@ -1,16 +1,16 @@
 # armory
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE) [![skills: 52](https://img.shields.io/badge/skills-52-informational)](skills/) [![evals: 100%](https://img.shields.io/badge/eval_coverage-100%25-success)](skills/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE) [![packages: 69](https://img.shields.io/badge/packages-69-informational)](manifest.yaml) [![evals: 100%](https://img.shields.io/badge/eval_coverage-100%25-success)](skills/)
 
-Curated, production-grade skills for AI coding agents. No magic, no demos — battle-tested workflows built for developers who use AI seriously.
+Curated, production-grade skills, agents, hooks, rules, commands, utilities, and presets for AI coding agents. No magic, no demos — battle-tested workflows built for developers who use AI seriously.
 
 ---
 
 ## Overview
 
-`armory` is a collection of custom skills for [Claude Code](https://claude.ai/code) and Claude.ai. Each skill is a self-contained prompt package that extends Claude with a repeatable, opinionated workflow for a specific task domain.
+`armory` is a collection of packages for [Claude Code](https://claude.ai/code) and Claude.ai. Each package is a self-contained prompt or automation unit that extends Claude with a repeatable, opinionated workflow for a specific task domain. Packages span seven types: skills, agents, hooks, rules, commands, utilities, and presets.
 
-**Philosophy:** Skills in this collection are practical and context-free. They define the _how_, not just the _what_ — covering inputs, outputs, edge cases, and failure modes. They are tested in real workloads, not constructed as examples.
+**Philosophy:** Packages in this collection are practical and context-free. They define the _how_, not just the _what_ — covering inputs, outputs, edge cases, and failure modes. They are tested in real workloads, not constructed as examples.
 
 Intended for developers who treat AI coding agents as a serious part of their workflow.
 
@@ -20,20 +20,20 @@ Intended for developers who treat AI coding agents as a serious part of their wo
 
 ### Development & Tooling
 
-| Skill                                            | Description                                                                                                                                 |
-| ------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------- |
-| [agent-builder](skills/agent-builder/)           | Build AI agents using the Claude Agent SDK and headless CLI mode — covers tool definitions, MCP servers, and programmatic orchestration     |
-| [github](skills/github/)                         | GitHub CLI operations via `gh` — issues, PRs, CI/Actions, releases, search, REST/GraphQL API, with error handling and automation workflows  |
-| [filesystem](skills/filesystem/)                 | File and directory operations via Claude Code built-in tools — replaces the Filesystem MCP server with native Read, Write, Edit, Glob, Grep |
-| [mcp-to-skill](skills/mcp-to-skill/)             | Convert MCP servers into on-demand skills to reduce active context window token usage                                                       |
-| [gpu-optimizer](skills/gpu-optimizer/)           | GPU optimization for consumer GPUs (8-24GB VRAM) — PyTorch, XGBoost, CuPy/RAPIDS, memory management, and CUDA tuning                        |
-| [tavily](skills/tavily/)                         | AI-optimized web search and content extraction via Tavily API with structured output parsing                                                |
-| [test-harness](skills/test-harness/)             | Comprehensive pytest suite generation — happy path, edge cases, error conditions, fixtures, mocks, async, parametrized tests                |
-| [debug-investigator](skills/debug-investigator/) | Systematic debugging framework — hypothesis-driven investigation with bisection, log analysis, instrumentation, and minimal reproduction    |
-| [to-markdown](skills/to-markdown/)               | Convert any file or URL to clean Markdown via MarkItDown — PDF, DOCX, XLSX, PPTX, HTML, images, audio, CSV, JSON, XML, YouTube, EPub       |
-| [web-fetch](skills/web-fetch/)                   | Web content fetching via curl and WebFetch — replaces the Fetch MCP server with native HTTP operations and jq parsing                       |
+| Skill                                            | Description                                                                                                                                                 |
+| ------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [agent-builder](skills/agent-builder/)           | Build AI agents using the Claude Agent SDK and headless CLI mode — covers tool definitions, MCP servers, and programmatic orchestration                     |
+| [github](skills/github/)                         | GitHub CLI operations via `gh` — issues, PRs, CI/Actions, releases, search, REST/GraphQL API, with error handling and automation workflows                  |
+| [filesystem](skills/filesystem/)                 | File and directory operations via Claude Code built-in tools — replaces the Filesystem MCP server with native Read, Write, Edit, Glob, Grep                 |
+| [mcp-to-skill](skills/mcp-to-skill/)             | Convert MCP servers into on-demand skills to reduce active context window token usage                                                                       |
+| [gpu-optimizer](skills/gpu-optimizer/)           | GPU optimization for consumer GPUs (8-24GB VRAM) — PyTorch, XGBoost, CuPy/RAPIDS, memory management, and CUDA tuning                                        |
+| [tavily](skills/tavily/)                         | AI-optimized web search and content extraction via Tavily API with structured output parsing                                                                |
+| [test-harness](skills/test-harness/)             | Comprehensive pytest suite generation — happy path, edge cases, error conditions, fixtures, mocks, async, parametrized tests                                |
+| [debug-investigator](skills/debug-investigator/) | Systematic debugging framework — hypothesis-driven investigation with bisection, log analysis, instrumentation, and minimal reproduction                    |
+| [to-markdown](skills/to-markdown/)               | Convert any file or URL to clean Markdown via MarkItDown — PDF, DOCX, XLSX, PPTX, HTML, images, audio, CSV, JSON, XML, YouTube, EPub                        |
+| [web-fetch](skills/web-fetch/)                   | Web content fetching via curl and WebFetch — replaces the Fetch MCP server with native HTTP operations and jq parsing                                       |
 | [lightpanda-browser](skills/lightpanda-browser/) | Lightweight headless browser automation via Lightpanda + agent-browser CDP — 9x lower memory, 11x faster, for scraping, DOM extraction, and form automation |
-| [skill-library](skills/skill-library/)           | Agent-native catalog for browsing, installing, updating, syncing, and removing armory skills from within a Claude Code session              |
+| [skill-library](skills/skill-library/)           | Agent-native catalog for browsing, installing, updating, syncing, and removing armory skills from within a Claude Code session                              |
 
 ### Research & Analysis
 
@@ -52,7 +52,7 @@ Intended for developers who treat AI coding agents as a serious part of their wo
 | [code-refiner](skills/code-refiner/)                   | Deep code simplification and refactoring — structural complexity analysis, anti-pattern detection, idiomatic rewrites across Python, Go, TS, Rust  |
 | [pr-review](skills/pr-review/)                         | Diff-based PR review across 5 dimensions — code quality, test coverage, silent failures, type design, comment quality with severity-ranked output  |
 | [pre-landing-review](skills/pre-landing-review/)       | Gate-oriented safety audit with two-pass severity triage — CRITICAL (SQL, races, trust) blocks landing, INFORMATIONAL is advisory                  |
-| [plan-review](skills/plan-review/)                     | Pre-implementation plan audit stress-testing scope, assumptions, risks, and failure modes with product and engineering lenses                       |
+| [plan-review](skills/plan-review/)                     | Pre-implementation plan audit stress-testing scope, assumptions, risks, and failure modes with product and engineering lenses                      |
 | [manuscript-review](skills/manuscript-review/)         | Pre-publication manuscript audit with 24 diagnostic dimensions, citation hygiene, and cross-element coherence                                      |
 | [manuscript-provenance](skills/manuscript-provenance/) | Computational provenance audit verifying every number, table, and figure in a manuscript traces back to code                                       |
 | [repo-sentinel](skills/repo-sentinel/)                 | Security audit and enforcement for public repos — 12 attack surfaces, pre-release readiness, history scrubbing, CI gates                           |
@@ -74,13 +74,13 @@ Intended for developers who treat AI coding agents as a serious part of their wo
 
 ### Documentation & Release
 
-| Skill                                            | Description                                                                                                                |
-| ------------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------- |
-| [changelog-composer](skills/changelog-composer/) | Structured changelogs from git history — conventional commit parsing, audience filtering, breaking change detection        |
-| [ship-workflow](skills/ship-workflow/)           | Automated release pipeline — merge main, run tests, pre-landing review, version bump, changelog, bisectable commits, PR  |
+| Skill                                            | Description                                                                                                                 |
+| ------------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------- |
+| [changelog-composer](skills/changelog-composer/) | Structured changelogs from git history — conventional commit parsing, audience filtering, breaking change detection         |
+| [ship-workflow](skills/ship-workflow/)           | Automated release pipeline — merge main, run tests, pre-landing review, version bump, changelog, bisectable commits, PR     |
 | [engineering-retro](skills/engineering-retro/)   | Git-based engineering retrospective — commit analysis, velocity metrics, session patterns, health scoring over time windows |
-| [adr-writer](skills/adr-writer/)                 | Architecture Decision Records — context capture, alternatives analysis, consequence projection, status lifecycle           |
-| [api-docs-generator](skills/api-docs-generator/) | API documentation audit and enhancement — FastAPI docstrings, Pydantic examples, OpenAPI spec enrichment, coverage reports |
+| [adr-writer](skills/adr-writer/)                 | Architecture Decision Records — context capture, alternatives analysis, consequence projection, status lifecycle            |
+| [api-docs-generator](skills/api-docs-generator/) | API documentation audit and enhancement — FastAPI docstrings, Pydantic examples, OpenAPI spec enrichment, coverage reports  |
 
 ### Backend & Data
 
@@ -103,7 +103,7 @@ Intended for developers who treat AI coding agents as a serious part of their wo
 
 | Skill                                              | Description                                                                                                                                                         |
 | -------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [humanize](skills/humanize/)                       | Detect and remove AI-generated writing patterns — 24 lexical patterns + 12 statistical signals, 6 domain profiles, 5-phase pipeline with semantic preservation |
+| [humanize](skills/humanize/)                       | Detect and remove AI-generated writing patterns — 24 lexical patterns + 12 statistical signals, 6 domain profiles, 5-phase pipeline with semantic preservation      |
 | [linkedin-post-style](skills/linkedin-post-style/) | Write LinkedIn posts in a specific technical voice with visual companion support — carousels via md-to-pdf, images via concept-to-image, video via concept-to-video |
 
 ### Deprecated
@@ -115,6 +115,55 @@ Skills below are superseded by base model capabilities. They remain installable 
 | [doc-condenser](skills/doc-condenser/)             | Base model handles summarization natively        |
 | [regex-builder](skills/regex-builder/)             | Base model generates regex at equivalent quality |
 | [sequential-thinking](skills/sequential-thinking/) | Base model handles chain-of-thought natively     |
+
+---
+
+## Agents
+
+| Agent                                          | Description                                           |
+| ---------------------------------------------- | ----------------------------------------------------- |
+| [code-reviewer](agents/code-reviewer/)         | Multi-phase code review with severity-ranked findings |
+| [security-reviewer](agents/security-reviewer/) | OWASP Top 10 vulnerability scanning                   |
+| [secret-scanner](agents/secret-scanner/)       | Pre-commit detection of hardcoded credentials         |
+
+## Rules
+
+| Rule                                            | Description                                    |
+| ----------------------------------------------- | ---------------------------------------------- |
+| [commit-standards](rules/commit-standards/)     | Conventional commit format, branch naming      |
+| [test-standards](rules/test-standards/)         | Coverage thresholds, test quality requirements |
+| [security-standards](rules/security-standards/) | Secret management, input validation, auth      |
+
+## Commands
+
+| Command                                    | Description                      |
+| ------------------------------------------ | -------------------------------- |
+| [tdd](commands/tdd/)                       | Test-driven development workflow |
+| [security-scan](commands/security-scan/)   | Security vulnerability audit     |
+| [refactor](commands/refactor/) | Code simplification workflow     |
+
+## Hooks
+
+| Hook                                      | Description                    |
+| ----------------------------------------- | ------------------------------ |
+| [git-protection](hooks/git-protection/)   | Block dangerous git operations |
+| [pre-edit-backup](hooks/pre-edit-backup/) | Backup files before edits      |
+| [cost-tracker](hooks/cost-tracker/)       | Log session cost/token usage   |
+
+## Utilities
+
+| Utility                                                 | Description                        |
+| ------------------------------------------------------- | ---------------------------------- |
+| [dependency-tree](utilities/dependency-tree/)           | Visualize project dependency graph |
+| [test-coverage-report](utilities/test-coverage-report/) | Coverage summary for changed files |
+
+## Presets
+
+| Preset                                    | Description                                  |
+| ----------------------------------------- | -------------------------------------------- |
+| [core](presets/core/)                     | Essential skills + git safety for every user |
+| [python-strict](presets/python-strict/)   | Full Python enforcement stack                |
+| [security-first](presets/security-first/) | Security auditing and enforcement            |
 
 ---
 
@@ -135,19 +184,29 @@ npx skills add Mathews-Tom/armory -s architecture-reviewer
 npx skills add Mathews-Tom/armory -l
 ```
 
-**Option 2 — TUI Installer**
+**Option 2 — Profile installer**
 
 ```bash
 git clone https://github.com/Mathews-Tom/armory.git
 cd armory
-uv run scripts/install_skills.py
+
+# Install by profile
+just install-profile core
+just install-profile python-strict
+
+# Install by type
+uv run scripts/install.py --type skills
+uv run scripts/install.py --type agents
+
+# Interactive TUI
+uv run scripts/install.py
 ```
 
-Displays a version-aware table of all skills, detects installed versions, and lets you select which to install or upgrade.
+Displays a version-aware table of all packages, detects installed versions, and lets you select which to install or upgrade. Profiles install curated bundles of packages across all types.
 
 **Option 3 — Manual**
 
-Clone the repo and symlink individual skill folders:
+Clone the repo and symlink individual package folders:
 
 ```bash
 git clone https://github.com/Mathews-Tom/armory.git
@@ -166,19 +225,19 @@ Skills activate when Claude detects a matching intent in your message. Each skil
 
 ```text
 "Create an architecture diagram for my microservices setup"
-→ activates: architecture-diagram
+-> activates: architecture-diagram
 
 "Run a security audit before I push this to GitHub"
-→ activates: repo-sentinel
+-> activates: repo-sentinel
 
 "Convert this markdown file to PDF with the Mermaid diagrams rendered"
-→ activates: md-to-pdf
+-> activates: md-to-pdf
 
 "Build an agent that monitors a directory for changes"
-→ activates: agent-builder
+-> activates: agent-builder
 
 "Evaluate the quality of this skill"
-→ activates: skill-evaluator
+-> activates: skill-evaluator
 ```
 
 Skills do not require explicit invocation — Claude matches your intent against the skill's trigger definition and loads it automatically when relevant.
@@ -208,7 +267,7 @@ Every skill has eval cases in `skills/<name>/evals/cases.yaml` — positive trig
 
 ```bash
 uv run scripts/validate_evals.py    # Schema validation for all eval files
-uv run scripts/generate_manifest.py # Regenerate skills.yaml manifest
+uv run scripts/generate_manifest.py # Regenerate manifest.yaml
 ```
 
 **CI pipeline** (`.github/workflows/skill-evals.yml`):
@@ -216,16 +275,16 @@ uv run scripts/generate_manifest.py # Regenerate skills.yaml manifest
 - **PR gate**: validates manifest sync + eval schema on every pull request
 - **Weekly cron**: Monday runs for model drift detection
 
-**Pre-commit hook**: auto-regenerates `skills.yaml` when skill files change.
+**Pre-commit hook**: auto-regenerates `manifest.yaml` when skill files change.
 
 ---
 
 ## Packaging
 
-Each skill can be packaged into a `.skill` archive for distribution:
+Each package can be packaged into an archive for distribution:
 
 ```bash
-uv run scripts/package_skill.py skills/architecture-reviewer
+uv run scripts/package.py skills/architecture-reviewer
 ```
 
 ---
@@ -244,7 +303,7 @@ Adapters for other agent surfaces are planned in `adapters/`:
 
 ## Contributing
 
-See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines on submitting new skills or improving existing ones.
+See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines on submitting new packages or improving existing ones.
 
 ---
 
