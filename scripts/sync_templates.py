@@ -1,18 +1,22 @@
 #!/usr/bin/env python3
-"""Sync shared template files into consuming skill directories."""
+"""Sync shared template files into consuming package directories."""
 from __future__ import annotations
 
 import shutil
 import sys
 from pathlib import Path
 
-REPO_ROOT = Path(__file__).resolve().parent.parent
+_REPO_ROOT = Path(__file__).resolve().parent.parent
+if str(_REPO_ROOT) not in sys.path:
+    sys.path.insert(0, str(_REPO_ROOT))
+
+from scripts.package_types import REPO_ROOT
+
 TEMPLATES_DIR = REPO_ROOT / "_templates"
-SKILLS_DIR = REPO_ROOT / "skills"
 
 TEMPLATE_CONSUMERS: dict[str, list[str]] = {
-    "detection-patterns.md": ["humanize", "linkedin-post-style", "manuscript-review"],
-    "project-detection.md": ["ship-workflow", "plan-review", "qa-systematic"],
+    "detection-patterns.md": ["skills/humanize", "skills/linkedin-post-style", "skills/manuscript-review"],
+    "project-detection.md": ["skills/ship-workflow", "skills/plan-review", "skills/qa-systematic"],
 }
 
 
@@ -26,8 +30,8 @@ def sync_template(template_name: str, consumers: list[str]) -> list[str]:
     source_content = source.read_bytes()
     updated: list[str] = []
 
-    for skill_name in consumers:
-        target_dir = SKILLS_DIR / skill_name / "references"
+    for consumer in consumers:
+        target_dir = REPO_ROOT / consumer / "references"
         target = target_dir / template_name
 
         if target.exists() and target.read_bytes() == source_content:

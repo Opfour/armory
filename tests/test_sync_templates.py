@@ -22,10 +22,9 @@ class TestSyncTemplate:
         source.write_text("template content")
 
         monkeypatch.setattr(st, "TEMPLATES_DIR", templates_dir)  # type: ignore[attr-defined]
-        monkeypatch.setattr(st, "SKILLS_DIR", skills_dir)  # type: ignore[attr-defined]
         monkeypatch.setattr(st, "REPO_ROOT", tmp_path)  # type: ignore[attr-defined]
 
-        updated = sync_template("test.md", ["skill-a"])
+        updated = sync_template("test.md", ["skills/skill-a"])
 
         target = skills_dir / "skill-a" / "references" / "test.md"
         assert target.exists()
@@ -47,10 +46,9 @@ class TestSyncTemplate:
         target.write_text("old content")
 
         monkeypatch.setattr(st, "TEMPLATES_DIR", templates_dir)  # type: ignore[attr-defined]
-        monkeypatch.setattr(st, "SKILLS_DIR", skills_dir)  # type: ignore[attr-defined]
         monkeypatch.setattr(st, "REPO_ROOT", tmp_path)  # type: ignore[attr-defined]
 
-        updated = sync_template("test.md", ["skill-a"])
+        updated = sync_template("test.md", ["skills/skill-a"])
 
         assert target.read_text() == "updated content"
         assert len(updated) == 1
@@ -70,10 +68,9 @@ class TestSyncTemplate:
         target.write_text("same content")
 
         monkeypatch.setattr(st, "TEMPLATES_DIR", templates_dir)  # type: ignore[attr-defined]
-        monkeypatch.setattr(st, "SKILLS_DIR", skills_dir)  # type: ignore[attr-defined]
         monkeypatch.setattr(st, "REPO_ROOT", tmp_path)  # type: ignore[attr-defined]
 
-        updated = sync_template("test.md", ["skill-a"])
+        updated = sync_template("test.md", ["skills/skill-a"])
 
         assert len(updated) == 0
 
@@ -89,16 +86,20 @@ class TestSyncTemplate:
         source.write_text("content")
 
         monkeypatch.setattr(st, "TEMPLATES_DIR", templates_dir)  # type: ignore[attr-defined]
-        monkeypatch.setattr(st, "SKILLS_DIR", skills_dir)  # type: ignore[attr-defined]
         monkeypatch.setattr(st, "REPO_ROOT", tmp_path)  # type: ignore[attr-defined]
 
-        sync_template("test.md", ["skill-b"])
+        sync_template("test.md", ["skills/skill-b"])
 
         assert (skills_dir / "skill-b" / "references" / "test.md").exists()
 
     def test_real_templates_registered(self) -> None:
-        """Verify TEMPLATE_CONSUMERS has expected entries."""
+        """Verify TEMPLATE_CONSUMERS uses type/name format."""
         assert "detection-patterns.md" in TEMPLATE_CONSUMERS
-        assert "humanize" in TEMPLATE_CONSUMERS["detection-patterns.md"]
-        assert "linkedin-post-style" in TEMPLATE_CONSUMERS["detection-patterns.md"]
-        assert "manuscript-review" in TEMPLATE_CONSUMERS["detection-patterns.md"]
+        consumers = TEMPLATE_CONSUMERS["detection-patterns.md"]
+        assert "skills/humanize" in consumers
+        assert "skills/linkedin-post-style" in consumers
+        assert "skills/manuscript-review" in consumers
+
+        for template_consumers in TEMPLATE_CONSUMERS.values():
+            for consumer in template_consumers:
+                assert "/" in consumer, f"Consumer '{consumer}' must use type/name format"

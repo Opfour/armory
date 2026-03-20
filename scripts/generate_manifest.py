@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Generate skills.yaml manifest from SKILL.md frontmatter files."""
+"""Generate manifest.yaml from package definition frontmatter files."""
 from __future__ import annotations
 
 import argparse
@@ -7,31 +7,68 @@ import re
 import subprocess
 import sys
 from pathlib import Path
+from typing import Any
+
+# Ensure repo root is on sys.path for direct script execution.
+_REPO_ROOT = Path(__file__).resolve().parent.parent
+if str(_REPO_ROOT) not in sys.path:
+    sys.path.insert(0, str(_REPO_ROOT))
 
 import yaml
 
-REPO_ROOT = Path(__file__).resolve().parent.parent
-SKILLS_DIR = REPO_ROOT / "skills"
-MANIFEST_PATH = REPO_ROOT / "skills.yaml"
+from scripts.frontmatter import extract_version, parse_frontmatter
+from scripts.package_types import (
+    LEGACY_MANIFEST_PATH,
+    MANIFEST_PATH,
+    REPO_ROOT,
+    TYPES,
+    PackageType,
+)
+
+# Type-specific metadata extractors keyed by PackageType.key.
+# Each callable receives the parsed frontmatter dict and returns a dict of
+# extra fields to merge into the manifest entry.
+_TYPE_EXTRACTORS: dict[str, Any] = {
+    "agent": lambda m: _pick(m, model=("model",), category=("category",), execution_phase=("execution_phase",)),
+    "hook": lambda m: _pick_nested(m, events=("hook", "events")),
+    "rule": lambda m: _pick_nested(m, scope=("metadata", "scope")),
+    "utility": lambda m: _pick_nested(m, runtime=("utility", "runtime")),
+    "preset": lambda m: _count_nested(m, package_count=("preset", "packages")),
+}
 
 
-def parse_frontmatter(content: str) -> dict[str, str]:
-    """Parse YAML frontmatter from SKILL.md content.
+def _pick(meta: dict[str, Any], **fields: tuple[str, ...]) -> dict[str, Any]:
+    """Extract top-level fields from frontmatter."""
+    result: dict[str, Any] = {}
+    for out_key, (fm_key,) in fields.items():
+        val = meta.get(fm_key)
+        if val is not None:
+            result[out_key] = val
+    return result
 
-    Reuses the same regex-free approach: split on '---' delimiters.
-    """
-    match = re.match(r"^---\s*\n(.*?)\n---\s*\n", content, re.DOTALL)
-    if not match:
-        raise ValueError("No valid YAML frontmatter found")
-    return yaml.safe_load(match.group(1))
+
+def _pick_nested(meta: dict[str, Any], **fields: tuple[str, str]) -> dict[str, Any]:
+    """Extract nested fields (two levels) from frontmatter."""
+    result: dict[str, Any] = {}
+    for out_key, (parent_key, child_key) in fields.items():
+        parent = meta.get(parent_key)
+        if isinstance(parent, dict):
+            val = parent.get(child_key)
+            if val is not None:
+                result[out_key] = val
+    return result
 
 
-def extract_version(meta: dict[str, str]) -> str:
-    """Extract version from metadata.version (preferred) or top-level version (legacy)."""
-    metadata = meta.get("metadata")
-    if isinstance(metadata, dict) and metadata.get("version"):
-        return str(metadata["version"])
-    return str(meta.get("version", ""))
+def _count_nested(meta: dict[str, Any], **fields: tuple[str, str]) -> dict[str, Any]:
+    """Count items in a nested list field."""
+    result: dict[str, Any] = {}
+    for out_key, (parent_key, child_key) in fields.items():
+        parent = meta.get(parent_key)
+        if isinstance(parent, dict):
+            val = parent.get(child_key)
+            if isinstance(val, list):
+                result[out_key] = len(val)
+    return result
 
 
 def resolve_repo(repo_flag: str | None) -> str:
@@ -75,16 +112,19 @@ def resolve_repo(repo_flag: str | None) -> str:
     sys.exit(1)
 
 
-def collect_skills(repo: str) -> list[dict[str, str | list[str]]]:
-    """Walk skills/*/SKILL.md and build manifest entries."""
-    entries: list[dict[str, str | list[str]]] = []
+def collect_packages(pkg_type: PackageType, repo: str) -> list[dict[str, Any]]:
+    """Walk {pkg_type.repo_dir}/*/definition_file and build manifest entries."""
+    entries: list[dict[str, Any]] = []
 
-    for skill_dir in sorted(SKILLS_DIR.iterdir()):
-        skill_md = skill_dir / "SKILL.md"
-        if not skill_dir.is_dir() or not skill_md.exists():
+    if not pkg_type.repo_dir.is_dir():
+        return entries
+
+    for pkg_dir in sorted(pkg_type.repo_dir.iterdir()):
+        def_file = pkg_dir / pkg_type.definition_file
+        if not pkg_dir.is_dir() or not def_file.exists():
             continue
 
-        content = skill_md.read_text(encoding="utf-8")
+        content = def_file.read_text(encoding="utf-8")
         meta = parse_frontmatter(content)
 
         name = meta.get("name", "")
@@ -92,17 +132,17 @@ def collect_skills(repo: str) -> list[dict[str, str | list[str]]]:
         description = meta.get("description", "")
 
         if not name:
-            print(f"WARNING: {skill_md} missing 'name' field, skipping", file=sys.stderr)
+            print(f"WARNING: {def_file} missing 'name' field, skipping", file=sys.stderr)
             continue
 
         if not version:
-            print(f"WARNING: {skill_md} missing 'version' field, skipping", file=sys.stderr)
+            print(f"WARNING: {def_file} missing 'version' field, skipping", file=sys.stderr)
             continue
 
-        path = str(skill_dir.relative_to(REPO_ROOT))
-        source = f"https://github.com/{repo}/blob/main/{path}/SKILL.md"
+        path = str(pkg_dir.relative_to(REPO_ROOT))
+        source = f"https://github.com/{repo}/blob/main/{path}/{pkg_type.definition_file}"
 
-        entry: dict[str, str | list[str]] = {
+        entry: dict[str, Any] = {
             "name": name,
             "version": version,
             "description": description.strip() if description else "",
@@ -110,7 +150,12 @@ def collect_skills(repo: str) -> list[dict[str, str | list[str]]]:
             "source": source,
         }
 
-        # Read optional complements from metadata
+        # Type-specific metadata
+        extractor = _TYPE_EXTRACTORS.get(pkg_type.key)
+        if extractor:
+            entry.update(extractor(meta))
+
+        # Optional complements from metadata
         metadata = meta.get("metadata")
         if isinstance(metadata, dict):
             complements = metadata.get("complements")
@@ -123,15 +168,14 @@ def collect_skills(repo: str) -> list[dict[str, str | list[str]]]:
 
 
 def enforce_bidirectional_complements(
-    entries: list[dict[str, str | list[str]]],
+    entries: list[dict[str, Any]],
 ) -> None:
-    """Ensure complements are bidirectional in the manifest output.
+    """Ensure complements are bidirectional within a type section.
 
-    If skill A lists B in complements, B's complements will include A in the
-    manifest output. This does NOT modify SKILL.md source files — only the
-    in-memory entries used for skills.yaml generation.
+    If package A lists B in complements, B's complements will include A in the
+    manifest output. This does NOT modify source files -- only in-memory entries.
     """
-    name_to_entry: dict[str, dict[str, str | list[str]]] = {
+    name_to_entry: dict[str, dict[str, Any]] = {
         str(e["name"]): e for e in entries
     }
 
@@ -153,35 +197,39 @@ def enforce_bidirectional_complements(
                 peer_complements.append(name)
 
 
-def write_manifest(entries: list[dict[str, str | list[str]]]) -> None:
-    """Write skills.yaml manifest file."""
-    manifest = {"skills": entries}
+def write_manifest(all_packages: dict[str, list[dict[str, Any]]]) -> None:
+    """Write manifest.yaml (all types) and skills.yaml (legacy, skills only)."""
     header = "# Auto-generated by scripts/generate_manifest.py — do not edit manually.\n"
+    dump_kwargs: dict[str, Any] = {
+        "default_flow_style": False,
+        "sort_keys": False,
+        "allow_unicode": True,
+        "width": 120,
+    }
 
+    # Unified manifest
+    manifest: dict[str, Any] = {"packages": all_packages}
     with MANIFEST_PATH.open("w", encoding="utf-8") as f:
         f.write(header)
-        yaml.dump(
-            manifest,
-            f,
-            default_flow_style=False,
-            sort_keys=False,
-            allow_unicode=True,
-            width=120,
-        )
+        yaml.dump(manifest, f, **dump_kwargs)
 
-    print(f"Generated {MANIFEST_PATH} with {len(entries)} skills")
+    # Legacy skills.yaml for backward compatibility
+    skills_entries = all_packages.get("skills", [])
+    legacy: dict[str, Any] = {"skills": skills_entries}
+    with LEGACY_MANIFEST_PATH.open("w", encoding="utf-8") as f:
+        f.write(header)
+        yaml.dump(legacy, f, **dump_kwargs)
 
 
 def main() -> int:
-    """Generate skills.yaml from SKILL.md frontmatter.
+    """Generate manifest.yaml from package definition frontmatter.
 
-    Adds source URLs derived from the GitHub remote (or --repo flag) and
-    copies complements from SKILL.md metadata. Complements are enforced as
-    bidirectional in the manifest output: if A lists B, B will also list A.
-    This auto-mirroring affects skills.yaml only, not SKILL.md source files.
+    Scans all package type directories, builds manifest entries, enforces
+    bidirectional complements within each type, and writes both manifest.yaml
+    and the legacy skills.yaml.
     """
     parser = argparse.ArgumentParser(
-        description="Generate skills.yaml manifest from SKILL.md frontmatter.",
+        description="Generate manifest.yaml from package definition frontmatter.",
     )
     parser.add_argument(
         "--repo",
@@ -192,13 +240,26 @@ def main() -> int:
     args = parser.parse_args()
 
     repo = resolve_repo(args.repo)
-    entries = collect_skills(repo)
-    if not entries:
-        print("ERROR: No skills found", file=sys.stderr)
+
+    all_packages: dict[str, list[dict[str, Any]]] = {}
+    total = 0
+
+    for pkg_type in TYPES.values():
+        entries = collect_packages(pkg_type, repo)
+        if not entries:
+            continue
+        enforce_bidirectional_complements(entries)
+        all_packages[pkg_type.manifest_section] = entries
+        total += len(entries)
+
+    if total == 0:
+        print("ERROR: No packages found", file=sys.stderr)
         return 1
 
-    enforce_bidirectional_complements(entries)
-    write_manifest(entries)
+    write_manifest(all_packages)
+
+    counts = ", ".join(f"{len(v)} {k}" for k, v in all_packages.items())
+    print(f"Generated {MANIFEST_PATH} with {counts}")
     return 0
 
 
