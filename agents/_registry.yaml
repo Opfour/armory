@@ -1,0 +1,55 @@
+# Agent Registry — cross-agent orchestration configuration
+# Defines language defaults, enforcement levels, and agent composition rules.
+
+languages:
+  python:
+    version: "3.12+"
+    file_patterns: ["*.py"]
+    style_guide: PEP 8
+  javascript:
+    version: "ES2022+"
+    file_patterns: ["*.js", "*.jsx", "*.mjs", "*.cjs"]
+    style_guide: ESLint recommended
+  typescript:
+    version: "5.0+"
+    file_patterns: ["*.ts", "*.tsx"]
+    style_guide: strict mode
+
+enforcement_levels:
+  strict:
+    description: >
+      All findings reported. No suppressions. CRITICAL and HIGH block commit.
+      Suitable for production codebases, security-sensitive projects, and CI gates.
+    severity_threshold: medium
+    block_on: [critical, high]
+    agents: [code-reviewer, security-reviewer, secret-scanner]
+
+  balanced:
+    description: >
+      CRITICAL and HIGH reported. MEDIUM reported as suggestions. LOW suppressed.
+      Suitable for active development with quality gates.
+    severity_threshold: high
+    block_on: [critical]
+    agents: [code-reviewer, security-reviewer, secret-scanner]
+
+  prototype:
+    description: >
+      CRITICAL only. All other severities suppressed. Suitable for rapid
+      prototyping and exploratory work where speed matters more than polish.
+    severity_threshold: critical
+    block_on: [critical]
+    agents: [secret-scanner]
+
+composition:
+  pre_commit_chain:
+    description: Agents that run before commit in recommended order.
+    sequence:
+      - secret-scanner
+      - security-reviewer
+      - code-reviewer
+
+  post_write_parallel:
+    description: Agents that can run in parallel after code is written.
+    agents:
+      - code-reviewer
+      - security-reviewer

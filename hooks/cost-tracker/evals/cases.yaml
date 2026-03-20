@@ -1,0 +1,29 @@
+cases:
+  - id: log_session_with_cost
+    prompt: "Session ended with $0.45 cost and 12500 tokens used"
+    fixtures: []
+    rubric:
+      - "Hook should fire on Stop event and append a row to cost-log.csv"
+      - "CSV row should contain timestamp, session_id, cost, and token count"
+    trigger_expected: true
+
+  - id: log_session_zero_cost
+    prompt: "Session ended with no API calls made"
+    fixtures: []
+    rubric:
+      - "Hook should still log a row even when cost is zero"
+    trigger_expected: true
+
+  - id: no_log_on_tool_use
+    prompt: "Run a Bash command to check disk space"
+    fixtures: []
+    rubric:
+      - "Hook should not fire on PreToolUse events — only on Stop"
+    trigger_expected: false
+
+  - id: no_log_on_edit
+    prompt: "Edit a Python file to fix a typo"
+    fixtures: []
+    rubric:
+      - "Hook should not fire on Edit tool use — only on Stop"
+    trigger_expected: false

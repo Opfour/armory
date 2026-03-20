@@ -1,0 +1,52 @@
+cases:
+  - id: scan_for_hardcoded_secrets
+    prompt: "Scan my code for hardcoded API keys and secrets before I commit."
+    fixtures: []
+    rubric:
+      - "activates secret scanner workflow"
+      - "identifies staged or target files"
+      - "checks for known provider key patterns (AWS, GitHub, Slack, etc.)"
+      - "checks for private key material"
+      - "produces BLOCK/PASS verdict"
+      - "redacts secret values in output"
+    trigger_expected: true
+
+  - id: credential_check_pre_commit
+    prompt: "Check for leaked credentials in the files I'm about to commit."
+    fixtures: []
+    rubric:
+      - "scans git staged files"
+      - "detects connection strings with embedded passwords"
+      - "detects high-entropy strings in credential variables"
+      - "provides remediation steps"
+    trigger_expected: true
+
+  - id: detect_env_leakage
+    prompt: "Did any of my .env values leak into source code?"
+    fixtures: []
+    rubric:
+      - "reads .env files for reference values"
+      - "searches source files for matching literal values"
+      - "flags matches as secret leakage"
+    trigger_expected: true
+
+  - id: full_security_review
+    prompt: "Review this Flask app for SQL injection and XSS vulnerabilities."
+    fixtures: []
+    rubric:
+      - "does not activate secret-scanner (security-reviewer territory)"
+    trigger_expected: false
+
+  - id: code_quality_check
+    prompt: "Check my code for readability and naming convention issues."
+    fixtures: []
+    rubric:
+      - "does not activate secret-scanner (code-reviewer territory)"
+    trigger_expected: false
+
+  - id: dependency_vulnerability
+    prompt: "Are any of my npm packages vulnerable to known CVEs?"
+    fixtures: []
+    rubric:
+      - "does not activate secret-scanner (dependency-audit territory)"
+    trigger_expected: false

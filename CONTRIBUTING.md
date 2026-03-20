@@ -1,10 +1,24 @@
 # Contributing
 
-## Skill Structure
+## Package Types
 
-Each skill lives in its own directory under `skills/` and must contain a `SKILL.md` file.
+Armory supports seven package types. Each lives in its own top-level directory with a definition file:
 
-`SKILL.md` requires YAML frontmatter:
+| Type    | Directory    | Definition File | Description                                |
+| ------- | ------------ | --------------- | ------------------------------------------ |
+| Skill   | `skills/`    | `SKILL.md`      | Prompt-driven workflow for a task domain   |
+| Agent   | `agents/`    | `AGENT.md`      | Autonomous multi-step agent with tools     |
+| Rule    | `rules/`     | `RULE.md`       | Always-on behavioral constraint            |
+| Command | `commands/`  | `COMMAND.md`    | Slash-command triggered workflow           |
+| Hook    | `hooks/`     | `HOOK.md`       | Event-driven automation (pre/post actions) |
+| Utility | `utilities/` | `UTILITY.md`    | Standalone tool or report generator        |
+| Preset  | `presets/`   | `PRESET.md`     | Curated bundle of packages across types    |
+
+## Package Structure
+
+Each package lives in its own directory under the appropriate type directory and must contain its definition file.
+
+### Skill (`SKILL.md`)
 
 ```yaml
 ---
@@ -15,21 +29,98 @@ metadata:
 ---
 ```
 
-Optional subdirectories:
+### Agent (`AGENT.md`)
 
-- `references/` — documents or context files the skill uses
-- `scripts/` — helper scripts invoked by the skill
+```yaml
+---
+name: my-agent-name
+description: What this agent does.
+type: agent
+metadata:
+  version: 1.0.0
+---
+```
+
+### Rule (`RULE.md`)
+
+```yaml
+---
+name: my-rule-name
+description: What this rule enforces.
+type: rule
+metadata:
+  version: 1.0.0
+---
+```
+
+### Command (`COMMAND.md`)
+
+```yaml
+---
+name: my-command-name
+description: What this command does.
+type: command
+metadata:
+  version: 1.0.0
+---
+```
+
+### Hook (`HOOK.md`)
+
+```yaml
+---
+name: my-hook-name
+description: What this hook does.
+type: hook
+trigger: pre-commit # or post-commit, pre-edit, etc.
+metadata:
+  version: 1.0.0
+---
+```
+
+### Utility (`UTILITY.md`)
+
+```yaml
+---
+name: my-utility-name
+description: What this utility does.
+type: utility
+metadata:
+  version: 1.0.0
+---
+```
+
+### Preset (`PRESET.md`)
+
+```yaml
+---
+name: my-preset-name
+description: What this preset bundles.
+type: preset
+packages:
+  - skills/some-skill
+  - rules/some-rule
+  - hooks/some-hook
+metadata:
+  version: 1.0.0
+---
+```
+
+Optional subdirectories (for any package type):
+
+- `references/` — documents or context files the package uses
+- `scripts/` — helper scripts invoked by the package
 - `assets/` — images or static files
 
 ## Versioning
 
-Skills use [semantic versioning](https://semver.org/) via the `metadata.version` field in SKILL.md frontmatter.
+Packages use [semantic versioning](https://semver.org/) via the `metadata.version` field in their definition file frontmatter.
 
-| Change Type | Bump | Example |
-|-------------|------|---------|
-| Breaking change to skill interface or behavior | MAJOR | `1.0.0` → `2.0.0` |
-| New capability, backward-compatible | MINOR | `1.0.0` → `1.1.0` |
-| Bug fix, typo, clarification | PATCH | `1.0.0` → `1.0.1` |
+| Change Type                                      | Bump  | Example            |
+| ------------------------------------------------ | ----- | ------------------ |
+| Breaking change to package interface or behavior | MAJOR | `1.0.0` -> `2.0.0` |
+| New capability, backward-compatible              | MINOR | `1.0.0` -> `1.1.0` |
+| Bug fix, typo, clarification                     | PATCH | `1.0.0` -> `1.0.1` |
 
 After changing a version, regenerate the manifest:
 
@@ -39,31 +130,32 @@ uv run scripts/generate_manifest.py
 
 ## Naming Rules
 
-- Skill names: kebab-case, maximum 64 characters
+- Package names: kebab-case, maximum 64 characters
 - Directory name must match the `name` field in frontmatter
 
 ## Self-Containment
 
-Skills must be standalone packages. Every file a skill references must live within its own directory.
+Packages must be standalone. Every file a package references must live within its own directory.
 
 **Blocked:**
-- `../other-skill/references/file.md` — cross-skill path references
-- Absolute paths to files outside the skill directory
-- References to files that only exist in other skills
 
-**Why:** Skills are distributed individually via `npx skills add` and `.skill` archives. Cross-skill references break when a skill is installed without its dependency. The skill-evaluator flags this as a CRITICAL D5 finding.
+- `../other-package/references/file.md` — cross-package path references
+- Absolute paths to files outside the package directory
+- References to files that only exist in other packages
 
-**Shared content:** If multiple skills need the same reference file, use the template sync system (see below). Each skill gets its own physical copy, managed by `scripts/sync_templates.py`.
+**Why:** Packages are distributed individually via `npx skills add` and archive files. Cross-package references break when a package is installed without its dependency. The skill-evaluator flags this as a CRITICAL D5 finding.
+
+**Shared content:** If multiple packages need the same reference file, use the template sync system (see below). Each package gets its own physical copy, managed by `scripts/sync_templates.py`.
 
 ## Shared Templates
 
-The `_templates/` directory holds reference files shared across multiple skills. The sync system copies templates into each consuming skill's `references/` directory.
+The `_templates/` directory holds reference files shared across multiple packages. The sync system copies templates into each consuming package's `references/` directory.
 
 **How it works:**
 
 1. Source files live in `_templates/` (e.g., `_templates/detection-patterns.md`)
-2. `scripts/sync_templates.py` defines which skills consume each template via `TEMPLATE_CONSUMERS`
-3. Running the script copies templates to `skills/{consumer}/references/{template}`
+2. `scripts/sync_templates.py` defines which packages consume each template via `TEMPLATE_CONSUMERS`
+3. Running the script copies templates to `{type-dir}/{consumer}/references/{template}`
 4. A pre-commit hook runs sync automatically when templates or references change
 
 **To add a shared template:**
@@ -73,34 +165,34 @@ The `_templates/` directory holds reference files shared across multiple skills.
 3. Run `uv run python scripts/sync_templates.py` to populate copies
 4. Commit both the template and the synced copies
 
-**To use an existing template in a new skill:**
+**To use an existing template in a new package:**
 
-1. Add your skill name to the consumer list in `scripts/sync_templates.py`
+1. Add your package name to the consumer list in `scripts/sync_templates.py`
 2. Run `uv run python scripts/sync_templates.py`
-3. Reference the file as `references/{template}` in your SKILL.md (local path, not `../`)
+3. Reference the file as `references/{template}` in your definition file (local path, not `../`)
 
 Current templates:
 
-| Template | Consumers | Purpose |
-|----------|-----------|---------|
-| `detection-patterns.md` | humanize, linkedin-post-style, manuscript-review | AI writing detection patterns |
-| `project-detection.md` | ship-workflow, plan-review, qa-systematic | Stack-agnostic project detection |
+| Template                | Consumers                                        | Purpose                          |
+| ----------------------- | ------------------------------------------------ | -------------------------------- |
+| `detection-patterns.md` | humanize, linkedin-post-style, manuscript-review | AI writing detection patterns    |
+| `project-detection.md`  | ship-workflow, plan-review, qa-systematic        | Stack-agnostic project detection |
 
 ## Description Rules
 
 - Maximum 1024 characters (sweet spot: 200-800 characters)
 - No angle brackets (`<`, `>`)
 - No pushy trigger language ("always use", "you must", "never do")
-- Include trigger phrases users would type to activate the skill
+- Include trigger phrases users would type to activate the package
 - Include a "Use this skill when..." clause describing activation contexts
 
 ## Writing an Effective Description
 
-The frontmatter description controls whether Claude activates your skill. A skill with deep content but a weak description delivers zero value.
+The frontmatter description controls whether Claude activates your package. A package with deep content but a weak description delivers zero value.
 
 **Include in every description:**
 
-1. What the skill does (functional summary)
+1. What the package does (functional summary)
 2. Key operations or subcommands covered
 3. Trigger phrases across synonym families (e.g., "review", "audit", "critique", "evaluate")
 4. A "Use this skill when..." clause listing concrete activation scenarios
@@ -126,7 +218,7 @@ description: "Review architecture and provide feedback."
 
 ## Quality Gate — Skill Evaluator
 
-Before submitting a PR, run the [skill-evaluator](skills/skill-evaluator/) against your skill:
+Before submitting a PR, run the [skill-evaluator](skills/skill-evaluator/) against your package:
 
 ```bash
 claude --add-dir skills/skill-evaluator --add-dir skills/my-skill-name
@@ -146,7 +238,7 @@ The evaluator scores 6 dimensions:
 
 **Minimum overall score for PR acceptance: 70% (Adequate).**
 
-Skills scoring below 70% need improvement before review. Skills with CRITICAL findings (missing frontmatter, name mismatch) are automatically rejected.
+Packages scoring below 70% need improvement before review. Packages with CRITICAL findings (missing frontmatter, name mismatch) are automatically rejected.
 
 ## Eval Cases
 
@@ -162,17 +254,18 @@ cases:
     rubric:
       - "Expected behavior point 1"
       - "Expected behavior point 2"
-    trigger_expected: true  # or false
+    trigger_expected: true # or false
 ```
 
 **Requirements:**
 
 | Skill Status | Positive Cases (trigger_expected: true) | Negative Cases (trigger_expected: false) |
-|-------------|----------------------------------------|------------------------------------------|
-| Active | 1+ (recommended: 2+) | 2+ |
-| Deprecated | 0 (must be zero) | 2+ |
+| ------------ | --------------------------------------- | ---------------------------------------- |
+| Active       | 1+ (recommended: 2+)                    | 2+                                       |
+| Deprecated   | 0 (must be zero)                        | 2+                                       |
 
 **Guidelines:**
+
 - Positive cases should use natural language a real user would type
 - Negative cases should test plausible but incorrect triggers (adjacent tasks the skill should NOT handle)
 - Each case needs a unique `id` (snake_case)
@@ -188,37 +281,37 @@ CI runs this on every PR. Skills without valid evals will fail the pipeline.
 
 ## Testing Locally
 
-Point Claude Code at the skill directory:
+Point Claude Code at the package directory:
 
 ```bash
 claude --add-dir skills/my-skill-name
 ```
 
-Verify the skill loads and behaves as expected before submitting a PR.
+Verify the package loads and behaves as expected before submitting a PR.
 
 ## Packaging
 
-Run the packaging script to produce a `.skill` artifact:
+Run the packaging script to produce a distributable archive:
 
 ```bash
-uv run scripts/package_skill.py skills/my-skill-name
+uv run scripts/package.py skills/my-skill-name
 ```
 
 ## Pull Request Checklist
 
 Before opening a PR, confirm:
 
-- [ ] `SKILL.md` has valid YAML frontmatter with `name`, `description`, and `metadata.version`
+- [ ] Definition file has valid YAML frontmatter with `name`, `description`, and `metadata.version`
 - [ ] Version bumped according to semver (MAJOR/MINOR/PATCH)
 - [ ] Manifest regenerated: `uv run scripts/generate_manifest.py`
-- [ ] Skill name is kebab-case, under 64 characters
+- [ ] Package name is kebab-case, under 64 characters
 - [ ] Description is 200-1024 characters with trigger phrases and "Use when" clause
 - [ ] No angle brackets or pushy language in description
 - [ ] No secrets, credentials, or internal URLs in any file
 - [ ] Tested locally with Claude Code
-- [ ] All file references in `SKILL.md` resolve to existing files within the skill directory
-- [ ] No cross-skill references (`../other-skill/`) — skill is fully self-contained
-- [ ] Eval cases exist in `evals/cases.yaml` with 1+ positive and 2+ negative triggers
+- [ ] All file references in the definition file resolve to existing files within the package directory
+- [ ] No cross-package references (`../other-package/`) — package is fully self-contained
+- [ ] Eval cases exist in `evals/cases.yaml` with 1+ positive and 2+ negative triggers (for skills)
 - [ ] Evals pass: `uv run python scripts/validate_evals.py`
 - [ ] Templates synced (if using shared templates): `uv run python scripts/sync_templates.py`
 - [ ] Skill evaluator score is 70% or above (paste the scorecard in your PR)

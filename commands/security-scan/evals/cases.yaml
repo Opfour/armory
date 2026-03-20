@@ -1,0 +1,42 @@
+cases:
+  - id: security_scan_path
+    prompt: "/security-scan src/api/"
+    fixtures: []
+    rubric:
+      - "activates security scan workflow"
+      - "scopes scan to src/api/ directory"
+      - "checks for hardcoded secrets"
+      - "checks for input validation issues"
+      - "produces severity-ranked findings"
+    trigger_expected: true
+
+  - id: security_scan_broad
+    prompt: "/security-scan"
+    fixtures: []
+    rubric:
+      - "activates security scan workflow on entire project"
+      - "covers all six scan categories"
+      - "outputs findings in severity-ranked table format"
+    trigger_expected: true
+
+  - id: security_scan_implicit
+    prompt: "Scan this codebase for security vulnerabilities before we deploy"
+    fixtures: []
+    rubric:
+      - "recognizes security scan intent"
+      - "scans for secrets, input validation, auth issues"
+    trigger_expected: true
+
+  - id: negative_dependency_audit
+    prompt: "Audit my project dependencies for license compliance and maintenance health"
+    fixtures: []
+    rubric:
+      - "does not activate security-scan (dependency-audit territory — license and health focus, not vulnerability focus)"
+    trigger_expected: false
+
+  - id: negative_architecture_review
+    prompt: "Review our authentication architecture for scalability"
+    fixtures: []
+    rubric:
+      - "does not activate security-scan (architecture-reviewer territory — design review, not vulnerability scanning)"
+    trigger_expected: false

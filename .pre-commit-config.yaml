@@ -25,7 +25,7 @@ repos:
         entry: python scripts/sync_templates.py
         language: python
         pass_filenames: false
-        files: ^(_templates/|skills/.*/references/)
+        files: ^(_templates/|(skills|agents|hooks|rules|commands|utilities|presets)/.*/references/)
 
       - id: generate-manifest
         name: Regenerate skills.yaml
@@ -33,7 +33,7 @@ repos:
         language: python
         additional_dependencies: [pyyaml]
         pass_filenames: false
-        files: ^skills/
+        files: ^(skills|agents|hooks|rules|commands|utilities|presets)/
 
       - id: block-env-files
         name: block-env-files

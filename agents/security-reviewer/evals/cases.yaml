@@ -1,0 +1,51 @@
+cases:
+  - id: scan_for_vulnerabilities
+    prompt: "Scan this code for security vulnerabilities."
+    fixtures: []
+    rubric:
+      - "activates security review workflow"
+      - "maps attack surface and entry points"
+      - "checks for OWASP Top 10 patterns"
+      - "produces severity-ranked findings with exploit scenarios"
+      - "includes remediation code"
+    trigger_expected: true
+
+  - id: owasp_audit_request
+    prompt: "Check this API for SQL injection and XSS issues."
+    fixtures: []
+    rubric:
+      - "activates injection analysis phase"
+      - "activates XSS analysis phase"
+      - "traces data flow from entry points to sinks"
+      - "classifies findings by severity"
+    trigger_expected: true
+
+  - id: security_review_auth
+    prompt: "Audit the authentication flow for security issues."
+    fixtures: []
+    rubric:
+      - "activates authentication and authorization phase"
+      - "checks password hashing, session management, JWT handling"
+      - "reports findings with exploit scenarios"
+    trigger_expected: true
+
+  - id: general_code_review
+    prompt: "Review my code for naming conventions and readability."
+    fixtures: []
+    rubric:
+      - "does not activate security-reviewer (code-reviewer territory)"
+    trigger_expected: false
+
+  - id: secret_detection_only
+    prompt: "Check if I accidentally committed any API keys."
+    fixtures: []
+    rubric:
+      - "does not activate security-reviewer (secret-scanner territory)"
+    trigger_expected: false
+
+  - id: dependency_vulnerability_check
+    prompt: "Check my package.json for vulnerable dependencies."
+    fixtures: []
+    rubric:
+      - "does not activate security-reviewer (dependency-audit territory)"
+    trigger_expected: false

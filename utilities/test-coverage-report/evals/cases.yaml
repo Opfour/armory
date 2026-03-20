@@ -1,0 +1,31 @@
+cases:
+  - id: check_tests_for_changes
+    prompt: "Check if the files I changed in my last commit have test coverage"
+    fixtures: []
+    rubric:
+      - "runs git diff to find changed files"
+      - "checks for corresponding test files"
+      - "reports coverage summary"
+    trigger_expected: true
+
+  - id: pr_test_coverage_gate
+    prompt: "Verify that all modified source files in this branch have tests before merging"
+    fixtures: []
+    rubric:
+      - "identifies changed source files relative to base branch"
+      - "validates test file existence for each changed file"
+    trigger_expected: true
+
+  - id: negative_run_tests
+    prompt: "Run the test suite and show me the results"
+    fixtures: []
+    rubric:
+      - "executing tests is different from checking test file existence"
+    trigger_expected: false
+
+  - id: negative_line_coverage
+    prompt: "Generate a detailed line-by-line code coverage report with branch coverage"
+    fixtures: []
+    rubric:
+      - "line/branch coverage analysis requires instrumented test execution, not file existence checks"
+    trigger_expected: false

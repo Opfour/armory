@@ -1,146 +1,51 @@
 #!/usr/bin/env python3
+"""Backward-compatible wrapper — use scripts/package.py instead."""
 from __future__ import annotations
 
-import argparse
-import re
-import sys
-import zipfile
 from pathlib import Path
-
-import yaml
-
 from typing import Any
+import sys
 
+_REPO_ROOT = Path(__file__).resolve().parent.parent
+if str(_REPO_ROOT) not in sys.path:
+    sys.path.insert(0, str(_REPO_ROOT))
 
-EXCLUDE_NAMES: set[str] = {
-    "__pycache__",
-    "node_modules",
-    ".DS_Store",
-    ".git",
-    "evals",
-}
+from scripts.package import main, package_skill
+from scripts.package import validate_frontmatter as _validate_frontmatter
+from scripts.frontmatter import parse_frontmatter
+from scripts.frontmatter import extract_version as _extract_version_str
+from scripts.frontmatter import validate_version as _validate_version_bool
+from scripts.package_types import TYPES, should_exclude
 
-EXCLUDE_SUFFIXES: set[str] = {".pyc"}
-
-
-def parse_frontmatter(content: str) -> dict[str, Any]:
-    match = re.match(r"^---\s*\n(.*?)\n---\s*\n", content, re.DOTALL)
-    if not match:
-        raise ValueError("No valid YAML frontmatter found in SKILL.md")
-    return yaml.safe_load(match.group(1))
-
-
-def validate_version(version: str) -> None:
-    if not re.match(r"^\d+\.\d+\.\d+$", version):
-        raise ValueError(f"Invalid version '{version}' — must be semver (e.g. 1.0.0)")
+# Re-export for backward compatibility
+is_excluded = should_exclude
 
 
 def extract_version(meta: dict[str, Any]) -> str | None:
-    """Extract version from metadata.version (preferred) or top-level version (legacy)."""
-    metadata = meta.get("metadata")
-    if isinstance(metadata, dict) and metadata.get("version"):
-        return str(metadata["version"])
-    if meta.get("version"):
-        return str(meta["version"])
-    return None
+    """Backward-compatible extract_version that returns None instead of empty string."""
+    result = _extract_version_str(meta)
+    return result if result else None
+
+
+def validate_version(version: str) -> None:
+    """Backward-compatible validate_version that raises on failure."""
+    if not _validate_version_bool(version):
+        raise ValueError(f"Invalid version '{version}' — must be semver (e.g. 1.0.0)")
 
 
 def validate_frontmatter(skill_dir: Path) -> dict[str, Any]:
-    skill_md = skill_dir / "SKILL.md"
-    if not skill_md.exists():
-        raise FileNotFoundError(f"SKILL.md not found in {skill_dir}")
+    """Backward-compatible skill-only frontmatter validation."""
+    return _validate_frontmatter(skill_dir, TYPES["skill"])
 
-    content = skill_md.read_text(encoding="utf-8")
-    meta = parse_frontmatter(content)
-
-    version = extract_version(meta)
-    missing: list[str] = []
-    if not meta.get("name"):
-        missing.append("name")
-    if not version:
-        missing.append("metadata.version")
-    if not meta.get("description"):
-        missing.append("description")
-    if missing:
-        raise ValueError(f"SKILL.md missing required fields: {', '.join(missing)}")
-
-    assert version is not None
-    validate_version(version)
-    meta["_resolved_version"] = version
-
-    return meta
-
-
-def is_excluded(path: Path, root: Path) -> bool:
-    relative = path.relative_to(root)
-    for part in relative.parts:
-        if part in EXCLUDE_NAMES:
-            return True
-    if path.suffix in EXCLUDE_SUFFIXES:
-        return True
-    return False
-
-
-def collect_files(skill_dir: Path) -> tuple[list[Path], list[Path]]:
-    included: list[Path] = []
-    excluded: list[Path] = []
-
-    for path in sorted(skill_dir.rglob("*")):
-        if not path.is_file():
-            continue
-        if is_excluded(path, skill_dir):
-            excluded.append(path)
-        else:
-            included.append(path)
-
-    return included, excluded
-
-
-def package_skill(skill_dir: Path, output_dir: Path) -> Path:
-    meta = validate_frontmatter(skill_dir)
-    skill_name: str = meta["name"]
-    skill_version: str = meta["_resolved_version"]
-    archive_name = f"{skill_name}-{skill_version}.skill"
-    output_path = output_dir / archive_name
-
-    included, excluded = collect_files(skill_dir)
-
-    output_dir.mkdir(parents=True, exist_ok=True)
-
-    with zipfile.ZipFile(output_path, "w", compression=zipfile.ZIP_DEFLATED) as zf:
-        for file_path in included:
-            arcname = file_path.relative_to(skill_dir.parent)
-            zf.write(file_path, arcname)
-            print(f"  added: {arcname}")
-
-    for file_path in excluded:
-        rel = file_path.relative_to(skill_dir)
-        print(f"  skipped: {rel}")
-
-    return output_path
-
-
-def main() -> int:
-    parser = argparse.ArgumentParser(description="Package a skill directory into a .skill archive")
-    parser.add_argument("skill_dir", type=Path, help="Path to the skill directory")
-    parser.add_argument("--output-dir", type=Path, default=Path("dist"), help="Output directory for .skill file")
-    args = parser.parse_args()
-
-    skill_dir: Path = args.skill_dir.resolve()
-    output_dir: Path = args.output_dir.resolve()
-
-    if not skill_dir.is_dir():
-        print(f"ERROR: {skill_dir} is not a directory", file=sys.stderr)
-        return 1
-
-    try:
-        output_path = package_skill(skill_dir, output_dir)
-        print(f"Packaged: {output_path}")
-        return 0
-    except (FileNotFoundError, ValueError) as exc:
-        print(f"ERROR: {exc}", file=sys.stderr)
-        return 1
-
+__all__ = [
+    "extract_version",
+    "is_excluded",
+    "main",
+    "package_skill",
+    "parse_frontmatter",
+    "validate_frontmatter",
+    "validate_version",
+]
 
 if __name__ == "__main__":
     sys.exit(main())

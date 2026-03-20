@@ -1,0 +1,39 @@
+cases:
+  - id: coverage_threshold_question
+    prompt: "What coverage percentage do we need for new code before merging?"
+    fixtures: []
+    rubric:
+      - "states 90% coverage for new/modified code"
+      - "mentions 80% overall and 95% critical paths"
+    trigger_expected: true
+
+  - id: test_structure_guidance
+    prompt: "How should I structure my unit tests for this authentication module?"
+    fixtures: []
+    rubric:
+      - "recommends arrange-act-assert pattern"
+      - "addresses test naming with expected outcome"
+      - "mentions mocking external dependencies at boundary"
+    trigger_expected: true
+
+  - id: mock_boundaries_question
+    prompt: "Should I mock the database in my integration tests?"
+    fixtures: []
+    rubric:
+      - "advises against mocking database in integration tests"
+      - "recommends real test database or test container"
+    trigger_expected: true
+
+  - id: negative_performance_benchmarking
+    prompt: "Run a load test against our API to measure requests per second"
+    fixtures: []
+    rubric:
+      - "load testing and performance benchmarking is not test standards"
+    trigger_expected: false
+
+  - id: negative_writing_production_code
+    prompt: "Implement the user registration endpoint with email validation"
+    fixtures: []
+    rubric:
+      - "implementing production code is not about testing standards"
+    trigger_expected: false

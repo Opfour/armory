@@ -13,4 +13,4 @@ dev = [
 ]
 
 [project.scripts]
-armory-install = "scripts.install_skills:main"
+armory-install = "scripts.install:main"

@@ -1,0 +1,33 @@
+cases:
+  - id: install_python_strict
+    prompt: "Set up strict Python enforcement for my typed codebase."
+    fixtures: []
+    rubric:
+      - "recommends or activates the python-strict preset"
+      - "mentions test-standards, security-standards, or tdd as included packages"
+      - "acknowledges this is a comprehensive Python-specific stack"
+    trigger_expected: true
+
+  - id: install_strict_for_api_project
+    prompt: "I need full quality gates for a Python API service handling payments."
+    fixtures: []
+    rubric:
+      - "recommends python-strict preset"
+      - "mentions secret-scanner or security-standards as relevant for sensitive data"
+    trigger_expected: true
+
+  - id: install_single_rule
+    prompt: "Add the test-standards rule to my project."
+    fixtures: []
+    rubric:
+      - "installs test-standards individually"
+      - "does not activate the python-strict preset"
+    trigger_expected: false
+
+  - id: javascript_project_not_python
+    prompt: "Set up strict enforcement for my TypeScript project."
+    fixtures: []
+    rubric:
+      - "does not recommend python-strict preset for a TypeScript project"
+      - "suggests alternative or general-purpose tooling"
+    trigger_expected: false

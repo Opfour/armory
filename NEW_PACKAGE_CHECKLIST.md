@@ -1,38 +1,50 @@
-# New Skill Checklist
+# New Package Checklist
 
-Follow this checklist every time you build a new skill for the armory. Items are ordered by workflow phase — complete each phase before moving to the next.
+Follow this checklist every time you build a new package for the armory. Items are ordered by workflow phase — complete each phase before moving to the next.
+
+**Definition files by type:**
+
+| Type | Directory | Definition File |
+| --- | --- | --- |
+| Skill | `skills/` | `SKILL.md` |
+| Agent | `agents/` | `AGENT.md` |
+| Rule | `rules/` | `RULE.md` |
+| Command | `commands/` | `COMMAND.md` |
+| Hook | `hooks/` | `HOOK.md` |
+| Utility | `utilities/` | `UTILITY.md` |
+| Preset | `presets/` | `PRESET.md` |
 
 ---
 
 ## Phase 1: Planning
 
-- [ ] **Define the scope** — what task domain does this skill cover? Write one sentence.
-- [ ] **Check for overlap** — search existing skills in `skills.yaml` to confirm no existing skill covers this domain. If overlap exists, decide: extend the existing skill or create a new one with clear boundary documentation.
-- [ ] **Identify the decision framework** — when should a user pick this skill over alternatives? Draft a comparison table (e.g., "use X when..., use Y when...").
-- [ ] **List prerequisites** — what binaries, packages, APIs, or services must be installed for the skill to function?
+- [ ] **Define the scope** — what task domain does this package cover? Write one sentence.
+- [ ] **Check for overlap** — search existing packages in `manifest.yaml` to confirm no existing package covers this domain. If overlap exists, decide: extend the existing package or create a new one with clear boundary documentation.
+- [ ] **Identify the decision framework** — when should a user pick this package over alternatives? Draft a comparison table (e.g., "use X when..., use Y when...").
+- [ ] **List prerequisites** — what binaries, packages, APIs, or services must be installed for the package to function?
 
 ## Phase 2: Structure
 
-- [ ] **Create directory** — `skills/<skill-name>/` with kebab-case name, max 64 characters.
-- [ ] **Create `SKILL.md`** with YAML frontmatter:
+- [ ] **Create directory** — `{type-dir}/<package-name>/` with kebab-case name, max 64 characters.
+- [ ] **Create definition file** (e.g., `SKILL.md`, `AGENT.md`, `HOOK.md`) with YAML frontmatter:
   ```yaml
   ---
-  name: <skill-name> # Must match directory name exactly
+  name: <package-name> # Must match directory name exactly
   description: <200-800 chars> # See description rules below
   metadata:
     version: 1.0.0
   ---
   ```
-- [ ] **Create `references/`** — add reference documents the skill needs (setup guides, compatibility matrices, command references).
+- [ ] **Create `references/`** — add reference documents the package needs (setup guides, compatibility matrices, command references).
 - [ ] **Create `templates/`** (optional) — add ready-to-use scripts. Make them executable (`chmod +x`).
 - [ ] **Create `evals/cases.yaml`** — trigger accuracy tests (see Phase 4).
 
-## Phase 3: Content — SKILL.md Body
+## Phase 3: Content — Definition File Body
 
-Write the skill body with these sections (in order):
+Write the definition file body with these sections (in order):
 
 - [ ] **Title and one-line summary**
-- [ ] **When-to-use table** — comparison with related skills or tools (decision framework from Phase 1)
+- [ ] **When-to-use table** — comparison with related packages or tools (decision framework from Phase 1)
 - [ ] **Triggers list** — explicit trigger phrases, grouped by synonym family
 - [ ] **Prerequisites** — installation commands, verification steps
 - [ ] **Core workflow** — numbered steps showing the end-to-end flow
@@ -48,8 +60,8 @@ Write the skill body with these sections (in order):
 
 Create `evals/cases.yaml` with:
 
-- [ ] **2+ positive cases** (`trigger_expected: true`) — natural language prompts that should activate the skill
-- [ ] **2+ negative cases** (`trigger_expected: false`) — adjacent tasks the skill should NOT handle
+- [ ] **2+ positive cases** (`trigger_expected: true`) — natural language prompts that should activate the package
+- [ ] **2+ negative cases** (`trigger_expected: false`) — adjacent tasks the package should NOT handle
 - [ ] Each case has a unique `id` (snake_case), a `prompt`, empty `fixtures: []`, and `rubric` items
 - [ ] Validate: `uv run python scripts/validate_evals.py`
 
@@ -57,7 +69,7 @@ Create `evals/cases.yaml` with:
 
 The frontmatter description is the single highest-leverage field. Verify it contains:
 
-- [ ] **Functional summary** — what the skill does (first clause)
+- [ ] **Functional summary** — what the package does (first clause)
 - [ ] **Key operations** — 3-5 specific capabilities listed
 - [ ] **Trigger phrases** — 6+ phrases across 3+ synonym families (imperative and interrogative forms)
 - [ ] **"Use when" clause** — concrete activation scenarios
@@ -74,18 +86,18 @@ The frontmatter description is the single highest-leverage field. Verify it cont
 - [ ] **Run skill evaluator** — target score: 70%+ (Adequate), aim for 80%+ (Strong)
 - [ ] **No CRITICAL findings** — name mismatch, missing frontmatter, broken file references
 - [ ] **No HIGH findings** — missing workflow, zero trigger phrases, no error handling
-- [ ] **Test locally** — `claude --add-dir skills/<skill-name>` and verify activation
+- [ ] **Test locally** — `claude --add-dir {type-dir}/<package-name>` and verify activation
 
 ## Phase 7: Integration
 
-- [ ] **Update README.md** — add the skill to the appropriate catalog section
-- [ ] **Update skill count badge** in README.md header
-- [ ] **Check self-containment** — no `../` references, no absolute paths outside skill directory
+- [ ] **Update README.md** — add the package to the appropriate catalog section
+- [ ] **Update package count badge** in README.md header
+- [ ] **Check self-containment** — no `../` references, no absolute paths outside package directory
 - [ ] **No secrets** — no API keys, credentials, or internal URLs in any file
 
 ## Phase 8: PR Submission
 
-- [ ] **Create feature branch** — `feat/<skill-name>`
+- [ ] **Create feature branch** — `feat/<package-name>`
 - [ ] **Commit** — small logical units, descriptive messages
 - [ ] **Paste skill evaluator scorecard** in the PR description
 - [ ] **Confirm CI passes** — manifest sync + eval validation
@@ -110,10 +122,10 @@ The frontmatter description is the single highest-leverage field. Verify it cont
 
 | Mistake                           | Impact                                             | Fix                                                        |
 | --------------------------------- | -------------------------------------------------- | ---------------------------------------------------------- |
-| Description under 100 characters  | Skill never activates — Claude cannot match intent | Expand to 200-800 chars with trigger phrases               |
-| Directory name ≠ frontmatter name | CRITICAL finding, PR rejected                      | Rename directory or frontmatter to match                   |
+| Description under 100 characters  | Package never activates — Claude cannot match intent | Expand to 200-800 chars with trigger phrases               |
+| Directory name != frontmatter name | CRITICAL finding, PR rejected                      | Rename directory or frontmatter to match                   |
 | No negative eval cases            | CI fails                                           | Add 2+ negative cases for adjacent-but-wrong tasks         |
 | Referenced file does not exist    | D5 capped at 2/5                                   | Create all files before referencing them                   |
-| Cross-skill references (`../`)    | Breaks standalone distribution                     | Copy shared content via template sync system               |
+| Cross-package references (`../`)  | Breaks standalone distribution                     | Copy shared content via template sync system               |
 | No troubleshooting section        | Users hit errors with no guidance                  | Add 3-5 common failure modes with fixes                    |
 | Only imperative triggers          | Misses question-form queries                       | Add interrogative triggers ("is X better?", "how do I Y?") |
