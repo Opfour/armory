@@ -1,4 +1,4 @@
-name: Package Skills
+name: Package All
 
 on:
   push:
@@ -28,17 +28,25 @@ jobs:
       - name: Validate manifest
         run: |
           python scripts/generate_manifest.py
-          git diff --exit-code skills.yaml
+          git diff --exit-code manifest.yaml
 
-      - name: Package all skills
+      - name: Package all items
         run: |
           mkdir -p dist
-          for skill_dir in skills/*/; do
-            if [ -f "${skill_dir}SKILL.md" ]; then
-              echo "Packaging ${skill_dir}..."
-              python scripts/package_skill.py "${skill_dir}" --output-dir dist
-            else
-              echo "Skipping ${skill_dir} — no SKILL.md found"
+          DEFINITION_MAP="skills:SKILL.md agents:AGENT.md hooks:HOOK.md rules:RULE.md commands:COMMAND.md utilities:UTILITY.md presets:PRESET.md"
+
+          for mapping in $DEFINITION_MAP; do
+            type_dir="${mapping%%:*}"
+            def_file="${mapping#*:}"
+            if [ -d "${type_dir}" ]; then
+              for pkg_dir in ${type_dir}/*/; do
+                if [ -f "${pkg_dir}${def_file}" ]; then
+                  echo "Packaging ${pkg_dir}..."
+                  python scripts/package.py "${pkg_dir}" --output-dir dist
+                else
+                  echo "Skipping ${pkg_dir} — no ${def_file} found"
+                fi
+              done
             fi
           done
 
@@ -46,7 +54,7 @@ jobs:
         if: startsWith(github.ref, 'refs/tags/v')
         uses: softprops/action-gh-release@a06a81a03ee405af7f2048a818ed3f03bbf83c7b # v2.5.0
         with:
-          files: dist/*.skill
+          files: dist/*
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
@@ -55,16 +63,16 @@ jobs:
         uses: softprops/action-gh-release@a06a81a03ee405af7f2048a818ed3f03bbf83c7b # v2.5.0
         with:
           tag_name: latest
-          name: Latest Skills (rolling)
+          name: Latest Packages (rolling)
           body: |
             Rolling release — automatically updated on every push to `main`.
 
-            Contains the latest packaged `.skill` files from the repository.
+            Contains the latest packaged archives from the repository.
             For stable releases, use a versioned tag (e.g., `v1.0.0`).
 
             **Last updated:** ${{ github.sha }}
           prerelease: true
           make_latest: false
-          files: dist/*.skill
+          files: dist/*
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

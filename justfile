@@ -3,27 +3,31 @@ set dotenv-load := true
 default:
     @just --list
 
-# Install skills to ~/.claude/skills/
+# Install packages to ~/.claude/
 install:
-    uv run scripts/install_skills.py
+    uv run scripts/install.py
 
-# Install all skills non-interactively
+# Install all packages non-interactively
 install-all:
-    echo -e "all\ny" | uv run scripts/install_skills.py
+    echo -e "all\ny" | uv run scripts/install.py
 
-# Regenerate skills.yaml manifest
+# Install by profile (core, developer, security, full)
+install-profile profile:
+    uv run scripts/install.py --profile {{profile}}
+
+# Regenerate manifest.yaml
 manifest:
     uv run scripts/generate_manifest.py
 
-# Package a skill as .skill archive
-package name:
-    uv run scripts/package_skill.py skills/{{name}}
+# Package a specific item (e.g., just package skills/pr-review)
+package path:
+    uv run scripts/package.py {{path}}
 
 # Validate all eval cases
 validate:
     uv run scripts/validate_evals.py
 
-# Sync shared templates to consuming skills
+# Sync shared templates to consumers
 sync-templates:
     uv run scripts/sync_templates.py
 
@@ -31,7 +35,7 @@ sync-templates:
 test:
     uv run pytest tests/ -v
 
-# Full pre-PR check: manifest + templates + evals + tests
+# Full pre-PR check
 check:
     just manifest
     just sync-templates

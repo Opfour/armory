@@ -1,0 +1,31 @@
+# Install profiles — curated subsets for different use cases.
+profiles:
+  core:
+    description: Essential skills for every Claude Code user
+    packages:
+      skills:
+        - pr-review
+        - code-refiner
+        - pre-landing-review
+
+  developer:
+    description: Core plus framework support and review tools
+    includes: [core]
+    packages:
+      skills:
+        - test-harness
+        - debug-investigator
+        - architecture-reviewer
+        - github
+
+  security:
+    description: Core plus security auditing and enforcement
+    includes: [core]
+    packages:
+      skills:
+        - repo-sentinel
+        - dependency-audit
+
+  full:
+    description: Every available package
+    all: true
