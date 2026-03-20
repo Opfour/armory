@@ -46,19 +46,19 @@ Intended for developers who treat AI coding agents as a serious part of their wo
 
 ### Skills — Review & Quality
 
-| Skill                                                  | Description                                                                                                                                        |
-| ------------------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [architecture-reviewer](skills/architecture-reviewer/) | Architecture reviews across 7 scored dimensions — structural integrity, scalability, security, performance, enterprise readiness, operations, data |
-| [code-refiner](skills/code-refiner/)                   | Deep code simplification and refactoring — structural complexity analysis, anti-pattern detection, idiomatic rewrites across Python, Go, TS, Rust  |
-| [pr-review](skills/pr-review/)                         | Diff-based PR review across 5 dimensions — code quality, test coverage, silent failures, type design, comment quality with severity-ranked output  |
-| [pre-landing-review](skills/pre-landing-review/)       | Gate-oriented safety audit with two-pass severity triage — CRITICAL (SQL, races, trust) blocks landing, INFORMATIONAL is advisory                  |
-| [plan-review](skills/plan-review/)                     | Pre-implementation plan audit stress-testing scope, assumptions, risks, and failure modes with product and engineering lenses                      |
-| [manuscript-review](skills/manuscript-review/)         | Pre-publication manuscript audit with 24 diagnostic dimensions, citation hygiene, and cross-element coherence                                      |
-| [manuscript-provenance](skills/manuscript-provenance/) | Computational provenance audit verifying every number, table, and figure in a manuscript traces back to code                                       |
-| [repo-sentinel](skills/repo-sentinel/)                 | Security audit and enforcement for public repos — 12 attack surfaces, pre-release readiness, history scrubbing, CI gates                           |
+| Skill                                                  | Description                                                                                                                                         |
+| ------------------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [architecture-reviewer](skills/architecture-reviewer/) | Architecture reviews across 7 scored dimensions — structural integrity, scalability, security, performance, enterprise readiness, operations, data  |
+| [code-refiner](skills/code-refiner/)                   | Deep code simplification and refactoring — structural complexity analysis, anti-pattern detection, idiomatic rewrites across Python, Go, TS, Rust   |
+| [pr-review](skills/pr-review/)                         | Diff-based PR review across 5 dimensions — code quality, test coverage, silent failures, type design, comment quality with severity-ranked output   |
+| [pre-landing-review](skills/pre-landing-review/)       | Gate-oriented safety audit with two-pass severity triage — CRITICAL (SQL, races, trust) blocks landing, INFORMATIONAL is advisory                   |
+| [plan-review](skills/plan-review/)                     | Pre-implementation plan audit stress-testing scope, assumptions, risks, and failure modes with product and engineering lenses                       |
+| [manuscript-review](skills/manuscript-review/)         | Pre-publication manuscript audit with 24 diagnostic dimensions, citation hygiene, and cross-element coherence                                       |
+| [manuscript-provenance](skills/manuscript-provenance/) | Computational provenance audit verifying every number, table, and figure in a manuscript traces back to code                                        |
+| [repo-sentinel](skills/repo-sentinel/)                 | Security audit and enforcement for public repos — 12 attack surfaces, pre-release readiness, history scrubbing, CI gates                            |
 | [package-evaluator](skills/package-evaluator/)         | Evaluate package quality across 6 weighted dimensions with type-specific signals — frontmatter, triggers, structure, depth, consistency, compliance |
-| [dependency-audit](skills/dependency-audit/)           | Dependency risk assessment — license compliance, maintenance health scoring, CVE detection, bloat identification, supply chain analysis            |
-| [qa-systematic](skills/qa-systematic/)                 | Systematic web QA testing with 8-category health scoring, issue taxonomy, and regression tracking — full, quick, and regression modes              |
+| [dependency-audit](skills/dependency-audit/)           | Dependency risk assessment — license compliance, maintenance health scoring, CVE detection, bloat identification, supply chain analysis             |
+| [qa-systematic](skills/qa-systematic/)                 | Systematic web QA testing with 8-category health scoring, issue taxonomy, and regression tracking — full, quick, and regression modes               |
 
 ### Skills — Visualization & Documents
 
@@ -136,11 +136,11 @@ Skills below are superseded by base model capabilities. They remain installable 
 
 ## Commands
 
-| Command                                    | Description                      |
-| ------------------------------------------ | -------------------------------- |
-| [tdd](commands/tdd/)                       | Test-driven development workflow |
-| [security-scan](commands/security-scan/)   | Security vulnerability audit     |
-| [refactor](commands/refactor/) | Code simplification workflow     |
+| Command                                  | Description                      |
+| ---------------------------------------- | -------------------------------- |
+| [tdd](commands/tdd/)                     | Test-driven development workflow |
+| [security-scan](commands/security-scan/) | Security vulnerability audit     |
+| [refactor](commands/refactor/)           | Code simplification workflow     |
 
 ## Hooks
 
@@ -250,14 +250,14 @@ Packages activate when Claude detects a matching intent. Each package defines tr
 
 Every package is evaluated against 6 shared dimensions using the [package-evaluator](skills/package-evaluator/), with type-specific signals for agents, hooks, rules, commands, utilities, and presets:
 
-| Dimension               | Weight | What it measures                                            |
-| ----------------------- | ------ | ----------------------------------------------------------- |
-| Frontmatter Quality     | 20%    | Description length, trigger phrases, "Use when" clause      |
-| Trigger Coverage        | 18%    | Synonym breadth, implied contexts, interrogative forms      |
-| Structural Completeness | 20%    | Workflow, error handling, output format, type-specific metadata |
+| Dimension               | Weight | What it measures                                                 |
+| ----------------------- | ------ | ---------------------------------------------------------------- |
+| Frontmatter Quality     | 20%    | Description length, trigger phrases, "Use when" clause           |
+| Trigger Coverage        | 18%    | Synonym breadth, implied contexts, interrogative forms           |
+| Structural Completeness | 20%    | Workflow, error handling, output format, type-specific metadata  |
 | Content Depth           | 22%    | Decision frameworks, multi-step workflows, type-specific signals |
-| Consistency & Integrity | 12%    | Name matching, file references, description-body alignment  |
-| CONTRIBUTING Compliance | 8%     | Naming conventions, length limits, YAML validity            |
+| Consistency & Integrity | 12%    | Name matching, file references, description-body alignment       |
+| CONTRIBUTING Compliance | 8%     | Naming conventions, length limits, YAML validity                 |
 
 ---
 
