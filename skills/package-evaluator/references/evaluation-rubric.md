@@ -1,6 +1,6 @@
 # Evaluation Rubric
 
-Detailed scoring criteria for each dimension of skill quality evaluation.
+Detailed scoring criteria for each dimension of package quality evaluation.
 
 ## Score Scale
 
@@ -32,7 +32,7 @@ General criteria for the 1-5 scale. Dimension-specific tables below refine these
 
 | Score | Criteria |
 | ----- | -------- |
-| 1 | Zero trigger phrases in description or body; skill activates only on exact name match |
+| 1 | Zero trigger phrases in description or body; package activates only on exact name match |
 | 2 | 1-2 trigger phrases, all using the same root word (e.g., "review" and "reviewer" but no synonyms) |
 | 3 | 3-4 distinct trigger phrases covering 2+ synonym families, but missing implied contexts or interrogative forms |
 | 4 | 5-7 trigger phrases across 3+ synonym families, includes at least one implied context scenario |
@@ -62,11 +62,11 @@ General criteria for the 1-5 scale. Dimension-specific tables below refine these
 
 | Score | Criteria |
 | ----- | -------- |
-| 1 | Directory name does not match frontmatter `name` field, OR skill contains cross-skill `../` references that break standalone packaging (CRITICAL findings) |
+| 1 | Directory name does not match frontmatter `name` field, OR package contains cross-package `../` references that break standalone packaging (CRITICAL findings) |
 | 2 | Name matches but 2+ referenced files do not exist on disk, or description promises features the body does not deliver |
 | 3 | Name matches, 1 referenced file missing or 1 description-body mismatch, minor terminology inconsistencies |
 | 4 | Name matches, all referenced files exist and are self-contained (no `../` paths), description aligns with body, minor terminology variation |
-| 5 | Name matches directory exactly, all referenced files exist within the skill directory, description accurately reflects body, consistent terminology throughout, fully self-contained |
+| 5 | Name matches directory exactly, all referenced files exist within the package directory, description accurately reflects body, consistent terminology throughout, fully self-contained |
 
 ### D6: CONTRIBUTING.md Compliance (8%)
 
@@ -80,14 +80,142 @@ General criteria for the 1-5 scale. Dimension-specific tables below refine these
 
 ---
 
+## Type-Specific Scoring Criteria
+
+The shared D1-D6 criteria above apply to all package types. The following sections
+document additional scoring adjustments for each non-skill package type. These
+adjustments modify D3 and D4 scores based on type-specific quality signals.
+
+### Agent Scoring Adjustments
+
+**D3 adjustments for AGENT.md:**
+
+| Condition | Impact |
+| --------- | ------ |
+| Missing `model` field (opus/sonnet/haiku) | -0.5 from D3 score |
+| Missing `color` field | -0.25 from D3 score |
+| Missing `metadata.category` | -0.5 from D3 score |
+| Missing `metadata.execution_phase` | -0.5 from D3 score |
+| Missing `metadata.language_targets` | -0.25 from D3 score |
+| All agent metadata absent | Cap D3 at 3/5 |
+
+**D4 adjustments for AGENT.md:**
+
+| Condition | Impact |
+| --------- | ------ |
+| No decision tree or algorithm section | Cap D4 at 2/5 |
+| No phase markers (START/END or numbered phases) | -0.5 from D4 score |
+| No severity classification (CRITICAL/HIGH/MEDIUM/LOW) | -0.5 from D4 score |
+| Only generic advice, no language-specific patterns | -0.5 from D4 score |
+| No VIOLATION/BLOCK/PASS outcome paths | -0.25 from D4 score |
+
+### Hook Scoring Adjustments
+
+**D3 adjustments for HOOK.md:**
+
+| Condition | Impact |
+| --------- | ------ |
+| No `hook.events` list | Cap D3 at 2/5 |
+| Missing `hook.handler.type` | -0.5 from D3 score |
+| Missing `hook.handler.command` | -0.5 from D3 score |
+| No handler script in directory | -1.0 from D3 score |
+
+**D4 adjustments for HOOK.md:**
+
+| Condition | Impact |
+| --------- | ------ |
+| No handler script exists | Cap D4 at 1/5 |
+| Handler is a placeholder/stub | Cap D4 at 2/5 |
+| No stdin JSON handling documented | -0.5 from D4 score |
+| No exit code semantics documented | -0.5 from D4 score |
+| No edge case documentation (timeout, malformed input) | -0.25 from D4 score |
+
+### Rule Scoring Adjustments
+
+**D3 adjustments for RULE.md:**
+
+| Condition | Impact |
+| --------- | ------ |
+| Missing `metadata.scope` (global/project) | -0.5 from D3 score |
+| Language-specific rule without `metadata.applies_to.languages` | -0.5 from D3 score |
+
+**D4 adjustments for RULE.md:**
+
+| Condition | Impact |
+| --------- | ------ |
+| Only vague principles, no concrete requirements | Cap D4 at 2/5 |
+| No code examples for key rules | -0.5 from D4 score |
+| No anti-patterns shown | -0.25 from D4 score |
+| Thresholds use "reasonable"/"appropriate" instead of numbers | -0.5 from D4 score |
+
+### Command Scoring Adjustments
+
+**D3 adjustments for COMMAND.md:**
+
+| Condition | Impact |
+| --------- | ------ |
+| Missing `command.syntax` | -0.5 from D3 score |
+| Missing `command.handler` | -0.5 from D3 score |
+| No argument documentation | -0.25 from D3 score |
+
+**D4 adjustments for COMMAND.md:**
+
+| Condition | Impact |
+| --------- | ------ |
+| No step-by-step workflow | Cap D4 at 2/5 |
+| No decision points marked | -0.5 from D4 score |
+| No output format specified | -0.25 from D4 score |
+| No termination criteria | -0.25 from D4 score |
+
+### Utility Scoring Adjustments
+
+**D3 adjustments for UTILITY.md:**
+
+| Condition | Impact |
+| --------- | ------ |
+| Missing `utility.runtime` | -0.5 from D3 score |
+| Missing `utility.entry_point` or file does not exist | -1.0 from D3 score |
+| Missing `utility.executable` | -0.25 from D3 score |
+
+**D4 adjustments for UTILITY.md:**
+
+| Condition | Impact |
+| --------- | ------ |
+| No working entry_point script | Cap D4 at 1/5 |
+| Entry point lacks argparse or CLI handling | -0.5 from D4 score |
+| No error handling in script (bare except or none) | -0.5 from D4 score |
+| No usage examples in body | -0.25 from D4 score |
+| Undocumented external dependencies | -0.5 from D4 score |
+
+### Preset Scoring Adjustments
+
+**D3 adjustments for PRESET.md:**
+
+| Condition | Impact |
+| --------- | ------ |
+| Missing `preset.packages` | Cap D3 at 1/5 |
+| No package type sections in preset | -0.5 from D3 score |
+| Missing `preset.compatibility.platforms` | -0.25 from D3 score |
+
+**D4 adjustments for PRESET.md:**
+
+| Condition | Impact |
+| --------- | ------ |
+| References non-existent packages | CRITICAL — caps overall at 40% |
+| No explanation of why packages work together | -0.5 from D4 score |
+| No target workflow or use case described | -0.5 from D4 score |
+| References aspirational (not yet created) packages | -1.0 from D4 score |
+
+---
+
 ## Dimension Weights and Justification
 
 | Dimension | Weight | Justification |
 | --------- | ------ | ------------- |
-| D4: Content Depth | 22% | Highest weight because shallow skills waste activation — once triggered, the skill must deliver substantive guidance or the user loses trust in the skill system |
-| D1: Frontmatter Quality | 20% | Controls discoverability — Claude Code uses the description to match skills to queries; a poor description means the skill is invisible |
+| D4: Content Depth | 22% | Highest weight because shallow packages waste activation — once triggered, the package must deliver substantive guidance or the user loses trust in the package system |
+| D1: Frontmatter Quality | 20% | Controls discoverability — Claude Code uses the description to match packages to queries; a poor description means the package is invisible |
 | D3: Structural Completeness | 20% | Structural gaps cause unpredictable behavior — missing error handling leads to silent failures, missing output format leads to inconsistent results |
-| D2: Trigger Coverage | 18% | Breadth of activation — even with a good description, narrow trigger vocabulary means the skill misses valid queries phrased differently |
+| D2: Trigger Coverage | 18% | Breadth of activation — even with a good description, narrow trigger vocabulary means the package misses valid queries phrased differently |
 | D5: Consistency and Integrity | 12% | Internal coherence — mismatches between name, description, and content cause confusion but do not prevent function if frontmatter is correct |
 | D6: CONTRIBUTING Compliance | 8% | Lowest weight because convention violations are easy to fix and rarely affect runtime behavior, but they block PR acceptance |
 
@@ -158,17 +286,20 @@ in CONTRIBUTING compliance.
 
 ## Calibration Rules for Meta-Evaluation
 
-1. If all skills in a Full Audit score above 80%, spot-check the lowest-scoring dimension
-   across all skills — the rubric may be too lenient if no dimension scores below 3/5.
-2. If a skill scores below 40%, verify CRITICAL findings are genuine before reporting.
+1. If all packages in a Full Audit score above 80%, spot-check the lowest-scoring dimension
+   across all packages — the rubric may be too lenient if no dimension scores below 3/5.
+2. If a package scores below 40%, verify CRITICAL findings are genuine before reporting.
    Distinguish between truly missing frontmatter and frontmatter that is merely sparse.
-3. When comparing scores across skills, a 10+ percentage point gap should correspond to
-   visible quality differences. If two skills feel similar in quality but score 15 points
+3. When comparing scores across packages, a 10+ percentage point gap should correspond to
+   visible quality differences. If two packages feel similar in quality but score 15 points
    apart, re-examine the dimension that diverges most.
 4. Self-evaluation must produce the same score regardless of whether the evaluator is
    aware it is evaluating itself. Run the same rubric, check the same files, apply the
    same caps.
-5. Do not round dimension scores to avoid half-scores — use 3.5 when the skill clearly
+5. Do not round dimension scores to avoid half-scores — use 3.5 when the package clearly
    falls between two levels. Round only the final percentage to one decimal place.
 6. A single CRITICAL finding dominates the overall score by design. This is intentional:
-   a skill that cannot activate or cannot load has zero utility regardless of content quality.
+   a package that cannot activate or cannot load has zero utility regardless of content quality.
+7. Type-specific adjustments are additive to shared criteria. Apply shared scoring first,
+   then adjust for type-specific signals. Never double-penalize: if a shared criterion and
+   a type-specific criterion flag the same gap, apply only the stricter cap.
