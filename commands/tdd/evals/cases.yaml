@@ -1,0 +1,41 @@
+cases:
+  - id: tdd_function_explicit
+    prompt: "/tdd parse_config"
+    fixtures: []
+    rubric:
+      - "activates TDD workflow"
+      - "identifies parse_config as the target"
+      - "attempts to understand requirements before writing tests"
+      - "writes failing tests before implementation"
+    trigger_expected: true
+
+  - id: tdd_module_scope
+    prompt: "I want to build this feature test-first. /tdd auth/session_manager"
+    fixtures: []
+    rubric:
+      - "activates TDD workflow for the auth/session_manager module"
+      - "follows red-green-refactor cycle"
+      - "generates edge case tests for session management"
+    trigger_expected: true
+
+  - id: tdd_implicit_trigger
+    prompt: "Write tests first, then implement the validate_email function"
+    fixtures: []
+    rubric:
+      - "recognizes test-first intent and activates TDD workflow"
+      - "writes failing tests before any implementation"
+    trigger_expected: true
+
+  - id: negative_generate_tests_only
+    prompt: "Generate a test suite for my existing UserService class"
+    fixtures: []
+    rubric:
+      - "does not activate TDD workflow (test-harness territory — tests for existing code, not test-first development)"
+    trigger_expected: false
+
+  - id: negative_code_review
+    prompt: "Review the test coverage of my recent changes"
+    fixtures: []
+    rubric:
+      - "does not activate TDD workflow (pr-review territory — reviewing existing tests, not writing new ones)"
+    trigger_expected: false

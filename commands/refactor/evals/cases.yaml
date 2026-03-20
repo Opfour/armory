@@ -1,0 +1,43 @@
+cases:
+  - id: refactor_clean_path
+    prompt: "/refactor src/parser.py"
+    fixtures: []
+    rubric:
+      - "activates refactor workflow"
+      - "scopes to src/parser.py"
+      - "analyzes cyclomatic complexity"
+      - "checks for duplicated logic"
+      - "verifies behavior preservation via tests"
+    trigger_expected: true
+
+  - id: refactor_clean_recent
+    prompt: "/refactor"
+    fixtures: []
+    rubric:
+      - "activates refactor workflow"
+      - "uses git diff to identify recently modified files"
+      - "presents file list before proceeding"
+    trigger_expected: true
+
+  - id: refactor_clean_implicit
+    prompt: "Clean up and simplify my recent changes before I open a PR"
+    fixtures: []
+    rubric:
+      - "recognizes code simplification intent"
+      - "identifies recently changed files"
+      - "applies complexity reduction transformations"
+    trigger_expected: true
+
+  - id: negative_code_refiner
+    prompt: "Do a deep refactoring pass on the entire codebase for anti-patterns"
+    fixtures: []
+    rubric:
+      - "does not activate refactor (code-refiner territory — deep structural refactoring across entire codebase, not recent-change cleanup)"
+    trigger_expected: false
+
+  - id: negative_pr_review
+    prompt: "Review my PR for code quality issues and suggest improvements"
+    fixtures: []
+    rubric:
+      - "does not activate refactor (pr-review territory — review and feedback, not direct simplification)"
+    trigger_expected: false

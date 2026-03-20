@@ -1,0 +1,52 @@
+cases:
+  - id: review_code_quality
+    prompt: "Review this code for quality issues before I commit."
+    fixtures: []
+    rubric:
+      - "activates code review workflow"
+      - "identifies target files via git diff or specified paths"
+      - "produces severity-ranked findings (CRITICAL/HIGH/MEDIUM/LOW)"
+      - "includes file:line references for each finding"
+      - "provides fix recommendations"
+    trigger_expected: true
+
+  - id: audit_code_explicit
+    prompt: "Audit this code for naming, complexity, and duplication issues."
+    fixtures: []
+    rubric:
+      - "activates naming and convention analysis"
+      - "activates complexity analysis"
+      - "activates DRY and duplication analysis"
+      - "classifies findings by severity"
+      - "provides specific extraction recommendations for duplications"
+    trigger_expected: true
+
+  - id: check_code_quality_general
+    prompt: "Check code quality on the files I just changed."
+    fixtures: []
+    rubric:
+      - "identifies changed files"
+      - "runs multi-phase analysis"
+      - "reports strengths alongside issues"
+    trigger_expected: true
+
+  - id: security_audit_specific
+    prompt: "Scan this repository for SQL injection and XSS vulnerabilities."
+    fixtures: []
+    rubric:
+      - "does not activate code-reviewer (security-reviewer territory)"
+    trigger_expected: false
+
+  - id: generate_tests_request
+    prompt: "Write unit tests for the UserService class."
+    fixtures: []
+    rubric:
+      - "does not activate code-reviewer (test-harness territory)"
+    trigger_expected: false
+
+  - id: refactor_code_request
+    prompt: "Refactor this function to reduce complexity."
+    fixtures: []
+    rubric:
+      - "does not activate code-reviewer (code-refiner territory)"
+    trigger_expected: false

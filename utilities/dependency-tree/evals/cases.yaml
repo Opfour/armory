@@ -1,0 +1,38 @@
+cases:
+  - id: show_python_deps
+    prompt: "Show me the dependency tree for this Python project"
+    fixtures: []
+    rubric:
+      - "parses pyproject.toml to extract dependencies"
+      - "displays dependencies in a tree format with version constraints"
+    trigger_expected: true
+
+  - id: list_node_dependencies
+    prompt: "List all dependencies and devDependencies from package.json"
+    fixtures: []
+    rubric:
+      - "reads package.json to extract dependency information"
+      - "separates runtime and dev dependencies"
+    trigger_expected: true
+
+  - id: go_mod_deps
+    prompt: "What Go modules does this project depend on?"
+    fixtures: []
+    rubric:
+      - "parses go.mod require blocks"
+      - "lists module paths with versions"
+    trigger_expected: true
+
+  - id: negative_install_deps
+    prompt: "Install the missing dependencies for my project"
+    fixtures: []
+    rubric:
+      - "installing dependencies is outside the scope of listing them"
+    trigger_expected: false
+
+  - id: negative_audit_vulnerabilities
+    prompt: "Check my dependencies for security vulnerabilities"
+    fixtures: []
+    rubric:
+      - "security auditing is not dependency tree visualization"
+    trigger_expected: false

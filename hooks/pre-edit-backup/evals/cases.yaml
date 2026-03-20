@@ -1,0 +1,29 @@
+cases:
+  - id: backup_before_edit
+    prompt: "Edit the file src/config.py to change the database URL"
+    fixtures: []
+    rubric:
+      - "Hook should fire on Edit tool invocation and create a backup"
+      - "Backup file should appear in ~/.claude/backups/ with timestamp prefix"
+    trigger_expected: true
+
+  - id: backup_before_replace
+    prompt: "Replace the function signature in utils/helpers.py"
+    fixtures: []
+    rubric:
+      - "Hook should fire when Edit tool is used for string replacement"
+    trigger_expected: true
+
+  - id: no_backup_on_read
+    prompt: "Read the contents of README.md"
+    fixtures: []
+    rubric:
+      - "Hook should not fire on Read tool — only Edit triggers backup"
+    trigger_expected: false
+
+  - id: no_backup_on_bash
+    prompt: "Run ls -la to list files in the current directory"
+    fixtures: []
+    rubric:
+      - "Hook should not fire on Bash tool invocations"
+    trigger_expected: false

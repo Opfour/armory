@@ -1,0 +1,33 @@
+cases:
+  - id: install_core_preset
+    prompt: "Set up the basic essentials for my Claude Code project."
+    fixtures: []
+    rubric:
+      - "recommends or activates the core preset"
+      - "mentions pr-review, code-refiner, or pre-landing-review as included packages"
+      - "does not suggest language-specific tooling"
+    trigger_expected: true
+
+  - id: install_core_for_new_team
+    prompt: "I'm onboarding new developers, give them a solid baseline for code quality."
+    fixtures: []
+    rubric:
+      - "recommends the core preset as a starting point"
+      - "mentions commit-standards or git-protection as part of the bundle"
+    trigger_expected: true
+
+  - id: install_single_skill_not_preset
+    prompt: "Install just the pr-review skill for me."
+    fixtures: []
+    rubric:
+      - "installs pr-review individually, not via a preset"
+      - "does not activate the core preset"
+    trigger_expected: false
+
+  - id: create_new_agent_not_preset
+    prompt: "Create a new custom agent for my project."
+    fixtures: []
+    rubric:
+      - "does not activate any preset"
+      - "proceeds with agent creation workflow"
+    trigger_expected: false

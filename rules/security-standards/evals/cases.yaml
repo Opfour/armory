@@ -1,0 +1,41 @@
+cases:
+  - id: secret_management_guidance
+    prompt: "Where should I store the API keys for our payment gateway integration?"
+    fixtures: []
+    rubric:
+      - "recommends environment variables or secrets manager"
+      - "explicitly prohibits hardcoding in source code"
+      - "mentions .env in .gitignore"
+    trigger_expected: true
+
+  - id: input_validation_implementation
+    prompt: "How should I validate user input on our registration endpoint?"
+    fixtures: []
+    rubric:
+      - "validates at system boundary"
+      - "covers type, length, format, and range"
+      - "recommends allowlist over denylist"
+    trigger_expected: true
+
+  - id: sql_parameterization
+    prompt: "What's the secure way to build SQL queries with user-provided filters?"
+    fixtures: []
+    rubric:
+      - "requires parameterized queries"
+      - "prohibits string concatenation of user input into SQL"
+      - "shows parameterized query example"
+    trigger_expected: true
+
+  - id: negative_ui_design
+    prompt: "Design a responsive dashboard layout with sidebar navigation"
+    fixtures: []
+    rubric:
+      - "UI layout design is not a security concern"
+    trigger_expected: false
+
+  - id: negative_database_schema
+    prompt: "Create an ERD for the e-commerce product catalog with categories and variants"
+    fixtures: []
+    rubric:
+      - "database schema design is not security standards"
+    trigger_expected: false

@@ -1,0 +1,40 @@
+cases:
+  - id: commit_message_format
+    prompt: "How should I format my commit message for this new login feature?"
+    fixtures: []
+    rubric:
+      - "specifies conventional commit format with type(scope): description"
+      - "mentions imperative mood and 72-char subject limit"
+      - "shows feat type for new feature"
+    trigger_expected: true
+
+  - id: branch_naming_convention
+    prompt: "What should I name my branch for fixing the authentication bug?"
+    fixtures: []
+    rubric:
+      - "recommends fix/ prefix with kebab-case slug"
+      - "references ticket number inclusion when available"
+    trigger_expected: true
+
+  - id: breaking_change_footer
+    prompt: "I'm removing a public API endpoint, how do I write this conventional commit?"
+    fixtures: []
+    rubric:
+      - "requires BREAKING CHANGE footer"
+      - "shows the ! suffix or footer format"
+      - "explains when BREAKING CHANGE is mandatory"
+    trigger_expected: true
+
+  - id: negative_code_review
+    prompt: "Review this pull request for code quality and suggest improvements"
+    fixtures: []
+    rubric:
+      - "code review is about code quality, not commit message formatting"
+    trigger_expected: false
+
+  - id: negative_deployment_pipeline
+    prompt: "Set up a CI/CD pipeline to deploy our app to AWS"
+    fixtures: []
+    rubric:
+      - "deployment pipeline setup is infrastructure, not commit standards"
+    trigger_expected: false
