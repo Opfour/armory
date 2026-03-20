@@ -16,9 +16,9 @@ Intended for developers who treat AI coding agents as a serious part of their wo
 
 ---
 
-## Skill Catalog
+## Package Catalog
 
-### Development & Tooling
+### Skills — Development & Tooling
 
 | Skill                                            | Description                                                                                                                                                 |
 | ------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -35,7 +35,7 @@ Intended for developers who treat AI coding agents as a serious part of their wo
 | [lightpanda-browser](skills/lightpanda-browser/) | Lightweight headless browser automation via Lightpanda + agent-browser CDP — 9x lower memory, 11x faster, for scraping, DOM extraction, and form automation |
 | [skill-library](skills/skill-library/)           | Agent-native catalog for browsing, installing, updating, syncing, and removing armory skills from within a Claude Code session                              |
 
-### Research & Analysis
+### Skills — Research & Analysis
 
 | Skill                                        | Description                                                                                                                                                       |
 | -------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -44,7 +44,7 @@ Intended for developers who treat AI coding agents as a serious part of their wo
 | [notebooklm](skills/notebooklm/)             | Google NotebookLM automation via notebooklm-py — create notebooks, add sources, chat, generate podcasts, videos, infographics, quizzes, flashcards, and more      |
 | [immune](skills/immune/)                     | Hybrid adaptive memory with Cheatsheet (positive patterns) and Immune (negative patterns) — Hot/Cold tiered memory, multi-domain antibody scanning, auto-learning |
 
-### Review & Quality
+### Skills — Review & Quality
 
 | Skill                                                  | Description                                                                                                                                        |
 | ------------------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -56,11 +56,11 @@ Intended for developers who treat AI coding agents as a serious part of their wo
 | [manuscript-review](skills/manuscript-review/)         | Pre-publication manuscript audit with 24 diagnostic dimensions, citation hygiene, and cross-element coherence                                      |
 | [manuscript-provenance](skills/manuscript-provenance/) | Computational provenance audit verifying every number, table, and figure in a manuscript traces back to code                                       |
 | [repo-sentinel](skills/repo-sentinel/)                 | Security audit and enforcement for public repos — 12 attack surfaces, pre-release readiness, history scrubbing, CI gates                           |
-| [skill-evaluator](skills/skill-evaluator/)             | Evaluate skill quality across 6 weighted dimensions — frontmatter, triggers, structure, depth, consistency, compliance                             |
+| [package-evaluator](skills/package-evaluator/)         | Evaluate package quality across 6 weighted dimensions with type-specific signals — frontmatter, triggers, structure, depth, consistency, compliance |
 | [dependency-audit](skills/dependency-audit/)           | Dependency risk assessment — license compliance, maintenance health scoring, CVE detection, bloat identification, supply chain analysis            |
 | [qa-systematic](skills/qa-systematic/)                 | Systematic web QA testing with 8-category health scoring, issue taxonomy, and regression tracking — full, quick, and regression modes              |
 
-### Visualization & Documents
+### Skills — Visualization & Documents
 
 | Skill                                                                | Description                                                                                                          |
 | -------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------- |
@@ -72,7 +72,7 @@ Intended for developers who treat AI coding agents as a serious part of their wo
 | [static-web-artifacts-builder](skills/static-web-artifacts-builder/) | Self-contained interactive HTML artifacts — infographics, dashboards, diagrams                                       |
 | [md-to-pdf](skills/md-to-pdf/)                                       | Markdown to styled PDF with Mermaid diagrams, KaTeX math, and syntax highlighting                                    |
 
-### Documentation & Release
+### Skills — Documentation & Release
 
 | Skill                                            | Description                                                                                                                 |
 | ------------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------- |
@@ -82,7 +82,7 @@ Intended for developers who treat AI coding agents as a serious part of their wo
 | [adr-writer](skills/adr-writer/)                 | Architecture Decision Records — context capture, alternatives analysis, consequence projection, status lifecycle            |
 | [api-docs-generator](skills/api-docs-generator/) | API documentation audit and enhancement — FastAPI docstrings, Pydantic examples, OpenAPI spec enrichment, coverage reports  |
 
-### Backend & Data
+### Skills — Backend & Data
 
 | Skill                                                      | Description                                                                                                |
 | ---------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- |
@@ -90,7 +90,7 @@ Intended for developers who treat AI coding agents as a serious part of their wo
 | [migration-risk-analyzer](skills/migration-risk-analyzer/) | Database migration risk assessment — lock analysis, downtime estimation, rollback strategies, validation   |
 | [benchmark-runner](skills/benchmark-runner/)               | Structured benchmark design — metric selection, test case matrix, environment capture, statistical rigor   |
 
-### AI/ML & Planning
+### Skills — AI/ML & Planning
 
 | Skill                                              | Description                                                                                                   |
 | -------------------------------------------------- | ------------------------------------------------------------------------------------------------------------- |
@@ -99,14 +99,14 @@ Intended for developers who treat AI coding agents as a serious part of their wo
 | [task-decomposer](skills/task-decomposer/)         | Feature decomposition — phased task breakdown, dependency mapping, edge case enumeration, sizing              |
 | [estimate-calibrator](skills/estimate-calibrator/) | Calibrated three-point estimates — PERT ranges, unknown identification, confidence intervals, bias correction |
 
-### Writing
+### Skills — Writing
 
 | Skill                                              | Description                                                                                                                                                         |
 | -------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | [humanize](skills/humanize/)                       | Detect and remove AI-generated writing patterns — 24 lexical patterns + 12 statistical signals, 6 domain profiles, 5-phase pipeline with semantic preservation      |
 | [linkedin-post-style](skills/linkedin-post-style/) | Write LinkedIn posts in a specific technical voice with visual companion support — carousels via md-to-pdf, images via concept-to-image, video via concept-to-video |
 
-### Deprecated
+### Skills — Deprecated
 
 Skills below are superseded by base model capabilities. They remain installable but receive no further updates.
 
@@ -219,41 +219,43 @@ Or download `.skill` archives from the [Releases](../../releases) page.
 
 ## Usage
 
-Skills activate when Claude detects a matching intent in your message. Each skill defines trigger phrases in its frontmatter description — check the `SKILL.md` in each folder for the full list.
+Packages activate when Claude detects a matching intent. Each package defines trigger phrases in its frontmatter description — check the definition file (`SKILL.md`, `AGENT.md`, etc.) in each folder.
 
 **Example triggers:**
 
 ```text
-"Create an architecture diagram for my microservices setup"
--> activates: architecture-diagram
-
 "Run a security audit before I push this to GitHub"
--> activates: repo-sentinel
+-> activates: repo-sentinel (skill)
 
-"Convert this markdown file to PDF with the Mermaid diagrams rendered"
--> activates: md-to-pdf
+"Review this code for quality issues"
+-> activates: code-reviewer (agent)
 
-"Build an agent that monitors a directory for changes"
--> activates: agent-builder
-
-"Evaluate the quality of this skill"
--> activates: skill-evaluator
+"Evaluate the quality of this package"
+-> activates: package-evaluator (skill)
 ```
 
-Skills do not require explicit invocation — Claude matches your intent against the skill's trigger definition and loads it automatically when relevant.
+**Commands** are invoked explicitly via slash syntax:
+
+```text
+/tdd calculate_discount    -> TDD workflow for a function
+/security-scan src/        -> security vulnerability audit
+/refactor src/utils.py     -> code simplification
+```
+
+**Hooks** fire automatically on Claude Code lifecycle events (PreToolUse, PostToolUse, Stop, SessionStart). **Rules** load as context when relevant. **Presets** install bundles via `just install-profile`.
 
 ---
 
-## Skill Quality
+## Package Quality
 
-Every skill is evaluated against 6 dimensions using the [skill-evaluator](skills/skill-evaluator/):
+Every package is evaluated against 6 shared dimensions using the [package-evaluator](skills/package-evaluator/), with type-specific signals for agents, hooks, rules, commands, utilities, and presets:
 
 | Dimension               | Weight | What it measures                                            |
 | ----------------------- | ------ | ----------------------------------------------------------- |
 | Frontmatter Quality     | 20%    | Description length, trigger phrases, "Use when" clause      |
 | Trigger Coverage        | 18%    | Synonym breadth, implied contexts, interrogative forms      |
-| Structural Completeness | 20%    | Workflow, error handling, output format, limitations        |
-| Content Depth           | 22%    | Decision frameworks, multi-step workflows, output templates |
+| Structural Completeness | 20%    | Workflow, error handling, output format, type-specific metadata |
+| Content Depth           | 22%    | Decision frameworks, multi-step workflows, type-specific signals |
 | Consistency & Integrity | 12%    | Name matching, file references, description-body alignment  |
 | CONTRIBUTING Compliance | 8%     | Naming conventions, length limits, YAML validity            |
 
@@ -261,7 +263,7 @@ Every skill is evaluated against 6 dimensions using the [skill-evaluator](skills
 
 ## Eval Coverage
 
-Every skill has eval cases in `skills/<name>/evals/cases.yaml` — positive triggers (should activate) and negative triggers (should not). Deprecated skills enforce 0 positive + 2 negative cases.
+Every package has eval cases in `{type}/<name>/evals/cases.yaml` — positive triggers (should activate) and negative triggers (should not). Deprecated packages enforce 0 positive + 2 negative cases.
 
 **Validation:**
 
@@ -270,28 +272,30 @@ uv run scripts/validate_evals.py    # Schema validation for all eval files
 uv run scripts/generate_manifest.py # Regenerate manifest.yaml
 ```
 
-**CI pipeline** (`.github/workflows/skill-evals.yml`):
+**CI pipeline** (`.github/workflows/evals.yml`):
 
-- **PR gate**: validates manifest sync + eval schema on every pull request
+- **PR gate**: validates manifest sync + eval schema on every pull request across all 7 type directories
 - **Weekly cron**: Monday runs for model drift detection
 
-**Pre-commit hook**: auto-regenerates `manifest.yaml` when skill files change.
+**Pre-commit hook**: auto-regenerates `manifest.yaml` when any package definition file changes.
 
 ---
 
 ## Packaging
 
-Each package can be packaged into an archive for distribution:
+Each package can be archived for distribution. Archive type is auto-detected from the directory:
 
 ```bash
-uv run scripts/package.py skills/architecture-reviewer
+uv run scripts/package.py skills/architecture-reviewer  # produces .skill
+uv run scripts/package.py agents/code-reviewer           # produces .agent
+uv run scripts/package.py hooks/git-protection            # produces .hook
 ```
 
 ---
 
 ## Portability
 
-These skills are Claude-native (Claude Code and Claude.ai).
+These packages are Claude-native (Claude Code and Claude.ai).
 
 Adapters for other agent surfaces are planned in `adapters/`:
 
