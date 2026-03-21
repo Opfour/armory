@@ -22,7 +22,6 @@ from rich.table import Table
 
 from scripts.frontmatter import extract_body, extract_version, parse_frontmatter
 from scripts.package_types import (
-    LEGACY_MANIFEST_PATH,
     MANIFEST_PATH,
     REPO_ROOT,
     TYPES,
@@ -101,8 +100,6 @@ def discover_packages(pkg_type: PackageType | None = None) -> list[PackageInfo]:
 
     if MANIFEST_PATH.exists():
         return _discover_from_manifest(types_to_scan)
-    if LEGACY_MANIFEST_PATH.exists():
-        return _discover_from_legacy_manifest(types_to_scan)
     return _discover_from_definition_files(types_to_scan)
 
 
@@ -124,31 +121,6 @@ def _discover_from_manifest(types_to_scan: list[PackageType]) -> list[PackageInf
                 source_path=source,
                 pkg_type=pt,
             ))
-
-    return packages
-
-
-def _discover_from_legacy_manifest(types_to_scan: list[PackageType]) -> list[PackageInfo]:
-    """Read skills from skills.yaml (legacy format)."""
-    manifest = yaml.safe_load(LEGACY_MANIFEST_PATH.read_text(encoding="utf-8"))
-    packages: list[PackageInfo] = []
-    skill_type = TYPES["skill"]
-
-    # Legacy manifest only contains skills
-    if skill_type not in types_to_scan:
-        return packages
-
-    for entry in manifest.get("skills", []):
-        source = REPO_ROOT / entry["path"]
-        if not source.is_dir():
-            continue
-        packages.append(PackageInfo(
-            name=entry["name"],
-            version=entry.get("version", "0.0.0"),
-            description=entry.get("description", ""),
-            source_path=source,
-            pkg_type=skill_type,
-        ))
 
     return packages
 
