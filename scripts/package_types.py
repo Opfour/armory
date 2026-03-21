@@ -92,7 +92,6 @@ TYPES: dict[str, PackageType] = {
 }
 
 MANIFEST_PATH = REPO_ROOT / "manifest.yaml"
-LEGACY_MANIFEST_PATH = REPO_ROOT / "skills.yaml"
 
 EXCLUDE_NAMES: frozenset[str] = frozenset({
     "__pycache__", "node_modules", ".DS_Store", ".git", "evals",

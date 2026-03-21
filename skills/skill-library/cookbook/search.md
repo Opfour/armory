@@ -2,7 +2,7 @@
 
 ## Steps
 
-1. **Fetch catalog** — use cached `/tmp/armory-catalog.yaml` if < 10 min old; missing = expired, re-fetch from remote.
+1. **Fetch catalog** — use cached `/tmp/armory-manifest.yaml` if < 10 min old; missing = expired, re-fetch from remote.
 
 2. **Search `name` and `description` fields** for keyword matches against the user query.
 

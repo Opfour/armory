@@ -13,7 +13,7 @@ Show full detail for a single skill by name.
 Check whether the cached catalog exists and is fresh (under 600 seconds old). If missing or stale, re-fetch. A missing cache file is an expired cache, not an error.
 
 ```bash
-CACHE_PATH="/tmp/armory-catalog.yaml"
+CACHE_PATH="/tmp/armory-manifest.yaml"
 CACHE_TTL=600
 ARMORY_REPO="Mathews-Tom/armory"
 ARMORY_BRANCH="main"
@@ -29,13 +29,13 @@ else
 fi
 
 if [ "$REFETCH" = true ]; then
-  curl -sL "https://raw.githubusercontent.com/${ARMORY_REPO}/${ARMORY_BRANCH}/skills.yaml" > "$CACHE_PATH"
+  curl -sL "https://raw.githubusercontent.com/${ARMORY_REPO}/${ARMORY_BRANCH}/manifest.yaml" > "$CACHE_PATH"
 fi
 ```
 
 ### Step 2 — Look up skill in catalog
 
-Search `/tmp/armory-catalog.yaml` for an entry where `name` matches the argument exactly. Extract: `name`, `version`, `description`, `path`, and `complements` (if present).
+Search `/tmp/armory-manifest.yaml` for an entry where `name` matches the argument exactly. Extract: `name`, `version`, `description`, `path`, and `complements` (if present).
 
 If the skill is not found in the catalog, proceed to Step 3 to check local installation. If not found anywhere, report: `Skill "<name>" not found in catalog or locally.`
 

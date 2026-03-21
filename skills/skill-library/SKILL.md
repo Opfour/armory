@@ -22,9 +22,9 @@ Agent-native catalog and installer for armory skills. Provides browsing, searchi
 
 - **ARMORY_REPO**: `Mathews-Tom/armory`
 - **ARMORY_BRANCH**: `main`
-- **ARMORY_CATALOG_URL**: `https://raw.githubusercontent.com/{ARMORY_REPO}/{ARMORY_BRANCH}/skills.yaml`
+- **ARMORY_CATALOG_URL**: `https://raw.githubusercontent.com/{ARMORY_REPO}/{ARMORY_BRANCH}/manifest.yaml`
 - **DEFAULT_INSTALL_DIR**: `~/.claude/skills/`
-- **CATALOG_CACHE_PATH**: `/tmp/armory-catalog.yaml`
+- **CATALOG_CACHE_PATH**: `/tmp/armory-manifest.yaml`
 - **CATALOG_CACHE_TTL**: `600` (seconds)
 
 ## Command Reference
@@ -52,4 +52,4 @@ If the subcommand does not match any known cookbook, report the error and list t
 - All bash operations must use absolute paths. Never `cd` into temp dirs.
 - Fetch uses a 3-tier fallback chain: sparse checkout, then `gh api`, then `curl`. Attempt each in order; proceed to the next only on failure.
 - Cache lives in `/tmp/` with a 10-minute TTL. A missing cache file is treated as expired (triggers a re-fetch), not as an error.
-- The catalog is read from `skills.yaml` on GitHub (at `ARMORY_CATALOG_URL`), not from a separate catalog file. This is the same manifest format used by the armory repository.
+- The catalog is read from `manifest.yaml` on GitHub (at `ARMORY_CATALOG_URL`), not from a separate catalog file. This is the same manifest format used by the armory repository.

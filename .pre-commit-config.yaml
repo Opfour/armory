@@ -27,14 +27,6 @@ repos:
         pass_filenames: false
         files: ^(_templates/|(skills|agents|hooks|rules|commands|utilities|presets)/.*/references/)
 
-      - id: generate-manifest
-        name: Regenerate skills.yaml
-        entry: python scripts/generate_manifest.py
-        language: python
-        additional_dependencies: [pyyaml]
-        pass_filenames: false
-        files: ^(skills|agents|hooks|rules|commands|utilities|presets)/
-
       - id: block-env-files
         name: block-env-files
         entry: bash -c 'if git diff --cached --name-only | grep -qE "^\.env"; then echo "Blocked: .env file"; exit 1; fi'

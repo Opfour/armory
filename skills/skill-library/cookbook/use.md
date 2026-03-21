@@ -11,16 +11,16 @@ Install a skill from the armory catalog into `~/.claude/skills/`.
 
 ### Step 1: Fetch catalog
 
-Check for a cached catalog at `CATALOG_CACHE_PATH` (`/tmp/armory-catalog.yaml`).
+Check for a cached catalog at `CATALOG_CACHE_PATH` (`/tmp/armory-manifest.yaml`).
 
 ```bash
-if [ -f /tmp/armory-catalog.yaml ]; then
-    age=$(( $(date +%s) - $(stat -f %m /tmp/armory-catalog.yaml) ))
+if [ -f /tmp/armory-manifest.yaml ]; then
+    age=$(( $(date +%s) - $(stat -f %m /tmp/armory-manifest.yaml) ))
     if [ "$age" -ge 600 ]; then
-        curl -sL "{ARMORY_CATALOG_URL}" -o /tmp/armory-catalog.yaml
+        curl -sL "{ARMORY_CATALOG_URL}" -o /tmp/armory-manifest.yaml
     fi
 else
-    curl -sL "{ARMORY_CATALOG_URL}" -o /tmp/armory-catalog.yaml
+    curl -sL "{ARMORY_CATALOG_URL}" -o /tmp/armory-manifest.yaml
 fi
 ```
 
@@ -28,7 +28,7 @@ If the fetch fails, report the error and stop.
 
 ### Step 2: Match skill name
 
-Parse `/tmp/armory-catalog.yaml` and search for the `<name>` argument:
+Parse `/tmp/armory-manifest.yaml` and search for the `<name>` argument:
 
 1. **Exact match** on the `name` field.
 2. **Fuzzy fallback**: if no exact match, search description keywords for `<name>`.
