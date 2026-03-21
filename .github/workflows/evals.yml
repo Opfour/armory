@@ -50,13 +50,6 @@ jobs:
             echo "Run 'python scripts/generate_manifest.py' and commit the result"
             exit 1
           }
-          # Backward compat: also check skills.yaml if it exists
-          if [ -f skills.yaml ]; then
-            git diff --exit-code skills.yaml || {
-              echo "ERROR: skills.yaml is out of sync"
-              exit 1
-            }
-          fi
 
       - name: Validate eval cases schema
         run: python scripts/validate_evals.py
