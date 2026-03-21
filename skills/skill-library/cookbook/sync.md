@@ -11,16 +11,16 @@ Re-pull all installed skills that have updates available in the armory catalog.
 
 ### Step 1: Fetch catalog
 
-Check for a cached catalog at `CATALOG_CACHE_PATH` (`/tmp/armory-catalog.yaml`).
+Check for a cached catalog at `CATALOG_CACHE_PATH` (`/tmp/armory-manifest.yaml`).
 
 ```bash
-if [ -f /tmp/armory-catalog.yaml ]; then
-    age=$(( $(date +%s) - $(stat -f %m /tmp/armory-catalog.yaml) ))
+if [ -f /tmp/armory-manifest.yaml ]; then
+    age=$(( $(date +%s) - $(stat -f %m /tmp/armory-manifest.yaml) ))
     if [ "$age" -ge 600 ]; then
-        curl -sL "{ARMORY_CATALOG_URL}" -o /tmp/armory-catalog.yaml
+        curl -sL "{ARMORY_CATALOG_URL}" -o /tmp/armory-manifest.yaml
     fi
 else
-    curl -sL "{ARMORY_CATALOG_URL}" -o /tmp/armory-catalog.yaml
+    curl -sL "{ARMORY_CATALOG_URL}" -o /tmp/armory-manifest.yaml
 fi
 ```
 
@@ -48,7 +48,7 @@ done
 
 ### Step 3: Compare versions
 
-For each installed skill, look up its entry in the catalog (`/tmp/armory-catalog.yaml`). Compare `metadata.version` from the local `SKILL.md` against the catalog version.
+For each installed skill, look up its entry in the catalog (`/tmp/armory-manifest.yaml`). Compare `metadata.version` from the local `SKILL.md` against the catalog version.
 
 Skip any installed skill that does not exist in the catalog (locally-created skills).
 

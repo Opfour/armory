@@ -9,7 +9,7 @@ Dry-run check for available version bumps across all installed skills. Does not 
 Check whether the cached catalog exists and is fresh (under 600 seconds old). If missing or stale, re-fetch. A missing cache file is an expired cache, not an error.
 
 ```bash
-CACHE_PATH="/tmp/armory-catalog.yaml"
+CACHE_PATH="/tmp/armory-manifest.yaml"
 CACHE_TTL=600
 ARMORY_REPO="Mathews-Tom/armory"
 ARMORY_BRANCH="main"
@@ -25,7 +25,7 @@ else
 fi
 
 if [ "$REFETCH" = true ]; then
-  curl -sL "https://raw.githubusercontent.com/${ARMORY_REPO}/${ARMORY_BRANCH}/skills.yaml" > "$CACHE_PATH"
+  curl -sL "https://raw.githubusercontent.com/${ARMORY_REPO}/${ARMORY_BRANCH}/manifest.yaml" > "$CACHE_PATH"
 fi
 ```
 
