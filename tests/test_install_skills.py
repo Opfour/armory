@@ -479,29 +479,6 @@ class TestDiscoverPackages:
         assert len(pkgs) == 1
         assert pkgs[0].pkg_type.key == "skill"
 
-    def test_discover_from_legacy_manifest(self, tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
-        """Falls back to skills.yaml when manifest.yaml missing."""
-        import scripts.install as mod
-
-        (tmp_path / "skills" / "s1").mkdir(parents=True)
-
-        legacy = {
-            "skills": [
-                {"name": "s1", "version": "1.0.0", "description": "skill", "path": "skills/s1"},
-            ],
-        }
-        legacy_path = tmp_path / "skills.yaml"
-        legacy_path.write_text(yaml.dump(legacy))
-
-        monkeypatch.setattr(mod, "MANIFEST_PATH", tmp_path / "nonexistent.yaml")
-        monkeypatch.setattr(mod, "LEGACY_MANIFEST_PATH", legacy_path)
-        monkeypatch.setattr(mod, "REPO_ROOT", tmp_path)
-        monkeypatch.setattr("scripts.package_types.REPO_ROOT", tmp_path)
-
-        pkgs = discover_packages()
-        assert len(pkgs) == 1
-        assert pkgs[0].pkg_type.key == "skill"
-
     def test_discover_from_definition_files(self, tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
         """Falls back to scanning definition files when no manifest."""
         import scripts.install as mod
@@ -514,7 +491,6 @@ class TestDiscoverPackages:
         )
 
         monkeypatch.setattr(mod, "MANIFEST_PATH", tmp_path / "nonexistent.yaml")
-        monkeypatch.setattr(mod, "LEGACY_MANIFEST_PATH", tmp_path / "also-nonexistent.yaml")
         monkeypatch.setattr(pt_mod, "REPO_ROOT", tmp_path)
 
         pkgs = discover_packages(_skill_type())
@@ -527,7 +503,6 @@ class TestDiscoverPackages:
         import scripts.package_types as pt_mod
 
         monkeypatch.setattr(mod, "MANIFEST_PATH", tmp_path / "nonexistent.yaml")
-        monkeypatch.setattr(mod, "LEGACY_MANIFEST_PATH", tmp_path / "also-nonexistent.yaml")
         monkeypatch.setattr(pt_mod, "REPO_ROOT", tmp_path)
 
         pkgs = discover_packages()

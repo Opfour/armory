@@ -300,36 +300,21 @@ class TestWriteManifest:
         import scripts.package_types as pt
 
         orig_manifest = pt.MANIFEST_PATH
-        orig_legacy = pt.LEGACY_MANIFEST_PATH
         pt.MANIFEST_PATH = tmp_path / "manifest.yaml"
-        pt.LEGACY_MANIFEST_PATH = tmp_path / "skills.yaml"
-        # Also patch the module-level references in generate_manifest
         gm_orig_manifest = gm.MANIFEST_PATH
-        gm_orig_legacy = gm.LEGACY_MANIFEST_PATH
         gm.MANIFEST_PATH = pt.MANIFEST_PATH
-        gm.LEGACY_MANIFEST_PATH = pt.LEGACY_MANIFEST_PATH
 
         try:
             write_manifest(all_packages)
 
-            # Check manifest.yaml
             manifest_content = pt.MANIFEST_PATH.read_text()
             assert "Auto-generated" in manifest_content
             manifest_data = yaml.safe_load(manifest_content)
             assert len(manifest_data["packages"]["skills"]) == 1
             assert manifest_data["packages"]["skills"][0]["name"] == "test-skill"
-
-            # Check legacy skills.yaml
-            legacy_content = pt.LEGACY_MANIFEST_PATH.read_text()
-            assert "Auto-generated" in legacy_content
-            legacy_data = yaml.safe_load(legacy_content)
-            assert len(legacy_data["skills"]) == 1
-            assert legacy_data["skills"][0]["name"] == "test-skill"
         finally:
             pt.MANIFEST_PATH = orig_manifest
-            pt.LEGACY_MANIFEST_PATH = orig_legacy
             gm.MANIFEST_PATH = gm_orig_manifest
-            gm.LEGACY_MANIFEST_PATH = gm_orig_legacy
 
     def test_writes_multiple_types(self, tmp_path: Path) -> None:
         all_packages: dict[str, list[dict[str, Any]]] = {
@@ -341,11 +326,8 @@ class TestWriteManifest:
         import scripts.package_types as pt
 
         orig_manifest = pt.MANIFEST_PATH
-        orig_legacy = pt.LEGACY_MANIFEST_PATH
         pt.MANIFEST_PATH = tmp_path / "manifest.yaml"
-        pt.LEGACY_MANIFEST_PATH = tmp_path / "skills.yaml"
         gm.MANIFEST_PATH = pt.MANIFEST_PATH
-        gm.LEGACY_MANIFEST_PATH = pt.LEGACY_MANIFEST_PATH
 
         try:
             write_manifest(all_packages)
@@ -354,13 +336,6 @@ class TestWriteManifest:
             assert "skills" in data["packages"]
             assert "agents" in data["packages"]
             assert data["packages"]["agents"][0]["model"] == "gpt-4.1"
-
-            # Legacy file only has skills
-            legacy = yaml.safe_load(pt.LEGACY_MANIFEST_PATH.read_text())
-            assert "skills" in legacy
-            assert "agents" not in legacy
         finally:
             pt.MANIFEST_PATH = orig_manifest
-            pt.LEGACY_MANIFEST_PATH = orig_legacy
             gm.MANIFEST_PATH = orig_manifest
-            gm.LEGACY_MANIFEST_PATH = orig_legacy
