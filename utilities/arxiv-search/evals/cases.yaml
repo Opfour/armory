@@ -1,0 +1,46 @@
+cases:
+  - id: search_by_topic
+    prompt: "Find recent arXiv papers about retrieval augmented generation"
+    fixtures: []
+    rubric:
+      - "executes arxiv search with relevant query terms"
+      - "returns structured metadata including title, authors, abstract"
+    trigger_expected: true
+
+  - id: search_by_author
+    prompt: "Look up papers by Yann LeCun on arXiv"
+    fixtures: []
+    rubric:
+      - "uses author field prefix (au:) to search"
+      - "returns paper list with metadata"
+    trigger_expected: true
+
+  - id: fetch_by_id
+    prompt: "Get the metadata for arXiv paper 1706.03762"
+    fixtures: []
+    rubric:
+      - "uses id_list to fetch specific paper"
+      - "returns structured metadata for the requested paper"
+    trigger_expected: true
+
+  - id: survey_category
+    prompt: "What papers were submitted to cs.CL this week about large language models?"
+    fixtures: []
+    rubric:
+      - "uses category prefix and date sorting"
+      - "returns recent submissions matching the query"
+    trigger_expected: true
+
+  - id: negative_critique_paper
+    prompt: "Critique the methodology in this transformer paper"
+    fixtures: []
+    rubric:
+      - "paper critique is research-critique territory, not search"
+    trigger_expected: false
+
+  - id: negative_download_pdf
+    prompt: "Download this paper's PDF to my desktop"
+    fixtures: []
+    rubric:
+      - "file download is outside search scope; the utility returns pdf_url for manual retrieval"
+    trigger_expected: false
