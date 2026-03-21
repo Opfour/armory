@@ -233,6 +233,25 @@ skills:
     diagrams), custom images (via concept-to-image), or animations (via concept-to-video).
   path: skills/linkedin-post-style
   source: https://github.com/Mathews-Tom/armory/blob/main/skills/linkedin-post-style/SKILL.md
+- name: literature-review
+  version: 1.0.0
+  description: 'Systematic literature review workflow for surveying, synthesizing, and analyzing a body of academic research
+    across a defined topic or research question. Covers the full review lifecycle: defining scope and inclusion criteria,
+    searching academic databases (arXiv via arxiv-search utility, Semantic Scholar, Google Scholar via web search), screening
+    and filtering results, extracting structured findings, thematic synthesis, gap identification, and producing a structured
+    review document with proper citations. Use this skill when you need to survey a research area, map the landscape of a
+    topic, identify research gaps, build a bibliography, compare methodologies across studies, write a related work section,
+    conduct a systematic review, perform a scoping review, or synthesize findings across multiple papers. Triggers on: "literature
+    review", "survey the literature", "what has been published on", "research landscape", "related work", "systematic review",
+    "scoping review", "map the research on", "what do we know about", "synthesize the research", "compare approaches to",
+    "bibliography on", "find papers about", "review the state of the art", "what are the key papers on", "research gap analysis".'
+  path: skills/literature-review
+  source: https://github.com/Mathews-Tom/armory/blob/main/skills/literature-review/SKILL.md
+  complements:
+  - arxiv-search
+  - research-critique
+  - manuscript-review
+  - manuscript-provenance
 - name: manuscript-provenance
   version: 1.1.0
   description: 'Computational provenance audit verifying that every number, table, figure, ordering, and terminology in a
@@ -243,6 +262,8 @@ skills:
     against scripts", "provenance audit", or any request to verify that manuscript content traces back to computational outputs.'
   path: skills/manuscript-provenance
   source: https://github.com/Mathews-Tom/armory/blob/main/skills/manuscript-provenance/SKILL.md
+  complements:
+  - literature-review
 - name: manuscript-review
   version: 1.2.1
   description: Systematic pre-publication manuscript audit producing a structured refactoring report with section-level diagnostics,
@@ -254,6 +275,8 @@ skills:
     work" — the full diagnostic surfaces issues across all facets even when only one was asked about.
   path: skills/manuscript-review
   source: https://github.com/Mathews-Tom/armory/blob/main/skills/manuscript-review/SKILL.md
+  complements:
+  - literature-review
 - name: mcp-to-skill
   version: 1.1.0
   description: 'Convert MCP (Model Context Protocol) servers into on-demand skills to dramatically reduce active context window
@@ -416,6 +439,8 @@ skills:
     — not formatting, citation hygiene, or submission readiness (use manuscript-review for those).'
   path: skills/research-critique
   source: https://github.com/Mathews-Tom/armory/blob/main/skills/research-critique/SKILL.md
+  complements:
+  - literature-review
 - name: sequential-thinking
   version: 1.1.0
   description: 'DEPRECATED: Use the model''s native extended thinking instead. Structured, reflective problem-solving through

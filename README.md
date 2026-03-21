@@ -1,6 +1,6 @@
 # armory
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE) [![packages: 69](https://img.shields.io/badge/packages-69-informational)](manifest.yaml) [![evals: 100%](https://img.shields.io/badge/eval_coverage-100%25-success)](skills/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE) [![packages: 72](https://img.shields.io/badge/packages-72-informational)](manifest.yaml) [![evals: 100%](https://img.shields.io/badge/eval_coverage-100%25-success)](skills/)
 
 Curated, production-grade skills, agents, hooks, rules, commands, utilities, and presets for AI coding agents. No magic, no demos — battle-tested workflows built for developers who use AI seriously.
 
@@ -39,10 +39,11 @@ Intended for developers who treat AI coding agents as a serious part of their wo
 
 | Skill                                        | Description                                                                                                                                                       |
 | -------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [youtube-search](skills/youtube-search/)     | Search YouTube by keyword via yt-dlp — returns structured metadata (title, URL, channel, views, duration, date) for discovery and source curation                 |
-| [youtube-analysis](skills/youtube-analysis/) | YouTube video transcript extraction and structured concept analysis — multi-level summaries, key concepts, takeaways, no API keys required                        |
-| [notebooklm](skills/notebooklm/)             | Google NotebookLM automation via notebooklm-py — create notebooks, add sources, chat, generate podcasts, videos, infographics, quizzes, flashcards, and more      |
-| [immune](skills/immune/)                     | Hybrid adaptive memory with Cheatsheet (positive patterns) and Immune (negative patterns) — Hot/Cold tiered memory, multi-domain antibody scanning, auto-learning |
+| [literature-review](skills/literature-review/) | Systematic literature review — search, screen, extract, and synthesize academic research with gap analysis and structured citations                              |
+| [youtube-search](skills/youtube-search/)       | Search YouTube by keyword via yt-dlp — returns structured metadata (title, URL, channel, views, duration, date) for discovery and source curation               |
+| [youtube-analysis](skills/youtube-analysis/)   | YouTube video transcript extraction and structured concept analysis — multi-level summaries, key concepts, takeaways, no API keys required                      |
+| [notebooklm](skills/notebooklm/)               | Google NotebookLM automation via notebooklm-py — create notebooks, add sources, chat, generate podcasts, videos, infographics, quizzes, flashcards, and more    |
+| [immune](skills/immune/)                       | Hybrid adaptive memory with Cheatsheet (positive patterns) and Immune (negative patterns) — Hot/Cold tiered memory, multi-domain antibody scanning, auto-learning |
 
 ### Skills — Review & Quality
 
@@ -154,16 +155,18 @@ Skills below are superseded by base model capabilities. They remain installable 
 
 | Utility                                                 | Description                        |
 | ------------------------------------------------------- | ---------------------------------- |
-| [dependency-tree](utilities/dependency-tree/)           | Visualize project dependency graph |
-| [test-coverage-report](utilities/test-coverage-report/) | Coverage summary for changed files |
+| [arxiv-search](utilities/arxiv-search/)                 | Search arXiv for papers, output structured JSON metadata    |
+| [dependency-tree](utilities/dependency-tree/)           | Visualize project dependency graph                          |
+| [test-coverage-report](utilities/test-coverage-report/) | Coverage summary for changed files                          |
 
 ## Presets
 
 | Preset                                    | Description                                  |
 | ----------------------------------------- | -------------------------------------------- |
-| [core](presets/core/)                     | Essential skills + git safety for every user |
-| [python-strict](presets/python-strict/)   | Full Python enforcement stack                |
-| [security-first](presets/security-first/) | Security auditing and enforcement            |
+| [core](presets/core/)                     | Essential skills + git safety for every user  |
+| [python-strict](presets/python-strict/)   | Full Python enforcement stack                 |
+| [research](presets/research/)             | Academic research and manuscript workflow      |
+| [security-first](presets/security-first/) | Security auditing and enforcement             |
 
 ---
 
