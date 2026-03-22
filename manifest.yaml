@@ -792,6 +792,16 @@ packages:
     source: https://github.com/Mathews-Tom/armory/blob/main/utilities/test-coverage-report/UTILITY.md
     runtime: python
   presets:
+  - name: ai-builder
+    version: 1.0.0
+    description: AI development toolkit for building, testing, and optimizing LLM-powered systems in Claude Code. Bundles
+      agent development, prompt engineering, GPU and inference optimization, RAG pipeline auditing, MCP server conversion,
+      and notebook generation into a single install. Covers the full AI workflow from designing prompts through building agents,
+      optimizing GPU utilization, auditing retrieval quality, and extending tool integrations. Use this preset when setting
+      up an AI development environment, machine learning toolkit, or LLM tools workspace. Relevant for agent development,
+      MCP development, RAG pipeline construction, and inference optimization workflows.
+    path: presets/ai-builder
+    source: https://github.com/Mathews-Tom/armory/blob/main/presets/ai-builder/PRESET.md
   - name: biz-validation
     version: 1.0.0
     description: 'Complete business idea validation toolkit bundling four complementary skills: market analysis (TAM/SAM/SOM,
@@ -804,6 +814,16 @@ packages:
       setting up a complete business analysis capability across market research, competition, and feasibility assessment.'
     path: presets/biz-validation
     source: https://github.com/Mathews-Tom/armory/blob/main/presets/biz-validation/PRESET.md
+  - name: content-ops
+    version: 1.0.0
+    description: Complete writing toolkit and content pipeline for Claude Code. Bundles text humanization, social media formatting,
+      manuscript review and provenance verification, release notes generation, document summarization, PDF export, and markdown
+      conversion into a single publishing workflow. Covers the full content lifecycle from draft through refinement, review,
+      and export. Handles technical writing, document management, and document conversion tasks. Use this preset when setting
+      up a content creation environment, manuscript tools workspace, social content workflow, or any project requiring a cohesive
+      publishing workflow with release notes and format conversion capabilities.
+    path: presets/content-ops
+    source: https://github.com/Mathews-Tom/armory/blob/main/presets/content-ops/PRESET.md
   - name: core
     version: 1.0.0
     description: 'Essential packages for every Claude Code user. Bundles pull request review, code refinement, pre-landing
@@ -813,6 +833,28 @@ packages:
       protected branches, and enforce consistent commit messages.'
     path: presets/core
     source: https://github.com/Mathews-Tom/armory/blob/main/presets/core/PRESET.md
+  - name: eng-ops
+    version: 1.0.0
+    description: Full-cycle engineering operations preset covering the build-test-ship pipeline and surrounding practices.
+      Bundles shipping workflow orchestration, systematic QA and test planning, test scaffolding and harness generation, performance
+      benchmarking, migration safety analysis, effort estimation calibration, engineering retrospectives, and root cause debugging
+      investigation. Use this preset when managing an engineering workflow, running a shipping pipeline, coordinating release
+      management, conducting test planning or QA toolkit setup, executing performance testing or benchmark suites, evaluating
+      migration safety and risk, calibrating effort estimation for sprints, facilitating a retrospective, or assembling a
+      debugging toolkit for incident response.
+    path: presets/eng-ops
+    source: https://github.com/Mathews-Tom/armory/blob/main/presets/eng-ops/PRESET.md
+  - name: media-craft
+    version: 1.0.0
+    description: Visual content creation toolkit for Claude Code. Bundles image generation (PNG/SVG from HTML/CSS), video
+      production (MP4/GIF via Manim and React/Remotion), slide deck authoring, interactive HTML visual builders, and system
+      architecture diagrams into a single install. Create visual assets, make an image, generate video, design presentation
+      decks, produce graphics, build slides, and compose animations from natural language descriptions. Serves as a media
+      toolkit for creative assets, visual content pipelines, and animation toolkit workflows. Use this preset when producing
+      graphics, illustrations, explainer videos, branded content, interactive data visualizations, or architectural topology
+      diagrams from concept descriptions.
+    path: presets/media-craft
+    source: https://github.com/Mathews-Tom/armory/blob/main/presets/media-craft/PRESET.md
   - name: python-strict
     version: 1.0.0
     description: 'Full-stack Python enforcement preset. Extends the core review-commit lifecycle with test-driven development,
