@@ -1,0 +1,38 @@
+cases:
+  - id: install_ai_dev_environment
+    prompt: "I need to set up a complete AI development toolkit for building agents and optimizing inference"
+    fixtures: []
+    rubric:
+      - "installs all six AI builder skills as a bundle"
+      - "covers agent creation, prompt engineering, GPU optimization, and RAG auditing"
+    trigger_expected: true
+
+  - id: build_agent_and_prompts
+    prompt: "I'm building a custom LLM agent with RAG — what packages do I need for prompt design and retrieval auditing?"
+    fixtures: []
+    rubric:
+      - "recommends the ai-builder preset as a complete AI workflow"
+      - "mentions prompt-lab and rag-auditor as included skills"
+    trigger_expected: true
+
+  - id: mcp_and_notebook_workflow
+    prompt: "I want to convert MCP servers to skills and document my AI experiments in notebooks"
+    fixtures: []
+    rubric:
+      - "recommends the ai-builder preset"
+      - "mentions mcp-to-skill and notebooklm as included skills"
+    trigger_expected: true
+
+  - id: negative_academic_research
+    prompt: "I need to do a systematic literature review and write an academic paper"
+    fixtures: []
+    rubric:
+      - "academic research workflows are covered by the research preset, not ai-builder"
+    trigger_expected: false
+
+  - id: negative_security_scanning
+    prompt: "Set up dependency scanning and security auditing for my project"
+    fixtures: []
+    rubric:
+      - "security tooling is covered by the sec-strict preset, not ai-builder"
+    trigger_expected: false
