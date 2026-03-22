@@ -1,5 +1,5 @@
 ---
-name: business-validation-suite
+name: biz-validation
 description: >
   Complete business idea validation toolkit bundling four complementary skills:
   market analysis (TAM/SAM/SOM, trend assessment), competitive landscape analysis
@@ -7,7 +7,7 @@ description: >
   (unit economics, technical risk, financial viability), and full idea validation
   (Lean Canvas, JTBD, SWOT/PESTLE, integrated scoring). Install the complete suite
   for end-to-end business validation, or install individual skills for focused analysis.
-  Triggers on: "validate business idea", "business validation suite", "install business
+  Triggers on: "validate business idea", "biz validation", "install business
   analysis tools", "market and competitive analysis", "evaluate business concept",
   "startup due diligence", "vet a business opportunity", "assess market feasibility",
   "is this idea viable", "business idea scorecard", "idea validation toolkit".
@@ -25,31 +25,35 @@ metadata:
     platforms: [macos, linux, windows]
 ---
 
-# Business Validation Suite
+# Biz Validation
 
 A curated bundle of four skills for comprehensive business idea validation.
 
 ## Included Skills
 
-| Skill | Purpose | Key Frameworks |
-|-------|---------|---------------|
-| `market-analyzer` | Market sizing and trend analysis | TAM/SAM/SOM, Rogers adoption curve, trend identification |
-| `competitive-analyzer` | Competitive landscape assessment | Porter's Five Forces, feature matrices, positioning maps |
-| `feasibility-assessor` | Financial and technical viability | Unit economics, technical risk scoring, break-even analysis |
-| `idea-validator` | Full business validation (orchestrator) | Lean Canvas, JTBD, SWOT/PESTLE, integrated scoring |
+| Skill                  | Purpose                                 | Key Frameworks                                              |
+| ---------------------- | --------------------------------------- | ----------------------------------------------------------- |
+| `market-analyzer`      | Market sizing and trend analysis        | TAM/SAM/SOM, Rogers adoption curve, trend identification    |
+| `competitive-analyzer` | Competitive landscape assessment        | Porter's Five Forces, feature matrices, positioning maps    |
+| `feasibility-assessor` | Financial and technical viability       | Unit economics, technical risk scoring, break-even analysis |
+| `idea-validator`       | Full business validation (orchestrator) | Lean Canvas, JTBD, SWOT/PESTLE, integrated scoring          |
 
 ## Usage Patterns
 
 ### Full Validation
+
 Ask Claude to "validate this business idea" — triggers `idea-validator`, which orchestrates the other three skills via sub-agents.
 
 ### Focused Analysis
+
 - "Analyze the market for X" — triggers `market-analyzer` directly
 - "Who are the competitors for X" — triggers `competitive-analyzer` directly
 - "Is X financially viable" — triggers `feasibility-assessor` directly
 
 ### Incremental Validation
+
 Run individual skills in sequence, building up a complete picture:
+
 1. Start with market analysis to confirm opportunity exists
 2. Add competitive analysis to understand the landscape
 3. Run feasibility to check if it can be built and sustained
@@ -59,7 +63,7 @@ Run individual skills in sequence, building up a complete picture:
 
 When `idea-validator` orchestrates the full suite, the data flows as follows:
 
-```
+```text
 User Input (idea/pitch/plan)
     │
     ▼
@@ -73,9 +77,9 @@ User Input (idea/pitch/plan)
 ┌─────────────────┐ ┌────────────────┐ ┌─────────────────┐
 │ market-analyzer │ │ competitive-   │ │ feasibility-    │
 │                 │ │ analyzer       │ │ assessor        │
-│ → TAM/SAM/SOM  │ │ → Competitors  │ │ → Unit economics│
-│ → Trends       │ │ → Five Forces  │ │ → Tech risk     │
-│ → Timing       │ │ → Positioning  │ │ → Break-even    │
+│ → TAM/SAM/SOM   │ │ → Competitors  │ │ → Unit economics│
+│ → Trends        │ │ → Five Forces  │ │ → Tech risk     │
+│ → Timing        │ │ → Positioning  │ │ → Break-even    │
 └────────┬────────┘ └───────┬────────┘ └────────┬────────┘
          │                  │                    │
          └──────────────────┴────────────────────┘
@@ -97,11 +101,13 @@ Each sub-agent returns structured findings. The orchestrator synthesizes them wi
 ## Installation
 
 Install the complete suite:
+
 ```bash
-npx skills add business-validation-suite
+npx skills add biz-validation
 ```
 
 Or install individual skills:
+
 ```bash
 npx skills add market-analyzer
 npx skills add competitive-analyzer

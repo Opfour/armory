@@ -792,18 +792,18 @@ packages:
     source: https://github.com/Mathews-Tom/armory/blob/main/utilities/test-coverage-report/UTILITY.md
     runtime: python
   presets:
-  - name: business-validation-suite
+  - name: biz-validation
     version: 1.0.0
     description: 'Complete business idea validation toolkit bundling four complementary skills: market analysis (TAM/SAM/SOM,
       trend assessment), competitive landscape analysis (Porter''s Five Forces, feature matrices, positioning), feasibility
       assessment (unit economics, technical risk, financial viability), and full idea validation (Lean Canvas, JTBD, SWOT/PESTLE,
       integrated scoring). Install the complete suite for end-to-end business validation, or install individual skills for
-      focused analysis. Triggers on: "validate business idea", "business validation suite", "install business analysis tools",
-      "market and competitive analysis", "evaluate business concept", "startup due diligence", "vet a business opportunity",
-      "assess market feasibility", "is this idea viable", "business idea scorecard", "idea validation toolkit". Use this preset
-      when setting up a complete business analysis capability across market research, competition, and feasibility assessment.'
-    path: presets/business-validation-suite
-    source: https://github.com/Mathews-Tom/armory/blob/main/presets/business-validation-suite/PRESET.md
+      focused analysis. Triggers on: "validate business idea", "biz validation", "install business analysis tools", "market
+      and competitive analysis", "evaluate business concept", "startup due diligence", "vet a business opportunity", "assess
+      market feasibility", "is this idea viable", "business idea scorecard", "idea validation toolkit". Use this preset when
+      setting up a complete business analysis capability across market research, competition, and feasibility assessment.'
+    path: presets/biz-validation
+    source: https://github.com/Mathews-Tom/armory/blob/main/presets/biz-validation/PRESET.md
   - name: core
     version: 1.0.0
     description: 'Essential packages for every Claude Code user. Bundles pull request review, code refinement, pre-landing
