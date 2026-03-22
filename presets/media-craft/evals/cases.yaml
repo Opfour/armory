@@ -1,0 +1,36 @@
+cases:
+  - id: create_visual_assets
+    prompt: "I need to create visual content — images, videos, and presentations for a product launch"
+    fixtures: []
+    rubric:
+      - "installs all six media-craft skills as a bundle"
+      - "covers image generation, video production, presentations, and diagrams"
+    trigger_expected: true
+
+  - id: generate_explainer_video
+    prompt: "Generate an animated explainer video and some diagrams for my architecture docs"
+    fixtures: []
+    rubric:
+      - "recommends the media-craft preset for video and diagram generation"
+    trigger_expected: true
+
+  - id: build_slide_deck
+    prompt: "Build slides for my conference talk and produce graphics for each slide"
+    fixtures: []
+    rubric:
+      - "activates media-craft preset covering html-presentation and concept-to-image"
+    trigger_expected: true
+
+  - id: negative_code_linting
+    prompt: "Set up Python linting and type checking for my project"
+    fixtures: []
+    rubric:
+      - "code quality tooling is covered by the python-strict preset, not media-craft"
+    trigger_expected: false
+
+  - id: negative_literature_review
+    prompt: "I need to do a systematic literature review for my thesis"
+    fixtures: []
+    rubric:
+      - "academic research workflows are covered by the research preset, not media-craft"
+    trigger_expected: false
