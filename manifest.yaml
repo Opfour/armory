@@ -82,6 +82,25 @@ packages:
       code smells.'
     path: skills/code-refiner
     source: https://github.com/Mathews-Tom/armory/blob/main/skills/code-refiner/SKILL.md
+  - name: competitive-analyzer
+    version: 1.0.0
+    description: 'Systematic competitive landscape analysis covering Porter''s Five Forces, competitor discovery, feature
+      and pricing comparison matrices, market positioning maps, and moat/defensibility assessment. Uses WebSearch to identify
+      direct, indirect, and potential competitors across Product Hunt, G2, Capterra, and Crunchbase. Produces structured reports
+      with force scorecards, feature gap analysis, pricing positioning, white space identification, and strategic recommendations.
+      Use this skill when you need to analyze competitors, compare product features, evaluate market positioning, assess competitive
+      threats, build a competitive matrix, run a Porter''s Five Forces analysis, identify competitive moats, map the competitive
+      landscape, evaluate market defensibility, or perform a pricing comparison. Triggers on: "competitive analysis", "competitor
+      comparison", "competitive landscape", "Porter''s Five Forces", "feature comparison matrix", "pricing analysis", "market
+      positioning", "moat assessment", "competitive threat", "defensibility analysis", "who are the competitors", "compare
+      competitors", "competitive intelligence", "rival analysis", "market rivalry", "competitive positioning map".'
+    path: skills/competitive-analyzer
+    source: https://github.com/Mathews-Tom/armory/blob/main/skills/competitive-analyzer/SKILL.md
+    complements:
+    - market-analyzer
+    - tavily
+    - web-fetch
+    - idea-validator
   - name: concept-to-image
     version: 1.2.0
     description: 'Turn any concept, idea, or description into a polished static HTML visual, then export it as a PNG or SVG
@@ -153,6 +172,18 @@ packages:
       uncertainty.'
     path: skills/estimate-calibrator
     source: https://github.com/Mathews-Tom/armory/blob/main/skills/estimate-calibrator/SKILL.md
+  - name: feasibility-assessor
+    version: 1.0.0
+    description: 'Evaluate whether a business idea, product concept, or feature is technically buildable and financially viable.
+      Covers unit economics (CAC, LTV, margins), revenue modeling, break-even analysis, architecture risk scoring, build estimation,
+      and integrated feasibility verdicts. Triggers on: feasibility assessment, viability analysis, unit economics review,
+      business case evaluation, technical risk assessment, break-even calculation, build vs buy analysis, go/no-go decision,
+      idea validation, market feasibility, cost-benefit analysis, ROI projection. Use this skill when someone needs to determine
+      whether a business idea, feature, or product is worth pursuing from financial and technical perspectives.'
+    path: skills/feasibility-assessor
+    source: https://github.com/Mathews-Tom/armory/blob/main/skills/feasibility-assessor/SKILL.md
+    complements:
+    - idea-validator
   - name: filesystem
     version: 1.1.0
     description: 'File and directory operations using Claude Code built-in tools — replaces the Filesystem MCP server. Maps
@@ -207,6 +238,23 @@ packages:
       AI tells, checking if text sounds AI-generated, or requesting a "human pass" on content.
     path: skills/humanize
     source: https://github.com/Mathews-Tom/armory/blob/main/skills/humanize/SKILL.md
+  - name: idea-validator
+    version: 1.0.0
+    description: 'Comprehensive business idea validation orchestrator that delegates parallel research to sub-agents and synthesizes
+      a structured report. Constructs a Lean Canvas, applies Jobs-to-be-Done analysis, spawns market research, competitive
+      analysis, and feasibility assessment agents, runs SWOT/PESTLE, and produces a weighted validation scorecard with verdict
+      and recommended experiments. Triggers on: "validate this idea", "assess this business idea", "evaluate my startup idea",
+      "analyze this concept", "critique this business plan", "review my idea", "check if this idea is viable", "audit this
+      business concept", "is this idea worth pursuing", "rate this startup idea", "score this business idea", "business idea
+      validation", "idea feasibility check", "validate my pitch", "evaluate this product concept". Use this skill when the
+      user presents a business idea, startup concept, product proposal, feature pitch, or pivot scenario and wants a structured
+      viability assessment with scoring.'
+    path: skills/idea-validator
+    source: https://github.com/Mathews-Tom/armory/blob/main/skills/idea-validator/SKILL.md
+    complements:
+    - market-analyzer
+    - competitive-analyzer
+    - feasibility-assessor
   - name: immune
     version: 1.0.0
     description: 'Hybrid adaptive memory system with two complementary memories: Cheatsheet (positive patterns injected before
@@ -284,6 +332,21 @@ packages:
     source: https://github.com/Mathews-Tom/armory/blob/main/skills/manuscript-review/SKILL.md
     complements:
     - literature-review
+  - name: market-analyzer
+    version: 1.0.0
+    description: 'Performs structured market analysis including TAM/SAM/SOM sizing, trend identification, and competitive
+      landscape assessment. Uses WebSearch to gather industry data, growth rates, funding signals, and consumer trends. Produces
+      investor-grade market reports with cited sources and confidence-rated estimates. Triggers on: "market analysis", "market
+      size", "TAM SAM SOM", "total addressable market", "market opportunity", "market research", "industry analysis", "market
+      sizing", "how big is the market", "market potential", "analyze this market", "market landscape", "competitive landscape",
+      "market trends", "growth rate", "market assessment". NOT for financial modeling, revenue forecasting, or pricing strategy.
+      Use this skill when a product, feature, or business idea needs market size estimation, trend analysis, or industry assessment
+      with sourced data.'
+    path: skills/market-analyzer
+    source: https://github.com/Mathews-Tom/armory/blob/main/skills/market-analyzer/SKILL.md
+    complements:
+    - competitive-analyzer
+    - idea-validator
   - name: mcp-to-skill
     version: 1.1.0
     description: 'Convert MCP (Model Context Protocol) servers into on-demand skills to dramatically reduce active context
@@ -511,6 +574,8 @@ packages:
       for that. Tavily returns clean, AI-ready snippets optimized for search-first intent.'
     path: skills/tavily
     source: https://github.com/Mathews-Tom/armory/blob/main/skills/tavily/SKILL.md
+    complements:
+    - competitive-analyzer
   - name: test-harness
     version: 1.1.0
     description: 'Generates comprehensive pytest test suites: happy path, edge cases, error conditions, fixture scaffolding,
@@ -543,6 +608,8 @@ packages:
       text". NOT for web searches without a URL — use tavily for that.'
     path: skills/web-fetch
     source: https://github.com/Mathews-Tom/armory/blob/main/skills/web-fetch/SKILL.md
+    complements:
+    - competitive-analyzer
   - name: youtube-analysis
     version: 1.1.0
     description: 'Extract YouTube video transcripts and produce structured concept analysis with multi-level summaries, key
@@ -725,6 +792,18 @@ packages:
     source: https://github.com/Mathews-Tom/armory/blob/main/utilities/test-coverage-report/UTILITY.md
     runtime: python
   presets:
+  - name: biz-validation
+    version: 1.0.0
+    description: 'Complete business idea validation toolkit bundling four complementary skills: market analysis (TAM/SAM/SOM,
+      trend assessment), competitive landscape analysis (Porter''s Five Forces, feature matrices, positioning), feasibility
+      assessment (unit economics, technical risk, financial viability), and full idea validation (Lean Canvas, JTBD, SWOT/PESTLE,
+      integrated scoring). Install the complete suite for end-to-end business validation, or install individual skills for
+      focused analysis. Triggers on: "validate business idea", "biz validation", "install business analysis tools", "market
+      and competitive analysis", "evaluate business concept", "startup due diligence", "vet a business opportunity", "assess
+      market feasibility", "is this idea viable", "business idea scorecard", "idea validation toolkit". Use this preset when
+      setting up a complete business analysis capability across market research, competition, and feasibility assessment.'
+    path: presets/biz-validation
+    source: https://github.com/Mathews-Tom/armory/blob/main/presets/biz-validation/PRESET.md
   - name: core
     version: 1.0.0
     description: 'Essential packages for every Claude Code user. Bundles pull request review, code refinement, pre-landing
