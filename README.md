@@ -20,17 +20,17 @@ Intended for developers who treat AI coding agents as a serious part of their wo
 
 Presets are curated bundles that install multiple packages in one command. Start with `core`, layer on domain-specific presets as needed.
 
-| Preset | Packages | Description |
-| ------ | -------- | ----------- |
-| [core](presets/core/) | 3 skills, 1 hook, 1 rule | Baseline review-commit lifecycle — PR review, code refinement, pre-landing gate, git protection, commit standards. Start here. |
-| [sec-strict](presets/sec-strict/) | 5 skills, 2 agents, 2 rules, 2 hooks, 1 command | Audit-grade security stack — secret scanning, dependency auditing, security review agents, repo sentinel, cost tracking. Superset of `core`. |
-| [python-strict](presets/python-strict/) | 4 skills, 2 agents, 3 rules, 2 hooks, 2 commands | Full Python enforcement — PR review, test harness, code review agents, secret scanning, commit/test/security standards, git protection, TDD, refactor. |
-| [research](presets/research/) | 4 skills, 1 utility | Academic research workflow — literature review, research critique, manuscript review, provenance auditing, arXiv search. |
-| [biz-validation](presets/biz-validation/) | 4 skills | Business idea validation — market analysis (TAM/SAM/SOM), competitive landscape (Porter's Five Forces), feasibility assessment (unit economics, technical risk), orchestrated validation (Lean Canvas, JTBD, SWOT/PESTLE). |
-| [eng-ops](presets/eng-ops/) | 8 skills | Engineering operations lifecycle — ship workflow, systematic QA, test scaffolding, benchmarking, migration risk, effort estimation, retrospectives, debugging. |
-| [media-craft](presets/media-craft/) | 6 skills | Visual and video production — concept-to-image (PNG/SVG), concept-to-video (Manim), Remotion video (React), HTML presentations, interactive HTML artifacts, architecture diagrams. |
-| [content-ops](presets/content-ops/) | 8 skills | Writing and publishing pipeline — humanize AI text, social content, manuscript review, authorship verification, changelogs, PDF export, summarization, format conversion. |
-| [ai-builder](presets/ai-builder/) | 6 skills | AI/ML development toolkit — agent building, prompt engineering, GPU optimization, RAG auditing, MCP-to-skill conversion, notebook generation. |
+| Preset                                    | Packages                                         | Description                                                                                                                                                                                                                |
+| ----------------------------------------- | ------------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [core](presets/core/)                     | 3 skills, 1 hook, 1 rule                         | Baseline review-commit lifecycle — PR review, code refinement, pre-landing gate, git protection, commit standards. Start here.                                                                                             |
+| [sec-strict](presets/sec-strict/)         | 5 skills, 2 agents, 2 rules, 2 hooks, 1 command  | Audit-grade security stack — secret scanning, dependency auditing, security review agents, repo sentinel, cost tracking. Superset of `core`.                                                                               |
+| [python-strict](presets/python-strict/)   | 4 skills, 2 agents, 3 rules, 2 hooks, 2 commands | Full Python enforcement — PR review, test harness, code review agents, secret scanning, commit/test/security standards, git protection, TDD, refactor.                                                                     |
+| [research](presets/research/)             | 4 skills, 1 utility                              | Academic research workflow — literature review, research critique, manuscript review, provenance auditing, arXiv search.                                                                                                   |
+| [biz-validation](presets/biz-validation/) | 4 skills                                         | Business idea validation — market analysis (TAM/SAM/SOM), competitive landscape (Porter's Five Forces), feasibility assessment (unit economics, technical risk), orchestrated validation (Lean Canvas, JTBD, SWOT/PESTLE). |
+| [eng-ops](presets/eng-ops/)               | 8 skills                                         | Engineering operations lifecycle — ship workflow, systematic QA, test scaffolding, benchmarking, migration risk, effort estimation, retrospectives, debugging.                                                             |
+| [media-craft](presets/media-craft/)       | 6 skills                                         | Visual and video production — concept-to-image (PNG/SVG), concept-to-video (Manim), Remotion video (React), HTML presentations, interactive HTML artifacts, architecture diagrams.                                         |
+| [content-ops](presets/content-ops/)       | 8 skills                                         | Writing and publishing pipeline — humanize AI text, social content, manuscript review, authorship verification, changelogs, PDF export, summarization, format conversion.                                                  |
+| [ai-builder](presets/ai-builder/)         | 6 skills                                         | AI/ML development toolkit — agent building, prompt engineering, GPU optimization, RAG auditing, MCP-to-skill conversion, notebook generation.                                                                              |
 
 ---
 
@@ -55,14 +55,14 @@ Presets are curated bundles that install multiple packages in one command. Start
 
 ### Skills — Research & Analysis
 
-| Skill                                        | Description                                                                                                                                                       |
-| -------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [literature-review](skills/literature-review/) | Systematic literature review — search, screen, extract, and synthesize academic research with gap analysis and structured citations                              |
-| [youtube-search](skills/youtube-search/)       | Search YouTube by keyword via yt-dlp — returns structured metadata (title, URL, channel, views, duration, date) for discovery and source curation               |
-| [youtube-analysis](skills/youtube-analysis/)   | YouTube video transcript extraction and structured concept analysis — multi-level summaries, key concepts, takeaways, no API keys required                      |
-| [notebooklm](skills/notebooklm/)               | Google NotebookLM automation via notebooklm-py — create notebooks, add sources, chat, generate podcasts, videos, infographics, quizzes, flashcards, and more    |
-| [research-critique](skills/research-critique/)   | Critical analysis of research papers — methodology evaluation, claims-evidence alignment, contribution assessment with collegial analytical posture              |
-| [immune](skills/immune/)                         | Hybrid adaptive memory with Cheatsheet (positive patterns) and Immune (negative patterns) — Hot/Cold tiered memory, multi-domain antibody scanning, auto-learning |
+| Skill                                          | Description                                                                                                                                                       |
+| ---------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [literature-review](skills/literature-review/) | Systematic literature review — search, screen, extract, and synthesize academic research with gap analysis and structured citations                               |
+| [youtube-search](skills/youtube-search/)       | Search YouTube by keyword via yt-dlp — returns structured metadata (title, URL, channel, views, duration, date) for discovery and source curation                 |
+| [youtube-analysis](skills/youtube-analysis/)   | YouTube video transcript extraction and structured concept analysis — multi-level summaries, key concepts, takeaways, no API keys required                        |
+| [notebooklm](skills/notebooklm/)               | Google NotebookLM automation via notebooklm-py — create notebooks, add sources, chat, generate podcasts, videos, infographics, quizzes, flashcards, and more      |
+| [research-critique](skills/research-critique/) | Critical analysis of research papers — methodology evaluation, claims-evidence alignment, contribution assessment with collegial analytical posture               |
+| [immune](skills/immune/)                       | Hybrid adaptive memory with Cheatsheet (positive patterns) and Immune (negative patterns) — Hot/Cold tiered memory, multi-domain antibody scanning, auto-learning |
 
 ### Skills — Review & Quality
 
@@ -115,8 +115,8 @@ Presets are curated bundles that install multiple packages in one command. Start
 | Skill                                                | Description                                                                                                                                   |
 | ---------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------- |
 | [idea-validator](skills/idea-validator/)             | Full business idea validation orchestrator — Lean Canvas, JTBD, parallel market/competitive/feasibility agents, SWOT/PESTLE, weighted scoring |
-| [market-analyzer](skills/market-analyzer/)           | Market sizing and trend analysis — TAM/SAM/SOM calculation, Rogers adoption curve, data triangulation, timing assessment                     |
-| [competitive-analyzer](skills/competitive-analyzer/) | Competitive landscape analysis — Porter's Five Forces, feature/pricing matrices, positioning maps, moat taxonomy                             |
+| [market-analyzer](skills/market-analyzer/)           | Market sizing and trend analysis — TAM/SAM/SOM calculation, Rogers adoption curve, data triangulation, timing assessment                      |
+| [competitive-analyzer](skills/competitive-analyzer/) | Competitive landscape analysis — Porter's Five Forces, feature/pricing matrices, positioning maps, moat taxonomy                              |
 | [feasibility-assessor](skills/feasibility-assessor/) | Financial and technical feasibility — unit economics (CAC/LTV), revenue modeling, break-even, technical risk scoring, build-vs-buy            |
 
 ### Skills — AI/ML & Planning
@@ -181,11 +181,11 @@ Skills below are superseded by base model capabilities. They remain installable 
 
 ## Utilities
 
-| Utility                                                 | Description                        |
-| ------------------------------------------------------- | ---------------------------------- |
-| [arxiv-search](utilities/arxiv-search/)                 | Search arXiv for papers, output structured JSON metadata    |
-| [dependency-tree](utilities/dependency-tree/)           | Visualize project dependency graph                          |
-| [test-coverage-report](utilities/test-coverage-report/) | Coverage summary for changed files                          |
+| Utility                                                 | Description                                              |
+| ------------------------------------------------------- | -------------------------------------------------------- |
+| [arxiv-search](utilities/arxiv-search/)                 | Search arXiv for papers, output structured JSON metadata |
+| [dependency-tree](utilities/dependency-tree/)           | Visualize project dependency graph                       |
+| [test-coverage-report](utilities/test-coverage-report/) | Coverage summary for changed files                       |
 
 ## Installation
 
