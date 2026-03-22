@@ -83,7 +83,7 @@ Assess whether the proposed solution addresses the core job better than current 
 
 ## Phase 4: Parallel Research Delegation
 
-Use the Agent tool to spawn three research agents in parallel. Each agent receives a focused research brief derived from the idea context established in Phases 1-3.
+Use the Agent tool to spawn three research agents in parallel. Each agent receives a focused research brief derived from the idea context established in Phases 1-3. These agents perform the same analysis covered by the complementary skills (`market-analyzer`, `competitive-analyzer`, `feasibility-assessor`) — when those skills are installed, their reference frameworks inform the analysis depth; when running standalone, the agents use the inline briefs below.
 
 ### Agent 1 — Market Research
 
