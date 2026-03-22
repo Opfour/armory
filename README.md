@@ -20,12 +20,12 @@ Intended for developers who treat AI coding agents as a serious part of their wo
 
 Presets are curated bundles that install multiple packages in one command. Start with `core`, layer on domain-specific presets as needed.
 
-| Preset | Skills | Description |
-| ------ | ------ | ----------- |
+| Preset | Packages | Description |
+| ------ | -------- | ----------- |
 | [core](presets/core/) | 3 skills, 1 hook, 1 rule | Baseline review-commit lifecycle — PR review, code refinement, pre-landing gate, git protection, commit standards. Start here. |
-| [sec-strict](presets/sec-strict/) | 5 skills, 2 agents, 2 rules, 1 hook, 1 command | Audit-grade security stack — secret scanning, dependency auditing, security review agents, repo sentinel, cost tracking. Superset of `core`. |
-| [python-strict](presets/python-strict/) | — | Full Python enforcement — type checking, test standards, security scanning, import ordering. Layer on top of `core`. |
-| [research](presets/research/) | — | Academic research workflow — literature review, manuscript review, provenance auditing, research critique, YouTube analysis. |
+| [sec-strict](presets/sec-strict/) | 5 skills, 2 agents, 2 rules, 2 hooks, 1 command | Audit-grade security stack — secret scanning, dependency auditing, security review agents, repo sentinel, cost tracking. Superset of `core`. |
+| [python-strict](presets/python-strict/) | 4 skills, 2 agents, 3 rules, 2 hooks, 2 commands | Full Python enforcement — PR review, test harness, code review agents, secret scanning, commit/test/security standards, git protection, TDD, refactor. |
+| [research](presets/research/) | 4 skills, 1 utility | Academic research workflow — literature review, research critique, manuscript review, provenance auditing, arXiv search. |
 | [biz-validation](presets/biz-validation/) | 4 skills | Business idea validation — market analysis (TAM/SAM/SOM), competitive landscape (Porter's Five Forces), feasibility assessment (unit economics, technical risk), orchestrated validation (Lean Canvas, JTBD, SWOT/PESTLE). |
 | [eng-ops](presets/eng-ops/) | 8 skills | Engineering operations lifecycle — ship workflow, systematic QA, test scaffolding, benchmarking, migration risk, effort estimation, retrospectives, debugging. |
 | [media-craft](presets/media-craft/) | 6 skills | Visual and video production — concept-to-image (PNG/SVG), concept-to-video (Manim), Remotion video (React), HTML presentations, interactive HTML artifacts, architecture diagrams. |
