@@ -3,7 +3,7 @@ cases:
     prompt: "Set up a security-focused stack for our application that handles user data."
     fixtures: []
     rubric:
-      - "recommends or activates the security-first preset"
+      - "recommends or activates the sec-strict preset"
       - "mentions security-reviewer, secret-scanner, or dependency-audit as included"
       - "acknowledges this covers sensitive data handling"
     trigger_expected: true
@@ -12,7 +12,7 @@ cases:
     prompt: "We need audit-grade security tooling for our SOC 2 compliant service."
     fixtures: []
     rubric:
-      - "recommends security-first preset"
+      - "recommends sec-strict preset"
       - "mentions security-standards rule or security-scan command"
     trigger_expected: true
 
@@ -21,7 +21,7 @@ cases:
     fixtures: []
     rubric:
       - "executes the security-scan command directly"
-      - "does not activate the security-first preset"
+      - "does not activate the sec-strict preset"
     trigger_expected: false
 
   - id: performance_optimization_not_security

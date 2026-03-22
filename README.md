@@ -166,7 +166,7 @@ Skills below are superseded by base model capabilities. They remain installable 
 | [core](presets/core/)                     | Essential skills + git safety for every user  |
 | [python-strict](presets/python-strict/)   | Full Python enforcement stack                 |
 | [research](presets/research/)             | Academic research and manuscript workflow      |
-| [security-first](presets/security-first/) | Security auditing and enforcement             |
+| [sec-strict](presets/sec-strict/)         | Security auditing and enforcement             |
 
 ---
 

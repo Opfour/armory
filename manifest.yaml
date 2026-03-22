@@ -830,12 +830,12 @@ packages:
       Use this preset when setting up a research project, academic writing environment, or scholarly review workflow.
     path: presets/research
     source: https://github.com/Mathews-Tom/armory/blob/main/presets/research/PRESET.md
-  - name: security-first
+  - name: sec-strict
     version: 1.0.0
     description: Security-focused preset for projects requiring audit-grade protection. Extends the core review-commit lifecycle
       with security-specific review agents, secret scanning, dependency vulnerability auditing, repository configuration sentinel,
       cost tracking, and security coding standards. Use this preset for applications handling sensitive data, regulated environments,
       or any codebase where security posture is a primary concern. Bundles 11 packages across skills, agents, rules, hooks,
       and commands.
-    path: presets/security-first
-    source: https://github.com/Mathews-Tom/armory/blob/main/presets/security-first/PRESET.md
+    path: presets/sec-strict
+    source: https://github.com/Mathews-Tom/armory/blob/main/presets/sec-strict/PRESET.md
