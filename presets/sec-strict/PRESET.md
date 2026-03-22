@@ -1,5 +1,5 @@
 ---
-name: security-first
+name: sec-strict
 type: preset
 description: >
   Security-focused preset for projects requiring audit-grade protection. Extends the
@@ -33,27 +33,27 @@ preset:
     platforms: [darwin, linux]
 ---
 
-# Security First Preset
+# Sec Strict Preset
 
 An audit-grade security stack for projects where security posture is a primary concern.
 Installs 11 packages providing layered defense across the development lifecycle.
 
 ## Included Packages
 
-| Type    | Package             | Role                                                |
-| ------- | ------------------- | --------------------------------------------------- |
-| Skill   | pr-review           | Diff-based code review across five dimensions       |
-| Skill   | code-refiner        | Structural simplification preserving behavior       |
-| Skill   | pre-landing-review  | Final merge-readiness gate                          |
-| Skill   | repo-sentinel       | Repository configuration and policy monitoring      |
-| Skill   | dependency-audit    | Dependency vulnerability and license scanning       |
-| Agent   | security-reviewer   | Security-focused automated code review              |
-| Agent   | secret-scanner      | Detects leaked credentials and API keys             |
-| Rule    | security-standards  | Enforces secure coding patterns                     |
-| Rule    | commit-standards    | Enforces conventional commit message formatting     |
-| Hook    | git-protection      | Blocks force-push and branch deletion on main       |
-| Hook    | cost-tracker        | Monitors and logs API usage costs                   |
-| Command | security-scan       | On-demand security vulnerability scanning           |
+| Type    | Package            | Role                                            |
+| ------- | ------------------ | ----------------------------------------------- |
+| Skill   | pr-review          | Diff-based code review across five dimensions   |
+| Skill   | code-refiner       | Structural simplification preserving behavior   |
+| Skill   | pre-landing-review | Final merge-readiness gate                      |
+| Skill   | repo-sentinel      | Repository configuration and policy monitoring  |
+| Skill   | dependency-audit   | Dependency vulnerability and license scanning   |
+| Agent   | security-reviewer  | Security-focused automated code review          |
+| Agent   | secret-scanner     | Detects leaked credentials and API keys         |
+| Rule    | security-standards | Enforces secure coding patterns                 |
+| Rule    | commit-standards   | Enforces conventional commit message formatting |
+| Hook    | git-protection     | Blocks force-push and branch deletion on main   |
+| Hook    | cost-tracker       | Monitors and logs API usage costs               |
+| Command | security-scan      | On-demand security vulnerability scanning       |
 
 ## Defense Layers
 
@@ -77,5 +77,5 @@ Installs 11 packages providing layered defense across the development lifecycle.
 
 ## Relationship to Core
 
-This preset is a superset of `core`. Installing `security-first` provides everything
+This preset is a superset of `core`. Installing `sec-strict` provides everything
 in `core` plus security-specific tooling. There is no need to install both.

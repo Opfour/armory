@@ -25,5 +25,5 @@ cases:
     prompt: "I need security scanning and dependency auditing tools"
     fixtures: []
     rubric:
-      - "security tooling is covered by the security-first preset, not research"
+      - "security tooling is covered by the sec-strict preset, not research"
     trigger_expected: false

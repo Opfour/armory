@@ -32,13 +32,13 @@ cover the review-commit lifecycle without imposing language-specific constraints
 
 ## Included Packages
 
-| Type  | Package             | Role                                              |
-| ----- | ------------------- | ------------------------------------------------- |
-| Skill | pr-review           | Diff-based code review across five dimensions     |
-| Skill | code-refiner        | Structural simplification preserving behavior     |
-| Skill | pre-landing-review  | Final merge-readiness gate                        |
-| Hook  | git-protection      | Blocks force-push and branch deletion on main     |
-| Rule  | commit-standards    | Enforces conventional commit message formatting   |
+| Type  | Package            | Role                                            |
+| ----- | ------------------ | ----------------------------------------------- |
+| Skill | pr-review          | Diff-based code review across five dimensions   |
+| Skill | code-refiner       | Structural simplification preserving behavior   |
+| Skill | pre-landing-review | Final merge-readiness gate                      |
+| Hook  | git-protection     | Blocks force-push and branch deletion on main   |
+| Rule  | commit-standards   | Enforces conventional commit message formatting |
 
 ## Workflow
 
@@ -62,4 +62,4 @@ cover the review-commit lifecycle without imposing language-specific constraints
 Layer additional presets on top of `core`:
 
 - **python-strict** — adds Python-focused testing, security scanning, and stricter rules.
-- **security-first** — adds security auditing, dependency scanning, and cost tracking.
+- **sec-strict** — adds security auditing, dependency scanning, and cost tracking.

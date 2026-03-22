@@ -14,15 +14,17 @@ description: >
   Use this preset when setting up a complete business analysis capability across
   market research, competition, and feasibility assessment.
 type: preset
-packages:
-  - skills/market-analyzer
-  - skills/competitive-analyzer
-  - skills/feasibility-assessor
-  - skills/idea-validator
 metadata:
   version: 1.0.0
+preset:
+  packages:
+    skills:
+      - name: market-analyzer
+      - name: competitive-analyzer
+      - name: feasibility-assessor
+      - name: idea-validator
   compatibility:
-    platforms: [macos, linux, windows]
+    platforms: [darwin, linux]
 ---
 
 # Biz Validation
