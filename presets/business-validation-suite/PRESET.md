@@ -1,0 +1,67 @@
+---
+name: business-validation-suite
+description: >
+  Complete business idea validation toolkit bundling four complementary skills:
+  market analysis (TAM/SAM/SOM, trend assessment), competitive landscape analysis
+  (Porter's Five Forces, feature matrices, positioning), feasibility assessment
+  (unit economics, technical risk, financial viability), and full idea validation
+  (Lean Canvas, JTBD, SWOT/PESTLE, integrated scoring). Install the complete suite
+  for end-to-end business validation, or install individual skills for focused analysis.
+  Triggers on: "validate business idea", "business validation suite", "install business
+  analysis tools", "market and competitive analysis". Use this preset when setting up
+  a complete business analysis capability across market research, competition, and
+  feasibility assessment.
+type: preset
+packages:
+  - skills/market-analyzer
+  - skills/competitive-analyzer
+  - skills/feasibility-assessor
+  - skills/idea-validator
+metadata:
+  version: 1.0.0
+---
+
+# Business Validation Suite
+
+A curated bundle of four skills for comprehensive business idea validation.
+
+## Included Skills
+
+| Skill | Purpose | Key Frameworks |
+|-------|---------|---------------|
+| `market-analyzer` | Market sizing and trend analysis | TAM/SAM/SOM, Rogers adoption curve, trend identification |
+| `competitive-analyzer` | Competitive landscape assessment | Porter's Five Forces, feature matrices, positioning maps |
+| `feasibility-assessor` | Financial and technical viability | Unit economics, technical risk scoring, break-even analysis |
+| `idea-validator` | Full business validation (orchestrator) | Lean Canvas, JTBD, SWOT/PESTLE, integrated scoring |
+
+## Usage Patterns
+
+### Full Validation
+Ask Claude to "validate this business idea" — triggers `idea-validator`, which orchestrates the other three skills via sub-agents.
+
+### Focused Analysis
+- "Analyze the market for X" — triggers `market-analyzer` directly
+- "Who are the competitors for X" — triggers `competitive-analyzer` directly
+- "Is X financially viable" — triggers `feasibility-assessor` directly
+
+### Incremental Validation
+Run individual skills in sequence, building up a complete picture:
+1. Start with market analysis to confirm opportunity exists
+2. Add competitive analysis to understand the landscape
+3. Run feasibility to check if it can be built and sustained
+4. Use idea-validator for the integrated synthesis
+
+## Installation
+
+Install the complete suite:
+```bash
+npx skills add business-validation-suite
+```
+
+Or install individual skills:
+```bash
+npx skills add market-analyzer
+npx skills add competitive-analyzer
+npx skills add feasibility-assessor
+npx skills add idea-validator
+```
