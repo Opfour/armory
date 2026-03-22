@@ -1,6 +1,6 @@
 # armory
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE) [![packages: 72](https://img.shields.io/badge/packages-72-informational)](manifest.yaml) [![evals: 100%](https://img.shields.io/badge/eval_coverage-100%25-success)](skills/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE) [![packages: 81](https://img.shields.io/badge/packages-81-informational)](manifest.yaml) [![evals: 100%](https://img.shields.io/badge/eval_coverage-100%25-success)](skills/)
 
 Curated, production-grade skills, agents, hooks, rules, commands, utilities, and presets for AI coding agents. No magic, no demos — battle-tested workflows built for developers who use AI seriously.
 
@@ -13,6 +13,24 @@ Curated, production-grade skills, agents, hooks, rules, commands, utilities, and
 **Philosophy:** Packages in this collection are practical and context-free. They define the _how_, not just the _what_ — covering inputs, outputs, edge cases, and failure modes. They are tested in real workloads, not constructed as examples.
 
 Intended for developers who treat AI coding agents as a serious part of their workflow.
+
+---
+
+## Presets
+
+Presets are curated bundles that install multiple packages in one command. Start with `core`, layer on domain-specific presets as needed.
+
+| Preset | Skills | Description |
+| ------ | ------ | ----------- |
+| [core](presets/core/) | 3 skills, 1 hook, 1 rule | Baseline review-commit lifecycle — PR review, code refinement, pre-landing gate, git protection, commit standards. Start here. |
+| [sec-strict](presets/sec-strict/) | 5 skills, 2 agents, 2 rules, 1 hook, 1 command | Audit-grade security stack — secret scanning, dependency auditing, security review agents, repo sentinel, cost tracking. Superset of `core`. |
+| [python-strict](presets/python-strict/) | — | Full Python enforcement — type checking, test standards, security scanning, import ordering. Layer on top of `core`. |
+| [research](presets/research/) | — | Academic research workflow — literature review, manuscript review, provenance auditing, research critique, YouTube analysis. |
+| [biz-validation](presets/biz-validation/) | 4 skills | Business idea validation — market analysis (TAM/SAM/SOM), competitive landscape (Porter's Five Forces), feasibility assessment (unit economics, technical risk), orchestrated validation (Lean Canvas, JTBD, SWOT/PESTLE). |
+| [eng-ops](presets/eng-ops/) | 8 skills | Engineering operations lifecycle — ship workflow, systematic QA, test scaffolding, benchmarking, migration risk, effort estimation, retrospectives, debugging. |
+| [media-craft](presets/media-craft/) | 6 skills | Visual and video production — concept-to-image (PNG/SVG), concept-to-video (Manim), Remotion video (React), HTML presentations, interactive HTML artifacts, architecture diagrams. |
+| [content-ops](presets/content-ops/) | 8 skills | Writing and publishing pipeline — humanize AI text, social content, manuscript review, authorship verification, changelogs, PDF export, summarization, format conversion. |
+| [ai-builder](presets/ai-builder/) | 6 skills | AI/ML development toolkit — agent building, prompt engineering, GPU optimization, RAG auditing, MCP-to-skill conversion, notebook generation. |
 
 ---
 
@@ -43,7 +61,8 @@ Intended for developers who treat AI coding agents as a serious part of their wo
 | [youtube-search](skills/youtube-search/)       | Search YouTube by keyword via yt-dlp — returns structured metadata (title, URL, channel, views, duration, date) for discovery and source curation               |
 | [youtube-analysis](skills/youtube-analysis/)   | YouTube video transcript extraction and structured concept analysis — multi-level summaries, key concepts, takeaways, no API keys required                      |
 | [notebooklm](skills/notebooklm/)               | Google NotebookLM automation via notebooklm-py — create notebooks, add sources, chat, generate podcasts, videos, infographics, quizzes, flashcards, and more    |
-| [immune](skills/immune/)                       | Hybrid adaptive memory with Cheatsheet (positive patterns) and Immune (negative patterns) — Hot/Cold tiered memory, multi-domain antibody scanning, auto-learning |
+| [research-critique](skills/research-critique/)   | Critical analysis of research papers — methodology evaluation, claims-evidence alignment, contribution assessment with collegial analytical posture              |
+| [immune](skills/immune/)                         | Hybrid adaptive memory with Cheatsheet (positive patterns) and Immune (negative patterns) — Hot/Cold tiered memory, multi-domain antibody scanning, auto-learning |
 
 ### Skills — Review & Quality
 
@@ -90,6 +109,15 @@ Intended for developers who treat AI coding agents as a serious part of their wo
 | [sql-optimizer](skills/sql-optimizer/)                     | SQL performance analysis — EXPLAIN interpretation, anti-pattern detection, index recommendations, rewrites |
 | [migration-risk-analyzer](skills/migration-risk-analyzer/) | Database migration risk assessment — lock analysis, downtime estimation, rollback strategies, validation   |
 | [benchmark-runner](skills/benchmark-runner/)               | Structured benchmark design — metric selection, test case matrix, environment capture, statistical rigor   |
+
+### Skills — Business Validation
+
+| Skill                                                | Description                                                                                                                                   |
+| ---------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------- |
+| [idea-validator](skills/idea-validator/)             | Full business idea validation orchestrator — Lean Canvas, JTBD, parallel market/competitive/feasibility agents, SWOT/PESTLE, weighted scoring |
+| [market-analyzer](skills/market-analyzer/)           | Market sizing and trend analysis — TAM/SAM/SOM calculation, Rogers adoption curve, data triangulation, timing assessment                     |
+| [competitive-analyzer](skills/competitive-analyzer/) | Competitive landscape analysis — Porter's Five Forces, feature/pricing matrices, positioning maps, moat taxonomy                             |
+| [feasibility-assessor](skills/feasibility-assessor/) | Financial and technical feasibility — unit economics (CAC/LTV), revenue modeling, break-even, technical risk scoring, build-vs-buy            |
 
 ### Skills — AI/ML & Planning
 
@@ -158,17 +186,6 @@ Skills below are superseded by base model capabilities. They remain installable 
 | [arxiv-search](utilities/arxiv-search/)                 | Search arXiv for papers, output structured JSON metadata    |
 | [dependency-tree](utilities/dependency-tree/)           | Visualize project dependency graph                          |
 | [test-coverage-report](utilities/test-coverage-report/) | Coverage summary for changed files                          |
-
-## Presets
-
-| Preset                                    | Description                                  |
-| ----------------------------------------- | -------------------------------------------- |
-| [core](presets/core/)                     | Essential skills + git safety for every user  |
-| [python-strict](presets/python-strict/)   | Full Python enforcement stack                 |
-| [research](presets/research/)             | Academic research and manuscript workflow      |
-| [sec-strict](presets/sec-strict/)         | Security auditing and enforcement             |
-
----
 
 ## Installation
 
