@@ -799,8 +799,9 @@ packages:
       assessment (unit economics, technical risk, financial viability), and full idea validation (Lean Canvas, JTBD, SWOT/PESTLE,
       integrated scoring). Install the complete suite for end-to-end business validation, or install individual skills for
       focused analysis. Triggers on: "validate business idea", "business validation suite", "install business analysis tools",
-      "market and competitive analysis". Use this preset when setting up a complete business analysis capability across market
-      research, competition, and feasibility assessment.'
+      "market and competitive analysis", "evaluate business concept", "startup due diligence", "vet a business opportunity",
+      "assess market feasibility", "is this idea viable", "business idea scorecard", "idea validation toolkit". Use this preset
+      when setting up a complete business analysis capability across market research, competition, and feasibility assessment.'
     path: presets/business-validation-suite
     source: https://github.com/Mathews-Tom/armory/blob/main/presets/business-validation-suite/PRESET.md
   - name: core
