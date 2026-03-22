@@ -30,13 +30,13 @@ academic research.
 
 ## Included Packages
 
-| Type    | Package              | Role                                                     |
-| ------- | -------------------- | -------------------------------------------------------- |
-| Utility | arxiv-search         | Search arXiv for papers, retrieve structured metadata    |
-| Skill   | literature-review    | Systematic review: search, screen, extract, synthesize   |
-| Skill   | research-critique    | Critical analysis of a single paper's merit              |
-| Skill   | manuscript-review    | Pre-publication audit of formatting, structure, citations |
-| Skill   | manuscript-provenance| Verify manuscript numbers trace to computational outputs |
+| Type    | Package               | Role                                                      |
+| ------- | --------------------- | --------------------------------------------------------- |
+| Utility | arxiv-search          | Search arXiv for papers, retrieve structured metadata     |
+| Skill   | literature-review     | Systematic review: search, screen, extract, synthesize    |
+| Skill   | research-critique     | Critical analysis of a single paper's merit               |
+| Skill   | manuscript-review     | Pre-publication audit of formatting, structure, citations |
+| Skill   | manuscript-provenance | Verify manuscript numbers trace to computational outputs  |
 
 ## Workflow
 

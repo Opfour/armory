@@ -42,21 +42,21 @@ lifecycle.
 
 ## Included Packages
 
-| Type    | Package             | Role                                               |
-| ------- | ------------------- | -------------------------------------------------- |
-| Skill   | pr-review           | Diff-based code review across five dimensions      |
-| Skill   | code-refiner        | Structural simplification preserving behavior      |
-| Skill   | pre-landing-review  | Final merge-readiness gate                         |
-| Skill   | test-harness        | Test generation and coverage analysis              |
-| Agent   | code-reviewer       | Automated code review on PR submission             |
-| Agent   | secret-scanner      | Detects leaked credentials and API keys            |
-| Rule    | commit-standards    | Enforces conventional commit message formatting    |
-| Rule    | test-standards      | Enforces minimum test coverage thresholds          |
-| Rule    | security-standards  | Enforces secure coding patterns                    |
-| Hook    | git-protection      | Blocks force-push and branch deletion on main      |
-| Hook    | pre-edit-backup     | Creates file backups before destructive edits      |
-| Command | tdd                 | Test-driven development workflow command            |
-| Command | refactor      | Automated refactoring with safety checks           |
+| Type    | Package            | Role                                            |
+| ------- | ------------------ | ----------------------------------------------- |
+| Skill   | pr-review          | Diff-based code review across five dimensions   |
+| Skill   | code-refiner       | Structural simplification preserving behavior   |
+| Skill   | pre-landing-review | Final merge-readiness gate                      |
+| Skill   | test-harness       | Test generation and coverage analysis           |
+| Agent   | code-reviewer      | Automated code review on PR submission          |
+| Agent   | secret-scanner     | Detects leaked credentials and API keys         |
+| Rule    | commit-standards   | Enforces conventional commit message formatting |
+| Rule    | test-standards     | Enforces minimum test coverage thresholds       |
+| Rule    | security-standards | Enforces secure coding patterns                 |
+| Hook    | git-protection     | Blocks force-push and branch deletion on main   |
+| Hook    | pre-edit-backup    | Creates file backups before destructive edits   |
+| Command | tdd                | Test-driven development workflow command        |
+| Command | refactor           | Automated refactoring with safety checks        |
 
 ## Workflow
 
