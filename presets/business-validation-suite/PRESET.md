@@ -8,9 +8,11 @@ description: >
   (Lean Canvas, JTBD, SWOT/PESTLE, integrated scoring). Install the complete suite
   for end-to-end business validation, or install individual skills for focused analysis.
   Triggers on: "validate business idea", "business validation suite", "install business
-  analysis tools", "market and competitive analysis". Use this preset when setting up
-  a complete business analysis capability across market research, competition, and
-  feasibility assessment.
+  analysis tools", "market and competitive analysis", "evaluate business concept",
+  "startup due diligence", "vet a business opportunity", "assess market feasibility",
+  "is this idea viable", "business idea scorecard", "idea validation toolkit".
+  Use this preset when setting up a complete business analysis capability across
+  market research, competition, and feasibility assessment.
 type: preset
 packages:
   - skills/market-analyzer
@@ -19,6 +21,8 @@ packages:
   - skills/idea-validator
 metadata:
   version: 1.0.0
+  compatibility:
+    platforms: [macos, linux, windows]
 ---
 
 # Business Validation Suite
@@ -50,6 +54,45 @@ Run individual skills in sequence, building up a complete picture:
 2. Add competitive analysis to understand the landscape
 3. Run feasibility to check if it can be built and sustained
 4. Use idea-validator for the integrated synthesis
+
+## Data Flow
+
+When `idea-validator` orchestrates the full suite, the data flows as follows:
+
+```
+User Input (idea/pitch/plan)
+    │
+    ▼
+┌─────────────────────┐
+│  idea-validator      │  Phase 1-3: Intake, Lean Canvas, JTBD
+│  (orchestrator)      │
+└────────┬────────────┘
+         │ Phase 4: Spawns 3 parallel agents
+         ├──────────────────┬──────────────────┐
+         ▼                  ▼                  ▼
+┌─────────────────┐ ┌────────────────┐ ┌─────────────────┐
+│ market-analyzer │ │ competitive-   │ │ feasibility-    │
+│                 │ │ analyzer       │ │ assessor        │
+│ → TAM/SAM/SOM  │ │ → Competitors  │ │ → Unit economics│
+│ → Trends       │ │ → Five Forces  │ │ → Tech risk     │
+│ → Timing       │ │ → Positioning  │ │ → Break-even    │
+└────────┬────────┘ └───────┬────────┘ └────────┬────────┘
+         │                  │                    │
+         └──────────────────┴────────────────────┘
+                            │
+                            ▼
+                ┌─────────────────────┐
+                │  idea-validator      │  Phase 5-7: SWOT/PESTLE,
+                │  (synthesis)         │  Scoring, Report
+                └─────────────────────┘
+                            │
+                            ▼
+                  Validation Report
+                  (6-dimension scorecard,
+                   verdict, experiments)
+```
+
+Each sub-agent returns structured findings. The orchestrator synthesizes them with SWOT/PESTLE analysis and produces a weighted validation scorecard.
 
 ## Installation
 
