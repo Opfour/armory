@@ -251,11 +251,13 @@ def find_chrome_binary() -> str | None:
                 return str(chrome)
 
     # Check Playwright's Chromium
-    for pw_dir in [Path("/opt/pw-browsers"), Path.home() / ".cache/ms-playwright"]:
+    for pw_dir in [Path("/opt/pw-browsers"), Path.home() / ".cache/ms-playwright",
+                   Path.home() / "Library/Caches/ms-playwright"]:
         if pw_dir.exists():
-            for chrome in pw_dir.rglob("chrome"):
-                if chrome.is_file() and os.access(str(chrome), os.X_OK):
-                    return str(chrome)
+            for pattern in ["chrome", "Chromium"]:
+                for chrome in pw_dir.rglob(pattern):
+                    if chrome.is_file() and os.access(str(chrome), os.X_OK):
+                        return str(chrome)
 
     # Check system Chrome
     for p in ["/opt/google/chrome/chrome", "/usr/bin/chromium-browser",
