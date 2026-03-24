@@ -251,11 +251,13 @@ def find_chrome_binary() -> str | None:
                 return str(chrome)
 
     # Check Playwright's Chromium
-    for pw_dir in [Path("/opt/pw-browsers"), Path.home() / ".cache/ms-playwright"]:
+    for pw_dir in [Path("/opt/pw-browsers"), Path.home() / ".cache/ms-playwright",
+                   Path.home() / "Library/Caches/ms-playwright"]:
         if pw_dir.exists():
-            for chrome in pw_dir.rglob("chrome"):
-                if chrome.is_file() and os.access(str(chrome), os.X_OK):
-                    return str(chrome)
+            for pattern in ["chrome", "Chromium"]:
+                for chrome in pw_dir.rglob(pattern):
+                    if chrome.is_file() and os.access(str(chrome), os.X_OK):
+                        return str(chrome)
 
     # Check system Chrome
     for p in ["/opt/google/chrome/chrome", "/usr/bin/chromium-browser",
@@ -275,7 +277,7 @@ def create_puppeteer_config(tmpdir: Path) -> Path:
 
     config = {
         "executablePath": chrome_path,
-        "args": ["--no-sandbox", "--disable-gpu", "--disable-dev-shm-usage", "--single-process"],
+        "args": ["--no-sandbox", "--disable-gpu", "--disable-dev-shm-usage"],
     }
     config_path = tmpdir / "puppeteer-config.json"
     config_path.write_text(json.dumps(config))
@@ -465,7 +467,7 @@ def html_to_pdf(html_path: Path, pdf_path: Path, page_format: str,
     with sync_playwright() as p:
         browser = p.chromium.launch(args=[
             '--no-sandbox', '--disable-gpu', '--disable-dev-shm-usage',
-            '--disable-software-rasterizer', '--single-process',
+            '--disable-software-rasterizer',
         ])
         context = browser.new_context()
         page = context.new_page()
