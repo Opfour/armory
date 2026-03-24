@@ -277,7 +277,7 @@ def create_puppeteer_config(tmpdir: Path) -> Path:
 
     config = {
         "executablePath": chrome_path,
-        "args": ["--no-sandbox", "--disable-gpu", "--disable-dev-shm-usage", "--single-process"],
+        "args": ["--no-sandbox", "--disable-gpu", "--disable-dev-shm-usage"],
     }
     config_path = tmpdir / "puppeteer-config.json"
     config_path.write_text(json.dumps(config))
@@ -467,7 +467,7 @@ def html_to_pdf(html_path: Path, pdf_path: Path, page_format: str,
     with sync_playwright() as p:
         browser = p.chromium.launch(args=[
             '--no-sandbox', '--disable-gpu', '--disable-dev-shm-usage',
-            '--disable-software-rasterizer', '--single-process',
+            '--disable-software-rasterizer',
         ])
         context = browser.new_context()
         page = context.new_page()
