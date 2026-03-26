@@ -26,6 +26,9 @@ name: my-skill-name
 description: What this skill does in plain language.
 metadata:
   version: 1.0.0
+  category: development
+  tags: [keyword1, keyword2, keyword3]
+  difficulty: intermediate
 ---
 ```
 
@@ -215,6 +218,42 @@ description: >
 ```yaml
 description: "Review architecture and provide feedback."
 ```
+
+## Metadata Fields
+
+Every package should include `category`, `tags`, and `difficulty` under `metadata:` in frontmatter.
+
+### Category
+
+Assign one category from the table below:
+
+| Category        | Use For                                                    |
+| --------------- | ---------------------------------------------------------- |
+| `development`   | Coding tools, build, debug, test, IDE integration          |
+| `review`        | Code review, PR review, quality checks, auditing           |
+| `security`      | Security scanning, secrets detection, vulnerability checks |
+| `research`      | Literature review, academic research, critique             |
+| `content`       | Writing, presentations, video, publishing                  |
+| `business`      | Idea validation, market sizing, feasibility, proposals     |
+| `visualization` | Diagrams, images, video rendering, visual artifacts        |
+| `operations`    | Release, deployment, CI/CD, git workflow, presets           |
+| `data`          | SQL, database, migration, benchmarks                       |
+
+### Tags
+
+Add 3-6 lowercase kebab-case tags that help users discover the package. Include:
+
+- Domain keywords (e.g., `sql`, `python`, `security`)
+- Action verbs (e.g., `code-review`, `test-generation`)
+- Technology names (e.g., `pytest`, `manim`, `remotion`)
+
+### Difficulty
+
+| Level          | Criteria                                                   |
+| -------------- | ---------------------------------------------------------- |
+| `beginner`     | Simple single-purpose tools, minimal setup                 |
+| `intermediate` | Multi-step workflows, some domain knowledge needed         |
+| `advanced`     | Complex multi-phase analysis, deep domain expertise needed |
 
 ## Quality Gate — Skill Evaluator
 
