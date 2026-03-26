@@ -54,6 +54,50 @@ jobs:
       - name: Validate eval cases schema
         run: python scripts/validate_evals.py
 
+      - name: Validate frontmatter
+        run: python scripts/validate_frontmatter.py
+
+      - name: Validate file references
+        run: python scripts/validate_references.py
+
+      - name: Evaluate package quality
+        if: github.event_name == 'pull_request'
+        run: |
+          TYPE_DIRS="skills agents hooks rules commands utilities presets"
+          DEFINITION_MAP="skills:SKILL.md agents:AGENT.md hooks:HOOK.md rules:RULE.md commands:COMMAND.md utilities:UTILITY.md presets:PRESET.md"
+
+          changed_packages=""
+          for mapping in $DEFINITION_MAP; do
+            type_dir="${mapping%%:*}"
+            def_file="${mapping#*:}"
+            matches=$(git diff --name-only origin/${{ github.base_ref }}...HEAD -- "${type_dir}/" \
+              | grep "${def_file}" \
+              | sed "s|${type_dir}/\([^/]*\)/.*|\1|" \
+              | sort -u)
+            for pkg in $matches; do
+              changed_packages="${changed_packages} ${type_dir}/${pkg}"
+            done
+          done
+
+          if [ -z "$changed_packages" ]; then
+            echo "No changed packages to evaluate"
+            exit 0
+          fi
+
+          failed=0
+          for pkg_path in $changed_packages; do
+            echo "Evaluating ${pkg_path}..."
+            if ! python scripts/evaluate_package.py --path "${pkg_path}" --threshold 70; then
+              failed=$((failed + 1))
+            fi
+          done
+
+          if [ "$failed" -gt 0 ]; then
+            echo ""
+            echo "FAILED: ${failed} package(s) below quality threshold"
+            exit 1
+          fi
+
       - name: Check eval coverage for changed packages
         if: github.event_name == 'pull_request'
         run: |
