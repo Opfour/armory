@@ -1,16 +1,19 @@
 ---
 name: plan-review
-description: >
-  Pre-implementation plan audit that stress-tests scope, assumptions, risks, and
-  failure modes before code is written. Use this skill when the user asks to review
-  a plan, audit a proposal, challenge scope, stress-test an approach, evaluate a
-  technical design, or says "review this plan", "is this plan solid", "what am I
+description: 'Pre-implementation plan audit that stress-tests scope, assumptions,
+  risks, and failure modes before code is written. Use this skill when the user asks
+  to review a plan, audit a proposal, challenge scope, stress-test an approach, evaluate
+  a technical design, or says "review this plan", "is this plan solid", "what am I
   missing", "challenge my assumptions", "plan review", "scope check", "stress-test
   this", "/plan-review". Supports product lens, engineering lens, or combined review.
+
+  '
 metadata:
   version: 1.0.0
+  category: review
+  tags: [plan-audit, scope, risk-assessment, assumptions]
+  difficulty: intermediate
 ---
-
 # Plan Review Skill
 
 ## Purpose

@@ -1,30 +1,33 @@
 ---
 name: ai-builder
 type: preset
-description: >
-  AI development toolkit for building, testing, and optimizing LLM-powered systems in Claude
-  Code. Bundles agent development, prompt engineering, GPU and inference optimization, RAG
-  pipeline auditing, MCP server conversion, and notebook generation into a single install.
-  Covers the full AI workflow from designing prompts through building agents, optimizing GPU
-  utilization, auditing retrieval quality, and extending tool integrations. Use this preset
-  when setting up an AI development environment, machine learning toolkit, or LLM tools
-  workspace. Relevant for agent development, MCP development, RAG pipeline construction,
-  and inference optimization workflows.
+description: 'AI development toolkit for building, testing, and optimizing LLM-powered
+  systems in Claude Code. Bundles agent development, prompt engineering, GPU and inference
+  optimization, RAG pipeline auditing, MCP server conversion, and notebook generation
+  into a single install. Covers the full AI workflow from designing prompts through
+  building agents, optimizing GPU utilization, auditing retrieval quality, and extending
+  tool integrations. Use this preset when setting up an AI development environment,
+  machine learning toolkit, or LLM tools workspace. Relevant for agent development,
+  MCP development, RAG pipeline construction, and inference optimization workflows.
+
+  '
 metadata:
   version: 1.0.0
+  category: review
+  tags: [ai, agent, development, toolkit]
+  difficulty: intermediate
 preset:
   packages:
     skills:
-      - name: agent-builder
-      - name: prompt-lab
-      - name: gpu-optimizer
-      - name: rag-auditor
-      - name: mcp-to-skill
-      - name: notebooklm
+    - {name: agent-builder}
+    - {name: prompt-lab}
+    - {name: gpu-optimizer}
+    - {name: rag-auditor}
+    - {name: mcp-to-skill}
+    - {name: notebooklm}
   compatibility:
     platforms: [darwin, linux]
 ---
-
 # AI Builder
 
 End-to-end toolkit for developing, optimizing, and validating AI-powered systems.

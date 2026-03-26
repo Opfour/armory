@@ -1,29 +1,30 @@
 ---
 name: release-captain
 type: agent
-description: >
-  Ship lifecycle manager that drives code from branch to PR through quality
-  gates, secret scanning, changelog generation, and dependency audits. Blocks
-  on failing tests or CRITICAL findings. Produces versioned commits, changelog
-  entries, and opens the pull request with full traceability.
-  Triggers on: "ship this", "create a release", "open a PR", "prepare for
-  release", "cut a release", "ship it", "ready to merge", "open pull request",
-  "release this branch", "time to ship". Use this agent when code is ready to
-  ship and needs quality gates, changelog, and PR creation rather than further
-  development.
+description: 'Ship lifecycle manager that drives code from branch to PR through quality
+  gates, secret scanning, changelog generation, and dependency audits. Blocks on failing
+  tests or CRITICAL findings. Produces versioned commits, changelog entries, and opens
+  the pull request with full traceability. Triggers on: "ship this", "create a release",
+  "open a PR", "prepare for release", "cut a release", "ship it", "ready to merge",
+  "open pull request", "release this branch", "time to ship". Use this agent when
+  code is ready to ship and needs quality gates, changelog, and PR creation rather
+  than further development.
+
+  '
 model: sonnet
 color: yellow
 metadata:
   version: 1.0.0
-  category: release
+  category: operations
   execution_phase: on-demand
   priority: 75
   enabled: true
   orchestrates:
     skills: [ship-workflow, changelog-composer, pre-landing-review, pr-review, dependency-audit]
     agents: [secret-scanner]
+  tags: [release, deployment, ci-cd, sonnet]
+  difficulty: intermediate
 ---
-
 # Release Captain
 
 Ship lifecycle manager that orchestrates quality gates, secret scanning,

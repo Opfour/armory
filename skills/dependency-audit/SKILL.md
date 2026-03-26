@@ -1,19 +1,21 @@
 ---
 name: dependency-audit
-description: >
-  Audits project dependencies for license compliance, maintenance health, security
-  vulnerabilities, and bloat. Analyzes both direct and transitive dependency trees,
-  detects abandoned packages, identifies license conflicts (copyleft, unknown), checks
-  for known CVEs, and finds unused or duplicate dependencies.
-  Triggers on: "audit dependencies", "dependency check", "license check",
-  "dependency health", "abandoned packages", "bloat check", "unused dependencies",
-  "security audit dependencies", "dependency review", "license compliance",
-  "package audit", "supply chain", "dependency risk".
-  Use this skill when reviewing project dependencies for risk.
+description: 'Audits project dependencies for license compliance, maintenance health,
+  security vulnerabilities, and bloat. Analyzes both direct and transitive dependency
+  trees, detects abandoned packages, identifies license conflicts (copyleft, unknown),
+  checks for known CVEs, and finds unused or duplicate dependencies. Triggers on:
+  "audit dependencies", "dependency check", "license check", "dependency health",
+  "abandoned packages", "bloat check", "unused dependencies", "security audit dependencies",
+  "dependency review", "license compliance", "package audit", "supply chain", "dependency
+  risk". Use this skill when reviewing project dependencies for risk.
+
+  '
 metadata:
   version: 1.1.0
+  category: review
+  tags: [dependencies, vulnerabilities, licenses, supply-chain]
+  difficulty: intermediate
 ---
-
 # Dependency Audit
 
 Comprehensive dependency risk assessment: license compatibility analysis, maintenance

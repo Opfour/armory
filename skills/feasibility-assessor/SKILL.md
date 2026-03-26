@@ -1,19 +1,22 @@
 ---
 name: feasibility-assessor
-description: >
-  Evaluate whether a business idea, product concept, or feature is technically buildable
-  and financially viable. Covers unit economics (CAC, LTV, margins), revenue modeling,
-  break-even analysis, architecture risk scoring, build estimation, and integrated
-  feasibility verdicts. Triggers on: feasibility assessment, viability analysis, unit
-  economics review, business case evaluation, technical risk assessment, break-even
-  calculation, build vs buy analysis, go/no-go decision, idea validation, market
-  feasibility, cost-benefit analysis, ROI projection. Use this skill when someone needs
-  to determine whether a business idea, feature, or product is worth pursuing from
-  financial and technical perspectives.
+description: 'Evaluate whether a business idea, product concept, or feature is technically
+  buildable and financially viable. Covers unit economics (CAC, LTV, margins), revenue
+  modeling, break-even analysis, architecture risk scoring, build estimation, and
+  integrated feasibility verdicts. Triggers on: feasibility assessment, viability
+  analysis, unit economics review, business case evaluation, technical risk assessment,
+  break-even calculation, build vs buy analysis, go/no-go decision, idea validation,
+  market feasibility, cost-benefit analysis, ROI projection. Use this skill when someone
+  needs to determine whether a business idea, feature, or product is worth pursuing
+  from financial and technical perspectives.
+
+  '
 metadata:
   version: 1.0.0
+  category: review
+  tags: [feasibility, unit-economics, viability, business-case]
+  difficulty: advanced
 ---
-
 # Feasibility Assessor
 
 Evaluate business ideas and features across two tracks: financial viability and technical feasibility. Produce an integrated verdict with actionable de-risking recommendations.

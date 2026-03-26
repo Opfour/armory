@@ -1,23 +1,25 @@
 ---
 name: immune
-description: >
-  Hybrid adaptive memory system with two complementary memories: Cheatsheet
-  (positive patterns injected before generation) and Immune (negative patterns
-  scanned after generation). Uses Hot/Cold tiered memory with multi-domain
-  support and auto-learning. Detects known errors via antibodies, discovers
-  new threats, and learns winning strategies over time.
-  Triggers on: "scan for errors", "immune scan", "check output quality",
-  "detect patterns", "scan content", "cheatsheet injection", "antibody scan",
-  "adaptive memory scan", "immune check", "quality scan", "pattern detection".
-  NOT for general code review or PR review — use pr-review instead.
-  NOT for security audits of repositories — use repo-sentinel instead.
+description: 'Hybrid adaptive memory system with two complementary memories: Cheatsheet
+  (positive patterns injected before generation) and Immune (negative patterns scanned
+  after generation). Uses Hot/Cold tiered memory with multi-domain support and auto-learning.
+  Detects known errors via antibodies, discovers new threats, and learns winning strategies
+  over time. Triggers on: "scan for errors", "immune scan", "check output quality",
+  "detect patterns", "scan content", "cheatsheet injection", "antibody scan", "adaptive
+  memory scan", "immune check", "quality scan", "pattern detection". NOT for general
+  code review or PR review — use pr-review instead. NOT for security audits of repositories
+  — use repo-sentinel instead.
+
+  '
 metadata:
   version: 1.0.0
   status: active
   classification: tooling-wrapper
   source: https://github.com/contactjccoaching-wq/immune
+  category: review
+  tags: [memory, error-detection, antibodies, adaptive]
+  difficulty: intermediate
 ---
-
 # Immune System v3 — Hybrid Cheatsheet + Immune
 
 You operate a hybrid adaptive system with two complementary memories:

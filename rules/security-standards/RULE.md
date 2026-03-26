@@ -1,22 +1,26 @@
 ---
 name: security-standards
 type: rule
-description: >
-  Defines security standards for application development including secret management (environment
-  variables, vault integration, never hardcode), input validation at system boundaries, authentication
-  and session handling (JWT, refresh tokens, session expiry), HTTP security headers, file upload
-  restrictions, SQL parameterization, dependency scanning, and CORS policy. Use this rule when
-  handling secrets, implementing authentication, validating user input, configuring HTTP security,
-  processing file uploads, or writing database queries. Triggers on "security rules", "secret
-  management", "input validation", "security standards", "JWT handling", "CORS policy",
-  "SQL injection", "file upload security", "dependency scanning", "HTTP headers".
+description: 'Defines security standards for application development including secret
+  management (environment variables, vault integration, never hardcode), input validation
+  at system boundaries, authentication and session handling (JWT, refresh tokens,
+  session expiry), HTTP security headers, file upload restrictions, SQL parameterization,
+  dependency scanning, and CORS policy. Use this rule when handling secrets, implementing
+  authentication, validating user input, configuring HTTP security, processing file
+  uploads, or writing database queries. Triggers on "security rules", "secret management",
+  "input validation", "security standards", "JWT handling", "CORS policy", "SQL injection",
+  "file upload security", "dependency scanning", "HTTP headers".
+
+  '
 metadata:
   version: 1.0.0
   scope: global
   applies_to:
-    languages: ["*"]
+    languages: ['*']
+  category: security
+  tags: [security, secrets, input-validation, authentication]
+  difficulty: beginner
 ---
-
 # Security Standards
 
 Standards for secure application development across all repositories and languages.

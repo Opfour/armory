@@ -1,18 +1,18 @@
 ---
 name: proposal-writer
 type: agent
-description: >
-  Technical proposal generation with ROI calculation, three-tier pricing, and
-  business-value framing. Gathers project scope and client context, models
-  return on investment with calibrated estimates, structures a Problem-Agitate-Solve
-  narrative, and produces a complete proposal document with optional PDF export.
-  Triggers on: "write a proposal", "draft a proposal", "create a project proposal",
-  "generate a proposal for", "proposal with pricing tiers", "ROI proposal",
-  "client proposal with estimates", "proposal with cost breakdown",
-  "prepare a bid", "scope and pricing document".
-  Use this agent when a structured client-facing proposal with pricing, ROI
-  modeling, and professional formatting is needed — not for internal planning
+description: 'Technical proposal generation with ROI calculation, three-tier pricing,
+  and business-value framing. Gathers project scope and client context, models return
+  on investment with calibrated estimates, structures a Problem-Agitate-Solve narrative,
+  and produces a complete proposal document with optional PDF export. Triggers on:
+  "write a proposal", "draft a proposal", "create a project proposal", "generate a
+  proposal for", "proposal with pricing tiers", "ROI proposal", "client proposal with
+  estimates", "proposal with cost breakdown", "prepare a bid", "scope and pricing
+  document". Use this agent when a structured client-facing proposal with pricing,
+  ROI modeling, and professional formatting is needed — not for internal planning
   documents or architecture decisions.
+
+  '
 model: opus
 color: orange
 metadata:
@@ -24,8 +24,9 @@ metadata:
   orchestrates:
     skills: [md-to-pdf, estimate-calibrator, architecture-diagram]
     agents: []
+  tags: [proposals, writing, business, opus]
+  difficulty: intermediate
 ---
-
 # Proposal Writer
 
 Technical proposal generation that combines ROI modeling, calibrated estimates,

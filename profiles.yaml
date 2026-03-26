@@ -1,15 +1,21 @@
 # Install profiles — curated subsets for different use cases.
+# Use: uv run scripts/install.py --profile <name>
+# List: uv run scripts/install.py --list-profiles
 profiles:
   core:
-    description: Essential skills for every Claude Code user
+    description: Essential review and commit lifecycle for every Claude Code user
     packages:
       skills:
         - pr-review
         - code-refiner
         - pre-landing-review
+      hooks:
+        - git-protection
+      rules:
+        - commit-standards
 
   developer:
-    description: Core plus framework support and review tools
+    description: Core plus testing, debugging, and architecture tools
     includes: [core]
     packages:
       skills:
@@ -17,6 +23,74 @@ profiles:
         - debug-investigator
         - architecture-reviewer
         - github
+
+  python-dev:
+    description: Python development with TDD, type checking, and security
+    includes: [core]
+    packages:
+      skills:
+        - test-harness
+        - debug-investigator
+        - gpu-optimizer
+      commands:
+        - tdd
+      rules:
+        - test-standards
+
+  security-engineer:
+    description: Security auditing, secrets detection, and compliance
+    includes: [core]
+    packages:
+      skills:
+        - repo-sentinel
+        - dependency-audit
+        - pre-landing-review
+      agents:
+        - security-reviewer
+        - secret-scanner
+        - codebase-auditor
+      rules:
+        - security-standards
+      commands:
+        - security-scan
+
+  content-creator:
+    description: Content creation, publishing, and visual production
+    packages:
+      skills:
+        - humanize
+        - linkedin-post-style
+        - html-presentation
+        - md-to-pdf
+        - concept-to-image
+        - concept-to-video
+      agents:
+        - content-strategist
+        - media-producer
+
+  researcher:
+    description: Academic research, literature survey, and analysis
+    packages:
+      skills:
+        - literature-review
+        - research-critique
+        - youtube-analysis
+        - tavily
+        - web-fetch
+      agents:
+        - research-analyst
+
+  business-analyst:
+    description: Idea validation, market sizing, and competitive analysis
+    packages:
+      skills:
+        - idea-validator
+        - market-analyzer
+        - competitive-analyzer
+        - feasibility-assessor
+      agents:
+        - idea-scout
+        - proposal-writer
 
   security:
     description: Core plus security auditing and enforcement

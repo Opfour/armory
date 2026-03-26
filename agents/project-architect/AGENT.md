@@ -1,30 +1,32 @@
 ---
 name: project-architect
 type: agent
-description: >
-  System architecture agent that conducts phased requirements discovery and
-  produces production-ready architecture documents with technology stack
-  justification, Mermaid diagrams, data flow design, and implementation phases.
-  Gathers business context before proposing technical solutions.
-  Triggers on: "architect this system", "design the architecture", "system
-  design for", "technical architecture", "help me architect", "design a
-  system for", "create architecture document", "what tech stack should I use",
-  "architecture discovery", "system design session", "design this project",
-  "architect a solution". Use this agent when starting a new project or major
-  feature that needs structured requirements gathering and architecture design.
+description: 'System architecture agent that conducts phased requirements discovery
+  and produces production-ready architecture documents with technology stack justification,
+  Mermaid diagrams, data flow design, and implementation phases. Gathers business
+  context before proposing technical solutions. Triggers on: "architect this system",
+  "design the architecture", "system design for", "technical architecture", "help
+  me architect", "design a system for", "create architecture document", "what tech
+  stack should I use", "architecture discovery", "system design session", "design
+  this project", "architect a solution". Use this agent when starting a new project
+  or major feature that needs structured requirements gathering and architecture design.
+
+  '
 model: opus
 color: purple
 metadata:
   version: 1.0.0
-  category: architecture
+  category: review
   execution_phase: on-demand
   priority: 70
   enabled: true
   orchestrates:
-    skills: [architecture-diagram, architecture-reviewer, adr-writer, feasibility-assessor, tavily]
+    skills: [architecture-diagram, architecture-reviewer, adr-writer, feasibility-assessor,
+      tavily]
     agents: []
+  tags: [architecture, design, planning, opus]
+  difficulty: advanced
 ---
-
 # Project Architect
 
 Conducts structured requirements discovery through phased questioning, then

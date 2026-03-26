@@ -1,24 +1,24 @@
 ---
 name: pre-edit-backup
 type: hook
-description: >
-  Creates a backup copy of any file before Claude Code edits it. Fires on PreToolUse
-  for the Edit tool, reads the file_path from the tool input JSON, and copies the
-  original file to ~/.claude/backups/ with a timestamped filename. Maintains a maximum
-  of 20 backup files by deleting the oldest when the limit is exceeded. Use this hook
-  when you want a local safety net for file edits that goes beyond git history.
+description: 'Creates a backup copy of any file before Claude Code edits it. Fires
+  on PreToolUse for the Edit tool, reads the file_path from the tool input JSON, and
+  copies the original file to ~/.claude/backups/ with a timestamped filename. Maintains
+  a maximum of 20 backup files by deleting the oldest when the limit is exceeded.
+  Use this hook when you want a local safety net for file edits that goes beyond git
+  history.
+
+  '
 metadata:
   version: 1.0.0
+  category: operations
+  tags: [backup, files, safety, pre-edit]
+  difficulty: beginner
 hook:
-  events:
-    - PreToolUse
-  matcher: "Edit"
-  handler:
-    type: command
-    command: "bash handler.sh"
-    timeout_ms: 5000
+  events: [PreToolUse]
+  matcher: Edit
+  handler: {type: command, command: bash handler.sh, timeout_ms: 5000}
 ---
-
 # pre-edit-backup
 
 Automatically backs up files before they are modified by the Edit tool.

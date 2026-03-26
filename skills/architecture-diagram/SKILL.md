@@ -1,17 +1,21 @@
 ---
 name: architecture-diagram
-description: >
-  Generate detailed layered architecture diagrams as self-contained HTML artifacts with inline
-  SVG icons, CSS Grid nested container layout, SVG path connection overlays, and color-coded
-  connection legends. Triggers on: "architecture diagram", "infra diagram", "system diagram",
-  "deployment diagram", "network diagram", "topology", "draw architecture", "visualize
-  architecture", "system topology", or any request for visual representation of system
-  components, containment hierarchy, and interconnections. For architecture reviews, audits,
-  critiques, or design assessments, use architecture-reviewer instead.
+description: 'Generate detailed layered architecture diagrams as self-contained HTML
+  artifacts with inline SVG icons, CSS Grid nested container layout, SVG path connection
+  overlays, and color-coded connection legends. Triggers on: "architecture diagram",
+  "infra diagram", "system diagram", "deployment diagram", "network diagram", "topology",
+  "draw architecture", "visualize architecture", "system topology", or any request
+  for visual representation of system components, containment hierarchy, and interconnections.
+  For architecture reviews, audits, critiques, or design assessments, use architecture-reviewer
+  instead.
+
+  '
 metadata:
   version: 1.1.0
+  category: review
+  tags: [architecture, diagram, visualization, svg]
+  difficulty: intermediate
 ---
-
 # Architecture Diagram Generator
 
 Produces self-contained `.html` files: inline SVG icons, CSS Grid nested zones, JS-driven SVG connection overlay with color-coded semantic line types and arrowhead markers. Zero external dependencies.

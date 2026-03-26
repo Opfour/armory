@@ -1,25 +1,30 @@
 ---
 name: eng-ops
 type: preset
-description: "DEPRECATED: Superseded by the release-captain and full-stack-builder agents. release-captain orchestrates ship-workflow, changelog-composer, pre-landing-review, dependency-audit with quality gates. full-stack-builder handles implementation with test-harness, code-refiner, and api-docs-generator. Use these agents instead."
+description: 'DEPRECATED: Superseded by the release-captain and full-stack-builder
+  agents. release-captain orchestrates ship-workflow, changelog-composer, pre-landing-review,
+  dependency-audit with quality gates. full-stack-builder handles implementation with
+  test-harness, code-refiner, and api-docs-generator. Use these agents instead.'
 metadata:
   version: 1.1.0
   status: deprecated
+  category: review
+  tags: [engineering, operations, ci-cd, release]
+  difficulty: intermediate
 preset:
   packages:
     skills:
-      - name: ship-workflow
-      - name: qa-systematic
-      - name: test-harness
-      - name: benchmark-runner
-      - name: migration-risk-analyzer
-      - name: estimate-calibrator
-      - name: engineering-retro
-      - name: debug-investigator
+    - {name: ship-workflow}
+    - {name: qa-systematic}
+    - {name: test-harness}
+    - {name: benchmark-runner}
+    - {name: migration-risk-analyzer}
+    - {name: estimate-calibrator}
+    - {name: engineering-retro}
+    - {name: debug-investigator}
   compatibility:
     platforms: [darwin, linux]
 ---
-
 # Eng Ops
 
 > **DEPRECATED** — The `release-captain` and `full-stack-builder` agents supersede this

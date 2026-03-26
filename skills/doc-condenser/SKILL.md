@@ -1,11 +1,15 @@
 ---
 name: doc-condenser
-description: "DEPRECATED: The base model handles document condensation and summarization natively at high quality. This skill no longer provides meaningful uplift. Retained for reference only."
+description: 'DEPRECATED: The base model handles document condensation and summarization
+  natively at high quality. This skill no longer provides meaningful uplift. Retained
+  for reference only.'
 metadata:
   version: 1.1.0
   status: deprecated
+  category: review
+  tags: [documentation, summarization, technical-writing, conciseness]
+  difficulty: beginner
 ---
-
 > **DEPRECATED** — Modern Claude models condense and summarize technical documentation
 > natively with comparable quality. The output format preferences encoded here (40% length
 > cap, tables over prose, paths first) are too generic to justify skill overhead. Retained

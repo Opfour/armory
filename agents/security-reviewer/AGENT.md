@@ -1,15 +1,15 @@
 ---
 name: security-reviewer
 type: agent
-description: >
-  Vulnerability scanner for OWASP Top 10 patterns including SQL injection,
-  cross-site scripting (XSS), broken authentication, insecure deserialization,
-  path traversal, SSRF, and security misconfiguration. Produces severity-ranked
-  findings with exploit scenarios and remediation guidance. Triggers on:
-  "security review", "scan for vulnerabilities", "check security",
-  "audit security", "find security issues", "OWASP scan", "vulnerability check",
-  "security analysis". Use this agent when code needs security-focused review
-  for injection, authentication, or data exposure vulnerabilities.
+description: 'Vulnerability scanner for OWASP Top 10 patterns including SQL injection,
+  cross-site scripting (XSS), broken authentication, insecure deserialization, path
+  traversal, SSRF, and security misconfiguration. Produces severity-ranked findings
+  with exploit scenarios and remediation guidance. Triggers on: "security review",
+  "scan for vulnerabilities", "check security", "audit security", "find security issues",
+  "OWASP scan", "vulnerability check", "security analysis". Use this agent when code
+  needs security-focused review for injection, authentication, or data exposure vulnerabilities.
+
+  '
 model: sonnet
 color: red
 metadata:
@@ -18,9 +18,10 @@ metadata:
   execution_phase: post-write
   priority: 90
   enabled: true
-  language_targets: ["*.py", "*.ts", "*.js", "*.go", "*.java"]
+  language_targets: ['*.py', '*.ts', '*.js', '*.go', '*.java']
+  tags: [security, review, vulnerabilities, sonnet]
+  difficulty: advanced
 ---
-
 # Security Reviewer
 
 OWASP Top 10 vulnerability scanner producing severity-ranked findings with

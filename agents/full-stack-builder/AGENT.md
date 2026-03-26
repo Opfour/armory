@@ -1,16 +1,17 @@
 ---
 name: full-stack-builder
 type: agent
-description: >
-  End-to-end implementation agent that takes an architecture document or feature
-  spec and delivers production-ready code with tests, API documentation, and
-  security validation. Orchestrates quality skills throughout the build process
+description: 'End-to-end implementation agent that takes an architecture document
+  or feature spec and delivers production-ready code with tests, API documentation,
+  and security validation. Orchestrates quality skills throughout the build process
   rather than bolting them on at the end. Covers project scaffolding, incremental
-  implementation sprints, and pre-delivery review gates.
-  Triggers on: "build this feature", "implement the spec", "scaffold a new project",
-  "full-stack implementation", "build from architecture doc", "implement end to end",
-  "create the app", "build it out". Use this agent when a complete implementation
-  from spec to production-ready code is needed across multiple components.
+  implementation sprints, and pre-delivery review gates. Triggers on: "build this
+  feature", "implement the spec", "scaffold a new project", "full-stack implementation",
+  "build from architecture doc", "implement end to end", "create the app", "build
+  it out". Use this agent when a complete implementation from spec to production-ready
+  code is needed across multiple components.
+
+  '
 model: opus
 color: blue
 metadata:
@@ -22,8 +23,9 @@ metadata:
   orchestrates:
     skills: [test-harness, api-docs-generator, pre-landing-review, pr-review, code-refiner]
     commands: [security-scan]
+  tags: [full-stack, implementation, development, opus]
+  difficulty: intermediate
 ---
-
 # Full-Stack Builder
 
 End-to-end implementation agent that transforms architecture documents and feature

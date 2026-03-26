@@ -1,21 +1,25 @@
 ---
 name: test-standards
 type: rule
-description: >
-  Defines testing standards including coverage thresholds (80% overall, 90% new code, 95% critical
-  paths), test naming conventions, structural patterns (arrange-act-assert), test categorization
-  (unit/integration/e2e), fixture management, mock boundaries, and CI gate requirements. Use this
-  rule when writing tests, setting up test infrastructure, reviewing test quality, or defining
-  coverage requirements. Triggers on "test coverage", "testing standards", "test requirements",
-  "coverage thresholds", "unit test", "integration test", "test structure", "arrange act assert",
+description: 'Defines testing standards including coverage thresholds (80% overall,
+  90% new code, 95% critical paths), test naming conventions, structural patterns
+  (arrange-act-assert), test categorization (unit/integration/e2e), fixture management,
+  mock boundaries, and CI gate requirements. Use this rule when writing tests, setting
+  up test infrastructure, reviewing test quality, or defining coverage requirements.
+  Triggers on "test coverage", "testing standards", "test requirements", "coverage
+  thresholds", "unit test", "integration test", "test structure", "arrange act assert",
   "mock boundaries", "test naming".
+
+  '
 metadata:
   version: 1.0.0
   scope: global
   applies_to:
-    languages: ["*"]
+    languages: ['*']
+  category: review
+  tags: [testing, coverage, pytest, ci]
+  difficulty: beginner
 ---
-
 # Test Standards
 
 Standards for test coverage, structure, naming, and CI enforcement across all repositories.

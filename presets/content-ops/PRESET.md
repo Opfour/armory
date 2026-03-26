@@ -1,25 +1,30 @@
 ---
 name: content-ops
 type: preset
-description: "DEPRECATED: Superseded by the content-strategist agent, which orchestrates content skills (humanize, linkedin-post-style, html-presentation, md-to-pdf, tavily, youtube-analysis) with per-channel adaptation, audience-aware tone, and automated quality passes. Use content-strategist agent instead."
+description: 'DEPRECATED: Superseded by the content-strategist agent, which orchestrates
+  content skills (humanize, linkedin-post-style, html-presentation, md-to-pdf, tavily,
+  youtube-analysis) with per-channel adaptation, audience-aware tone, and automated
+  quality passes. Use content-strategist agent instead.'
 metadata:
   version: 1.1.0
   status: deprecated
+  category: review
+  tags: [content, writing, publishing, workflow]
+  difficulty: intermediate
 preset:
   packages:
     skills:
-      - name: humanize
-      - name: linkedin-post-style
-      - name: manuscript-review
-      - name: manuscript-provenance
-      - name: changelog-composer
-      - name: md-to-pdf
-      - name: doc-condenser
-      - name: to-markdown
+    - {name: humanize}
+    - {name: linkedin-post-style}
+    - {name: manuscript-review}
+    - {name: manuscript-provenance}
+    - {name: changelog-composer}
+    - {name: md-to-pdf}
+    - {name: doc-condenser}
+    - {name: to-markdown}
   compatibility:
     platforms: [darwin, linux]
 ---
-
 # Content Ops
 
 > **DEPRECATED** — The `content-strategist` agent supersedes this preset. It creates and

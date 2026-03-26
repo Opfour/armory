@@ -1,22 +1,25 @@
 ---
 name: refactor
 type: command
-description: >
-  Code simplification workflow that identifies and cleans recently modified files.
-  Uses git diff to find changed files, analyzes cyclomatic complexity, detects
-  duplicated logic, simplifies nested conditionals, extracts helpers only when
-  justified, and verifies behavior preservation through tests. Triggers on:
-  "/refactor", "clean up recent changes", "simplify this code", "reduce
-  complexity", "clean before PR", "tidy up my code". Use this command when code
-  works correctly but needs simplification before committing or merging.
+description: 'Code simplification workflow that identifies and cleans recently modified
+  files. Uses git diff to find changed files, analyzes cyclomatic complexity, detects
+  duplicated logic, simplifies nested conditionals, extracts helpers only when justified,
+  and verifies behavior preservation through tests. Triggers on: "/refactor", "clean
+  up recent changes", "simplify this code", "reduce complexity", "clean before PR",
+  "tidy up my code". Use this command when code works correctly but needs simplification
+  before committing or merging.
+
+  '
 metadata:
   version: 1.0.0
+  category: development
+  tags: [refactoring, code-quality, simplification]
+  difficulty: intermediate
 command:
-  syntax: "/refactor [path]"
+  syntax: /refactor [path]
   handler: inline
   dependencies: []
 ---
-
 # Refactor Clean — Code Simplification Workflow
 
 When the user invokes `/refactor [path]`, execute this workflow exactly.

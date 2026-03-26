@@ -1,10 +1,22 @@
 ---
 name: html-presentation
-description: Convert any document, outline, or content into a polished, self-contained HTML slide presentation. Use this skill whenever the user wants to create a presentation, slide deck, pitch deck, or talk from a document, markdown file, outline, notes, or any textual content and wants the output as an HTML file (not PPTX). Also trigger when the user asks for an "HTML presentation", "web-based slides", "reveal.js deck", "browser presentation", or wants to convert a document into slides they can present from a browser. Supports two navigation modes - horizontal (left/right, Reveal.js-powered) and vertical scroll (top-to-bottom, keyboard/scroll navigation). Includes multiple visual themes (dark editorial, light minimal, corporate, hacker terminal). Consider asking the user for clarification on theme, navigation direction, and content structure if not already specified.
+description: Convert any document, outline, or content into a polished, self-contained
+  HTML slide presentation. Use this skill whenever the user wants to create a presentation,
+  slide deck, pitch deck, or talk from a document, markdown file, outline, notes,
+  or any textual content and wants the output as an HTML file (not PPTX). Also trigger
+  when the user asks for an "HTML presentation", "web-based slides", "reveal.js deck",
+  "browser presentation", or wants to convert a document into slides they can present
+  from a browser. Supports two navigation modes - horizontal (left/right, Reveal.js-powered)
+  and vertical scroll (top-to-bottom, keyboard/scroll navigation). Includes multiple
+  visual themes (dark editorial, light minimal, corporate, hacker terminal). Consider
+  asking the user for clarification on theme, navigation direction, and content structure
+  if not already specified.
 metadata:
   version: 1.1.0
+  category: visualization
+  tags: [slides, presentation, reveal-js, html]
+  difficulty: intermediate
 ---
-
 # HTML Presentation Skill
 
 Convert documents, outlines, or freeform content into polished, self-contained HTML slide presentations with keyboard and scroll navigation.

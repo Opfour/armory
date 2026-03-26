@@ -1,30 +1,31 @@
 ---
 name: project-planner
 type: agent
-description: >
-  Task breakdown and project planning agent that decomposes work into
-  dependency-mapped items with three-point estimates, milestones, and risk
-  tracking. Produces actionable project plans with parallelization flags
-  and realistic timelines calibrated against historical data.
-  Triggers on: "plan this project", "break down the work", "create a project
-  plan", "estimate the timeline", "task breakdown", "what are the milestones",
-  "decompose this into tasks", "how long will this take", "plan the
-  implementation", "scope this work". Use this agent when a structured project
-  plan with task dependencies, estimates, and risk assessment is needed rather
-  than ad-hoc task listing.
+description: 'Task breakdown and project planning agent that decomposes work into
+  dependency-mapped items with three-point estimates, milestones, and risk tracking.
+  Produces actionable project plans with parallelization flags and realistic timelines
+  calibrated against historical data. Triggers on: "plan this project", "break down
+  the work", "create a project plan", "estimate the timeline", "task breakdown", "what
+  are the milestones", "decompose this into tasks", "how long will this take", "plan
+  the implementation", "scope this work". Use this agent when a structured project
+  plan with task dependencies, estimates, and risk assessment is needed rather than
+  ad-hoc task listing.
+
+  '
 model: sonnet
 color: cyan
 metadata:
   version: 1.0.0
-  category: planning
+  category: development
   execution_phase: on-demand
   priority: 70
   enabled: true
   orchestrates:
     skills: [task-decomposer, estimate-calibrator, plan-review, engineering-retro]
     agents: []
+  tags: [planning, decomposition, estimation, sonnet]
+  difficulty: intermediate
 ---
-
 # Project Planner
 
 Task breakdown and project planning agent that produces dependency-mapped work

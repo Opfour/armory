@@ -1,19 +1,23 @@
 ---
 name: mcp-to-skill
-description: >
-  Convert MCP (Model Context Protocol) servers into on-demand skills to dramatically
-  reduce active context window usage. MCP tool schemas consume tokens on every turn
-  whether used or not; skills load only when needed. Analyzes MCP tool definitions,
-  classifies each tool by replacement strategy, and generates a complete skill package.
-  Use this skill whenever the user mentions: convert MCP, MCP to skill, reduce context
-  size, too many tools, tool token bloat, slim down MCPs, context window full, replace
-  MCP, MCP migration. Also trigger when the user has many active MCP servers and wants
-  to optimize context usage, asks about reducing token overhead from tool definitions,
-  or says my context is too big or running out of context when MCPs are active.
+description: 'Convert MCP (Model Context Protocol) servers into on-demand skills to
+  dramatically reduce active context window usage. MCP tool schemas consume tokens
+  on every turn whether used or not; skills load only when needed. Analyzes MCP tool
+  definitions, classifies each tool by replacement strategy, and generates a complete
+  skill package. Use this skill whenever the user mentions: convert MCP, MCP to skill,
+  reduce context size, too many tools, tool token bloat, slim down MCPs, context window
+  full, replace MCP, MCP migration. Also trigger when the user has many active MCP
+  servers and wants to optimize context usage, asks about reducing token overhead
+  from tool definitions, or says my context is too big or running out of context when
+  MCPs are active.
+
+  '
 metadata:
   version: 1.1.0
+  category: data
+  tags: [mcp, skill-conversion, context-optimization, token-reduction]
+  difficulty: intermediate
 ---
-
 # MCP-to-Skill Converter
 
 Convert MCP servers into on-demand skills. MCP tool schemas sit in the system prompt

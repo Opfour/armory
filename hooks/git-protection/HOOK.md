@@ -1,25 +1,24 @@
 ---
 name: git-protection
 type: hook
-description: >
-  Blocks dangerous git operations that can cause irreversible data loss. Intercepts
-  Bash tool invocations before execution and inspects the command string for destructive
-  patterns: force-push (push --force / push -f), hard reset (reset --hard), deletion of
-  main/master branches (branch -D main/master), and aggressive clean (clean -fd). Use
-  this hook when working in repositories where accidental destructive git commands could
-  wipe uncommitted work or rewrite shared history.
+description: 'Blocks dangerous git operations that can cause irreversible data loss.
+  Intercepts Bash tool invocations before execution and inspects the command string
+  for destructive patterns: force-push (push --force / push -f), hard reset (reset
+  --hard), deletion of main/master branches (branch -D main/master), and aggressive
+  clean (clean -fd). Use this hook when working in repositories where accidental destructive
+  git commands could wipe uncommitted work or rewrite shared history.
+
+  '
 metadata:
   version: 1.0.0
+  category: operations
+  tags: [git, branch-protection, safety, hooks]
+  difficulty: beginner
 hook:
-  events:
-    - PreToolUse
-  matcher: "Bash"
-  handler:
-    type: command
-    command: "bash handler.sh"
-    timeout_ms: 5000
+  events: [PreToolUse]
+  matcher: Bash
+  handler: {type: command, command: bash handler.sh, timeout_ms: 5000}
 ---
-
 # git-protection
 
 Prevents destructive git operations from executing through Claude Code.

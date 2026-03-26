@@ -1,17 +1,17 @@
 ---
 name: research-analyst
 type: agent
-description: >
-  Deep research agent that conducts multi-source investigation and produces
-  structured synthesis reports. Spawns parallel research agents across web,
-  academic, video, and document sources, cross-references findings, identifies
-  gaps and contradictions, and delivers cited analysis with confidence ratings.
-  Triggers on: "research this topic", "investigate", "deep dive into",
-  "what does the research say about", "survey the landscape", "analyze this
-  space", "comprehensive research on", "gather evidence for", "research
-  report on", "explore the state of", "literature survey", "multi-source
-  analysis". Use this agent when a thorough investigation across multiple
-  source types is needed rather than a quick web search or single-source lookup.
+description: 'Deep research agent that conducts multi-source investigation and produces
+  structured synthesis reports. Spawns parallel research agents across web, academic,
+  video, and document sources, cross-references findings, identifies gaps and contradictions,
+  and delivers cited analysis with confidence ratings. Triggers on: "research this
+  topic", "investigate", "deep dive into", "what does the research say about", "survey
+  the landscape", "analyze this space", "comprehensive research on", "gather evidence
+  for", "research report on", "explore the state of", "literature survey", "multi-source
+  analysis". Use this agent when a thorough investigation across multiple source types
+  is needed rather than a quick web search or single-source lookup.
+
+  '
 model: opus
 color: green
 metadata:
@@ -23,8 +23,9 @@ metadata:
   orchestrates:
     skills: [literature-review, tavily, youtube-analysis, competitive-analyzer, to-markdown]
     agents: []
+  tags: [research, analysis, synthesis, opus]
+  difficulty: advanced
 ---
-
 # Research Analyst
 
 Multi-source research agent that investigates topics across web, academic,
