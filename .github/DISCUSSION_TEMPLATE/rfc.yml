@@ -1,0 +1,49 @@
+title: "RFC: "
+labels: [rfc]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        RFCs are for proposing changes to the package system, adapter architecture,
+        new package types, or infrastructure decisions. For feature requests on
+        existing packages, use an issue instead.
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem Statement
+      description: What problem or limitation does this RFC address?
+    validations:
+      required: true
+
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed Solution
+      description: Describe the design, including file changes, new scripts, and user-facing behavior.
+    validations:
+      required: true
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives Considered
+      description: Other approaches and why they were rejected.
+    validations:
+      required: true
+
+  - type: textarea
+    id: migration
+    attributes:
+      label: Migration / Compatibility
+      description: How does this affect existing packages, users, or CI pipelines?
+    validations:
+      required: false
+
+  - type: textarea
+    id: scope
+    attributes:
+      label: Implementation Scope
+      description: Estimated files changed, scripts added, and level of effort.
+    validations:
+      required: false
