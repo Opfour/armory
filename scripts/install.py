@@ -624,6 +624,11 @@ def main() -> int:
         help="Install packages matching a profile from profiles.yaml",
     )
     parser.add_argument(
+        "--list-profiles",
+        action="store_true",
+        help="Show available install profiles and exit",
+    )
+    parser.add_argument(
         "--target",
         choices=["claude", "cursor", "codex", "gemini"],
         default="claude",
@@ -636,6 +641,24 @@ def main() -> int:
         help="Project directory for non-Claude targets (default: current directory)",
     )
     args = parser.parse_args()
+
+    if args.list_profiles:
+        profiles = load_profiles()
+        if not profiles:
+            console.print("[red]No profiles found in profiles.yaml[/red]")
+            return 1
+        table = Table(title="Install Profiles", show_lines=False)
+        table.add_column("Profile", style="cyan")
+        table.add_column("Description")
+        table.add_column("Includes", style="dim")
+        for name, profile in profiles.items():
+            includes = ", ".join(profile.get("includes", []))
+            desc = profile.get("description", "")
+            if profile.get("all"):
+                desc += " [bold](all packages)[/bold]"
+            table.add_row(name, desc, includes or "—")
+        console.print(table)
+        return 0
 
     if args.target != "claude":
         return install_to_platform(args.target, args.project_dir)
