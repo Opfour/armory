@@ -22,19 +22,19 @@ Intended for developers who treat AI coding agents as a serious part of their wo
 
 Orchestrator agents compose skills and other agents into multi-phase workflows. Each can run solo or be spawned by another agent via the Agent tool.
 
-| Agent                                              | Model  | Description                                                                                                     |
-| -------------------------------------------------- | ------ | --------------------------------------------------------------------------------------------------------------- |
-| [team-lead](agents/team-lead/)                     | opus   | Meta-orchestrator — decomposes multi-domain requests, delegates to specialized agents, synthesizes results       |
-| [codebase-auditor](agents/codebase-auditor/)       | sonnet | Unified quality assessment — spawns code-reviewer, security-reviewer, secret-scanner in parallel, merges report |
-| [project-architect](agents/project-architect/)     | opus   | Phased requirements discovery producing architecture documents with diagrams and tech stack justification        |
-| [project-planner](agents/project-planner/)         | sonnet | Task decomposition with dependency mapping, three-point estimates, milestone timelines, and risk logs            |
-| [research-analyst](agents/research-analyst/)       | opus   | Multi-source investigation with parallel agents across web, academic, video, and competitive sources             |
-| [idea-scout](agents/idea-scout/)                   | opus   | Business idea validation — Lean Canvas, parallel market/competitive/feasibility research, weighted scorecard     |
-| [full-stack-builder](agents/full-stack-builder/)   | opus   | End-to-end implementation from spec — scaffolding, sprints, quality passes, documentation, pre-delivery review   |
-| [release-captain](agents/release-captain/)         | sonnet | Ship lifecycle with quality gates — pre-flight, secret scan, changelog, version bump, PR creation               |
-| [proposal-writer](agents/proposal-writer/)         | opus   | Technical proposals with ROI calculations, three-tier pricing, and Problem-Agitate-Solve framing                |
-| [content-strategist](agents/content-strategist/)   | sonnet | Multi-channel content creation with per-channel adaptation and automated quality passes                          |
-| [media-producer](agents/media-producer/)           | sonnet | Visual and video format router — selects the right skill based on concept type and output needs                  |
+| Agent                                            | Model  | Description                                                                                                     |
+| ------------------------------------------------ | ------ | --------------------------------------------------------------------------------------------------------------- |
+| [team-lead](agents/team-lead/)                   | opus   | Meta-orchestrator — decomposes multi-domain requests, delegates to specialized agents, synthesizes results      |
+| [codebase-auditor](agents/codebase-auditor/)     | sonnet | Unified quality assessment — spawns code-reviewer, security-reviewer, secret-scanner in parallel, merges report |
+| [project-architect](agents/project-architect/)   | opus   | Phased requirements discovery producing architecture documents with diagrams and tech stack justification       |
+| [project-planner](agents/project-planner/)       | sonnet | Task decomposition with dependency mapping, three-point estimates, milestone timelines, and risk logs           |
+| [research-analyst](agents/research-analyst/)     | opus   | Multi-source investigation with parallel agents across web, academic, video, and competitive sources            |
+| [idea-scout](agents/idea-scout/)                 | opus   | Business idea validation — Lean Canvas, parallel market/competitive/feasibility research, weighted scorecard    |
+| [full-stack-builder](agents/full-stack-builder/) | opus   | End-to-end implementation from spec — scaffolding, sprints, quality passes, documentation, pre-delivery review  |
+| [release-captain](agents/release-captain/)       | sonnet | Ship lifecycle with quality gates — pre-flight, secret scan, changelog, version bump, PR creation               |
+| [proposal-writer](agents/proposal-writer/)       | opus   | Technical proposals with ROI calculations, three-tier pricing, and Problem-Agitate-Solve framing                |
+| [content-strategist](agents/content-strategist/) | sonnet | Multi-channel content creation with per-channel adaptation and automated quality passes                         |
+| [media-producer](agents/media-producer/)         | sonnet | Visual and video format router — selects the right skill based on concept type and output needs                 |
 
 ### Agents — Analyzers
 
@@ -189,24 +189,24 @@ Skills below are superseded by base model capabilities. They remain installable 
 
 Presets install curated bundles of passive packages (rules, hooks, commands) in one command. For active workflow orchestration, use agents instead.
 
-| Preset                                    | Packages                                          | Description                                                                                              |
-| ----------------------------------------- | ------------------------------------------------- | -------------------------------------------------------------------------------------------------------- |
-| [core](presets/core/)                     | 3 skills, 1 hook, 1 rule                          | Baseline review-commit lifecycle. Start here.                                                            |
-| [sec-strict](presets/sec-strict/)         | 5 skills, 3 agents, 2 rules, 2 hooks, 1 command   | Audit-grade security stack with codebase-auditor. Superset of `core`.                                    |
-| [python-strict](presets/python-strict/)   | 4 skills, 2 agents, 3 rules, 2 hooks, 2 commands  | Full Python enforcement — TDD, type checking, test coverage, security standards.                         |
-| [ai-builder](presets/ai-builder/)         | 6 skills                                          | AI/ML development toolkit — agent building, prompt engineering, GPU optimization, RAG auditing.           |
+| Preset                                  | Packages                                         | Description                                                                                     |
+| --------------------------------------- | ------------------------------------------------ | ----------------------------------------------------------------------------------------------- |
+| [core](presets/core/)                   | 3 skills, 1 hook, 1 rule                         | Baseline review-commit lifecycle. Start here.                                                   |
+| [sec-strict](presets/sec-strict/)       | 5 skills, 3 agents, 2 rules, 2 hooks, 1 command  | Audit-grade security stack with codebase-auditor. Superset of `core`.                           |
+| [python-strict](presets/python-strict/) | 4 skills, 2 agents, 3 rules, 2 hooks, 2 commands | Full Python enforcement — TDD, type checking, test coverage, security standards.                |
+| [ai-builder](presets/ai-builder/)       | 6 skills                                         | AI/ML development toolkit — agent building, prompt engineering, GPU optimization, RAG auditing. |
 
 ### Deprecated Presets
 
 Superseded by orchestrator agents that provide autonomous workflow orchestration instead of manual skill invocation.
 
-| Preset | Replacement |
-| ------ | ----------- |
-| ~~biz-validation~~ | `idea-scout` agent |
-| ~~media-craft~~ | `media-producer` agent |
-| ~~content-ops~~ | `content-strategist` agent |
-| ~~research~~ | `research-analyst` agent |
-| ~~eng-ops~~ | `release-captain` + `full-stack-builder` agents |
+| Preset             | Replacement                                     |
+| ------------------ | ----------------------------------------------- |
+| ~~biz-validation~~ | `idea-scout` agent                              |
+| ~~media-craft~~    | `media-producer` agent                          |
+| ~~content-ops~~    | `content-strategist` agent                      |
+| ~~research~~       | `research-analyst` agent                        |
+| ~~eng-ops~~        | `release-captain` + `full-stack-builder` agents |
 
 ---
 
@@ -342,15 +342,83 @@ uv run scripts/package.py hooks/git-protection            # produces .hook
 
 ---
 
-## Portability
+## Cross-Platform Adapters
 
-These packages are Claude-native (Claude Code and Claude.ai).
+Packages are authored as Claude Code-native definitions. The adapter generator transforms them into platform-specific formats for Cursor, OpenAI Codex, and Gemini CLI.
 
-Adapters for other agent surfaces are planned in `adapters/`:
+### Generate
 
-- **Cursor** — `.cursorrules`
-- **OpenAI Codex** — `AGENTS.md`
-- **Gemini CLI** — `GEMINI.md`
+```bash
+# All platforms
+uv run scripts/generate_adapters.py
+
+# Single platform
+uv run scripts/generate_adapters.py --platform cursor
+uv run scripts/generate_adapters.py --platform codex
+uv run scripts/generate_adapters.py --platform gemini
+
+# Filter by package type
+uv run scripts/generate_adapters.py --platform cursor --type skills --type rules
+
+# Preview without writing
+uv run scripts/generate_adapters.py --dry-run
+```
+
+Output lands in `adapters/{platform}/` (gitignored — generated, not source).
+
+### Platform Mapping
+
+| Armory Type   | Cursor                                   | Codex                 | Gemini                                  |
+| ------------- | ---------------------------------------- | --------------------- | --------------------------------------- |
+| **Skills**    | `.cursor/rules/{name}.mdc`               | `skills/AGENTS.md`    | `.gemini/skills/{name}/SKILL.md`        |
+| **Agents**    | `.cursor/rules/{name}.mdc`               | `agents/AGENTS.md`    | `.gemini/agents/{name}.md`              |
+| **Rules**     | `.cursor/rules/{name}.mdc` (alwaysApply) | `standards/AGENTS.md` | Sections in `GEMINI.md`                 |
+| **Commands**  | `.cursor/commands/{name}.md`             | `workflows/AGENTS.md` | `.gemini/commands/workflow/{name}.toml` |
+| **Hooks**     | —                                        | —                     | —                                       |
+| **Utilities** | —                                        | —                     | Wrapped as `.gemini/skills/`            |
+| **Presets**   | —                                        | —                     | —                                       |
+
+### Use with Cursor
+
+Copy the generated `.cursor/` directory into your project root:
+
+```bash
+uv run scripts/generate_adapters.py --platform cursor
+cp -r adapters/cursor/.cursor /path/to/your/project/
+```
+
+Rules with `alwaysApply: true` (project standards) load on every prompt. Skills and agents load when Cursor matches the description or glob pattern.
+
+### Use with OpenAI Codex
+
+Copy the generated Codex directory to your project root:
+
+```bash
+uv run scripts/generate_adapters.py --platform codex
+cp adapters/codex/AGENTS.md /path/to/your/project/
+cp -r adapters/codex/{standards,agents,workflows,skills} /path/to/your/project/
+```
+
+The root `AGENTS.md` is a condensed index under the 32 KiB budget. Full content is in subdirectory `AGENTS.md` files, loaded via Codex's hierarchical discovery when the working directory matches.
+
+### Use with Gemini CLI
+
+Copy the generated `.gemini/` directory into your project root:
+
+```bash
+uv run scripts/generate_adapters.py --platform gemini
+cp -r adapters/gemini/.gemini /path/to/your/project/
+```
+
+Skills are a near 1:1 copy (references, scripts, and assets included). Rules become sections in `GEMINI.md`. Commands are converted to TOML format. Agents are markdown files with cleaned frontmatter.
+
+### What's Lost
+
+Not all package types have equivalents on every platform:
+
+- **Hooks** have no equivalent on Cursor or Codex. Gemini has hooks but uses a different event model.
+- **Presets** require a dependency resolver that no target platform provides.
+- **Utilities** with executable scripts are skipped on Cursor and Codex (passive context only). Gemini wraps them as skills.
 
 ---
 
