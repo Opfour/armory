@@ -88,12 +88,10 @@ packages:
       and pricing comparison matrices, market positioning maps, and moat/defensibility assessment. Uses WebSearch to identify
       direct, indirect, and potential competitors across Product Hunt, G2, Capterra, and Crunchbase. Produces structured reports
       with force scorecards, feature gap analysis, pricing positioning, white space identification, and strategic recommendations.
-      Use this skill when you need to analyze competitors, compare product features, evaluate market positioning, assess competitive
-      threats, build a competitive matrix, run a Porter''s Five Forces analysis, identify competitive moats, map the competitive
-      landscape, evaluate market defensibility, or perform a pricing comparison. Triggers on: "competitive analysis", "competitor
-      comparison", "competitive landscape", "Porter''s Five Forces", "feature comparison matrix", "pricing analysis", "market
-      positioning", "moat assessment", "competitive threat", "defensibility analysis", "who are the competitors", "compare
-      competitors", "competitive intelligence", "rival analysis", "market rivalry", "competitive positioning map".'
+      Triggers on: "competitive analysis", "competitor comparison", "competitive landscape", "Porter''s Five Forces", "feature
+      comparison matrix", "pricing analysis", "market positioning", "moat assessment", "competitive threat", "defensibility
+      analysis", "compare competitors", "competitive intelligence". Use this skill when analyzing competitors, comparing features,
+      or evaluating market positioning and defensibility.'
     path: skills/competitive-analyzer
     source: https://github.com/Mathews-Tom/armory/blob/main/skills/competitive-analyzer/SKILL.md
     complements:
@@ -288,16 +286,12 @@ packages:
     source: https://github.com/Mathews-Tom/armory/blob/main/skills/linkedin-post-style/SKILL.md
   - name: literature-review
     version: 1.0.0
-    description: 'Systematic literature review workflow for surveying, synthesizing, and analyzing a body of academic research
-      across a defined topic or research question. Covers the full review lifecycle: defining scope and inclusion criteria,
-      searching academic databases (arXiv via arxiv-search utility, Semantic Scholar, Google Scholar via web search), screening
-      and filtering results, extracting structured findings, thematic synthesis, gap identification, and producing a structured
-      review document with proper citations. Use this skill when you need to survey a research area, map the landscape of
-      a topic, identify research gaps, build a bibliography, compare methodologies across studies, write a related work section,
-      conduct a systematic review, perform a scoping review, or synthesize findings across multiple papers. Triggers on: "literature
-      review", "survey the literature", "what has been published on", "research landscape", "related work", "systematic review",
-      "scoping review", "map the research on", "what do we know about", "synthesize the research", "compare approaches to",
-      "bibliography on", "find papers about", "review the state of the art", "what are the key papers on", "research gap analysis".'
+    description: 'Systematic literature review workflow for surveying, synthesizing, and analyzing academic research. Covers
+      the full lifecycle: scope definition, searching academic databases (arXiv, Semantic Scholar, Google Scholar), screening,
+      structured extraction, thematic synthesis, gap identification, and producing a cited review document. Triggers on: "literature
+      review", "survey the literature", "research landscape", "related work", "systematic review", "scoping review", "synthesize
+      the research", "bibliography on", "find papers about", "review the state of the art", "research gap analysis". Use this
+      skill when surveying a research area, mapping a topic landscape, identifying gaps, or writing a related work section.'
     path: skills/literature-review
     source: https://github.com/Mathews-Tom/armory/blob/main/skills/literature-review/SKILL.md
     complements:
@@ -396,17 +390,11 @@ packages:
     version: 1.3.0
     description: 'Evaluate Claude Code package quality across 6 weighted dimensions: frontmatter quality, trigger coverage,
       structural completeness, content depth, consistency and integrity, and CONTRIBUTING.md compliance. Covers all 7 package
-      types: skills, agents, hooks, rules, commands, utilities, and presets. Each type has type-specific quality signals that
-      refine D3 and D4 scoring. Produces scored audit reports with severity-classified findings and actionable recommendations.
-      Two modes: (1) Quick Audit — single package, full per-dimension report with weighted scoring; (2) Full Audit — all packages
-      in repo, comparative ranking table plus per-package summaries, optionally filtered by type. Triggers on: "evaluate package",
-      "evaluate skill", "audit agent quality", "score this hook", "rate this rule", "evaluate command", "check utility quality",
-      "assess preset", "package quality", "package audit", "audit skill quality", "score skill", "skill review", "check skill
-      completeness", "rate this skill", "skill quality check", "grade skill", "assess skill", "skill audit", "how good is
-      this skill", "SKILL.md feedback", "how good is this agent", "AGENT.md feedback". Use this skill when reviewing Claude
-      Code packages before deployment, comparing package quality across a repo, or diagnosing why a skill fails to activate
-      on relevant queries. NOT for evaluating or improving LLM prompts — use prompt-lab instead. NOT for reviewing pull requests
-      — use pr-review instead.'
+      types with type-specific signals. Produces scored audit reports with severity-classified findings. Two modes: Quick
+      Audit (single package, full report) and Full Audit (all packages, ranking table). Triggers on: "evaluate package", "audit
+      agent quality", "score this hook", "package quality", "package audit", "skill review", "skill quality check", "how good
+      is this skill", "AGENT.md feedback". Use this skill when reviewing packages before deployment or diagnosing activation
+      failures. NOT for LLM prompts (use prompt-lab) or PRs (use pr-review).'
     path: skills/package-evaluator
     source: https://github.com/Mathews-Tom/armory/blob/main/skills/package-evaluator/SKILL.md
   - name: plan-review

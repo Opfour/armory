@@ -7,17 +7,13 @@ description: >
   identify direct, indirect, and potential competitors across Product Hunt,
   G2, Capterra, and Crunchbase. Produces structured reports with force
   scorecards, feature gap analysis, pricing positioning, white space
-  identification, and strategic recommendations. Use this skill when you
-  need to analyze competitors, compare product features, evaluate market
-  positioning, assess competitive threats, build a competitive matrix,
-  run a Porter's Five Forces analysis, identify competitive moats, map
-  the competitive landscape, evaluate market defensibility, or perform
-  a pricing comparison. Triggers on: "competitive analysis", "competitor
-  comparison", "competitive landscape", "Porter's Five Forces", "feature
-  comparison matrix", "pricing analysis", "market positioning", "moat
-  assessment", "competitive threat", "defensibility analysis", "who are
-  the competitors", "compare competitors", "competitive intelligence",
-  "rival analysis", "market rivalry", "competitive positioning map".
+  identification, and strategic recommendations. Triggers on: "competitive
+  analysis", "competitor comparison", "competitive landscape", "Porter's
+  Five Forces", "feature comparison matrix", "pricing analysis", "market
+  positioning", "moat assessment", "competitive threat", "defensibility
+  analysis", "compare competitors", "competitive intelligence". Use this
+  skill when analyzing competitors, comparing features, or evaluating
+  market positioning and defensibility.
 metadata:
   version: 1.0.0
   complements:

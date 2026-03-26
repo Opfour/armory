@@ -3,22 +3,13 @@ name: package-evaluator
 description: >
   Evaluate Claude Code package quality across 6 weighted dimensions: frontmatter quality,
   trigger coverage, structural completeness, content depth, consistency and integrity,
-  and CONTRIBUTING.md compliance. Covers all 7 package types: skills, agents, hooks, rules,
-  commands, utilities, and presets. Each type has type-specific quality signals that refine
-  D3 and D4 scoring. Produces scored audit reports with severity-classified findings and
-  actionable recommendations. Two modes: (1) Quick Audit — single package, full per-dimension
-  report with weighted scoring; (2) Full Audit — all packages in repo, comparative ranking
-  table plus per-package summaries, optionally filtered by type. Triggers on: "evaluate
-  package", "evaluate skill", "audit agent quality", "score this hook", "rate this rule",
-  "evaluate command", "check utility quality", "assess preset", "package quality",
-  "package audit", "audit skill quality", "score skill", "skill review", "check skill
-  completeness", "rate this skill", "skill quality check", "grade skill", "assess skill",
-  "skill audit", "how good is this skill", "SKILL.md feedback", "how good is this agent",
-  "AGENT.md feedback". Use this skill when reviewing Claude Code packages before deployment,
-  comparing package quality across a repo, or diagnosing why a skill fails to activate on
-  relevant queries.
-  NOT for evaluating or improving LLM prompts — use prompt-lab instead.
-  NOT for reviewing pull requests — use pr-review instead.
+  and CONTRIBUTING.md compliance. Covers all 7 package types with type-specific signals.
+  Produces scored audit reports with severity-classified findings. Two modes: Quick Audit
+  (single package, full report) and Full Audit (all packages, ranking table). Triggers on:
+  "evaluate package", "audit agent quality", "score this hook", "package quality", "package
+  audit", "skill review", "skill quality check", "how good is this skill", "AGENT.md
+  feedback". Use this skill when reviewing packages before deployment or diagnosing
+  activation failures. NOT for LLM prompts (use prompt-lab) or PRs (use pr-review).
 metadata:
   version: 1.3.0
 ---

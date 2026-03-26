@@ -30,6 +30,9 @@ jobs:
           python scripts/generate_manifest.py
           git diff --exit-code manifest.yaml
 
+      - name: Validate adapter generation
+        run: python scripts/generate_adapters.py --validate
+
       - name: Package all items
         run: |
           mkdir -p dist

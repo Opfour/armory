@@ -237,6 +237,10 @@ class AdapterGenerator(ABC):
         """Return summary of files written."""
         return f"{self.platform}: {len(self._files_written)} files"
 
+    def validate(self) -> list[str]:
+        """Validate generated output. Returns list of error messages."""
+        return []
+
 
 # ---------------------------------------------------------------------------
 # Cursor adapter
@@ -296,6 +300,20 @@ class CursorAdapter(AdapterGenerator):
         body = inline_references(pkg)
 
         return "\n".join(fm_parts) + "\n\n" + body
+
+    def validate(self) -> list[str]:
+        errors: list[str] = []
+        for path in self._files_written:
+            if not path.exists() or path.suffix != ".mdc":
+                continue
+            content = path.read_text(encoding="utf-8")
+            if not content.startswith("---"):
+                errors.append(f"cursor: {path.name} missing YAML frontmatter")
+                continue
+            # Check alwaysApply is present and boolean-valued
+            if "alwaysApply:" not in content:
+                errors.append(f"cursor: {path.name} missing alwaysApply field")
+        return errors
 
 
 # ---------------------------------------------------------------------------
@@ -408,6 +426,25 @@ class CodexAdapter(AdapterGenerator):
             print(f"  codex: root AGENTS.md is {size:,} bytes ({pct:.0f}% of 32 KiB budget)", file=sys.stderr)
 
         self._write(self.output_dir / "AGENTS.md", root_content)
+
+    def validate(self) -> list[str]:
+        errors: list[str] = []
+        root = self.output_dir / "AGENTS.md"
+        if root.exists():
+            size = len(root.read_bytes())
+            if size > self.SIZE_BUDGET_BYTES:
+                errors.append(
+                    f"codex: root AGENTS.md exceeds 32 KiB budget ({size:,} bytes)"
+                )
+        # Verify subdirectory files exist
+        for subdir in ("standards", "agents", "workflows", "skills"):
+            sub_file = self.output_dir / subdir / "AGENTS.md"
+            if not sub_file.exists() and root.exists():
+                # Only flag if root references it
+                root_text = root.read_text(encoding="utf-8") if root.exists() else ""
+                if f"`{subdir}/AGENTS.md`" in root_text:
+                    errors.append(f"codex: {subdir}/AGENTS.md referenced but not found")
+        return errors
 
 
 # ---------------------------------------------------------------------------
@@ -532,6 +569,31 @@ class GeminiAdapter(AdapterGenerator):
         ]
         return "\n".join(lines)
 
+    def validate(self) -> list[str]:
+        errors: list[str] = []
+        claude_fields = {"type", "model", "color", "hook", "command", "utility", "preset"}
+        gemini_dir = self.output_dir / ".gemini"
+        skills_dir = gemini_dir / "skills"
+        if not skills_dir.is_dir():
+            return errors
+        for skill_dir in sorted(skills_dir.iterdir()):
+            skill_md = skill_dir / "SKILL.md"
+            if not skill_md.exists():
+                continue
+            content = skill_md.read_text(encoding="utf-8")
+            try:
+                fm = parse_frontmatter(content)
+            except (ValueError, Exception):
+                errors.append(f"gemini: {skill_dir.name}/SKILL.md has invalid frontmatter")
+                continue
+            if isinstance(fm, dict):
+                leaked = claude_fields & set(fm.keys())
+                if leaked:
+                    errors.append(
+                        f"gemini: {skill_dir.name}/SKILL.md has Claude-specific fields: {leaked}"
+                    )
+        return errors
+
 
 # ---------------------------------------------------------------------------
 # Helpers
@@ -586,6 +648,11 @@ def main() -> int:
         default=REPO_ROOT / "adapters",
         help="Output root directory (default: adapters/)",
     )
+    parser.add_argument(
+        "--validate",
+        action="store_true",
+        help="Validate generated output after generation.",
+    )
     args = parser.parse_args()
 
     # Load packages
@@ -602,6 +669,7 @@ def main() -> int:
     platforms = [args.platform] if args.platform else list(_ADAPTERS.keys())
 
     # Generate
+    adapters: list[AdapterGenerator] = []
     for platform in platforms:
         adapter_cls = _ADAPTERS[platform]
         platform_dir = args.output_dir / platform
@@ -609,6 +677,19 @@ def main() -> int:
         print(f"\n{'[dry-run] ' if args.dry_run else ''}Generating {platform}...")
         adapter.generate(packages)
         print(f"  {adapter.report()}")
+        adapters.append(adapter)
+
+    # Validate
+    if args.validate and not args.dry_run:
+        all_errors: list[str] = []
+        for adapter in adapters:
+            all_errors.extend(adapter.validate())
+        if all_errors:
+            print(f"\nValidation FAILED: {len(all_errors)} error(s):", file=sys.stderr)
+            for err in all_errors:
+                print(f"  {err}", file=sys.stderr)
+            return 1
+        print(f"\nValidation passed for {len(adapters)} platform(s)")
 
     return 0
 
