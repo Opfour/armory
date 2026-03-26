@@ -14,3 +14,4 @@ dev = [
 
 [project.scripts]
 armory-install = "scripts.install:main"
+armory-search = "scripts.search:main"
