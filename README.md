@@ -378,39 +378,63 @@ Output lands in `adapters/{platform}/` (gitignored — generated, not source).
 | **Utilities** | —                                        | —                     | Wrapped as `.gemini/skills/`            |
 | **Presets**   | —                                        | —                     | —                                       |
 
-### Use with Cursor
+### Quick Install (no Python required)
 
-Copy the generated `.cursor/` directory into your project root:
+Download pre-built adapter packages from the latest release:
+
+```bash
+# Cursor
+npx @anthropic-armory/installer --target cursor
+
+# Codex
+npx @anthropic-armory/installer --target codex
+
+# Gemini
+npx @anthropic-armory/installer --target gemini --dir /path/to/project
+```
+
+Or download directly from [GitHub Releases](../../releases):
+
+```bash
+# Cursor — extract .cursor/ into your project root
+curl -sL https://github.com/Mathews-Tom/armory/releases/download/latest/armory-cursor.tar.gz | tar -xz
+
+# Codex — extract AGENTS.md + subdirectories into project root
+curl -sL https://github.com/Mathews-Tom/armory/releases/download/latest/armory-codex.tar.gz | tar -xz
+
+# Gemini — extract .gemini/ into your project root
+curl -sL https://github.com/Mathews-Tom/armory/releases/download/latest/armory-gemini.tar.gz | tar -xz
+```
+
+### Install via Python (with TUI)
+
+The Python installer supports all targets with `--target`:
+
+```bash
+uv run scripts/install.py --target cursor --project-dir /path/to/project
+uv run scripts/install.py --target codex --project-dir /path/to/project
+uv run scripts/install.py --target gemini --project-dir /path/to/project
+```
+
+### Generate Locally
+
+Generate adapter output from source (requires Python 3.12):
 
 ```bash
 uv run scripts/generate_adapters.py --platform cursor
-cp -r adapters/cursor/.cursor /path/to/your/project/
-```
-
-Rules with `alwaysApply: true` (project standards) load on every prompt. Skills and agents load when Cursor matches the description or glob pattern.
-
-### Use with OpenAI Codex
-
-Copy the generated Codex directory to your project root:
-
-```bash
 uv run scripts/generate_adapters.py --platform codex
-cp adapters/codex/AGENTS.md /path/to/your/project/
-cp -r adapters/codex/{standards,agents,workflows,skills} /path/to/your/project/
-```
-
-The root `AGENTS.md` is a condensed index under the 32 KiB budget. Full content is in subdirectory `AGENTS.md` files, loaded via Codex's hierarchical discovery when the working directory matches.
-
-### Use with Gemini CLI
-
-Copy the generated `.gemini/` directory into your project root:
-
-```bash
 uv run scripts/generate_adapters.py --platform gemini
-cp -r adapters/gemini/.gemini /path/to/your/project/
 ```
 
-Skills are a near 1:1 copy (references, scripts, and assets included). Rules become sections in `GEMINI.md`. Commands are converted to TOML format. Agents are markdown files with cleaned frontmatter.
+Output lands in `adapters/{platform}/` (gitignored — generated, not source).
+
+### Platform Details
+
+**Cursor**: Rules with `alwaysApply: true` (project standards) load on every prompt. Skills and agents load when Cursor matches the description or glob pattern.
+
+**Codex**: The root `AGENTS.md` is a condensed index under the 32 KiB budget. Full content is in subdirectory `AGENTS.md` files, loaded via Codex's hierarchical discovery.
+
+**Gemini**: Skills are a near 1:1 copy (references, scripts, and assets included). Rules become sections in `GEMINI.md`. Commands are converted to TOML format.
 
 ### What's Lost
 
