@@ -1,0 +1,14 @@
+{
+  "name": "@anthropic-armory/installer",
+  "version": "0.1.0",
+  "description": "Cross-platform installer for armory AI agent packages — Cursor, Codex, and Gemini",
+  "license": "MIT",
+  "repository": "https://github.com/Mathews-Tom/armory",
+  "bin": {
+    "armory-install": "bin/install.js"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "keywords": ["claude-code", "cursor", "codex", "gemini", "ai-agent", "skills"]
+}
