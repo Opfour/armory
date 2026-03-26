@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Questions & Discussion
+    url: https://github.com/Mathews-Tom/armory/discussions
+    about: Ask questions, share ideas, or discuss approaches in GitHub Discussions.
+  - name: RFC / Design Proposal
+    url: https://github.com/Mathews-Tom/armory/discussions/new?category=rfcs
+    about: Propose changes to the package system, adapter architecture, or new package types.

@@ -1,0 +1,72 @@
+name: Package Request
+description: Request a new skill, agent, hook, rule, command, utility, or preset
+labels: [package-request]
+body:
+  - type: dropdown
+    id: package-type
+    attributes:
+      label: Package Type
+      options:
+        - Skill
+        - Agent
+        - Hook
+        - Rule
+        - Command
+        - Utility
+        - Preset
+    validations:
+      required: true
+
+  - type: input
+    id: name
+    attributes:
+      label: Suggested Name
+      description: kebab-case, max 64 characters
+      placeholder: e.g. kubernetes-ops
+    validations:
+      required: true
+
+  - type: dropdown
+    id: category
+    attributes:
+      label: Category
+      options:
+        - development
+        - review
+        - security
+        - research
+        - content
+        - business
+        - visualization
+        - operations
+        - data
+    validations:
+      required: true
+
+  - type: textarea
+    id: description
+    attributes:
+      label: What should this package do?
+      description: Describe the workflow, key operations, and when it should activate.
+    validations:
+      required: true
+
+  - type: textarea
+    id: triggers
+    attributes:
+      label: Example trigger phrases
+      description: What would a user type to activate this package?
+      placeholder: |
+        "deploy to kubernetes"
+        "check my k8s config"
+        "kubernetes troubleshoot"
+    validations:
+      required: true
+
+  - type: textarea
+    id: context
+    attributes:
+      label: Additional context
+      description: Existing tools, references, or related packages.
+    validations:
+      required: false
