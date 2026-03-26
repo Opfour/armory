@@ -37,6 +37,7 @@ htmlcov/
 playwright-report/
 
 # ── Generated output ──────────────────────────
+adapters/
 *.pdf
 *.png
 *.svg
