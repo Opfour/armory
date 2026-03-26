@@ -30,8 +30,17 @@ jobs:
           python scripts/generate_manifest.py
           git diff --exit-code manifest.yaml
 
-      - name: Validate adapter generation
+      - name: Generate and validate adapters
         run: python scripts/generate_adapters.py --validate
+
+      - name: Package adapter artifacts
+        run: |
+          mkdir -p dist
+          cd adapters/cursor && tar -czf ../../dist/armory-cursor.tar.gz .cursor && cd ../..
+          cd adapters/codex && tar -czf ../../dist/armory-codex.tar.gz AGENTS.md standards agents workflows skills && cd ../..
+          cd adapters/gemini && tar -czf ../../dist/armory-gemini.tar.gz .gemini && cd ../..
+          echo "Adapter artifacts:"
+          ls -lh dist/armory-*.tar.gz
 
       - name: Package all items
         run: |

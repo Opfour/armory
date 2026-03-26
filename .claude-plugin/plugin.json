@@ -1,0 +1,24 @@
+{
+  "name": "armory",
+  "version": "0.2.0",
+  "description": "Production-grade skills, agents, hooks, rules, and commands for Claude Code — 92 packages across 7 types",
+  "author": {
+    "name": "Mathews-Tom",
+    "url": "https://github.com/Mathews-Tom"
+  },
+  "homepage": "https://github.com/Mathews-Tom/armory",
+  "repository": "https://github.com/Mathews-Tom/armory",
+  "license": "MIT",
+  "keywords": [
+    "skills",
+    "agents",
+    "code-review",
+    "security",
+    "testing",
+    "architecture",
+    "research",
+    "content",
+    "hooks",
+    "rules"
+  ]
+}

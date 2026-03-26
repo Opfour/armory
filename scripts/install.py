@@ -5,6 +5,7 @@ from __future__ import annotations
 import shutil
 import stat
 import sys
+import tempfile
 from dataclasses import dataclass
 from enum import Enum
 from pathlib import Path
@@ -546,6 +547,58 @@ def filter_by_profile(
 
 
 # ---------------------------------------------------------------------------
+# Platform adapter installation
+# ---------------------------------------------------------------------------
+
+_PLATFORM_COPY_MAP: dict[str, str] = {
+    "cursor": ".cursor",
+    "gemini": ".gemini",
+}
+
+
+def install_to_platform(target: str, project_dir: Path) -> int:
+    """Generate adapter output and copy to project directory for non-Claude targets."""
+    from scripts.generate_adapters import _ADAPTERS, load_packages
+
+    packages = load_packages()
+    total = sum(len(pkgs) for pkgs in packages.values())
+    if total == 0:
+        console.print("[red]No packages found.[/red]")
+        return 1
+
+    adapter_cls = _ADAPTERS[target]
+    tmp_dir = tempfile.mkdtemp(prefix="armory-adapter-")
+    tmp_path = Path(tmp_dir)
+
+    try:
+        adapter = adapter_cls(tmp_path, dry_run=False)
+        adapter.generate(packages)
+
+        if target in _PLATFORM_COPY_MAP:
+            src = tmp_path / _PLATFORM_COPY_MAP[target]
+            dst = project_dir / _PLATFORM_COPY_MAP[target]
+            if dst.exists():
+                shutil.rmtree(dst)
+            shutil.copytree(src, dst)
+        elif target == "codex":
+            # Copy AGENTS.md and subdirectories to project root
+            for item in tmp_path.iterdir():
+                dst = project_dir / item.name
+                if item.is_dir():
+                    if dst.exists():
+                        shutil.rmtree(dst)
+                    shutil.copytree(item, dst)
+                else:
+                    shutil.copy2(item, dst)
+
+        console.print(f"[green]Installed {target} adapter to {project_dir}[/green]")
+        console.print(f"  {adapter.report()}")
+        return 0
+    finally:
+        shutil.rmtree(tmp_dir, ignore_errors=True)
+
+
+# ---------------------------------------------------------------------------
 # CLI
 # ---------------------------------------------------------------------------
 
@@ -570,7 +623,22 @@ def main() -> int:
         "--profile",
         help="Install packages matching a profile from profiles.yaml",
     )
+    parser.add_argument(
+        "--target",
+        choices=["claude", "cursor", "codex", "gemini"],
+        default="claude",
+        help="Target platform (default: claude)",
+    )
+    parser.add_argument(
+        "--project-dir",
+        type=Path,
+        default=Path.cwd(),
+        help="Project directory for non-Claude targets (default: current directory)",
+    )
     args = parser.parse_args()
+
+    if args.target != "claude":
+        return install_to_platform(args.target, args.project_dir)
 
     console.print(Panel("armory installer", border_style="blue"))
 
