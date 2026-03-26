@@ -154,12 +154,21 @@ def collect_packages(pkg_type: PackageType, repo: str) -> list[dict[str, Any]]:
         if extractor:
             entry.update(extractor(meta))
 
-        # Optional complements from metadata
+        # Optional metadata fields: complements, tags, category, difficulty
         metadata = meta.get("metadata")
         if isinstance(metadata, dict):
             complements = metadata.get("complements")
             if isinstance(complements, list) and complements:
                 entry["complements"] = complements
+            tags = metadata.get("tags")
+            if isinstance(tags, list) and tags:
+                entry["tags"] = tags
+            category = metadata.get("category")
+            if isinstance(category, str) and category:
+                entry["category"] = category
+            difficulty = metadata.get("difficulty")
+            if isinstance(difficulty, str) and difficulty:
+                entry["difficulty"] = difficulty
 
         entries.append(entry)
 
