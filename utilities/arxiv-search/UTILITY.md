@@ -1,26 +1,24 @@
 ---
 name: arxiv-search
 type: utility
-description: >
-  Searches arXiv for academic papers by keyword, author, title, or category and
-  outputs structured JSON with full metadata (title, authors, abstract, dates,
+description: 'Searches arXiv for academic papers by keyword, author, title, or category
+  and outputs structured JSON with full metadata (title, authors, abstract, dates,
   categories, DOI, PDF URL). Supports field-prefixed queries (au:, ti:, abs:, cat:),
   sorting by relevance/date, result limits, and direct ID lookup. Use this utility
   when you need to discover research papers, build a reading list, gather references
-  for a literature review, fetch paper metadata by arXiv ID, or survey recent
-  publications in a research area. Complements research-critique (per-paper analysis)
-  and literature-review (multi-paper synthesis).
+  for a literature review, fetch paper metadata by arXiv ID, or survey recent publications
+  in a research area. Complements research-critique (per-paper analysis) and literature-review
+  (multi-paper synthesis).
+
+  '
 metadata:
   version: 1.0.0
-  complements:
-    - literature-review
-    - research-critique
-utility:
-  runtime: python
-  entry_point: scripts/arxiv_search.py
-  executable: true
+  complements: [literature-review, research-critique]
+  category: review
+  tags: [arxiv, academic, papers, search]
+  difficulty: beginner
+utility: {runtime: python, entry_point: scripts/arxiv_search.py, executable: true}
 ---
-
 # arxiv-search
 
 Search arXiv and retrieve structured paper metadata.

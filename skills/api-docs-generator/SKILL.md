@@ -1,18 +1,21 @@
 ---
 name: api-docs-generator
-description: >
-  Audits and enhances API documentation for FastAPI and REST endpoints. Identifies
-  missing descriptions, incomplete response codes, missing examples, and generates
-  enhanced docstrings, Pydantic model examples, and OpenAPI spec improvements.
-  Triggers on: "generate API docs", "document this API", "OpenAPI for",
-  "add examples to", "improve docstrings", "API documentation audit", "FastAPI docs",
-  "document endpoints", "API reference", "swagger docs", "REST API docs",
-  "endpoint documentation", "response documentation".
-  Use this skill when API endpoints need documentation or documentation audit.
+description: 'Audits and enhances API documentation for FastAPI and REST endpoints.
+  Identifies missing descriptions, incomplete response codes, missing examples, and
+  generates enhanced docstrings, Pydantic model examples, and OpenAPI spec improvements.
+  Triggers on: "generate API docs", "document this API", "OpenAPI for", "add examples
+  to", "improve docstrings", "API documentation audit", "FastAPI docs", "document
+  endpoints", "API reference", "swagger docs", "REST API docs", "endpoint documentation",
+  "response documentation". Use this skill when API endpoints need documentation or
+  documentation audit.
+
+  '
 metadata:
   version: 1.1.0
+  category: review
+  tags: [api, documentation, openapi, fastapi]
+  difficulty: intermediate
 ---
-
 # API Docs Generator
 
 Audits API endpoint documentation for completeness, generates enhanced docstrings with

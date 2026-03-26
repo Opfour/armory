@@ -1,51 +1,76 @@
 ---
 name: skill-library
 description: >
-  Agent-native catalog and installer for armory skills. Browse, search, install,
-  update, sync, and remove skills from the armory collection without leaving your
-  agent session. Triggers on: "list available skills", "install skill", "pull skill",
-  "what skills are available", "update my skills", "search skills for",
-  "skill catalog", "armory list", "armory install", "armory search",
-  "remove skill", "uninstall skill", "/library list", "/library use",
-  "/library remove", "show me armory skills", "get the architecture-reviewer
-  skill", "do I have the latest skills". Use this skill when the user wants to
-  discover, install, update, or remove armory skills from within an agent session.
+  Agent-native catalog and installer for armory packages across all 7 types: skills,
+  agents, hooks, rules, commands, utilities, and presets. Browse, search, install,
+  update, sync, and remove packages without leaving your agent session. Supports
+  type filtering and profile-based bundles. Triggers on: "list available packages",
+  "install skill", "install agent", "pull skill", "what packages are available",
+  "update my skills", "search packages for", "package catalog", "armory list",
+  "armory install", "armory search", "remove skill", "/library list", "/library use",
+  "/library remove", "/library profiles", "show me armory packages". Use this skill
+  when discovering, installing, updating, or removing armory packages within a session.
 metadata:
-  version: 1.0.0
+  version: 2.0.0
+  category: operations
+  tags: [armory, catalog, install, package-management, discovery]
+  difficulty: beginner
 ---
+# Package Library
 
-# Skill Library
-
-Agent-native catalog and installer for armory skills. Provides browsing, searching, installing, updating, syncing, and removing skills directly within an agent session.
+Agent-native catalog and installer for all armory package types. Provides browsing, searching, installing, updating, syncing, and removing packages directly within an agent session.
 
 ## Variables
 
 - **ARMORY_REPO**: `Mathews-Tom/armory`
 - **ARMORY_BRANCH**: `main`
 - **ARMORY_CATALOG_URL**: `https://raw.githubusercontent.com/{ARMORY_REPO}/{ARMORY_BRANCH}/manifest.yaml`
-- **DEFAULT_INSTALL_DIR**: `~/.claude/skills/`
+- **DEFAULT_INSTALL_DIR**: `~/.claude/`
 - **CATALOG_CACHE_PATH**: `/tmp/armory-manifest.yaml`
 - **CATALOG_CACHE_TTL**: `600` (seconds)
 
+## Supported Package Types
+
+| Type    | Install Target            | Method          |
+| ------- | ------------------------- | --------------- |
+| skill   | `~/.claude/skills/`       | Copy directory  |
+| agent   | `~/.claude/agents/`       | Copy directory  |
+| hook    | `~/.claude/hooks/`        | Copy directory  |
+| rule    | `~/.claude/rules/`        | Body-only file  |
+| command | `~/.claude/commands/`     | Body-only file  |
+| utility | `~/.claude/utilities/`    | Copy + chmod +x |
+| preset  | `~/.claude/presets/`      | Copy directory  |
+
 ## Command Reference
 
-| Command                     | Cookbook             | Purpose                                                               |
-| --------------------------- | -------------------- | --------------------------------------------------------------------- |
-| `/library list`             | `cookbook/list.md`   | Show all skills with version, installed status, update available      |
-| `/library use <name>`       | `cookbook/use.md`    | Pull a skill from armory into `~/.claude/skills/`                     |
-| `/library search <keyword>` | `cookbook/search.md` | Keyword search across skill names and descriptions                    |
-| `/library sync`             | `cookbook/sync.md`   | Re-pull all installed skills that have updates                        |
-| `/library info <name>`      | `cookbook/info.md`   | Show full detail for a skill                                          |
-| `/library update`           | `cookbook/update.md` | Check all installed skills for available version bumps (dry-run sync) |
-| `/library remove <name>`    | `cookbook/remove.md` | Remove an installed skill from `~/.claude/skills/`                    |
+| Command                              | Cookbook              | Purpose                                                                  |
+| ------------------------------------ | -------------------- | ------------------------------------------------------------------------ |
+| `/library list`                      | `cookbook/list.md`    | Show all packages with type, version, installed status, update available |
+| `/library list --type <type>`        | `cookbook/list.md`    | Filter listing by package type (skill, agent, hook, rule, etc.)         |
+| `/library use <name>`                | `cookbook/use.md`     | Pull a package from armory (auto-detects type from manifest)            |
+| `/library search <keyword>`          | `cookbook/search.md`  | Keyword search across all package types, names, and descriptions        |
+| `/library search --category <name>`  | `cookbook/search.md`  | Filter search by category (development, review, security, etc.)         |
+| `/library sync`                      | `cookbook/sync.md`    | Re-pull all installed packages that have updates                        |
+| `/library info <name>`               | `cookbook/info.md`    | Show full detail for a package (type, version, tags, category)          |
+| `/library update`                    | `cookbook/update.md`  | Check all installed packages for version bumps (dry-run sync)           |
+| `/library remove <name>`             | `cookbook/remove.md`  | Remove an installed package                                              |
+| `/library profiles`                  | `cookbook/profiles.md`| Show available install profiles with package counts                      |
 
 ## Cookbook Dispatch
 
 User commands are routed to the corresponding cookbook file based on the subcommand. When a `/library` command is received, extract the subcommand (the first token after `/library`) and load the matching cookbook file from the `cookbook/` directory relative to this skill. The cookbook file contains the full execution procedure for that operation.
 
-For example, `/library use commit-standards` dispatches to `cookbook/use.md` with `commit-standards` as the skill name argument. `/library list` dispatches to `cookbook/list.md` with no arguments.
+For example, `/library use commit-standards` dispatches to `cookbook/use.md` with `commit-standards` as the package name argument. `/library list --type agent` dispatches to `cookbook/list.md` with `--type agent` as the filter.
 
 If the subcommand does not match any known cookbook, report the error and list the valid subcommands from the table above.
+
+## Type Detection
+
+When `/library use <name>` is called, determine the package type by searching all sections of the manifest (`packages.skills`, `packages.agents`, `packages.hooks`, etc.). The first section containing a matching `name` entry determines the type. Use the type to:
+
+1. Resolve the correct source path: `{type_dir}/{name}/`
+2. Determine the install target: `~/.claude/{install_subdir}/`
+3. Choose the install method: directory copy or body-only extraction
 
 ## Behavioral Notes
 
@@ -53,3 +78,4 @@ If the subcommand does not match any known cookbook, report the error and list t
 - Fetch uses a 3-tier fallback chain: sparse checkout, then `gh api`, then `curl`. Attempt each in order; proceed to the next only on failure.
 - Cache lives in `/tmp/` with a 10-minute TTL. A missing cache file is treated as expired (triggers a re-fetch), not as an error.
 - The catalog is read from `manifest.yaml` on GitHub (at `ARMORY_CATALOG_URL`), not from a separate catalog file. This is the same manifest format used by the armory repository.
+- All package type sections share the same entry format: `name`, `version`, `description`, `path`, `source`, plus optional `tags`, `category`, `difficulty`.

@@ -1,10 +1,19 @@
 ---
 name: lightpanda-browser
-description: Lightweight headless browser automation using Lightpanda as the backend engine with agent-browser CLI. 9x lower memory, 11x faster than Chromium. Use for web scraping, DOM interaction, data extraction, form automation, and API testing where visual rendering is not required. Triggers on "lightpanda", "lightweight browser", "fast headless browser", "headless scraping", "low memory browser", "browser without rendering", "is lightpanda faster than chromium", "which headless browser uses less memory", "how do I scrape without chromium", or any browser automation task where speed and resource efficiency matter more than visual fidelity.
+description: Lightweight headless browser automation using Lightpanda as the backend
+  engine with agent-browser CLI. 9x lower memory, 11x faster than Chromium. Use for
+  web scraping, DOM interaction, data extraction, form automation, and API testing
+  where visual rendering is not required. Triggers on "lightpanda", "lightweight browser",
+  "fast headless browser", "headless scraping", "low memory browser", "browser without
+  rendering", "is lightpanda faster than chromium", "which headless browser uses less
+  memory", "how do I scrape without chromium", or any browser automation task where
+  speed and resource efficiency matter more than visual fidelity.
 metadata:
   version: 1.0.0
+  category: visualization
+  tags: [browser, headless, scraping, lightweight]
+  difficulty: beginner
 ---
-
 # Lightpanda Browser — Fast Headless Automation
 
 Headless browser automation using [Lightpanda](https://github.com/lightpanda-io/browser) as the backend engine, controlled through the `agent-browser` CLI via CDP (Chrome DevTools Protocol).

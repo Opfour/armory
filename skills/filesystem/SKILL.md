@@ -1,19 +1,22 @@
 ---
 name: filesystem
-description: >
-  File and directory operations using Claude Code built-in tools — replaces the
-  Filesystem MCP server. Maps all 11 MCP tools to native equivalents: Read, Write,
+description: 'File and directory operations using Claude Code built-in tools — replaces
+  the Filesystem MCP server. Maps all 11 MCP tools to native equivalents: Read, Write,
   Edit, Glob, Grep, and Bash. Covers file reading with line ranges, parallel reads,
   pattern-based file search, regex content search, directory listing, tree traversal,
-  move/copy/rename, and metadata inspection. Trigger phrases: "read this file",
-  "write to file", "create a file", "edit file", "find files matching", "search for
-  text in files", "list directory", "show directory tree", "move file", "rename file",
+  move/copy/rename, and metadata inspection. Trigger phrases: "read this file", "write
+  to file", "create a file", "edit file", "find files matching", "search for text
+  in files", "list directory", "show directory tree", "move file", "rename file",
   "copy file", "file info", "find all Python files", "search codebase for". Use this
   skill when performing file operations, navigating codebases, or managing directories.
+
+  '
 metadata:
   version: 1.1.0
+  category: content
+  tags: [files, directories, search, navigation]
+  difficulty: beginner
 ---
-
 # Filesystem
 
 All file and directory operations use Claude Code's built-in tools. No MCP server

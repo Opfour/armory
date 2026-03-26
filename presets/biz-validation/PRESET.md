@@ -1,21 +1,26 @@
 ---
 name: biz-validation
-description: "DEPRECATED: Superseded by the idea-scout agent, which orchestrates the same skills (market-analyzer, competitive-analyzer, feasibility-assessor, idea-validator) with parallel research delegation, weighted scoring, and GO/CAUTION/NO-GO verdicts. Use idea-scout agent instead."
+description: 'DEPRECATED: Superseded by the idea-scout agent, which orchestrates the
+  same skills (market-analyzer, competitive-analyzer, feasibility-assessor, idea-validator)
+  with parallel research delegation, weighted scoring, and GO/CAUTION/NO-GO verdicts.
+  Use idea-scout agent instead.'
 type: preset
 metadata:
   version: 1.1.0
   status: deprecated
+  category: research
+  tags: [business, validation, market, feasibility]
+  difficulty: intermediate
 preset:
   packages:
     skills:
-      - name: market-analyzer
-      - name: competitive-analyzer
-      - name: feasibility-assessor
-      - name: idea-validator
+    - {name: market-analyzer}
+    - {name: competitive-analyzer}
+    - {name: feasibility-assessor}
+    - {name: idea-validator}
   compatibility:
     platforms: [darwin, linux]
 ---
-
 # Biz Validation
 
 > **DEPRECATED** — The `idea-scout` agent supersedes this preset. It orchestrates the

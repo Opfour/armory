@@ -1,17 +1,20 @@
 ---
 name: engineering-retro
-description: >
-  Git-based engineering retrospective analyzing commit history, PR patterns, and
-  development velocity over a configurable time window. Use this skill when the user
-  asks for a retrospective, retro, sprint review, weekly review, engineering review,
-  development summary, commit analysis, team velocity report, or says "what did we
-  ship", "what happened this week", "engineering retro", "sprint retro", "dev summary",
-  "/engineering-retro". Supports time windows (7d default, 24h, 14d, 30d) and
-  monorepo path scoping.
+description: 'Git-based engineering retrospective analyzing commit history, PR patterns,
+  and development velocity over a configurable time window. Use this skill when the
+  user asks for a retrospective, retro, sprint review, weekly review, engineering
+  review, development summary, commit analysis, team velocity report, or says "what
+  did we ship", "what happened this week", "engineering retro", "sprint retro", "dev
+  summary", "/engineering-retro". Supports time windows (7d default, 24h, 14d, 30d)
+  and monorepo path scoping.
+
+  '
 metadata:
   version: 1.0.0
+  category: review
+  tags: [retrospective, velocity, git-analysis, sprint]
+  difficulty: intermediate
 ---
-
 # Engineering Retrospective
 
 Generate a structured, git-based engineering retrospective for a configurable time window. This is a **read-only analysis** — no files are modified except the optional JSON snapshot.

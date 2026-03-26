@@ -1,18 +1,18 @@
 ---
 name: media-producer
 type: agent
-description: >
-  Visual and video asset creation with intelligent format routing. Analyzes
-  concepts and automatically selects the optimal output format — static images,
-  architecture diagrams, animated explainers, motion graphics, interactive
-  dashboards, or slide presentations. Orchestrates specialized production skills
-  and provides styling guidance for consistent, high-quality visual output.
-  Triggers on: "create a visual for", "make a diagram of", "generate a video
-  explaining", "build a presentation about", "visualize this architecture",
-  "produce an infographic for", "animate this concept", "create slides for",
-  "make a product demo video", "design a visual showing".
-  Use this agent when a concept needs to become a visual or video asset and the
-  user has not specified a single production skill by name.
+description: 'Visual and video asset creation with intelligent format routing. Analyzes
+  concepts and automatically selects the optimal output format — static images, architecture
+  diagrams, animated explainers, motion graphics, interactive dashboards, or slide
+  presentations. Orchestrates specialized production skills and provides styling guidance
+  for consistent, high-quality visual output. Triggers on: "create a visual for",
+  "make a diagram of", "generate a video explaining", "build a presentation about",
+  "visualize this architecture", "produce an infographic for", "animate this concept",
+  "create slides for", "make a product demo video", "design a visual showing". Use
+  this agent when a concept needs to become a visual or video asset and the user has
+  not specified a single production skill by name.
+
+  '
 model: sonnet
 color: magenta
 metadata:
@@ -22,16 +22,12 @@ metadata:
   priority: 70
   enabled: true
   orchestrates:
-    skills:
-      - concept-to-image
-      - concept-to-video
-      - remotion-video
-      - architecture-diagram
-      - html-presentation
-      - static-web-artifacts-builder
+    skills: [concept-to-image, concept-to-video, remotion-video, architecture-diagram,
+      html-presentation, static-web-artifacts-builder]
     agents: []
+  tags: [media, production, content, sonnet]
+  difficulty: intermediate
 ---
-
 # Media Producer
 
 Visual and video asset creation with intelligent format routing. Analyzes what

@@ -1,17 +1,20 @@
 ---
 name: tavily
-description: >
-  AI-optimized web search via Tavily API. Use this skill when no specific URL is provided
-  and the user needs to search the web for current information, recent events, technical
-  documentation, or news. Triggers on: "search the web", "look this up online", "find
-  recent information about", "search for", "google this", "web search", "look up", "find
-  current data on", "what does the web say about", "research online". NOT for fetching a
-  known URL — use web-fetch for that. Tavily returns clean, AI-ready snippets optimized
-  for search-first intent.
+description: 'AI-optimized web search via Tavily API. Use this skill when no specific
+  URL is provided and the user needs to search the web for current information, recent
+  events, technical documentation, or news. Triggers on: "search the web", "look this
+  up online", "find recent information about", "search for", "google this", "web search",
+  "look up", "find current data on", "what does the web say about", "research online".
+  NOT for fetching a known URL — use web-fetch for that. Tavily returns clean, AI-ready
+  snippets optimized for search-first intent.
+
+  '
 metadata:
   version: 1.1.0
+  category: research
+  tags: [web-search, research, real-time, ai-optimized]
+  difficulty: beginner
 ---
-
 # Tavily Search
 
 Web search and URL content extraction powered by Tavily API. Returns clean, structured results

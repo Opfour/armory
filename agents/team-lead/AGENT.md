@@ -1,40 +1,33 @@
 ---
 name: team-lead
 type: agent
-description: >
-  Meta-orchestrator agent that analyzes complex requests, decomposes them into
-  agent-sized tasks, delegates to specialized agents, manages sequencing and
-  parallelism, and synthesizes results into unified deliverables. Acts as the
-  intelligent router and coordinator across the full agent team.
-  Triggers on: "handle this end to end", "take care of everything",
-  "coordinate the team", "manage this project", "orchestrate this work",
-  "delegate this across agents", "team lead", "run the full pipeline",
-  "I need the whole workflow", "end to end", "full lifecycle".
-  Use this agent when a task spans multiple agent domains and needs
-  coordination rather than a single focused agent.
+description: 'Meta-orchestrator agent that analyzes complex requests, decomposes them
+  into agent-sized tasks, delegates to specialized agents, manages sequencing and
+  parallelism, and synthesizes results into unified deliverables. Acts as the intelligent
+  router and coordinator across the full agent team. Triggers on: "handle this end
+  to end", "take care of everything", "coordinate the team", "manage this project",
+  "orchestrate this work", "delegate this across agents", "team lead", "run the full
+  pipeline", "I need the whole workflow", "end to end", "full lifecycle". Use this
+  agent when a task spans multiple agent domains and needs coordination rather than
+  a single focused agent.
+
+  '
 model: opus
 color: gold
 metadata:
   version: 1.0.0
-  category: orchestration
+  category: operations
   execution_phase: on-demand
   priority: 50
   enabled: true
   orchestrates:
     skills: []
-    agents:
-      - project-architect
-      - project-planner
-      - research-analyst
-      - proposal-writer
-      - full-stack-builder
-      - content-strategist
-      - release-captain
-      - codebase-auditor
-      - idea-scout
-      - media-producer
+    agents: [project-architect, project-planner, research-analyst, proposal-writer,
+      full-stack-builder, content-strategist, release-captain, codebase-auditor, idea-scout,
+      media-producer]
+  tags: [orchestration, delegation, multi-agent, opus]
+  difficulty: advanced
 ---
-
 # Team Lead
 
 Meta-orchestrator that decomposes complex, multi-domain requests into

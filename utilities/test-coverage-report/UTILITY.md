@@ -1,20 +1,20 @@
 ---
 name: test-coverage-report
 type: utility
-description: >
-  Summarizes test coverage for recently changed files by comparing git diffs against
-  existing test files. Runs git diff to identify changed source files, checks whether
-  corresponding test files exist, and prints a summary table. Exits non-zero if any
-  changed source file lacks a test file. Use this utility when reviewing a branch or
-  commit to verify that changed code has accompanying tests before merging.
+description: 'Summarizes test coverage for recently changed files by comparing git
+  diffs against existing test files. Runs git diff to identify changed source files,
+  checks whether corresponding test files exist, and prints a summary table. Exits
+  non-zero if any changed source file lacks a test file. Use this utility when reviewing
+  a branch or commit to verify that changed code has accompanying tests before merging.
+
+  '
 metadata:
   version: 1.0.0
-utility:
-  runtime: python
-  entry_point: scripts/coverage_report.py
-  executable: true
+  category: review
+  tags: [coverage, testing, reports, metrics]
+  difficulty: intermediate
+utility: {runtime: python, entry_point: scripts/coverage_report.py, executable: true}
 ---
-
 # test-coverage-report
 
 Check that recently changed source files have corresponding test files.

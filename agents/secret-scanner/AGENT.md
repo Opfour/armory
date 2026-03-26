@@ -1,16 +1,16 @@
 ---
 name: secret-scanner
 type: agent
-description: >
-  Pre-commit secret detection agent scanning for hardcoded API keys, passwords,
-  tokens, connection strings, private keys, and high-entropy strings. Detects
-  known provider key patterns (AWS, GitHub, Slack, Stripe, Google, Azure),
-  .env values leaked into source code, and PEM-encoded private keys. Designed
-  for fast pre-commit gating with zero false-negative tolerance. Triggers on:
-  "scan for secrets", "check for hardcoded keys", "secret detection",
-  "credential scan", "find leaked keys", "check for passwords in code",
-  "pre-commit secret check". Use this agent when code is about to be
-  committed and needs a secrets gate.
+description: 'Pre-commit secret detection agent scanning for hardcoded API keys, passwords,
+  tokens, connection strings, private keys, and high-entropy strings. Detects known
+  provider key patterns (AWS, GitHub, Slack, Stripe, Google, Azure), .env values leaked
+  into source code, and PEM-encoded private keys. Designed for fast pre-commit gating
+  with zero false-negative tolerance. Triggers on: "scan for secrets", "check for
+  hardcoded keys", "secret detection", "credential scan", "find leaked keys", "check
+  for passwords in code", "pre-commit secret check". Use this agent when code is about
+  to be committed and needs a secrets gate.
+
+  '
 model: haiku
 color: red
 metadata:
@@ -19,9 +19,10 @@ metadata:
   execution_phase: pre-commit
   priority: 200
   enabled: true
-  language_targets: ["*"]
+  language_targets: ['*']
+  tags: [secrets, scanning, security, haiku]
+  difficulty: intermediate
 ---
-
 # Secret Scanner
 
 Pre-commit credential detection scanning for hardcoded secrets, known

@@ -1,18 +1,18 @@
 ---
 name: content-strategist
 type: agent
-description: >
-  Technical content creation and adaptation engine that transforms topics,
-  research, and source material into channel-optimized content across multiple
-  formats. Orchestrates research, writing, slide generation, PDF production,
-  and humanization into a unified content pipeline. Produces LinkedIn posts,
-  blog articles, HTML slide decks, and PDF reports from a single brief.
-  Triggers on: "create content for", "write a LinkedIn post about",
-  "turn this into a blog post", "build a slide deck on", "content strategy for",
-  "repurpose this for", "adapt this content", "write about this topic",
-  "create a presentation on", "multi-channel content for".
-  Use this agent when content needs to be created, adapted, or distributed
-  across multiple channels or formats from a single topic or source.
+description: 'Technical content creation and adaptation engine that transforms topics,
+  research, and source material into channel-optimized content across multiple formats.
+  Orchestrates research, writing, slide generation, PDF production, and humanization
+  into a unified content pipeline. Produces LinkedIn posts, blog articles, HTML slide
+  decks, and PDF reports from a single brief. Triggers on: "create content for", "write
+  a LinkedIn post about", "turn this into a blog post", "build a slide deck on", "content
+  strategy for", "repurpose this for", "adapt this content", "write about this topic",
+  "create a presentation on", "multi-channel content for". Use this agent when content
+  needs to be created, adapted, or distributed across multiple channels or formats
+  from a single topic or source.
+
+  '
 model: sonnet
 color: pink
 metadata:
@@ -22,10 +22,12 @@ metadata:
   priority: 70
   enabled: true
   orchestrates:
-    skills: [linkedin-post-style, humanize, html-presentation, md-to-pdf, tavily, youtube-analysis]
+    skills: [linkedin-post-style, humanize, html-presentation, md-to-pdf, tavily,
+      youtube-analysis]
     agents: []
+  tags: [content, strategy, planning, sonnet]
+  difficulty: intermediate
 ---
-
 # Content Strategist
 
 Transforms topics and source material into channel-optimized content across

@@ -1,21 +1,21 @@
 ---
 name: dependency-tree
 type: utility
-description: >
-  Parses project dependency configuration files (pyproject.toml, package.json, go.mod)
-  and prints a formatted dependency tree to stdout. Auto-detects project type from files
-  present in the working directory. Supports depth limiting for large dependency graphs.
-  Use this utility when you need to visualize project dependencies, inspect version
-  constraints, or get a quick overview of what a project depends on without running
-  package manager commands.
+description: 'Parses project dependency configuration files (pyproject.toml, package.json,
+  go.mod) and prints a formatted dependency tree to stdout. Auto-detects project type
+  from files present in the working directory. Supports depth limiting for large dependency
+  graphs. Use this utility when you need to visualize project dependencies, inspect
+  version constraints, or get a quick overview of what a project depends on without
+  running package manager commands.
+
+  '
 metadata:
   version: 1.0.0
-utility:
-  runtime: python
-  entry_point: scripts/dependency_tree.py
-  executable: true
+  category: visualization
+  tags: [dependencies, tree, analysis, packages]
+  difficulty: intermediate
+utility: {runtime: python, entry_point: scripts/dependency_tree.py, executable: true}
 ---
-
 # dependency-tree
 
 Parse and display project dependencies as a formatted tree.

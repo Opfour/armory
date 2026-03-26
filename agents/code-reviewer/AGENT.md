@@ -1,26 +1,27 @@
 ---
 name: code-reviewer
 type: agent
-description: >
-  Multi-phase code review agent with severity-ranked findings across naming
-  conventions, cyclomatic complexity, error handling, DRY violations, security
-  surface, and test coverage gaps. Produces structured reports with
-  CRITICAL/HIGH/MEDIUM/LOW classification and file:line references.
-  Triggers on: "review code", "code review", "check code quality",
-  "audit code", "review my code", "code quality check", "lint my code",
-  "find code issues". Use this agent when code has been written or modified
+description: 'Multi-phase code review agent with severity-ranked findings across naming
+  conventions, cyclomatic complexity, error handling, DRY violations, security surface,
+  and test coverage gaps. Produces structured reports with CRITICAL/HIGH/MEDIUM/LOW
+  classification and file:line references. Triggers on: "review code", "code review",
+  "check code quality", "audit code", "review my code", "code quality check", "lint
+  my code", "find code issues". Use this agent when code has been written or modified
   and needs systematic quality review before commit or merge.
+
+  '
 model: sonnet
 color: blue
 metadata:
   version: 1.0.0
-  category: code-quality
+  category: review
   execution_phase: post-write
   priority: 100
   enabled: true
-  language_targets: ["*"]
+  language_targets: ['*']
+  tags: [code-review, quality, severity-ranking, sonnet]
+  difficulty: intermediate
 ---
-
 # Code Reviewer
 
 Multi-phase code quality review producing severity-ranked findings with

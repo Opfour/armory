@@ -1,23 +1,25 @@
 ---
 name: security-scan
 type: command
-description: >
-  Security audit workflow that scans a codebase path or scope for vulnerabilities
-  across six categories: hardcoded secrets, input validation, authentication and
-  authorization logic, dependency vulnerabilities, HTTP security headers, and
-  misconfiguration. Produces severity-ranked findings with remediation guidance.
-  Triggers on: "/security-scan", "scan for vulnerabilities", "security audit this
-  code", "check for hardcoded secrets", "find security issues", "vulnerability
-  scan". Use this command when auditing code for security issues before deployment
-  or during review.
+description: 'Security audit workflow that scans a codebase path or scope for vulnerabilities
+  across six categories: hardcoded secrets, input validation, authentication and authorization
+  logic, dependency vulnerabilities, HTTP security headers, and misconfiguration.
+  Produces severity-ranked findings with remediation guidance. Triggers on: "/security-scan",
+  "scan for vulnerabilities", "security audit this code", "check for hardcoded secrets",
+  "find security issues", "vulnerability scan". Use this command when auditing code
+  for security issues before deployment or during review.
+
+  '
 metadata:
   version: 1.0.0
+  category: review
+  tags: [security, scanning, vulnerabilities, audit]
+  difficulty: intermediate
 command:
-  syntax: "/security-scan [path-or-scope]"
+  syntax: /security-scan [path-or-scope]
   handler: inline
   dependencies: []
 ---
-
 # Security Scan — Vulnerability Audit Workflow
 
 When the user invokes `/security-scan [path-or-scope]`, execute this workflow exactly.

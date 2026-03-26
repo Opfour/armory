@@ -1,23 +1,28 @@
 ---
 name: research
 type: preset
-description: "DEPRECATED: Superseded by the research-analyst agent, which orchestrates literature-review, tavily, youtube-analysis, competitive-analyzer, and web-fetch with parallel multi-source investigation, cross-referencing, and confidence-rated synthesis. Use research-analyst agent instead."
+description: 'DEPRECATED: Superseded by the research-analyst agent, which orchestrates
+  literature-review, tavily, youtube-analysis, competitive-analyzer, and web-fetch
+  with parallel multi-source investigation, cross-referencing, and confidence-rated
+  synthesis. Use research-analyst agent instead.'
 metadata:
   version: 1.1.0
   status: deprecated
+  category: review
+  tags: [research, academic, literature, analysis]
+  difficulty: intermediate
 preset:
   packages:
     skills:
-      - name: literature-review
-      - name: research-critique
-      - name: manuscript-review
-      - name: manuscript-provenance
+    - {name: literature-review}
+    - {name: research-critique}
+    - {name: manuscript-review}
+    - {name: manuscript-provenance}
     utilities:
-      - name: arxiv-search
+    - {name: arxiv-search}
   compatibility:
     platforms: [darwin, linux]
 ---
-
 # Research Preset
 
 > **DEPRECATED** — The `research-analyst` agent supersedes this preset. It conducts

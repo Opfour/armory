@@ -1,29 +1,30 @@
 ---
 name: codebase-auditor
 type: agent
-description: >
-  Unified multi-dimensional codebase quality assessment that spawns specialized
-  review agents in parallel and aggregates findings into a single prioritized
-  report. Covers code quality, security vulnerabilities, secret detection,
-  architectural concerns, dependency health, and test coverage gaps.
-  Triggers on: "audit the codebase", "full quality check", "comprehensive
-  review", "audit everything", "run all checks", "codebase health check",
-  "quality assessment", "audit this repo", "check everything before release",
-  "multi-dimensional review". Use this agent when a broad quality assessment
+description: 'Unified multi-dimensional codebase quality assessment that spawns specialized
+  review agents in parallel and aggregates findings into a single prioritized report.
+  Covers code quality, security vulnerabilities, secret detection, architectural concerns,
+  dependency health, and test coverage gaps. Triggers on: "audit the codebase", "full
+  quality check", "comprehensive review", "audit everything", "run all checks", "codebase
+  health check", "quality assessment", "audit this repo", "check everything before
+  release", "multi-dimensional review". Use this agent when a broad quality assessment
   across multiple dimensions is needed rather than a single focused review.
+
+  '
 model: sonnet
 color: red
 metadata:
   version: 1.0.0
-  category: quality
+  category: review
   execution_phase: on-demand
   priority: 80
   enabled: true
   orchestrates:
     skills: [architecture-reviewer, dependency-audit]
     agents: [code-reviewer, security-reviewer, secret-scanner]
+  tags: [audit, codebase, quality, sonnet]
+  difficulty: intermediate
 ---
-
 # Codebase Auditor
 
 Unified quality assessment that orchestrates specialized agents and skills to

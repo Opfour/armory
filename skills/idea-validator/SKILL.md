@@ -1,27 +1,26 @@
 ---
 name: idea-validator
-description: >
-  Comprehensive business idea validation orchestrator that delegates parallel
-  research to sub-agents and synthesizes a structured report. Constructs a Lean
-  Canvas, applies Jobs-to-be-Done analysis, spawns market research, competitive
-  analysis, and feasibility assessment agents, runs SWOT/PESTLE, and produces a
-  weighted validation scorecard with verdict and recommended experiments.
-  Triggers on: "validate this idea", "assess this business idea", "evaluate my
-  startup idea", "analyze this concept", "critique this business plan", "review
-  my idea", "check if this idea is viable", "audit this business concept",
-  "is this idea worth pursuing", "rate this startup idea", "score this business
-  idea", "business idea validation", "idea feasibility check", "validate my
-  pitch", "evaluate this product concept". Use this skill when the user presents
-  a business idea, startup concept, product proposal, feature pitch, or pivot
-  scenario and wants a structured viability assessment with scoring.
+description: 'Comprehensive business idea validation orchestrator that delegates parallel
+  research to sub-agents and synthesizes a structured report. Constructs a Lean Canvas,
+  applies Jobs-to-be-Done analysis, spawns market research, competitive analysis,
+  and feasibility assessment agents, runs SWOT/PESTLE, and produces a weighted validation
+  scorecard with verdict and recommended experiments. Triggers on: "validate this
+  idea", "assess this business idea", "evaluate my startup idea", "analyze this concept",
+  "critique this business plan", "review my idea", "check if this idea is viable",
+  "audit this business concept", "is this idea worth pursuing", "rate this startup
+  idea", "score this business idea", "business idea validation", "idea feasibility
+  check", "validate my pitch", "evaluate this product concept". Use this skill when
+  the user presents a business idea, startup concept, product proposal, feature pitch,
+  or pivot scenario and wants a structured viability assessment with scoring.
+
+  '
 metadata:
   version: 1.0.0
-  complements:
-    - market-analyzer
-    - competitive-analyzer
-    - feasibility-assessor
+  complements: [market-analyzer, competitive-analyzer, feasibility-assessor]
+  category: review
+  tags: [idea-validation, lean-canvas, jtbd, swot]
+  difficulty: advanced
 ---
-
 # Business Idea Validator
 
 ## Purpose

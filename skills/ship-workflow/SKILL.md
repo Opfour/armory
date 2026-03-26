@@ -1,16 +1,19 @@
 ---
 name: ship-workflow
-description: >
-  Automated release pipeline that merges main, runs tests, performs pre-landing
+description: 'Automated release pipeline that merges main, runs tests, performs pre-landing
   review, bumps version, updates changelog, creates bisectable commits, and opens
-  a pull request. Use this skill when the user says "ship it", "ship this",
-  "release this", "prepare for release", "open a PR", "push and PR", "land this",
-  "get this ready to ship", "create release", "/ship-workflow". Handles the full
-  lifecycle from pre-flight checks through PR creation.
+  a pull request. Use this skill when the user says "ship it", "ship this", "release
+  this", "prepare for release", "open a PR", "push and PR", "land this", "get this
+  ready to ship", "create release", "/ship-workflow". Handles the full lifecycle from
+  pre-flight checks through PR creation.
+
+  '
 metadata:
   version: 1.0.0
+  category: review
+  tags: [release, ci-cd, pull-request, changelog]
+  difficulty: intermediate
 ---
-
 # Ship Workflow
 
 Automated release pipeline that takes a feature branch from working state to

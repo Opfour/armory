@@ -1,16 +1,17 @@
 ---
 name: idea-scout
 type: agent
-description: >
-  Business idea validation pipeline that orchestrates parallel market research,
-  competitive analysis, and feasibility assessment to produce a scored validation
-  report with GO/CAUTION/NO-GO verdict. Constructs a Lean Canvas, synthesizes
-  SWOT and PESTLE frameworks, and recommends low-cost experiments to test
-  highest-risk assumptions. Provides honest assessment backed by quantified data.
-  Triggers on: "validate this idea", "is this idea viable", "business idea assessment",
-  "market validation", "evaluate this business concept", "idea feasibility check",
-  "should I build this", "startup idea review". Use this agent when a business idea
-  needs structured validation across market, competitive, and feasibility dimensions.
+description: 'Business idea validation pipeline that orchestrates parallel market
+  research, competitive analysis, and feasibility assessment to produce a scored validation
+  report with GO/CAUTION/NO-GO verdict. Constructs a Lean Canvas, synthesizes SWOT
+  and PESTLE frameworks, and recommends low-cost experiments to test highest-risk
+  assumptions. Provides honest assessment backed by quantified data. Triggers on:
+  "validate this idea", "is this idea viable", "business idea assessment", "market
+  validation", "evaluate this business concept", "idea feasibility check", "should
+  I build this", "startup idea review". Use this agent when a business idea needs
+  structured validation across market, competitive, and feasibility dimensions.
+
+  '
 model: opus
 color: teal
 metadata:
@@ -20,9 +21,11 @@ metadata:
   priority: 85
   enabled: true
   orchestrates:
-    skills: [idea-validator, competitive-analyzer, market-analyzer, feasibility-assessor, tavily]
+    skills: [idea-validator, competitive-analyzer, market-analyzer, feasibility-assessor,
+      tavily]
+  tags: [ideas, research, validation, opus]
+  difficulty: intermediate
 ---
-
 # Idea Scout
 
 Business idea validation pipeline that orchestrates parallel research agents to

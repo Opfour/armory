@@ -1,23 +1,25 @@
 ---
 name: tdd
 type: command
-description: >
-  Test-driven development workflow for functions, modules, or features. Guides
-  Claude through the red-green-refactor cycle: understand requirements, write a
-  failing test first, implement minimal code to pass, refactor, repeat. Enforces
-  test-first discipline with rules for naming, assertion specificity, edge case
-  generation, and cycle termination. Triggers on: "/tdd", "test-driven", "write
-  tests first", "red green refactor", "TDD workflow", "test first development".
-  Use this command when starting implementation work where tests should drive
-  the design.
+description: 'Test-driven development workflow for functions, modules, or features.
+  Guides Claude through the red-green-refactor cycle: understand requirements, write
+  a failing test first, implement minimal code to pass, refactor, repeat. Enforces
+  test-first discipline with rules for naming, assertion specificity, edge case generation,
+  and cycle termination. Triggers on: "/tdd", "test-driven", "write tests first",
+  "red green refactor", "TDD workflow", "test first development". Use this command
+  when starting implementation work where tests should drive the design.
+
+  '
 metadata:
   version: 1.0.0
+  category: development
+  tags: [tdd, testing, red-green-refactor, test-first]
+  difficulty: intermediate
 command:
-  syntax: "/tdd [function-or-module]"
+  syntax: /tdd [function-or-module]
   handler: inline
   dependencies: []
 ---
-
 # TDD — Test-Driven Development Workflow
 
 When the user invokes `/tdd [target]`, execute this workflow exactly.

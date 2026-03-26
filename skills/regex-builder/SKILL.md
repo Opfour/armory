@@ -1,14 +1,17 @@
 ---
 name: regex-builder
-description: >
-  DEPRECATED: The base model generates, explains, and tests regex patterns natively
-  with high accuracy. This skill no longer provides meaningful uplift. Retained for
-  reference only.
+description: 'DEPRECATED: The base model generates, explains, and tests regex patterns
+  natively with high accuracy. This skill no longer provides meaningful uplift. Retained
+  for reference only.
+
+  '
 metadata:
   version: 1.1.0
   status: deprecated
+  category: development
+  tags: [regex, pattern-matching, testing, validation]
+  difficulty: beginner
 ---
-
 > **DEPRECATED** — Modern Claude models produce accurate, well-explained regex patterns
 > with edge-case test suites natively, including multi-language usage examples. The uplift
 > delta from this skill approaches zero. Retained for archival reference only.
