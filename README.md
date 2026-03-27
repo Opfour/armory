@@ -344,12 +344,12 @@ An MCP server exposes armory packages as discoverable tools for any agent sessio
 
 **Available tools:**
 
-| Tool | Description |
-|------|-------------|
-| `search_packages` | Keyword search with type, category, and tag filters |
-| `get_package` | Full metadata for a single package by name |
+| Tool                 | Description                                                   |
+| -------------------- | ------------------------------------------------------------- |
+| `search_packages`    | Keyword search with type, category, and tag filters           |
+| `get_package`        | Full metadata for a single package by name                    |
 | `recommend_packages` | Context-aware recommendations by language, framework, or task |
-| `list_categories` | All categories with package counts |
+| `list_categories`    | All categories with package counts                            |
 
 ---
 
