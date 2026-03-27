@@ -1,6 +1,7 @@
 ---
 name: changelog-composer
-description: 'Generates structured changelogs and release notes from git history and
+description:
+  'Generates structured changelogs and release notes from git history and
   PR descriptions. Classifies changes into breaking, features, fixes, performance,
   and docs. Filters internal-only changes, detects breaking changes, and produces
   human-readable entries linked to source PRs. Triggers on: "generate changelog",
@@ -16,6 +17,7 @@ metadata:
   tags: [changelog, release-notes, git-history, versioning]
   difficulty: intermediate
 ---
+
 # Changelog Composer
 
 Transforms raw git history and PR descriptions into polished, audience-appropriate

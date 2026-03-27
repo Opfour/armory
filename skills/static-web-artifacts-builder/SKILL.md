@@ -1,6 +1,7 @@
 ---
 name: static-web-artifacts-builder
-description: 'Build elaborate, self-contained static HTML artifacts opened in a browser
+description:
+  'Build elaborate, self-contained static HTML artifacts opened in a browser
   — interactive diagrams, architecture visuals, data dashboards, HTML infographics,
   and rich interactive deliverables. Use this skill when the output is an HTML file
   viewed in a browser. Zero build toolchain — no React, no Vite, no Parcel. Pure HTML5
@@ -16,6 +17,7 @@ metadata:
   tags: [html, interactive, dashboard, svg]
   difficulty: intermediate
 ---
+
 # Static Web Artifacts Builder
 
 To build high-density static infographic artifacts, follow these steps:
@@ -91,28 +93,28 @@ Share the validated HTML file in conversation with the user so they can view it 
 
 ## When to Use This Skill vs Other Visual Skills
 
-| Task | Use This Skill | Use Instead |
-|---|---|---|
-| Rich infographic with multiple sections, high data density | Yes | — |
-| Self-contained dashboard with interactive tabs or toggles | Yes | — |
-| Architecture diagram with bidirectional flows and layered tiers | Yes | `architecture-diagram` for auto-generated from code |
-| Simple concept illustration or icon-style image | No | `concept-to-image` |
-| Slide deck or multi-page presentation | No | `html-presentation` |
-| Architecture diagram generated from existing codebase | No | `architecture-diagram` |
-| Single-page visual where CSS Grid layout control is critical | Yes | — |
-| Artifact must be screenshot-ready via Playwright | Yes (with caveat — see Limitations) | — |
+| Task                                                            | Use This Skill                      | Use Instead                                         |
+| --------------------------------------------------------------- | ----------------------------------- | --------------------------------------------------- |
+| Rich infographic with multiple sections, high data density      | Yes                                 | —                                                   |
+| Self-contained dashboard with interactive tabs or toggles       | Yes                                 | —                                                   |
+| Architecture diagram with bidirectional flows and layered tiers | Yes                                 | `architecture-diagram` for auto-generated from code |
+| Simple concept illustration or icon-style image                 | No                                  | `concept-to-image`                                  |
+| Slide deck or multi-page presentation                           | No                                  | `html-presentation`                                 |
+| Architecture diagram generated from existing codebase           | No                                  | `architecture-diagram`                              |
+| Single-page visual where CSS Grid layout control is critical    | Yes                                 | —                                                   |
+| Artifact must be screenshot-ready via Playwright                | Yes (with caveat — see Limitations) | —                                                   |
 
 ---
 
 ## Error Handling
 
-| Error | Cause | Resolution |
-|---|---|---|
-| CDN link detected by `bundle-artifact.sh` | External stylesheet or script reference in HTML | Inline all CSS and JS — no external URLs allowed in output |
-| Content overflow / clipping in browser | Viewport too small or fixed heights with overflow:hidden | Use `min-height` instead of `height`; test at 1440px wide; use `overflow: auto` on scroll regions |
-| Playwright screenshot cuts off content | Page height exceeds screenshot viewport | Set `page.setViewportSize` to match content dimensions; use `fullPage: true` |
-| `bundle-artifact.sh` reports missing inline SVG | SVG loaded via `<img src>` or external ref | Replace with inline `<svg>` block directly in HTML |
-| File size too large to share as artifact | Embedded base64 images or verbose SVG | Optimize SVG paths; avoid embedding raster images |
+| Error                                           | Cause                                                    | Resolution                                                                                        |
+| ----------------------------------------------- | -------------------------------------------------------- | ------------------------------------------------------------------------------------------------- |
+| CDN link detected by `bundle-artifact.sh`       | External stylesheet or script reference in HTML          | Inline all CSS and JS — no external URLs allowed in output                                        |
+| Content overflow / clipping in browser          | Viewport too small or fixed heights with overflow:hidden | Use `min-height` instead of `height`; test at 1440px wide; use `overflow: auto` on scroll regions |
+| Playwright screenshot cuts off content          | Page height exceeds screenshot viewport                  | Set `page.setViewportSize` to match content dimensions; use `fullPage: true`                      |
+| `bundle-artifact.sh` reports missing inline SVG | SVG loaded via `<img src>` or external ref               | Replace with inline `<svg>` block directly in HTML                                                |
+| File size too large to share as artifact        | Embedded base64 images or verbose SVG                    | Optimize SVG paths; avoid embedding raster images                                                 |
 
 ---
 

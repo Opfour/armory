@@ -1,6 +1,7 @@
 ---
 name: agent-builder
-description: Build AI agents and automate Claude Code programmatically using the Claude
+description:
+  Build AI agents and automate Claude Code programmatically using the Claude
   Agent SDK and headless CLI mode. Use this skill when you need to build an agent,
   create a Claude agent, make a bot, work with the agent SDK, run Claude in headless
   mode, write programmatic agent code, automate with Claude, create an MCP server
@@ -14,6 +15,7 @@ metadata:
   tags: [agent-sdk, headless, automation, mcp]
   difficulty: intermediate
 ---
+
 # Agent Builder - Claude SDK & CLI Expert
 
 **Triggers:**

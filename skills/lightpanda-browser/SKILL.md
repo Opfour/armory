@@ -1,6 +1,7 @@
 ---
 name: lightpanda-browser
-description: Lightweight headless browser automation using Lightpanda as the backend
+description:
+  Lightweight headless browser automation using Lightpanda as the backend
   engine with agent-browser CLI. 9x lower memory, 11x faster than Chromium. Use for
   web scraping, DOM interaction, data extraction, form automation, and API testing
   where visual rendering is not required. Triggers on "lightpanda", "lightweight browser",
@@ -14,6 +15,7 @@ metadata:
   tags: [browser, headless, scraping, lightweight]
   difficulty: beginner
 ---
+
 # Lightpanda Browser — Fast Headless Automation
 
 Headless browser automation using [Lightpanda](https://github.com/lightpanda-io/browser) as the backend engine, controlled through the `agent-browser` CLI via CDP (Chrome DevTools Protocol).
@@ -408,25 +410,25 @@ Lightpanda uses V8 but not all Web APIs are implemented. If `eval` fails:
 
 Reference numbers for choosing between Lightpanda and Chromium. Measured on typical scraping workloads.
 
-| Metric | Lightpanda | Chromium (Playwright) | When It Matters |
-|--------|-----------|----------------------|-----------------|
-| Memory per page | ~60MB | ~550MB | Parallel sessions, CI runners, constrained environments |
-| Cold start | <100ms | ~2s | Short-lived scripts, serverless, high-frequency invocations |
-| DOM-only page load | ~50ms | ~300ms | Bulk scraping (difference compounds over hundreds of pages) |
-| Binary size | ~15MB | ~300MB | Docker images, CI caching, disk-constrained hosts |
-| JS execution (V8) | Equivalent | Equivalent | No difference — same engine |
-| Full page render | N/A | ~500ms | Lightpanda cannot render — use Chromium |
+| Metric             | Lightpanda | Chromium (Playwright) | When It Matters                                             |
+| ------------------ | ---------- | --------------------- | ----------------------------------------------------------- |
+| Memory per page    | ~60MB      | ~550MB                | Parallel sessions, CI runners, constrained environments     |
+| Cold start         | <100ms     | ~2s                   | Short-lived scripts, serverless, high-frequency invocations |
+| DOM-only page load | ~50ms      | ~300ms                | Bulk scraping (difference compounds over hundreds of pages) |
+| Binary size        | ~15MB      | ~300MB                | Docker images, CI caching, disk-constrained hosts           |
+| JS execution (V8)  | Equivalent | Equivalent            | No difference — same engine                                 |
+| Full page render   | N/A        | ~500ms                | Lightpanda cannot render — use Chromium                     |
 
 ### Decision Thresholds
 
-| Scenario | Recommendation |
-|----------|---------------|
-| < 10 pages, need screenshots | Chromium — overhead is negligible |
-| 10-100 pages, text extraction only | Lightpanda — saves 5-50GB RAM |
-| 100+ pages, parallel sessions | Lightpanda — Chromium hits memory limits |
-| CI with 2GB RAM limit | Lightpanda — fits 30+ pages vs 3 with Chromium |
-| Visual regression testing | Chromium — Lightpanda cannot produce images |
-| Form submission + response validation | Either — Lightpanda is faster but both work |
+| Scenario                              | Recommendation                                 |
+| ------------------------------------- | ---------------------------------------------- |
+| < 10 pages, need screenshots          | Chromium — overhead is negligible              |
+| 10-100 pages, text extraction only    | Lightpanda — saves 5-50GB RAM                  |
+| 100+ pages, parallel sessions         | Lightpanda — Chromium hits memory limits       |
+| CI with 2GB RAM limit                 | Lightpanda — fits 30+ pages vs 3 with Chromium |
+| Visual regression testing             | Chromium — Lightpanda cannot produce images    |
+| Form submission + response validation | Either — Lightpanda is faster but both work    |
 
 ---
 

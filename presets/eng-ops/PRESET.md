@@ -1,10 +1,11 @@
 ---
 name: eng-ops
 type: preset
-description: 'DEPRECATED: Superseded by the release-captain and full-stack-builder
+description:
+  "DEPRECATED: Superseded by the release-captain and full-stack-builder
   agents. release-captain orchestrates ship-workflow, changelog-composer, pre-landing-review,
   dependency-audit with quality gates. full-stack-builder handles implementation with
-  test-harness, code-refiner, and api-docs-generator. Use these agents instead.'
+  test-harness, code-refiner, and api-docs-generator. Use these agents instead."
 metadata:
   version: 1.1.0
   status: deprecated
@@ -14,17 +15,18 @@ metadata:
 preset:
   packages:
     skills:
-    - {name: ship-workflow}
-    - {name: qa-systematic}
-    - {name: test-harness}
-    - {name: benchmark-runner}
-    - {name: migration-risk-analyzer}
-    - {name: estimate-calibrator}
-    - {name: engineering-retro}
-    - {name: debug-investigator}
+      - { name: ship-workflow }
+      - { name: qa-systematic }
+      - { name: test-harness }
+      - { name: benchmark-runner }
+      - { name: migration-risk-analyzer }
+      - { name: estimate-calibrator }
+      - { name: engineering-retro }
+      - { name: debug-investigator }
   compatibility:
     platforms: [darwin, linux]
 ---
+
 # Eng Ops
 
 > **DEPRECATED** — The `release-captain` and `full-stack-builder` agents supersede this
@@ -37,16 +39,16 @@ End-to-end engineering operations toolkit spanning the plan-build-test-ship-refl
 
 ## Included Skills
 
-| Skill                    | Purpose                                        | Phase   |
-| ------------------------ | ---------------------------------------------- | ------- |
-| ship-workflow            | Orchestrate end-to-end shipping pipeline       | ship    |
-| qa-systematic            | Systematic test planning and QA strategy       | plan    |
-| test-harness             | Test scaffolding and generation                | test    |
-| benchmark-runner         | Performance benchmarking and regression checks | test    |
-| migration-risk-analyzer  | Migration safety and rollback analysis         | build   |
-| estimate-calibrator      | Effort estimation calibration and tracking     | plan    |
-| engineering-retro        | Structured engineering retrospectives          | reflect |
-| debug-investigator       | Root cause analysis and debugging              | build   |
+| Skill                   | Purpose                                        | Phase   |
+| ----------------------- | ---------------------------------------------- | ------- |
+| ship-workflow           | Orchestrate end-to-end shipping pipeline       | ship    |
+| qa-systematic           | Systematic test planning and QA strategy       | plan    |
+| test-harness            | Test scaffolding and generation                | test    |
+| benchmark-runner        | Performance benchmarking and regression checks | test    |
+| migration-risk-analyzer | Migration safety and rollback analysis         | build   |
+| estimate-calibrator     | Effort estimation calibration and tracking     | plan    |
+| engineering-retro       | Structured engineering retrospectives          | reflect |
+| debug-investigator      | Root cause analysis and debugging              | build   |
 
 ## Workflow
 

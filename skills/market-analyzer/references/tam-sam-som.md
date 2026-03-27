@@ -36,6 +36,7 @@ SOM = SAM filtered by:
 ```
 
 A healthy ratio benchmark (varies by industry):
+
 - SAM is typically 10-40% of TAM
 - SOM Year 1 is typically 1-5% of SAM
 - SOM Year 3 is typically 5-15% of SAM
@@ -127,6 +128,7 @@ Run both top-down and bottom-up independently, then compare:
 ## Common Mistakes
 
 ### Vanity TAM
+
 Inflating TAM by using an overly broad market definition. An AI writing assistant's
 TAM is not "the global software market" — it's the content creation and editing tools
 market.
@@ -135,24 +137,28 @@ market.
 interpretation.
 
 ### Ignoring Substitutes
+
 Counting only direct competitors and missing substitute solutions (spreadsheets
 competing with project management tools, manual processes competing with automation).
 
 **Fix:** Include the value of workarounds and manual processes in the market size.
 
 ### Static Market Assumption
+
 Using current market size without accounting for growth. A market at $5B growing at
 25% CAGR will be $15B in 5 years.
 
 **Fix:** State the base year and growth rate. Project forward for the relevant timeframe.
 
 ### Uniform Pricing
+
 Assuming every customer pays the same price. Enterprise and SMB segments have
 dramatically different willingness-to-pay.
 
 **Fix:** Size each segment separately with segment-appropriate pricing.
 
 ### Conflating Revenue and GMV
+
 Marketplace businesses often report Gross Merchandise Value, not revenue. A marketplace
 with $1B GMV and a 15% take rate has $150M in revenue.
 
@@ -160,27 +166,27 @@ with $1B GMV and a 15% take rate has $150M in revenue.
 
 ## Industry Benchmark Ranges
 
-| Industry | Typical TAM Range | Growth (CAGR) | Notes |
-|----------|------------------|---------------|-------|
-| Enterprise SaaS | $10B-$500B by segment | 10-20% | High SAM/TAM ratio due to global delivery |
-| Consumer mobile apps | $1B-$50B by category | 5-15% | Low conversion, high volume |
-| Healthcare IT | $20B-$200B | 8-15% | Regulatory friction, long sales cycles |
-| Fintech | $10B-$300B by segment | 15-25% | Strong growth, regulatory variance by region |
-| E-commerce (vertical) | $5B-$100B | 8-15% | Category-dependent, commodity pressure |
-| EdTech | $5B-$50B | 10-20% | Institutional vs consumer segments differ |
-| Climate/cleantech | $10B-$500B | 15-30% | Policy-driven, subsidy-dependent |
+| Industry              | Typical TAM Range     | Growth (CAGR) | Notes                                        |
+| --------------------- | --------------------- | ------------- | -------------------------------------------- |
+| Enterprise SaaS       | $10B-$500B by segment | 10-20%        | High SAM/TAM ratio due to global delivery    |
+| Consumer mobile apps  | $1B-$50B by category  | 5-15%         | Low conversion, high volume                  |
+| Healthcare IT         | $20B-$200B            | 8-15%         | Regulatory friction, long sales cycles       |
+| Fintech               | $10B-$300B by segment | 15-25%        | Strong growth, regulatory variance by region |
+| E-commerce (vertical) | $5B-$100B             | 8-15%         | Category-dependent, commodity pressure       |
+| EdTech                | $5B-$50B              | 10-20%        | Institutional vs consumer segments differ    |
+| Climate/cleantech     | $10B-$500B            | 15-30%        | Policy-driven, subsidy-dependent             |
 
 ## Data Source Recommendations
 
-| Source | Best For | Cost | Freshness |
-|--------|----------|------|-----------|
-| Statista | Quick market size figures, charts | Paid/free tier | Updated regularly |
-| Grand View Research | Detailed segment breakdowns, CAGR | Reports ($2K-$5K) | Annual |
-| IBISWorld | US industry analysis, competitive landscape | Subscription | Annual |
-| Gartner / IDC | Technology markets, vendor landscape | Subscription | Quarterly |
-| Census Bureau / BLS | US demographics, employment, wages | Free | Annual/monthly |
-| World Bank Open Data | Global economic indicators | Free | Annual |
-| Crunchbase | Startup funding, competitor tracking | Freemium | Real-time |
-| Google Trends | Relative interest over time | Free | Real-time |
-| SEC Filings (EDGAR) | Public company revenue, segment data | Free | Quarterly |
-| PitchBook | Private company data, deal flow | Subscription | Real-time |
+| Source               | Best For                                    | Cost              | Freshness         |
+| -------------------- | ------------------------------------------- | ----------------- | ----------------- |
+| Statista             | Quick market size figures, charts           | Paid/free tier    | Updated regularly |
+| Grand View Research  | Detailed segment breakdowns, CAGR           | Reports ($2K-$5K) | Annual            |
+| IBISWorld            | US industry analysis, competitive landscape | Subscription      | Annual            |
+| Gartner / IDC        | Technology markets, vendor landscape        | Subscription      | Quarterly         |
+| Census Bureau / BLS  | US demographics, employment, wages          | Free              | Annual/monthly    |
+| World Bank Open Data | Global economic indicators                  | Free              | Annual            |
+| Crunchbase           | Startup funding, competitor tracking        | Freemium          | Real-time         |
+| Google Trends        | Relative interest over time                 | Free              | Real-time         |
+| SEC Filings (EDGAR)  | Public company revenue, segment data        | Free              | Quarterly         |
+| PitchBook            | Private company data, deal flow             | Subscription      | Real-time         |

@@ -16,6 +16,7 @@ metadata:
   tags: [armory, catalog, install, package-management, discovery]
   difficulty: beginner
 ---
+
 # Package Library
 
 Agent-native catalog and installer for all armory package types. Provides browsing, searching, installing, updating, syncing, and removing packages directly within an agent session.
@@ -31,30 +32,30 @@ Agent-native catalog and installer for all armory package types. Provides browsi
 
 ## Supported Package Types
 
-| Type    | Install Target            | Method          |
-| ------- | ------------------------- | --------------- |
-| skill   | `~/.claude/skills/`       | Copy directory  |
-| agent   | `~/.claude/agents/`       | Copy directory  |
-| hook    | `~/.claude/hooks/`        | Copy directory  |
-| rule    | `~/.claude/rules/`        | Body-only file  |
-| command | `~/.claude/commands/`     | Body-only file  |
-| utility | `~/.claude/utilities/`    | Copy + chmod +x |
-| preset  | `~/.claude/presets/`      | Copy directory  |
+| Type    | Install Target         | Method          |
+| ------- | ---------------------- | --------------- |
+| skill   | `~/.claude/skills/`    | Copy directory  |
+| agent   | `~/.claude/agents/`    | Copy directory  |
+| hook    | `~/.claude/hooks/`     | Copy directory  |
+| rule    | `~/.claude/rules/`     | Body-only file  |
+| command | `~/.claude/commands/`  | Body-only file  |
+| utility | `~/.claude/utilities/` | Copy + chmod +x |
+| preset  | `~/.claude/presets/`   | Copy directory  |
 
 ## Command Reference
 
-| Command                              | Cookbook              | Purpose                                                                  |
-| ------------------------------------ | -------------------- | ------------------------------------------------------------------------ |
-| `/library list`                      | `cookbook/list.md`    | Show all packages with type, version, installed status, update available |
-| `/library list --type <type>`        | `cookbook/list.md`    | Filter listing by package type (skill, agent, hook, rule, etc.)         |
-| `/library use <name>`                | `cookbook/use.md`     | Pull a package from armory (auto-detects type from manifest)            |
-| `/library search <keyword>`          | `cookbook/search.md`  | Keyword search across all package types, names, and descriptions        |
-| `/library search --category <name>`  | `cookbook/search.md`  | Filter search by category (development, review, security, etc.)         |
-| `/library sync`                      | `cookbook/sync.md`    | Re-pull all installed packages that have updates                        |
-| `/library info <name>`               | `cookbook/info.md`    | Show full detail for a package (type, version, tags, category)          |
-| `/library update`                    | `cookbook/update.md`  | Check all installed packages for version bumps (dry-run sync)           |
-| `/library remove <name>`             | `cookbook/remove.md`  | Remove an installed package                                              |
-| `/library profiles`                  | `cookbook/profiles.md`| Show available install profiles with package counts                      |
+| Command                             | Cookbook               | Purpose                                                                  |
+| ----------------------------------- | ---------------------- | ------------------------------------------------------------------------ |
+| `/library list`                     | `cookbook/list.md`     | Show all packages with type, version, installed status, update available |
+| `/library list --type <type>`       | `cookbook/list.md`     | Filter listing by package type (skill, agent, hook, rule, etc.)          |
+| `/library use <name>`               | `cookbook/use.md`      | Pull a package from armory (auto-detects type from manifest)             |
+| `/library search <keyword>`         | `cookbook/search.md`   | Keyword search across all package types, names, and descriptions         |
+| `/library search --category <name>` | `cookbook/search.md`   | Filter search by category (development, review, security, etc.)          |
+| `/library sync`                     | `cookbook/sync.md`     | Re-pull all installed packages that have updates                         |
+| `/library info <name>`              | `cookbook/info.md`     | Show full detail for a package (type, version, tags, category)           |
+| `/library update`                   | `cookbook/update.md`   | Check all installed packages for version bumps (dry-run sync)            |
+| `/library remove <name>`            | `cookbook/remove.md`   | Remove an installed package                                              |
+| `/library profiles`                 | `cookbook/profiles.md` | Show available install profiles with package counts                      |
 
 ## Cookbook Dispatch
 

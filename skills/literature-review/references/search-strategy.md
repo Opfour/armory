@@ -6,15 +6,15 @@ arXiv supports boolean field-prefixed queries through the Atom API.
 
 ### Field Prefixes
 
-| Prefix | Field | Notes |
-|--------|-------|-------|
-| `ti:` | Title | Matches words in the title |
-| `au:` | Author | Last name or "lastname_firstname" |
-| `abs:` | Abstract | Matches words in the abstract |
-| `cat:` | Category | arXiv category (e.g., cs.CL, cs.AI, stat.ML) |
-| `all:` | All fields | Searches across all metadata |
-| `co:` | Comment | Author comments field |
-| `jr:` | Journal ref | Journal reference field |
+| Prefix | Field       | Notes                                        |
+| ------ | ----------- | -------------------------------------------- |
+| `ti:`  | Title       | Matches words in the title                   |
+| `au:`  | Author      | Last name or "lastname_firstname"            |
+| `abs:` | Abstract    | Matches words in the abstract                |
+| `cat:` | Category    | arXiv category (e.g., cs.CL, cs.AI, stat.ML) |
+| `all:` | All fields  | Searches across all metadata                 |
+| `co:`  | Comment     | Author comments field                        |
+| `jr:`  | Journal ref | Journal reference field                      |
 
 ### Boolean Operators
 
@@ -45,19 +45,19 @@ ti:survey AND abs:large language models AND cat:cs.CL
 
 ### arXiv Categories (Common CS/AI)
 
-| Category | Description |
-|----------|-------------|
-| cs.AI | Artificial Intelligence |
-| cs.CL | Computation and Language (NLP) |
-| cs.CV | Computer Vision |
-| cs.LG | Machine Learning |
-| cs.IR | Information Retrieval |
-| cs.SE | Software Engineering |
-| cs.CR | Cryptography and Security |
-| cs.DB | Databases |
-| cs.DC | Distributed Computing |
-| cs.HC | Human-Computer Interaction |
-| stat.ML | Machine Learning (Statistics) |
+| Category | Description                    |
+| -------- | ------------------------------ |
+| cs.AI    | Artificial Intelligence        |
+| cs.CL    | Computation and Language (NLP) |
+| cs.CV    | Computer Vision                |
+| cs.LG    | Machine Learning               |
+| cs.IR    | Information Retrieval          |
+| cs.SE    | Software Engineering           |
+| cs.CR    | Cryptography and Security      |
+| cs.DB    | Databases                      |
+| cs.DC    | Distributed Computing          |
+| cs.HC    | Human-Computer Interaction     |
+| stat.ML  | Machine Learning (Statistics)  |
 
 ## Semantic Scholar API
 

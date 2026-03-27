@@ -1,6 +1,7 @@
 ---
 name: estimate-calibrator
-description: 'Produces calibrated three-point estimates (best/likely/worst case) with
+description:
+  'Produces calibrated three-point estimates (best/likely/worst case) with
   explicit unknowns, confidence intervals, and assumption documentation. Breaks work
   into atomic units, identifies technical and scope uncertainties, calculates PERT
   ranges, and provides confidence rationale. Triggers on: "estimate this", "how long
@@ -17,6 +18,7 @@ metadata:
   tags: [estimation, pert, confidence-interval, planning]
   difficulty: intermediate
 ---
+
 # Estimate Calibrator
 
 Replaces single-point guesses with structured three-point estimates: decomposes work

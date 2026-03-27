@@ -1,6 +1,7 @@
 ---
 name: remotion-video
-description: 'Create production-grade motion graphics and videos using Remotion (React).
+description:
+  'Create production-grade motion graphics and videos using Remotion (React).
   Use whenever the user wants branded video content, product demos, data-driven video
   generation, or motion graphics with audio sync, web fonts, TailwindCSS styling,
   or media embedding. Covers: marketing videos, product launches, data visualizations,
@@ -19,6 +20,7 @@ metadata:
   tags: [video, react, remotion, motion-graphics]
   difficulty: advanced
 ---
+
 # Remotion Video
 
 Creates production-grade videos using Remotion — a React framework where video is code.

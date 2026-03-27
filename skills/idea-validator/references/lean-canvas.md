@@ -13,11 +13,13 @@ The top 3 problems your target customer faces related to the domain you are addr
 **What does not belong:** Your solution disguised as a problem. Internal technical challenges. Problems only you care about.
 
 **Common mistakes:**
+
 - Stating the problem too broadly ("communication is hard")
 - Listing problems the customer does not actually have
 - Confusing symptoms with root causes
 
 **Assessment criteria:**
+
 - Are the problems specific enough to test?
 - Does the customer acknowledge these problems?
 - Is there existing evidence of the problem (forums, complaints, workarounds)?
@@ -33,11 +35,13 @@ The target market and early adopter profile.
 **What does not belong:** "Everyone." Multiple unrelated segments without prioritization.
 
 **Common mistakes:**
+
 - Defining the segment too broadly ("small businesses")
 - No distinction between mainstream market and early adopters
 - Targeting a segment you cannot reach
 
 **Assessment criteria:**
+
 - Can you identify and reach these people?
 - Is the early adopter profile specific enough to find 10 of them this week?
 - Is the segment large enough to build a business but small enough to dominate initially?
@@ -53,11 +57,13 @@ A single, clear, compelling message that states why your solution is different a
 **What does not belong:** Feature lists. Jargon. Generic quality claims ("best-in-class").
 
 **Common mistakes:**
+
 - Describing features instead of outcomes
 - Not differentiating from existing alternatives
 - Being too abstract to be testable
 
 **Assessment criteria:**
+
 - Does it address the #1 problem directly?
 - Would a customer understand it in under 8 seconds?
 - Is it falsifiable — could you prove it wrong?
@@ -73,11 +79,13 @@ The top 3 features that address the top 3 problems.
 **What does not belong:** Feature wishlists. Technical architecture details. Features that address problems not listed in box 1.
 
 **Common mistakes:**
+
 - Solution does not map to stated problems
 - Over-scoping the MVP
 - Describing the solution before validating the problem
 
 **Assessment criteria:**
+
 - Does each feature map to a stated problem?
 - Is this the simplest possible solution that tests the hypothesis?
 - Can this be built and shipped to early adopters within weeks, not months?
@@ -93,11 +101,13 @@ How you reach and deliver value to customers.
 **What does not belong:** Aspirational channels you have no path to ("viral growth"). Channels that do not reach your stated customer segment.
 
 **Common mistakes:**
+
 - Relying on channels that require scale to work (viral, network effects) before you have scale
 - No connection between channel and customer segment
 - Ignoring the cost of the channel
 
 **Assessment criteria:**
+
 - Do these channels reach the early adopters identified in box 2?
 - Is there at least one channel you can start using today?
 - What is the cost per acquired customer through each channel?
@@ -113,11 +123,13 @@ How the business makes money.
 **What does not belong:** "We'll figure out monetization later." Revenue models that contradict the UVP.
 
 **Common mistakes:**
+
 - No pricing hypothesis
 - Pricing disconnected from value delivered
 - Relying on advertising revenue at small scale
 
 **Assessment criteria:**
+
 - Is the price justified by the value (does it save or earn the customer more than it costs)?
 - Is the pricing model standard for this market or does it require behavior change?
 - Can you test willingness to pay before building?
@@ -133,6 +145,7 @@ Fixed and variable costs to operate the business.
 **What does not belong:** Aspirational future costs at scale. Costs for features not in the MVP.
 
 **Assessment criteria:**
+
 - Are costs realistic for the current stage?
 - Is the unit economics favorable (revenue per customer > cost per customer)?
 - What is the burn rate and runway?
@@ -148,6 +161,7 @@ The numbers that tell you whether the business is working.
 **What does not belong:** Vanity metrics (page views, downloads, registered users without activation).
 
 **Assessment criteria:**
+
 - Do these metrics connect to the business model?
 - Can you measure them with current tools?
 - Do they indicate whether the value proposition is working?
@@ -163,11 +177,13 @@ Something that cannot be easily copied or bought by competitors.
 **What does not belong:** Features (can be copied), first-mover advantage (rarely durable), passion (not a moat), working harder.
 
 **Common mistakes:**
+
 - Listing features or technology as the advantage
 - Claiming first-mover advantage
 - Leaving this box blank (honest but concerning)
 
 **Assessment criteria:**
+
 - Would this advantage still hold if a well-funded competitor entered?
 - Does the advantage compound over time?
 - Is the advantage real today or aspirational?
@@ -190,18 +206,19 @@ Incoherence between boxes is a stronger signal than weakness in any individual b
 
 ## Lean Canvas vs Business Model Canvas
 
-| Aspect | Lean Canvas | Business Model Canvas |
-|--------|------------|----------------------|
-| Focus | Problem/solution fit | Business model architecture |
-| Best for | Early-stage startups, new product ideas | Established businesses, business model innovation |
-| Replaces | Key Partners, Key Activities, Key Resources | Problem, Solution, Unfair Advantage, Key Metrics |
-| Orientation | Risk and hypothesis testing | Value chain and partner ecosystem |
+| Aspect      | Lean Canvas                                 | Business Model Canvas                             |
+| ----------- | ------------------------------------------- | ------------------------------------------------- |
+| Focus       | Problem/solution fit                        | Business model architecture                       |
+| Best for    | Early-stage startups, new product ideas     | Established businesses, business model innovation |
+| Replaces    | Key Partners, Key Activities, Key Resources | Problem, Solution, Unfair Advantage, Key Metrics  |
+| Orientation | Risk and hypothesis testing                 | Value chain and partner ecosystem                 |
 
 Use Lean Canvas when validating whether the idea should exist. Use Business Model Canvas when designing how an established idea operates.
 
 ## Prioritization
 
 Ash Maurya's recommended order for filling the canvas:
+
 1. Start with Problem and Customer Segments (who has the problem?)
 2. Then Unique Value Proposition (why will they care?)
 3. Then Solution (what is the minimum viable approach?)

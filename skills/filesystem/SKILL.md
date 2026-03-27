@@ -1,6 +1,7 @@
 ---
 name: filesystem
-description: 'File and directory operations using Claude Code built-in tools — replaces
+description:
+  'File and directory operations using Claude Code built-in tools — replaces
   the Filesystem MCP server. Maps all 11 MCP tools to native equivalents: Read, Write,
   Edit, Glob, Grep, and Bash. Covers file reading with line ranges, parallel reads,
   pattern-based file search, regex content search, directory listing, tree traversal,
@@ -17,6 +18,7 @@ metadata:
   tags: [files, directories, search, navigation]
   difficulty: beginner
 ---
+
 # Filesystem
 
 All file and directory operations use Claude Code's built-in tools. No MCP server

@@ -1,6 +1,7 @@
 ---
 name: research-critique
-description: 'Critical analysis of research papers, academic manuscripts, preprints,
+description:
+  'Critical analysis of research papers, academic manuscripts, preprints,
   and technical studies — evaluating methodology, claims-evidence alignment, contribution
   significance, and intellectual honesty. Produces coherent analytical responses (not
   checklists) that distinguish genuine weaknesses from standard field limitations.
@@ -20,6 +21,7 @@ metadata:
   tags: [research, methodology, claims-evidence, peer-review]
   difficulty: intermediate
 ---
+
 # Research Paper Critique
 
 ## Purpose
@@ -106,11 +108,11 @@ Before finalizing your critique, verify each point against these filters:
 
 Not every input is a full empirical paper. Adapt the posture rather than refusing.
 
-| Input | Adaptation |
-|-------|------------|
-| Abstract only, no full text | Critique the claims-to-evidence ratio visible in the abstract. State explicitly what cannot be evaluated without the full paper. Do not fabricate methodology concerns you cannot verify. |
-| Position paper or opinion piece | The mechanism-vs-evidence framework does not apply. Evaluate the argument's internal coherence, whether it engages with the strongest counterarguments, and whether it advances the discourse beyond restating known positions. |
-| Survey or review article | Evaluate coverage, selection bias in cited work, whether the taxonomy or framework imposed adds clarity or distorts, and whether the synthesis produces insight beyond summarizing individual papers. |
-| Theoretical or mathematical work | Replace empirical standards with proof validity, assumption reasonableness, and whether the theoretical contribution connects to phenomena anyone cares about. Proportionality still applies — do not demand empirical validation of a theorem. |
-| Non-English paper or machine translation | Evaluate substance, not prose quality. Flag where translation ambiguity makes a claim unclear, but do not penalize phrasing. |
-| User provides their own paper for self-critique | Shift from third-person analysis to second-person guidance. Prioritize actionable revisions over assessment. Identify the strongest and weakest sections explicitly. |
+| Input                                           | Adaptation                                                                                                                                                                                                                                      |
+| ----------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Abstract only, no full text                     | Critique the claims-to-evidence ratio visible in the abstract. State explicitly what cannot be evaluated without the full paper. Do not fabricate methodology concerns you cannot verify.                                                       |
+| Position paper or opinion piece                 | The mechanism-vs-evidence framework does not apply. Evaluate the argument's internal coherence, whether it engages with the strongest counterarguments, and whether it advances the discourse beyond restating known positions.                 |
+| Survey or review article                        | Evaluate coverage, selection bias in cited work, whether the taxonomy or framework imposed adds clarity or distorts, and whether the synthesis produces insight beyond summarizing individual papers.                                           |
+| Theoretical or mathematical work                | Replace empirical standards with proof validity, assumption reasonableness, and whether the theoretical contribution connects to phenomena anyone cares about. Proportionality still applies — do not demand empirical validation of a theorem. |
+| Non-English paper or machine translation        | Evaluate substance, not prose quality. Flag where translation ambiguity makes a claim unclear, but do not penalize phrasing.                                                                                                                    |
+| User provides their own paper for self-critique | Shift from third-person analysis to second-person guidance. Prioritize actionable revisions over assessment. Identify the strongest and weakest sections explicitly.                                                                            |

@@ -1,6 +1,7 @@
 ---
 name: web-fetch
-description: 'Web content fetching and URL retrieval via curl and WebFetch — replaces
+description:
+  'Web content fetching and URL retrieval via curl and WebFetch — replaces
   the Fetch MCP server (fetch_html, fetch_json, fetch_markdown, fetch_txt). Use this
   skill when a specific URL is provided and the user wants its content. Covers HTTP
   GET/POST, JSON API consumption with jq, HTML retrieval, markdown conversion, plain
@@ -18,6 +19,7 @@ metadata:
   tags: [http, curl, api, web-content]
   difficulty: beginner
 ---
+
 # Web Fetch
 
 All web content retrieval uses `curl` (Bash) or the built-in `WebFetch` tool. No MCP
@@ -26,12 +28,12 @@ control.
 
 ## Quick Reference
 
-| Fetch MCP Tool | Replacement | When to Use |
-|---|---|---|
-| `fetch_html` | `curl -s URL` | Raw HTML needed for parsing |
-| `fetch_json` | `curl -s URL \| jq '.'` | API responses, structured data |
-| `fetch_markdown` | `WebFetch` | Readable page content (default output is markdown) |
-| `fetch_txt` | `curl -s URL` or `WebFetch` | Plain text extraction |
+| Fetch MCP Tool   | Replacement                 | When to Use                                        |
+| ---------------- | --------------------------- | -------------------------------------------------- |
+| `fetch_html`     | `curl -s URL`               | Raw HTML needed for parsing                        |
+| `fetch_json`     | `curl -s URL \| jq '.'`     | API responses, structured data                     |
+| `fetch_markdown` | `WebFetch`                  | Readable page content (default output is markdown) |
+| `fetch_txt`      | `curl -s URL` or `WebFetch` | Plain text extraction                              |
 
 **Default choice:** Use `WebFetch` for general page content. Use `curl` when you need
 headers, authentication, POST bodies, or raw format control.
@@ -59,13 +61,13 @@ those.
 curl -sL "https://example.com/page"
 ```
 
-| Flag | Purpose |
-|---|---|
-| `-s` | Silent mode — suppress progress meter |
-| `-L` | Follow redirects (3xx) |
-| `-o file.html` | Save to file instead of stdout |
-| `-I` | Headers only (HEAD request) |
-| `-i` | Include response headers in output |
+| Flag           | Purpose                               |
+| -------------- | ------------------------------------- |
+| `-s`           | Silent mode — suppress progress meter |
+| `-L`           | Follow redirects (3xx)                |
+| `-o file.html` | Save to file instead of stdout        |
+| `-I`           | Headers only (HEAD request)           |
+| `-i`           | Include response headers in output    |
 
 Fetch and extract specific elements with `xmllint` or `python3`:
 
@@ -278,16 +280,16 @@ curl -s -b /tmp/cookies.txt "https://example.com/dashboard"
 
 ## Error Handling
 
-| HTTP Status | Meaning | Resolution |
-|---|---|---|
-| 301/302 | Redirect | Add `-L` flag to follow |
-| 401 | Unauthorized | Check token/credentials; verify env var is set |
-| 403 | Forbidden | Insufficient permissions or IP restriction |
-| 404 | Not Found | Verify URL path; resource may be deleted |
-| 429 | Rate Limited | Respect `Retry-After` header; add delay between requests |
-| 500 | Server Error | Retry once; if persistent, report upstream |
-| SSL error | Certificate issue | Do not use `-k` (insecure) — fix the root cause |
-| Timeout | Network/server slow | Increase `--max-time`; check connectivity |
+| HTTP Status | Meaning             | Resolution                                               |
+| ----------- | ------------------- | -------------------------------------------------------- |
+| 301/302     | Redirect            | Add `-L` flag to follow                                  |
+| 401         | Unauthorized        | Check token/credentials; verify env var is set           |
+| 403         | Forbidden           | Insufficient permissions or IP restriction               |
+| 404         | Not Found           | Verify URL path; resource may be deleted                 |
+| 429         | Rate Limited        | Respect `Retry-After` header; add delay between requests |
+| 500         | Server Error        | Retry once; if persistent, report upstream               |
+| SSL error   | Certificate issue   | Do not use `-k` (insecure) — fix the root cause          |
+| Timeout     | Network/server slow | Increase `--max-time`; check connectivity                |
 
 Verify a URL is reachable before complex operations:
 

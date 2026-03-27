@@ -1,6 +1,7 @@
 ---
 name: repo-sentinel
-description: 'Full security audit and enforcement for public repositories across 12
+description:
+  "Full security audit and enforcement for public repositories across 12
   attack surfaces: git history, source code, docs, config, .gitignore recon, CI/CD,
   containers, dependencies, binaries, metadata, platform-specific (GitHub/GitLab),
   license compliance, and community surface. Provides fast-path and full 20-check
@@ -13,13 +14,14 @@ description: 'Full security audit and enforcement for public repositories across
   security scanning, or is this safe to push, pre-oss, open source readiness, release
   audit, or open source audit. This is the gatekeeper between internal and public.
 
-  '
+  "
 metadata:
   version: 1.1.0
   category: review
   tags: [security, public-repo, secret-scanning, audit]
   difficulty: advanced
 ---
+
 # Repo Sentinel
 
 Everything in a public repo is permanent attacker surface. This skill defines what belongs in a

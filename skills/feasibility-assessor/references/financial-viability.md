@@ -12,6 +12,7 @@ Growth: New MRR + Expansion MRR - Churned MRR - Contraction MRR
 Key drivers: conversion rate from free to paid, monthly churn rate, expansion rate.
 
 Typical conversion benchmarks:
+
 - Free trial to paid: 2-5% (self-serve), 15-25% (sales-assisted)
 - Freemium to paid: 1-4%
 - Annual vs monthly: 20-40% of customers choose annual (offer 15-20% discount)
@@ -35,6 +36,7 @@ Revenue = Pageviews * Ads per Page * CPM / 1000
 ```
 
 CPM benchmarks by category:
+
 - General display: $1-5
 - Targeted display: $5-15
 - Premium / niche: $15-50
@@ -66,29 +68,30 @@ Break-Even Customers = Fixed Costs / (ARPU * Gross Margin % - Variable Cost per 
 
 ### Fixed Cost Categories
 
-| Category | Examples | Typical Monthly Range (Startup) |
-|----------|----------|---------------------------------|
-| Personnel | Salaries, benefits, contractors | $20K-200K |
-| Infrastructure | Cloud hosting, SaaS tools, domains | $500-10K |
-| Office / workspace | Rent, utilities, co-working | $0-10K |
-| Legal / accounting | Legal counsel, bookkeeping, compliance | $1K-5K |
-| Insurance | D&O, E&O, general liability | $500-2K |
+| Category           | Examples                               | Typical Monthly Range (Startup) |
+| ------------------ | -------------------------------------- | ------------------------------- |
+| Personnel          | Salaries, benefits, contractors        | $20K-200K                       |
+| Infrastructure     | Cloud hosting, SaaS tools, domains     | $500-10K                        |
+| Office / workspace | Rent, utilities, co-working            | $0-10K                          |
+| Legal / accounting | Legal counsel, bookkeeping, compliance | $1K-5K                          |
+| Insurance          | D&O, E&O, general liability            | $500-2K                         |
 
 ### Variable Cost Categories
 
-| Category | Examples | Scales With |
-|----------|----------|-------------|
-| COGS | Hosting per user, API calls, data costs | Users / transactions |
-| Payment processing | Stripe/payment gateway fees | Revenue |
-| Customer support | Support tickets, chat agents | Users |
-| Fulfillment | Shipping, packaging, returns | Orders |
-| Sales commission | Per-deal commission | New customers |
+| Category           | Examples                                | Scales With          |
+| ------------------ | --------------------------------------- | -------------------- |
+| COGS               | Hosting per user, API calls, data costs | Users / transactions |
+| Payment processing | Stripe/payment gateway fees             | Revenue              |
+| Customer support   | Support tickets, chat agents            | Users                |
+| Fulfillment        | Shipping, packaging, returns            | Orders               |
+| Sales commission   | Per-deal commission                     | New customers        |
 
 ### Scenario Modeling
 
 Build three scenarios with explicit assumptions:
 
 **Pessimistic scenario**:
+
 - Conversion: 50th percentile of industry benchmarks
 - Churn: 1.5x industry average
 - Growth: linear, no viral coefficient
@@ -96,6 +99,7 @@ Build three scenarios with explicit assumptions:
 - Timeline: 1.5x base estimate
 
 **Base scenario**:
+
 - Conversion: industry average
 - Churn: industry average
 - Growth: moderate compounding
@@ -103,6 +107,7 @@ Build three scenarios with explicit assumptions:
 - Timeline: base estimate
 
 **Optimistic scenario**:
+
 - Conversion: top quartile
 - Churn: 0.7x industry average
 - Growth: compounding with network effects or viral coefficient
@@ -148,20 +153,21 @@ Minimum comfortable runway: 12 months. Start fundraising at 6-9 months remaining
 1. Determine monthly burn rate (total operating expenses - revenue)
 2. Estimate months to reach cash-flow positive or next funding milestone
 3. Add 6-month buffer for delays and unexpected costs
-4. Total funding needed = monthly burn * (months to milestone + buffer)
+4. Total funding needed = monthly burn \* (months to milestone + buffer)
 
 ### Funding Stage Benchmarks
 
-| Stage | Typical Raise | Expected Traction |
-|-------|--------------|-------------------|
-| Pre-seed | $100K-500K | Idea + team, maybe prototype |
-| Seed | $500K-3M | MVP live, early users, initial revenue signal |
-| Series A | $3M-15M | Product-market fit, $1M+ ARR, clear growth path |
-| Series B | $15M-50M | Scaling proven model, $5M+ ARR, unit economics work |
+| Stage    | Typical Raise | Expected Traction                                   |
+| -------- | ------------- | --------------------------------------------------- |
+| Pre-seed | $100K-500K    | Idea + team, maybe prototype                        |
+| Seed     | $500K-3M      | MVP live, early users, initial revenue signal       |
+| Series A | $3M-15M       | Product-market fit, $1M+ ARR, clear growth path     |
+| Series B | $15M-50M      | Scaling proven model, $5M+ ARR, unit economics work |
 
 ## Industry Benchmark Sources
 
 Where to find comparable data:
+
 - **SaaS**: OpenView Partners benchmarks, KeyBanc SaaS survey, Bessemer cloud index
 - **E-commerce**: Shopify benchmark reports, NRF retail data
 - **Marketplace**: a16z marketplace metrics, Sharetribe marketplace data
@@ -173,15 +179,15 @@ Use WebSearch to find current-year versions of these reports during assessment.
 
 ## Key Financial Ratios
 
-| Ratio | Formula | What It Indicates | Healthy Range |
-|-------|---------|-------------------|---------------|
-| Gross margin | (Revenue - COGS) / Revenue | Efficiency of core delivery | SaaS: 70-85%, E-com: 30-50% |
-| Operating margin | Operating Income / Revenue | Overall business efficiency | Positive for mature, negative OK for growth |
-| Burn multiple | Net Burn / Net New ARR | Efficiency of growth spending | < 2x good, < 1x excellent |
-| Rule of 40 | Revenue Growth % + Profit Margin % | Growth-profitability balance | > 40% for SaaS |
-| Magic number | Net New ARR / Prior Quarter S&M Spend | Sales efficiency | > 1.0 good, > 1.5 excellent |
-| CAC payback | CAC / (ARPU * Gross Margin) | Months to recover acquisition cost | < 12 months |
-| Quick ratio (SaaS) | (New MRR + Expansion MRR) / (Churned MRR + Contraction MRR) | Growth health | > 4.0 |
+| Ratio              | Formula                                                     | What It Indicates                  | Healthy Range                               |
+| ------------------ | ----------------------------------------------------------- | ---------------------------------- | ------------------------------------------- |
+| Gross margin       | (Revenue - COGS) / Revenue                                  | Efficiency of core delivery        | SaaS: 70-85%, E-com: 30-50%                 |
+| Operating margin   | Operating Income / Revenue                                  | Overall business efficiency        | Positive for mature, negative OK for growth |
+| Burn multiple      | Net Burn / Net New ARR                                      | Efficiency of growth spending      | < 2x good, < 1x excellent                   |
+| Rule of 40         | Revenue Growth % + Profit Margin %                          | Growth-profitability balance       | > 40% for SaaS                              |
+| Magic number       | Net New ARR / Prior Quarter S&M Spend                       | Sales efficiency                   | > 1.0 good, > 1.5 excellent                 |
+| CAC payback        | CAC / (ARPU \* Gross Margin)                                | Months to recover acquisition cost | < 12 months                                 |
+| Quick ratio (SaaS) | (New MRR + Expansion MRR) / (Churned MRR + Contraction MRR) | Growth health                      | > 4.0                                       |
 
 ## Path to Profitability Patterns
 

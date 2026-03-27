@@ -1,6 +1,7 @@
 ---
 name: qa-systematic
-description: 'Systematic web application QA testing with structured issue taxonomy,
+description:
+  'Systematic web application QA testing with structured issue taxonomy,
   health scoring, and regression tracking. Use this skill when the user asks for QA
   testing, systematic testing, smoke testing, regression testing, web app testing,
   browser testing, or says "QA this", "test the app", "smoke test", "run QA", "systematic
@@ -14,17 +15,21 @@ metadata:
   tags: [qa, testing, browser, regression]
   difficulty: advanced
 ---
+
 # Systematic QA Testing
 
 ## Modes
 
 ### Full (default)
+
 Systematic page-by-page testing, 8-category health score, full issue documentation.
 
 ### Quick
+
 30-second smoke test of critical paths only: login, main nav, primary action.
 
 ### Regression
+
 Diff current state against saved baseline, report new/resolved issues.
 
 ## Browser Automation Detection
@@ -67,42 +72,49 @@ Use the highest-priority method available. State which method is in use at the s
 For each page, run the per-page checklist below. In quick mode, run only the items marked with (Q).
 
 #### Visual Scan
+
 - (Q) Layout renders correctly — no overlap, no overflow
 - Images load — no broken `<img>` tags
 - Typography consistent — no visible font fallbacks
 - Responsive: check at desktop (1280px) and mobile (375px) widths
 
 #### Interactive Elements
+
 - (Q) All buttons and links are clickable and responsive
 - Hover states present where expected
 - Focus indicators visible for keyboard navigation
 - Disabled states visually distinct
 
 #### Forms
+
 - (Q) Required field validation fires on empty submit
 - Error messages display on invalid input
 - Success feedback on valid submission
 - Form resubmission handled — no duplicate submissions on double-click
 
 #### Navigation
+
 - (Q) All nav links resolve — no 404s
 - Back button works as expected
 - Deep links work — direct URL access returns correct page
 - Breadcrumbs accurate (if present)
 
 #### State Management
+
 - Loading states displayed during async operations
 - Empty states handled — no blank pages when data is absent
 - Error states recoverable — retry or back options present
 - Data persists across navigation — no lost form data on back/forward
 
 #### Console
+
 - (Q) No JavaScript errors in console
 - No failed network requests (4xx/5xx)
 - No mixed content warnings
 - No deprecation warnings in hot paths
 
 #### Responsiveness
+
 - Mobile layout usable — no horizontal scroll at 375px
 - Touch targets >= 44px
 - Text readable without zoom (>= 16px body text)
@@ -131,7 +143,7 @@ Compute health score using the weights defined below and detailed in `references
 Weighted average across 8 categories, scored 0-100.
 
 | Category       | Weight |
-|----------------|--------|
+| -------------- | ------ |
 | Console errors | 15%    |
 | Broken links   | 10%    |
 | Functional     | 20%    |
@@ -142,6 +154,7 @@ Weighted average across 8 categories, scored 0-100.
 | Content        | 5%     |
 
 **Scoring per category**: start at 100, deduct per issue by severity:
+
 - Critical: -30
 - Major: -15
 - Minor: -5

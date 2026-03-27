@@ -7,12 +7,14 @@
 Organize findings by recurring themes across papers rather than paper-by-paper summary.
 
 **Process:**
+
 1. Code each paper's key findings into thematic labels
 2. Group papers sharing themes
 3. For each theme: state the consensus, note disagreements, identify evolution
 4. Cross-reference themes to reveal gaps
 
 **Output structure:**
+
 ```
 ## Theme: [Label]
 
@@ -33,6 +35,7 @@ Points of tension: [where papers disagree and why]
 Build structured comparisons across defined dimensions.
 
 **Process:**
+
 1. Identify comparison axes (method, dataset, metric, scale, limitations)
 2. Extract comparable data points from each paper
 3. Build comparison matrix
@@ -40,13 +43,13 @@ Build structured comparisons across defined dimensions.
 
 **Output structure:**
 
-| Dimension | Paper A | Paper B | Paper C |
-|-----------|---------|---------|---------|
-| Method | X | Y | Z |
-| Dataset | D1 | D1, D2 | D2 |
-| Key metric | 0.85 | 0.82 | 0.88 |
-| Scale | 1K samples | 10K samples | 1K samples |
-| Limitation | Domain-specific | Slow | Requires X |
+| Dimension  | Paper A         | Paper B     | Paper C    |
+| ---------- | --------------- | ----------- | ---------- |
+| Method     | X               | Y           | Z          |
+| Dataset    | D1              | D1, D2      | D2         |
+| Key metric | 0.85            | 0.82        | 0.88       |
+| Scale      | 1K samples      | 10K samples | 1K samples |
+| Limitation | Domain-specific | Slow        | Requires X |
 
 **Pitfall:** Comparing incomparable results. Papers using different datasets, metrics, or evaluation protocols cannot be directly compared on numbers. Note comparability constraints explicitly.
 
@@ -55,12 +58,14 @@ Build structured comparisons across defined dimensions.
 Map the temporal evolution of a research area.
 
 **Process:**
+
 1. Order papers by publication date
 2. Identify inflection points (papers that shifted the field's direction)
 3. Track how methods, assumptions, and benchmarks changed over time
 4. Note what drove changes (new datasets, new techniques, failures of prior approaches)
 
 **Output structure:**
+
 ```
 ## [Year Range]: [Era Label]
 
@@ -79,16 +84,17 @@ Identify what is unstudied, understudied, or contradictory.
 
 **Categories of gaps:**
 
-| Gap Type | Description | Example |
-|----------|-------------|---------|
-| **Coverage gap** | Topic or domain not yet studied | "No work applies X to domain Y" |
-| **Methodological gap** | Approach not yet tried on a known problem | "X has been tested with method A but not B" |
-| **Evidence gap** | Claims made without sufficient evidence | "Multiple papers claim X but none provide controlled experiments" |
-| **Contradiction** | Studies reach conflicting conclusions | "Paper A finds X improves Y; Paper B finds it does not" |
-| **Scale gap** | Only tested at small scale | "All studies use <1K samples; real-world scale unknown" |
-| **Replication gap** | Findings not independently replicated | "Only the original authors have reported this result" |
+| Gap Type               | Description                               | Example                                                           |
+| ---------------------- | ----------------------------------------- | ----------------------------------------------------------------- |
+| **Coverage gap**       | Topic or domain not yet studied           | "No work applies X to domain Y"                                   |
+| **Methodological gap** | Approach not yet tried on a known problem | "X has been tested with method A but not B"                       |
+| **Evidence gap**       | Claims made without sufficient evidence   | "Multiple papers claim X but none provide controlled experiments" |
+| **Contradiction**      | Studies reach conflicting conclusions     | "Paper A finds X improves Y; Paper B finds it does not"           |
+| **Scale gap**          | Only tested at small scale                | "All studies use <1K samples; real-world scale unknown"           |
+| **Replication gap**    | Findings not independently replicated     | "Only the original authors have reported this result"             |
 
 **Process:**
+
 1. Map the space: what questions exist × what has been studied
 2. Identify empty cells (unstudied combinations)
 3. Identify weak cells (studied but with limitations)
@@ -101,35 +107,35 @@ For each included paper, extract:
 
 ```yaml
 paper:
-  id: ""              # arXiv ID, DOI, or other identifier
+  id: "" # arXiv ID, DOI, or other identifier
   title: ""
   authors: []
   year: null
-  venue: ""           # Conference/journal name
-  type: ""            # empirical | theoretical | survey | position
+  venue: "" # Conference/journal name
+  type: "" # empirical | theoretical | survey | position
 
 research:
-  question: ""        # What question does this paper address?
-  hypothesis: ""      # What does it predict/propose?
-  contribution: ""    # What is the claimed novel contribution?
+  question: "" # What question does this paper address?
+  hypothesis: "" # What does it predict/propose?
+  contribution: "" # What is the claimed novel contribution?
 
 methodology:
-  approach: ""        # High-level method description
-  datasets: []        # Datasets used
-  metrics: []         # Evaluation metrics
-  baselines: []       # What it compares against
-  scale: ""           # Data/compute scale
+  approach: "" # High-level method description
+  datasets: [] # Datasets used
+  metrics: [] # Evaluation metrics
+  baselines: [] # What it compares against
+  scale: "" # Data/compute scale
 
 findings:
-  primary: []         # Main results (quantitative where possible)
-  secondary: []       # Supporting results
-  negative: []        # What did NOT work (often buried in appendices)
+  primary: [] # Main results (quantitative where possible)
+  secondary: [] # Supporting results
+  negative: [] # What did NOT work (often buried in appendices)
 
 assessment:
-  strengths: []       # What this paper does well
-  limitations: []     # As stated by authors + your assessment
-  relevance: ""       # How it relates to the review's research question
-  themes: []          # Thematic labels for synthesis grouping
+  strengths: [] # What this paper does well
+  limitations: [] # As stated by authors + your assessment
+  relevance: "" # How it relates to the review's research question
+  themes: [] # Thematic labels for synthesis grouping
 ```
 
 ## Anti-Patterns

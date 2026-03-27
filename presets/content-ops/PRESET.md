@@ -1,10 +1,11 @@
 ---
 name: content-ops
 type: preset
-description: 'DEPRECATED: Superseded by the content-strategist agent, which orchestrates
+description:
+  "DEPRECATED: Superseded by the content-strategist agent, which orchestrates
   content skills (humanize, linkedin-post-style, html-presentation, md-to-pdf, tavily,
   youtube-analysis) with per-channel adaptation, audience-aware tone, and automated
-  quality passes. Use content-strategist agent instead.'
+  quality passes. Use content-strategist agent instead."
 metadata:
   version: 1.1.0
   status: deprecated
@@ -14,17 +15,18 @@ metadata:
 preset:
   packages:
     skills:
-    - {name: humanize}
-    - {name: linkedin-post-style}
-    - {name: manuscript-review}
-    - {name: manuscript-provenance}
-    - {name: changelog-composer}
-    - {name: md-to-pdf}
-    - {name: doc-condenser}
-    - {name: to-markdown}
+      - { name: humanize }
+      - { name: linkedin-post-style }
+      - { name: manuscript-review }
+      - { name: manuscript-provenance }
+      - { name: changelog-composer }
+      - { name: md-to-pdf }
+      - { name: doc-condenser }
+      - { name: to-markdown }
   compatibility:
     platforms: [darwin, linux]
 ---
+
 # Content Ops
 
 > **DEPRECATED** — The `content-strategist` agent supersedes this preset. It creates and
@@ -36,16 +38,16 @@ An end-to-end content lifecycle toolkit for drafting, refining, reviewing, publi
 
 ## Included Skills
 
-| Skill                  | Purpose                                      | Output                              |
-| ---------------------- | -------------------------------------------- | ----------------------------------- |
-| `humanize`             | De-AI text, restore natural writing voice     | Rewritten prose free of AI patterns |
-| `linkedin-post-style`  | Format content for LinkedIn and social media  | Platform-ready social posts         |
-| `manuscript-review`    | Pre-submission readiness audit                | Structured review with action items |
-| `manuscript-provenance`| Verify authorship and computational origins   | Provenance verification report      |
-| `changelog-composer`   | Generate release notes from commit history    | Formatted changelog / release notes |
-| `md-to-pdf`            | Export markdown documents to PDF              | PDF file                            |
-| `doc-condenser`        | Summarize and condense lengthy documents      | Condensed summary document          |
-| `to-markdown`          | Convert various formats to markdown           | Markdown file                       |
+| Skill                   | Purpose                                      | Output                              |
+| ----------------------- | -------------------------------------------- | ----------------------------------- |
+| `humanize`              | De-AI text, restore natural writing voice    | Rewritten prose free of AI patterns |
+| `linkedin-post-style`   | Format content for LinkedIn and social media | Platform-ready social posts         |
+| `manuscript-review`     | Pre-submission readiness audit               | Structured review with action items |
+| `manuscript-provenance` | Verify authorship and computational origins  | Provenance verification report      |
+| `changelog-composer`    | Generate release notes from commit history   | Formatted changelog / release notes |
+| `md-to-pdf`             | Export markdown documents to PDF             | PDF file                            |
+| `doc-condenser`         | Summarize and condense lengthy documents     | Condensed summary document          |
+| `to-markdown`           | Convert various formats to markdown          | Markdown file                       |
 
 ## Workflow
 
@@ -62,16 +64,16 @@ An end-to-end content lifecycle toolkit for drafting, refining, reviewing, publi
 
 ## Choosing the Right Skill
 
-| Task                                          | Skill                  |
-| --------------------------------------------- | ---------------------- |
-| Text sounds too robotic or AI-generated       | `humanize`             |
-| Need a LinkedIn or social media post          | `linkedin-post-style`  |
-| Preparing a manuscript for submission         | `manuscript-review`    |
-| Confirming data/figures match source code     | `manuscript-provenance`|
-| Writing release notes for a new version       | `changelog-composer`   |
-| Exporting a document as PDF                   | `md-to-pdf`            |
-| Shortening a long document or extracting key points | `doc-condenser`  |
-| Converting HTML, DOCX, or other formats to MD | `to-markdown`          |
+| Task                                                | Skill                   |
+| --------------------------------------------------- | ----------------------- |
+| Text sounds too robotic or AI-generated             | `humanize`              |
+| Need a LinkedIn or social media post                | `linkedin-post-style`   |
+| Preparing a manuscript for submission               | `manuscript-review`     |
+| Confirming data/figures match source code           | `manuscript-provenance` |
+| Writing release notes for a new version             | `changelog-composer`    |
+| Exporting a document as PDF                         | `md-to-pdf`             |
+| Shortening a long document or extracting key points | `doc-condenser`         |
+| Converting HTML, DOCX, or other formats to MD       | `to-markdown`           |
 
 ## When to Use
 

@@ -1,6 +1,7 @@
 ---
 name: youtube-analysis
-description: 'Extract YouTube video transcripts and produce structured concept analysis
+description:
+  "Extract YouTube video transcripts and produce structured concept analysis
   with multi-level summaries, key concepts, and actionable takeaways. Pure Python,
   no API keys, no MCP dependency. Fetches transcripts via youtube-transcript-api with
   yt-dlp fallback, then Claude analyzes the content directly. Use this skill when
@@ -10,13 +11,14 @@ description: 'Extract YouTube video transcripts and produce structured concept a
   podcast transcript, conference talk notes, tech talk breakdown, video key points,
   TL;DR of video, video takeaways, or pastes any URL containing youtube.com or youtu.be.
 
-  '
+  "
 metadata:
   version: 1.1.0
   category: visualization
   tags: [youtube, analysis, skill]
   difficulty: intermediate
 ---
+
 # YouTube Analysis
 
 Extract transcripts from YouTube videos and produce structured concept analysis — key ideas, arguments, technical terms, takeaways, and multi-level summaries — all without API keys or MCP servers.

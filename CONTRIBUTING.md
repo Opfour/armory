@@ -119,17 +119,37 @@ Optional subdirectories (for any package type):
 
 Packages use [semantic versioning](https://semver.org/) via the `metadata.version` field in their definition file frontmatter.
 
-| Change Type                                      | Bump  | Example            |
-| ------------------------------------------------ | ----- | ------------------ |
-| Breaking change to package interface or behavior | MAJOR | `1.0.0` -> `2.0.0` |
-| New capability, backward-compatible              | MINOR | `1.0.0` -> `1.1.0` |
-| Bug fix, typo, clarification                     | PATCH | `1.0.0` -> `1.0.1` |
+| Change Type | Bump | Example | Concrete examples |
+| --- | --- | --- | --- |
+| Breaking change to behavior or schema | MAJOR | `1.0.0` -> `2.0.0` | Removed workflow step, renamed command, changed output format |
+| New capability, backward-compatible | MINOR | `1.0.0` -> `1.1.0` | Added workflow step, new reference file, expanded trigger coverage |
+| Bug fix, typo, clarification | PATCH | `1.0.0` -> `1.0.1` | Typo fix, description improvement, eval case addition |
 
 After changing a version, regenerate the manifest:
 
 ```bash
 uv run scripts/generate_manifest.py
 ```
+
+### Per-Package Changelogs
+
+For packages with active development (frequent updates across multiple PRs), add an optional `CHANGELOG.md` in the package directory:
+
+```markdown
+# Changelog — package-name
+
+## 2.0.0
+
+- BREAKING: removed Phase 3 (merged into Phase 2)
+- Added error handling section
+
+## 1.1.0
+
+- Added reference file for edge cases
+- Expanded trigger phrases for activation coverage
+```
+
+Changelogs are optional. Single-version packages and packages with only a few changes do not need them — the git history suffices.
 
 ## Naming Rules
 

@@ -1,6 +1,7 @@
 ---
 name: manuscript-review
-description: 'Systematic pre-publication manuscript audit producing a structured refactoring
+description:
+  'Systematic pre-publication manuscript audit producing a structured refactoring
   report with section-level diagnostics, citation hygiene analysis, and submission-readiness
   assessment. Use this skill whenever the user uploads a manuscript, paper, thesis
   chapter, journal submission, or conference paper and asks for review, feedback,
@@ -19,6 +20,7 @@ metadata:
   tags: [manuscript, pre-publication, citation-hygiene, submission]
   difficulty: advanced
 ---
+
 # Manuscript Review Skill
 
 ## Purpose
@@ -172,6 +174,7 @@ from `references/detection-patterns.md`. Academic manuscripts
 drafted or polished with AI assistants often retain detectable tells.
 
 Focus on patterns relevant to academic writing:
+
 - Significance inflation (#1) — "pivotal", "groundbreaking", "paradigm shift"
 - AI-frequency vocabulary (#7) — "delve", "landscape", "tapestry", "underscore"
 - Copula avoidance (#8) — "serves as" instead of "is"
@@ -180,6 +183,7 @@ Focus on patterns relevant to academic writing:
 - Excessive hedging (#23) — beyond what epistemically appropriate hedging requires
 
 Skip patterns that are acceptable in academic prose:
+
 - Passive voice — standard in methods sections
 - Formal transitions — "Furthermore", "Moreover" are conventional in academic writing
 - Title case headings — journal style may require it

@@ -1,6 +1,7 @@
 ---
 name: plan-review
-description: 'Pre-implementation plan audit that stress-tests scope, assumptions,
+description:
+  'Pre-implementation plan audit that stress-tests scope, assumptions,
   risks, and failure modes before code is written. Use this skill when the user asks
   to review a plan, audit a proposal, challenge scope, stress-test an approach, evaluate
   a technical design, or says "review this plan", "is this plan solid", "what am I
@@ -14,6 +15,7 @@ metadata:
   tags: [plan-audit, scope, risk-assessment, assumptions]
   difficulty: intermediate
 ---
+
 # Plan Review Skill
 
 ## Purpose
@@ -63,7 +65,7 @@ review proceeds on a false foundation.
 Extract every implicit assumption. For each one:
 
 | Assumption | If wrong? | Supporting evidence | What falsifies it? |
-|------------|-----------|--------------------|--------------------|
+| ---------- | --------- | ------------------- | ------------------ |
 
 Common assumption categories to probe:
 
@@ -79,7 +81,7 @@ Common assumption categories to probe:
 For each component or subsystem in the plan, fill a failure mode table:
 
 | Component | Failure Mode | Blast Radius | Recovery Strategy |
-|-----------|-------------|--------------|-------------------|
+| --------- | ------------ | ------------ | ----------------- |
 
 Additionally identify **data flow shadow paths** — side effects, async
 callbacks, event propagation, or cache invalidation chains that are not on
@@ -164,12 +166,12 @@ Evaluate the proposed implementation order:
 
 Deliver exactly one of:
 
-| Verdict | Meaning |
-|---------|---------|
-| **Ship** | Plan is solid. Proceed as written. |
+| Verdict               | Meaning                                                                         |
+| --------------------- | ------------------------------------------------------------------------------- |
+| **Ship**              | Plan is solid. Proceed as written.                                              |
 | **Ship with changes** | Viable, but specific modifications listed below are required before proceeding. |
-| **Rethink** | Fundamental structural issues require re-planning. Itemize what must change. |
-| **Reject** | Plan is not viable. Explain why and what alternative direction to consider. |
+| **Rethink**           | Fundamental structural issues require re-planning. Itemize what must change.    |
+| **Reject**            | Plan is not viable. Explain why and what alternative direction to consider.     |
 
 Include a one-paragraph rationale for the verdict.
 

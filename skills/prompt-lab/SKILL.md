@@ -1,6 +1,7 @@
 ---
 name: prompt-lab
-description: 'Systematic LLM prompt engineering: analyzes existing prompts for failure
+description:
+  'Systematic LLM prompt engineering: analyzes existing prompts for failure
   modes, generates structured variants (direct, few-shot, chain-of-thought), designs
   evaluation rubrics with weighted criteria, and produces test case suites for comparing
   prompt performance. Triggers on: "prompt engineering", "prompt lab", "generate prompt
@@ -17,6 +18,7 @@ metadata:
   tags: [prompt-engineering, evaluation, few-shot, chain-of-thought]
   difficulty: intermediate
 ---
+
 # Prompt Lab
 
 Replaces trial-and-error prompt engineering with structured methodology: objective

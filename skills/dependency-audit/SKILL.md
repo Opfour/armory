@@ -1,6 +1,7 @@
 ---
 name: dependency-audit
-description: 'Audits project dependencies for license compliance, maintenance health,
+description:
+  'Audits project dependencies for license compliance, maintenance health,
   security vulnerabilities, and bloat. Analyzes both direct and transitive dependency
   trees, detects abandoned packages, identifies license conflicts (copyleft, unknown),
   checks for known CVEs, and finds unused or duplicate dependencies. Triggers on:
@@ -16,6 +17,7 @@ metadata:
   tags: [dependencies, vulnerabilities, licenses, supply-chain]
   difficulty: intermediate
 ---
+
 # Dependency Audit
 
 Comprehensive dependency risk assessment: license compatibility analysis, maintenance

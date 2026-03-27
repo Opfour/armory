@@ -127,25 +127,25 @@ npm install @remotion/renderer
 Basic usage:
 
 ```ts
-import { renderMedia, selectComposition } from '@remotion/renderer';
-import path from 'path';
+import { renderMedia, selectComposition } from "@remotion/renderer";
+import path from "path";
 
 const bundleLocation = await bundle({
-  entryPoint: path.join(process.cwd(), 'src/index.ts'),
+  entryPoint: path.join(process.cwd(), "src/index.ts"),
 });
 
 const composition = await selectComposition({
   serveUrl: bundleLocation,
-  id: 'MyVideo',
-  inputProps: { title: 'Hello World' },
+  id: "MyVideo",
+  inputProps: { title: "Hello World" },
 });
 
 await renderMedia({
   composition,
   serveUrl: bundleLocation,
-  codec: 'h264',
-  outputLocation: 'out/video.mp4',
-  inputProps: { title: 'Hello World' },
+  codec: "h264",
+  outputLocation: "out/video.mp4",
+  inputProps: { title: "Hello World" },
   onProgress: ({ progress }) => {
     process.stdout.write(`\rRendering: ${Math.round(progress * 100)}%`);
   },
@@ -157,12 +157,12 @@ await renderMedia({
 Bundle the project before rendering programmatically:
 
 ```ts
-import { bundle } from '@remotion/bundler';
-import path from 'path';
-import { enableTailwind } from '@remotion/tailwind';
+import { bundle } from "@remotion/bundler";
+import path from "path";
+import { enableTailwind } from "@remotion/tailwind";
 
 const bundleLocation = await bundle({
-  entryPoint: path.join(process.cwd(), 'src/index.ts'),
+  entryPoint: path.join(process.cwd(), "src/index.ts"),
   // Apply same webpack overrides as remotion.config.ts
   webpackOverride: enableTailwind,
 });
@@ -183,35 +183,35 @@ npx remotion still Thumbnail out/thumb-custom.png --props='{"title":"Custom"}'
 Programmatic:
 
 ```ts
-import { renderStill } from '@remotion/renderer';
+import { renderStill } from "@remotion/renderer";
 
 await renderStill({
   composition,
   serveUrl: bundleLocation,
-  output: 'out/thumbnail.png',
-  imageFormat: 'png',
-  inputProps: { title: 'Custom Thumbnail' },
+  output: "out/thumbnail.png",
+  imageFormat: "png",
+  inputProps: { title: "Custom Thumbnail" },
 });
 ```
 
 ## Quality Presets (scripts/render.sh reference)
 
-| Preset    | Resolution | FPS | Concurrency | Use case               |
-| --------- | ---------- | --- | ----------- | ---------------------- |
-| `preview` | 480p (0.25x scale) | composition fps | 2 | Fast layout check |
-| `draft`   | 720p (0.667x scale) | composition fps | 4 | Client draft review |
-| `final`   | 1080p (1x) | composition fps | 8 | Standard delivery |
-| `4k`      | 2160p (2x scale) | composition fps | 4 | Presentation quality |
+| Preset    | Resolution          | FPS             | Concurrency | Use case             |
+| --------- | ------------------- | --------------- | ----------- | -------------------- |
+| `preview` | 480p (0.25x scale)  | composition fps | 2           | Fast layout check    |
+| `draft`   | 720p (0.667x scale) | composition fps | 4           | Client draft review  |
+| `final`   | 1080p (1x)          | composition fps | 8           | Standard delivery    |
+| `4k`      | 2160p (2x scale)    | composition fps | 4           | Presentation quality |
 
 Note: "scale" here means `--scale` flag passed to `npx remotion render`. The composition's width/height defines the native resolution; `--scale` multiplies it.
 
 ## Common Render Errors
 
-| Error                          | Cause                                      | Resolution                                            |
-| ------------------------------ | ------------------------------------------ | ----------------------------------------------------- |
-| `Composition not found`        | Wrong ID in CLI command                    | Check `<Composition id=` matches command              |
-| `ENOMEM` / heap out of memory  | Too many concurrent frames in RAM          | Reduce `--concurrency`                                |
-| `delayRender timed out`        | Async fetch > 30s                          | Increase `timeoutInMilliseconds` in `delayRender`     |
-| `ERR_MODULE_NOT_FOUND`         | Missing npm package                        | Run `npm install`                                     |
-| Corrupted output               | Interrupted render                         | Delete partial output, re-render                      |
-| No audio in output             | ffmpeg not found                           | Install ffmpeg: `brew install ffmpeg`                 |
+| Error                         | Cause                             | Resolution                                        |
+| ----------------------------- | --------------------------------- | ------------------------------------------------- |
+| `Composition not found`       | Wrong ID in CLI command           | Check `<Composition id=` matches command          |
+| `ENOMEM` / heap out of memory | Too many concurrent frames in RAM | Reduce `--concurrency`                            |
+| `delayRender timed out`       | Async fetch > 30s                 | Increase `timeoutInMilliseconds` in `delayRender` |
+| `ERR_MODULE_NOT_FOUND`        | Missing npm package               | Run `npm install`                                 |
+| Corrupted output              | Interrupted render                | Delete partial output, re-render                  |
+| No audio in output            | ffmpeg not found                  | Install ffmpeg: `brew install ffmpeg`             |

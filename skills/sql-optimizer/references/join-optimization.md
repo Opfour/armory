@@ -140,10 +140,10 @@ WHERE d.user_id IS NULL;
 
 ### PostgreSQL CTE Behavior
 
-| PostgreSQL Version | CTE Behavior |
-|-------------------|-------------|
-| < 12 | Always materialized (optimization fence) |
-| >= 12 | Inlined by default if referenced once |
+| PostgreSQL Version | CTE Behavior                             |
+| ------------------ | ---------------------------------------- |
+| < 12               | Always materialized (optimization fence) |
+| >= 12              | Inlined by default if referenced once    |
 
 ```sql
 -- Force materialization (PostgreSQL 12+)

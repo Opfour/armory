@@ -1,6 +1,7 @@
 ---
 name: benchmark-runner
-description: 'Designs structured benchmarks for comparing algorithms, models, or implementations.
+description:
+  'Designs structured benchmarks for comparing algorithms, models, or implementations.
   Selects appropriate metrics (latency, throughput, memory, accuracy), designs representative
   test cases, captures hardware/software context, produces comparison tables with
   tradeoff analysis, and includes reproduction instructions. Triggers on: "benchmark",
@@ -16,6 +17,7 @@ metadata:
   tags: [benchmarking, performance, comparison, metrics]
   difficulty: intermediate
 ---
+
 # Benchmark Runner
 
 Standardizes performance comparison methodology: metric selection, test case design,

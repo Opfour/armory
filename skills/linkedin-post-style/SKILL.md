@@ -1,6 +1,7 @@
 ---
 name: linkedin-post-style
-description: 'Write LinkedIn posts matching a specific technical author''s voice —
+description:
+  'Write LinkedIn posts matching a specific technical author''s voice —
   direct, analytical, dry-humored, and precise. Use this skill whenever the user asks
   to write, draft, rewrite, review, improve, or refine a LinkedIn post, social media
   post, tech commentary, or any public-facing short-form writing about technology,
@@ -18,6 +19,7 @@ metadata:
   tags: [linkedin, social-media, writing, content]
   difficulty: intermediate
 ---
+
 # LinkedIn Post Style Guide
 
 You are writing in a specific author's voice. This is not generic "professional LinkedIn content." Study the patterns below and internalize them before writing a single word.

@@ -1,7 +1,8 @@
 ---
 name: idea-scout
 type: agent
-description: 'Business idea validation pipeline that orchestrates parallel market
+description:
+  'Business idea validation pipeline that orchestrates parallel market
   research, competitive analysis, and feasibility assessment to produce a scored validation
   report with GO/CAUTION/NO-GO verdict. Constructs a Lean Canvas, synthesizes SWOT
   and PESTLE frameworks, and recommends low-cost experiments to test highest-risk
@@ -21,11 +22,18 @@ metadata:
   priority: 85
   enabled: true
   orchestrates:
-    skills: [idea-validator, competitive-analyzer, market-analyzer, feasibility-assessor,
-      tavily]
+    skills:
+      [
+        idea-validator,
+        competitive-analyzer,
+        market-analyzer,
+        feasibility-assessor,
+        tavily,
+      ]
   tags: [ideas, research, validation, opus]
   difficulty: intermediate
 ---
+
 # Idea Scout
 
 Business idea validation pipeline that orchestrates parallel research agents to
@@ -36,6 +44,7 @@ produce a scored validation report with actionable verdict and recommended exper
 ## Scope and Trigger Conditions
 
 ### Activate when:
+
 - User presents a business idea and asks whether it is viable
 - User requests market validation or feasibility analysis for a concept
 - User asks for a structured assessment of a startup idea
@@ -44,6 +53,7 @@ produce a scored validation report with actionable verdict and recommended exper
 - User requests a Lean Canvas or validation scorecard for an idea
 
 ### Do NOT activate when:
+
 - User asks for market research without a specific idea to validate (use `research-analyst` agent)
 - User asks for technical architecture of a validated idea (use `project-architect` agent)
 - User asks for competitive analysis of an existing product, not an idea (use `competitive-analyzer` skill)
@@ -54,10 +64,10 @@ produce a scored validation report with actionable verdict and recommended exper
 
 ## Input Requirements
 
-| Input | Required | Description |
-|-------|----------|-------------|
-| Business idea description | Yes | The problem, proposed solution, and target customer. Can be rough — intake phase will extract structure. |
-| Existing research | No | Prior market data, competitor lists, or customer interviews to incorporate. |
+| Input                     | Required | Description                                                                                              |
+| ------------------------- | -------- | -------------------------------------------------------------------------------------------------------- |
+| Business idea description | Yes      | The problem, proposed solution, and target customer. Can be rough — intake phase will extract structure. |
+| Existing research         | No       | Prior market data, competitor lists, or customer interviews to incorporate.                              |
 
 If the idea description is missing critical elements (problem, solution, target customer, value proposition, or revenue model), ask up to 5 clarifying questions before proceeding. Do not proceed with gaps in core elements.
 
@@ -65,13 +75,13 @@ If the idea description is missing critical elements (problem, solution, target 
 
 ## Composition Map
 
-| Component | Type | Invoked In | Purpose |
-|-----------|------|------------|---------|
-| idea-validator | skill | Phase 2 | Lean Canvas construction and initial validation framework |
-| market-analyzer | skill | Phase 3 (Agent A) | TAM/SAM/SOM sizing, growth trends, market timing |
-| tavily | skill | Phase 3 (Agent A) | Web search for market data and trend validation |
-| competitive-analyzer | skill | Phase 3 (Agent B) | Competitor identification, Porter's Five Forces analysis |
-| feasibility-assessor | skill | Phase 3 (Agent C) | Unit economics, technical complexity, build estimate |
+| Component            | Type  | Invoked In        | Purpose                                                   |
+| -------------------- | ----- | ----------------- | --------------------------------------------------------- |
+| idea-validator       | skill | Phase 2           | Lean Canvas construction and initial validation framework |
+| market-analyzer      | skill | Phase 3 (Agent A) | TAM/SAM/SOM sizing, growth trends, market timing          |
+| tavily               | skill | Phase 3 (Agent A) | Web search for market data and trend validation           |
+| competitive-analyzer | skill | Phase 3 (Agent B) | Competitor identification, Porter's Five Forces analysis  |
+| feasibility-assessor | skill | Phase 3 (Agent C) | Unit economics, technical complexity, build estimate      |
 
 ---
 
@@ -139,18 +149,19 @@ Cross-reference SWOT and PESTLE to identify reinforcing patterns and contradicti
 
 Score the idea across six weighted dimensions:
 
-| Dimension | Weight | Criteria |
-|-----------|--------|----------|
-| Problem | 20% | Severity, frequency, willingness to pay for solution |
-| Market | 20% | Size, growth rate, timing, accessibility |
-| Competition | 15% | Differentiation, defensibility, competitor strength |
-| Feasibility | 20% | Unit economics, technical complexity, time to market |
-| Team Fit | 10% | Alignment with builder's skills, network, domain expertise |
-| Timing | 15% | Market readiness, technology maturity, regulatory environment |
+| Dimension   | Weight | Criteria                                                      |
+| ----------- | ------ | ------------------------------------------------------------- |
+| Problem     | 20%    | Severity, frequency, willingness to pay for solution          |
+| Market      | 20%    | Size, growth rate, timing, accessibility                      |
+| Competition | 15%    | Differentiation, defensibility, competitor strength           |
+| Feasibility | 20%    | Unit economics, technical complexity, time to market          |
+| Team Fit    | 10%    | Alignment with builder's skills, network, domain expertise    |
+| Timing      | 15%    | Market readiness, technology maturity, regulatory environment |
 
 Each dimension scores 1-10. Calculate weighted total.
 
 **Verdict thresholds:**
+
 - **GO** (7.0+): Strong validation across dimensions, proceed to planning
 - **CAUTION** (4.5-6.9): Mixed signals, address specific risks before committing
 - **NO-GO** (<4.5): Fundamental issues in multiple dimensions, pivot or abandon
@@ -160,6 +171,7 @@ Each dimension scores 1-10. Calculate weighted total.
 Propose 3-5 low-cost experiments to test the highest-risk assumptions identified in Phase 2:
 
 For each experiment:
+
 1. **Assumption being tested:** The specific belief that could invalidate the idea
 2. **Experiment design:** What to do (landing page test, customer interviews, prototype, ad campaign)
 3. **Success criteria:** Quantified threshold that validates the assumption
@@ -172,23 +184,25 @@ Order experiments by risk reduction per dollar spent.
 
 ## Output Artifacts
 
-| Artifact | Format | Description |
-|----------|--------|-------------|
-| Validation Report | Markdown | Complete report with scorecard, Lean Canvas, SWOT, PESTLE, and verdict |
-| Lean Canvas | Markdown table | Structured canvas with all nine blocks populated |
-| SWOT Matrix | Markdown table | Four-quadrant analysis synthesized from parallel research |
-| Recommended Experiments | Markdown list | 3-5 prioritized experiments with success criteria |
+| Artifact                | Format         | Description                                                            |
+| ----------------------- | -------------- | ---------------------------------------------------------------------- |
+| Validation Report       | Markdown       | Complete report with scorecard, Lean Canvas, SWOT, PESTLE, and verdict |
+| Lean Canvas             | Markdown table | Structured canvas with all nine blocks populated                       |
+| SWOT Matrix             | Markdown table | Four-quadrant analysis synthesized from parallel research              |
+| Recommended Experiments | Markdown list  | 3-5 prioritized experiments with success criteria                      |
 
 ---
 
 ## Handoff Protocol
 
 ### Receiving Work
+
 - Receives a business idea description from the user or from `team-lead` agent
 - Accepts optional existing research to incorporate
 - Accepts optional constraints (budget, timeline, team size) for feasibility scoring
 
 ### Passing Work
+
 - Returns the full validation report with scored verdict (GO/CAUTION/NO-GO)
 - If verdict is GO, the report can feed directly into `project-architect` agent for technical design
 - Includes machine-parseable summary line: `**Verdict:** GO|CAUTION|NO-GO (score: X.X/10.0)`

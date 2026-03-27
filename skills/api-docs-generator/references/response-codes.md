@@ -7,12 +7,12 @@ usage guidelines.
 
 ## Success Codes (2xx)
 
-| Code | Name | When to Use | Response Body |
-|------|------|-------------|---------------|
-| 200 | OK | Successful GET, PUT, PATCH | Resource or result |
-| 201 | Created | Successful POST that created a resource | Created resource |
-| 202 | Accepted | Async operation accepted, not yet complete | Status/tracking info |
-| 204 | No Content | Successful DELETE, or action with no response | None |
+| Code | Name       | When to Use                                   | Response Body        |
+| ---- | ---------- | --------------------------------------------- | -------------------- |
+| 200  | OK         | Successful GET, PUT, PATCH                    | Resource or result   |
+| 201  | Created    | Successful POST that created a resource       | Created resource     |
+| 202  | Accepted   | Async operation accepted, not yet complete    | Status/tracking info |
+| 204  | No Content | Successful DELETE, or action with no response | None                 |
 
 ### Documentation Pattern
 
@@ -31,17 +31,17 @@ responses={204: {"description": "Resource deleted successfully"}}
 
 ## Client Error Codes (4xx)
 
-| Code | Name | When to Use | Documentation Notes |
-|------|------|-------------|---------------------|
-| 400 | Bad Request | Malformed request body or query | Describe what makes a request invalid |
-| 401 | Unauthorized | Missing or invalid authentication | Document auth requirements |
-| 403 | Forbidden | Authenticated but insufficient permissions | Document required roles/permissions |
-| 404 | Not Found | Resource does not exist | Document which identifier was not found |
-| 405 | Method Not Allowed | HTTP method not supported for this endpoint | Usually auto-documented |
-| 409 | Conflict | Action conflicts with current state | Document what state causes conflict |
-| 410 | Gone | Resource was deleted and will not return | Distinguish from 404 |
-| 422 | Unprocessable Entity | Validation error (FastAPI default) | FastAPI auto-documents this |
-| 429 | Too Many Requests | Rate limit exceeded | Document rate limit policy |
+| Code | Name                 | When to Use                                 | Documentation Notes                     |
+| ---- | -------------------- | ------------------------------------------- | --------------------------------------- |
+| 400  | Bad Request          | Malformed request body or query             | Describe what makes a request invalid   |
+| 401  | Unauthorized         | Missing or invalid authentication           | Document auth requirements              |
+| 403  | Forbidden            | Authenticated but insufficient permissions  | Document required roles/permissions     |
+| 404  | Not Found            | Resource does not exist                     | Document which identifier was not found |
+| 405  | Method Not Allowed   | HTTP method not supported for this endpoint | Usually auto-documented                 |
+| 409  | Conflict             | Action conflicts with current state         | Document what state causes conflict     |
+| 410  | Gone                 | Resource was deleted and will not return    | Distinguish from 404                    |
+| 422  | Unprocessable Entity | Validation error (FastAPI default)          | FastAPI auto-documents this             |
+| 429  | Too Many Requests    | Rate limit exceeded                         | Document rate limit policy              |
 
 ### Common Error Response Schema
 
@@ -71,12 +71,12 @@ responses={
 
 ## Server Error Codes (5xx)
 
-| Code | Name | When to Document | Notes |
-|------|------|-----------------|-------|
-| 500 | Internal Server Error | Generally NOT documented | Users can't act on it |
-| 502 | Bad Gateway | If behind proxy/gateway | Document retry strategy |
-| 503 | Service Unavailable | During maintenance | Document expected availability |
-| 504 | Gateway Timeout | Long-running operations | Document timeout limits |
+| Code | Name                  | When to Document         | Notes                          |
+| ---- | --------------------- | ------------------------ | ------------------------------ |
+| 500  | Internal Server Error | Generally NOT documented | Users can't act on it          |
+| 502  | Bad Gateway           | If behind proxy/gateway  | Document retry strategy        |
+| 503  | Service Unavailable   | During maintenance       | Document expected availability |
+| 504  | Gateway Timeout       | Long-running operations  | Document timeout limits        |
 
 **General rule:** Don't document 500 errors — they indicate a bug, not an expected
 condition. Document 502/503/504 only if users need to handle them.
@@ -85,14 +85,14 @@ condition. Document 502/503/504 only if users need to handle them.
 
 ## REST Method → Expected Codes
 
-| Method | Success | Common Errors |
-|--------|---------|---------------|
-| GET (single) | 200 | 401, 403, 404 |
-| GET (list) | 200 | 401, 403, 422 (bad filter params) |
-| POST (create) | 201 | 400, 401, 403, 409, 422 |
-| PUT (replace) | 200 | 400, 401, 403, 404, 422 |
-| PATCH (update) | 200 | 400, 401, 403, 404, 422 |
-| DELETE | 204 | 401, 403, 404 |
+| Method         | Success | Common Errors                     |
+| -------------- | ------- | --------------------------------- |
+| GET (single)   | 200     | 401, 403, 404                     |
+| GET (list)     | 200     | 401, 403, 422 (bad filter params) |
+| POST (create)  | 201     | 400, 401, 403, 409, 422           |
+| PUT (replace)  | 200     | 400, 401, 403, 404, 422           |
+| PATCH (update) | 200     | 400, 401, 403, 404, 422           |
+| DELETE         | 204     | 401, 403, 404                     |
 
 ---
 
@@ -130,12 +130,12 @@ responses={
 
 Use consistent, machine-readable error codes:
 
-| Pattern | Examples |
-|---------|---------|
-| `{RESOURCE}_NOT_FOUND` | `USER_NOT_FOUND`, `ORDER_NOT_FOUND` |
-| `{RESOURCE}_{CONFLICT}` | `EMAIL_EXISTS`, `USERNAME_TAKEN` |
-| `INVALID_{FIELD}` | `INVALID_EMAIL`, `INVALID_DATE_RANGE` |
-| `MISSING_{FIELD}` | `MISSING_AUTHORIZATION`, `MISSING_BODY` |
-| `{ACTION}_FAILED` | `PAYMENT_FAILED`, `UPLOAD_FAILED` |
-| `RATE_LIMIT_EXCEEDED` | Self-explanatory |
-| `INSUFFICIENT_PERMISSIONS` | Self-explanatory |
+| Pattern                    | Examples                                |
+| -------------------------- | --------------------------------------- |
+| `{RESOURCE}_NOT_FOUND`     | `USER_NOT_FOUND`, `ORDER_NOT_FOUND`     |
+| `{RESOURCE}_{CONFLICT}`    | `EMAIL_EXISTS`, `USERNAME_TAKEN`        |
+| `INVALID_{FIELD}`          | `INVALID_EMAIL`, `INVALID_DATE_RANGE`   |
+| `MISSING_{FIELD}`          | `MISSING_AUTHORIZATION`, `MISSING_BODY` |
+| `{ACTION}_FAILED`          | `PAYMENT_FAILED`, `UPLOAD_FAILED`       |
+| `RATE_LIMIT_EXCEEDED`      | Self-explanatory                        |
+| `INSUFFICIENT_PERMISSIONS` | Self-explanatory                        |

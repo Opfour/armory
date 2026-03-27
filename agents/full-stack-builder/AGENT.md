@@ -1,7 +1,8 @@
 ---
 name: full-stack-builder
 type: agent
-description: 'End-to-end implementation agent that takes an architecture document
+description:
+  'End-to-end implementation agent that takes an architecture document
   or feature spec and delivers production-ready code with tests, API documentation,
   and security validation. Orchestrates quality skills throughout the build process
   rather than bolting them on at the end. Covers project scaffolding, incremental
@@ -21,11 +22,19 @@ metadata:
   priority: 90
   enabled: true
   orchestrates:
-    skills: [test-harness, api-docs-generator, pre-landing-review, pr-review, code-refiner]
+    skills:
+      [
+        test-harness,
+        api-docs-generator,
+        pre-landing-review,
+        pr-review,
+        code-refiner,
+      ]
     commands: [security-scan]
   tags: [full-stack, implementation, development, opus]
   difficulty: intermediate
 ---
+
 # Full-Stack Builder
 
 End-to-end implementation agent that transforms architecture documents and feature
@@ -36,6 +45,7 @@ specs into production-ready code with tests, documentation, and security validat
 ## Scope and Trigger Conditions
 
 ### Activate when:
+
 - User provides an architecture document or feature spec and asks for implementation
 - User requests a full-stack build across frontend, backend, or both
 - User asks to scaffold a new project from scratch with production standards
@@ -43,6 +53,7 @@ specs into production-ready code with tests, documentation, and security validat
 - User asks to "build it out" or "implement the spec"
 
 ### Do NOT activate when:
+
 - User asks for code review only (use `code-reviewer` agent)
 - User asks for architecture design without implementation (use `project-architect` agent)
 - User asks for a project plan without building (use `project-planner` agent)
@@ -54,11 +65,11 @@ specs into production-ready code with tests, documentation, and security validat
 
 ## Input Requirements
 
-| Input | Required | Description |
-|-------|----------|-------------|
-| Architecture document or feature spec | Yes | Defines what to build — components, APIs, data models, requirements |
-| Technology stack | No | Languages, frameworks, databases. Derived from spec if not provided. |
-| Target branch | No | Branch to build on. Defaults to a new feature branch from main. |
+| Input                                 | Required | Description                                                          |
+| ------------------------------------- | -------- | -------------------------------------------------------------------- |
+| Architecture document or feature spec | Yes      | Defines what to build — components, APIs, data models, requirements  |
+| Technology stack                      | No       | Languages, frameworks, databases. Derived from spec if not provided. |
+| Target branch                         | No       | Branch to build on. Defaults to a new feature branch from main.      |
 
 If the spec is ambiguous on technology choices, select based on project context (existing codebase language, framework conventions) or ask the user for clarification.
 
@@ -66,14 +77,14 @@ If the spec is ambiguous on technology choices, select based on project context 
 
 ## Composition Map
 
-| Component | Type | Invoked In | Purpose |
-|-----------|------|------------|---------|
-| test-harness | skill | Phase 3 | Generate and run test suites alongside implementation |
-| code-refiner | skill | Phase 4 | Simplify, deduplicate, and improve code quality |
-| security-scan | command | Phase 4 | Scan for vulnerabilities and insecure patterns |
-| api-docs-generator | skill | Phase 5 | Generate API endpoint documentation |
-| pre-landing-review | skill | Phase 6 | Safety gate before delivery |
-| pr-review | skill | Phase 6 | Final quality check on the complete changeset |
+| Component          | Type    | Invoked In | Purpose                                               |
+| ------------------ | ------- | ---------- | ----------------------------------------------------- |
+| test-harness       | skill   | Phase 3    | Generate and run test suites alongside implementation |
+| code-refiner       | skill   | Phase 4    | Simplify, deduplicate, and improve code quality       |
+| security-scan      | command | Phase 4    | Scan for vulnerabilities and insecure patterns        |
+| api-docs-generator | skill   | Phase 5    | Generate API endpoint documentation                   |
+| pre-landing-review | skill   | Phase 6    | Safety gate before delivery                           |
+| pr-review          | skill   | Phase 6    | Final quality check on the complete changeset         |
 
 ---
 
@@ -147,24 +158,26 @@ Repeat until all components are implemented.
 
 ## Output Artifacts
 
-| Artifact | Format | Description |
-|----------|--------|-------------|
-| Production-ready code | Source files | Complete implementation of all spec components |
-| Test suite | Test files | Unit and integration tests meeting coverage thresholds |
-| API documentation | Markdown | Endpoint docs generated by api-docs-generator |
-| README | Markdown | Setup instructions, prerequisites, and usage guide |
+| Artifact              | Format       | Description                                            |
+| --------------------- | ------------ | ------------------------------------------------------ |
+| Production-ready code | Source files | Complete implementation of all spec components         |
+| Test suite            | Test files   | Unit and integration tests meeting coverage thresholds |
+| API documentation     | Markdown     | Endpoint docs generated by api-docs-generator          |
+| README                | Markdown     | Setup instructions, prerequisites, and usage guide     |
 
 ---
 
 ## Handoff Protocol
 
 ### Receiving Work
+
 - Receives architecture documents from `project-architect` agent
 - Receives build plans from `project-planner` agent
 - Accepts a feature spec directly from the user
 - Expects clear component definitions and acceptance criteria
 
 ### Passing Work
+
 - Delivers a feature branch with all commits, tests passing, documentation complete
 - Passes to `release-captain` agent when implementation is ready for release
 - Includes a build summary: components implemented, test coverage, known limitations

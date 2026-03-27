@@ -330,6 +330,42 @@ uv run scripts/generate_manifest.py # Regenerate manifest.yaml
 
 ---
 
+## MCP Server
+
+An MCP server exposes armory packages as discoverable tools for any agent session. Register in your Claude Code config:
+
+```json
+{
+  "mcpServers": {
+    "armory": { "command": "uv", "args": ["run", "mcp/server.py"] }
+  }
+}
+```
+
+**Available tools:**
+
+| Tool                 | Description                                                   |
+| -------------------- | ------------------------------------------------------------- |
+| `search_packages`    | Keyword search with type, category, and tag filters           |
+| `get_package`        | Full metadata for a single package by name                    |
+| `recommend_packages` | Context-aware recommendations by language, framework, or task |
+| `list_categories`    | All categories with package counts                            |
+
+---
+
+## Spec Compliance
+
+Skills are validated against the [agentskills.io](https://agentskills.io) open standard:
+
+```bash
+uv run scripts/validate_agentskills.py           # Warnings only (default)
+uv run scripts/validate_agentskills.py --strict   # Extra fields are errors
+```
+
+All 57 skills pass with 0 errors. The validator checks the 6-field frontmatter spec (name, description, license, compatibility, metadata, allowed-tools) and flags Claude Code-specific fields as warnings.
+
+---
+
 ## Packaging
 
 Each package can be archived for distribution. Archive type is auto-detected from the directory:

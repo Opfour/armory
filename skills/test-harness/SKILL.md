@@ -1,6 +1,7 @@
 ---
 name: test-harness
-description: 'Generates comprehensive pytest test suites: happy path, edge cases,
+description:
+  'Generates comprehensive pytest test suites: happy path, edge cases,
   error conditions, fixture scaffolding, mock strategy, and async patterns. Analyzes
   function signatures, dependency chains, and complexity hotspots to produce runnable,
   parametrized test files. Triggers on: "generate tests", "write tests for", "test
@@ -16,6 +17,7 @@ metadata:
   tags: [testing, pytest, test-generation, python]
   difficulty: intermediate
 ---
+
 # Test Harness
 
 Systematic test suite generation that transforms source code into comprehensive, runnable

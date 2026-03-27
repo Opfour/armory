@@ -4,19 +4,19 @@ Per-format conversion details, internal engines, known issues, and workarounds.
 
 ## Format Table
 
-| Format          | Engine (internal)       | Known Issues                                      | Workaround                                      |
-| --------------- | ----------------------- | ------------------------------------------------- | ----------------------------------------------- |
-| PDF (text)      | pdfminer                | Multi-column layouts merge columns                | Acceptable for LLM use                          |
-| PDF (scanned)   | pdfminer                | Returns empty — no text layer                     | OCR: Azure DocIntel or Tesseract (see below)    |
-| DOCX            | python-docx             | Embedded images lost                              | Use LLM client for image descriptions           |
-| PPTX            | python-pptx             | Speaker notes included (useful for LLMs)          | Filter with `---NOTES---` marker if needed      |
-| XLSX / XLS      | openpyxl / xlrd         | Each sheet becomes a Markdown table               | Works well                                      |
-| HTML            | html2text               | Complex layouts lose structure                    | Use Turndown for fidelity-critical cases        |
-| Images          | EXIF + optional OCR     | No OCR without Azure DocIntel                     | Pass `docintel_endpoint` for OCR                |
-| Audio           | speech transcription    | Requires `[audio-transcription]` extra            | `uv pip install 'markitdown[audio-transcription]'` |
-| YouTube         | transcript API          | Only works if captions available                  | Returns empty if no captions                    |
-| CSV / JSON / XML | built-in               | Converts to Markdown tables/structure             | Clean, reliable                                 |
-| EPub            | built-in                | Large EPubs may be slow                           | Works for most cases                            |
+| Format           | Engine (internal)    | Known Issues                             | Workaround                                         |
+| ---------------- | -------------------- | ---------------------------------------- | -------------------------------------------------- |
+| PDF (text)       | pdfminer             | Multi-column layouts merge columns       | Acceptable for LLM use                             |
+| PDF (scanned)    | pdfminer             | Returns empty — no text layer            | OCR: Azure DocIntel or Tesseract (see below)       |
+| DOCX             | python-docx          | Embedded images lost                     | Use LLM client for image descriptions              |
+| PPTX             | python-pptx          | Speaker notes included (useful for LLMs) | Filter with `---NOTES---` marker if needed         |
+| XLSX / XLS       | openpyxl / xlrd      | Each sheet becomes a Markdown table      | Works well                                         |
+| HTML             | html2text            | Complex layouts lose structure           | Use Turndown for fidelity-critical cases           |
+| Images           | EXIF + optional OCR  | No OCR without Azure DocIntel            | Pass `docintel_endpoint` for OCR                   |
+| Audio            | speech transcription | Requires `[audio-transcription]` extra   | `uv pip install 'markitdown[audio-transcription]'` |
+| YouTube          | transcript API       | Only works if captions available         | Returns empty if no captions                       |
+| CSV / JSON / XML | built-in             | Converts to Markdown tables/structure    | Clean, reliable                                    |
+| EPub             | built-in             | Large EPubs may be slow                  | Works for most cases                               |
 
 ## Scanned PDF — OCR Escalation Path
 
@@ -71,6 +71,7 @@ Images in DOCX files are not extracted by default. To get image descriptions, en
 ## HTML Fidelity
 
 markitdown uses `html2text` which handles standard article content well but loses structure on:
+
 - Nested tables (common in email templates)
 - CSS-dependent layouts (grid, flexbox)
 - Interactive elements (forms, JS-rendered content)

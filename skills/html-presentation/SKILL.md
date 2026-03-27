@@ -1,6 +1,7 @@
 ---
 name: html-presentation
-description: Convert any document, outline, or content into a polished, self-contained
+description:
+  Convert any document, outline, or content into a polished, self-contained
   HTML slide presentation. Use this skill whenever the user wants to create a presentation,
   slide deck, pitch deck, or talk from a document, markdown file, outline, notes,
   or any textual content and wants the output as an HTML file (not PPTX). Also trigger
@@ -17,6 +18,7 @@ metadata:
   tags: [slides, presentation, reveal-js, html]
   difficulty: intermediate
 ---
+
 # HTML Presentation Skill
 
 Convert documents, outlines, or freeform content into polished, self-contained HTML slide presentations with keyboard and scroll navigation.
@@ -158,12 +160,12 @@ If the content is large (>15 slides), build iteratively — write the skeleton f
 
 ## Error Handling
 
-| Problem | Cause | Fix |
-| ------- | ----- | --- |
-| CDN fails to load (Reveal.js, Lucide, Google Fonts) | Network unavailable or CDN outage | Switch to inline styles/scripts: embed Reveal.js core inline, replace Lucide icons with inline SVG paths, use system font stack (`system-ui, -apple-system, sans-serif`) |
-| Content overflows slide viewport | Too much text or too many elements per slide | Split the slide into two: move supporting detail to a follow-up slide or convert prose to a bullet list |
-| Fonts render incorrectly or fail to load | Google Fonts CDN blocked or slow | Add system font fallback in the font-family stack: `'Font Name', system-ui, Georgia, serif` |
-| Reveal.js fails to initialize | Script load order issue or missing plugin | Verify CDN script tags appear before `Reveal.initialize()`; check browser console for 404s |
+| Problem                                             | Cause                                        | Fix                                                                                                                                                                      |
+| --------------------------------------------------- | -------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| CDN fails to load (Reveal.js, Lucide, Google Fonts) | Network unavailable or CDN outage            | Switch to inline styles/scripts: embed Reveal.js core inline, replace Lucide icons with inline SVG paths, use system font stack (`system-ui, -apple-system, sans-serif`) |
+| Content overflows slide viewport                    | Too much text or too many elements per slide | Split the slide into two: move supporting detail to a follow-up slide or convert prose to a bullet list                                                                  |
+| Fonts render incorrectly or fail to load            | Google Fonts CDN blocked or slow             | Add system font fallback in the font-family stack: `'Font Name', system-ui, Georgia, serif`                                                                              |
+| Reveal.js fails to initialize                       | Script load order issue or missing plugin    | Verify CDN script tags appear before `Reveal.initialize()`; check browser console for 404s                                                                               |
 
 ## Quality Checklist
 

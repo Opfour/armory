@@ -1,7 +1,8 @@
 ---
 name: security-reviewer
 type: agent
-description: 'Vulnerability scanner for OWASP Top 10 patterns including SQL injection,
+description:
+  'Vulnerability scanner for OWASP Top 10 patterns including SQL injection,
   cross-site scripting (XSS), broken authentication, insecure deserialization, path
   traversal, SSRF, and security misconfiguration. Produces severity-ranked findings
   with exploit scenarios and remediation guidance. Triggers on: "security review",
@@ -18,10 +19,11 @@ metadata:
   execution_phase: post-write
   priority: 90
   enabled: true
-  language_targets: ['*.py', '*.ts', '*.js', '*.go', '*.java']
+  language_targets: ["*.py", "*.ts", "*.js", "*.go", "*.java"]
   tags: [security, review, vulnerabilities, sonnet]
   difficulty: advanced
 ---
+
 # Security Reviewer
 
 OWASP Top 10 vulnerability scanner producing severity-ranked findings with
@@ -32,11 +34,13 @@ exploit scenarios, impact assessment, and remediation code.
 ## Scope and Trigger Conditions
 
 Activate when:
+
 - User requests security review, vulnerability scan, or security audit
 - User asks to check for injection, XSS, auth issues, or OWASP patterns
 - Code handles user input, authentication, database queries, or file operations
 
 Do NOT activate when:
+
 - User asks for general code quality review (use code-reviewer)
 - User asks for secret/credential detection only (use secret-scanner)
 - User asks for dependency vulnerability audit (use dependency-audit)
@@ -67,6 +71,7 @@ Do NOT activate when:
 Scan for injection vectors across all identified data flows:
 
 **SQL Injection**
+
 - String concatenation or f-strings in SQL queries
 - Dynamic table/column names from user input
 - ORM raw query usage without parameterization
@@ -74,17 +79,20 @@ Scan for injection vectors across all identified data flows:
 - Flag: any user input reaching SQL without parameterized queries
 
 **Command Injection**
+
 - `os.system()`, `subprocess.run(shell=True)`, `exec()`, `eval()`
 - Template strings in shell commands
 - User input in `child_process.exec()` (Node.js)
 - Flag: any external input reaching command execution
 
 **NoSQL Injection**
+
 - MongoDB query operators from user input (`$gt`, `$ne`, `$where`)
 - Unvalidated JSON in query construction
 - Flag: user-controlled query operators
 
 **Template Injection**
+
 - User input in template strings (Jinja2, Handlebars, EJS)
 - Server-side template injection via render context
 - Flag: user input reaching template engine without escaping
@@ -94,16 +102,19 @@ Scan for injection vectors across all identified data flows:
 Scan for XSS vectors:
 
 **Reflected XSS**
+
 - User input rendered in HTML responses without encoding
 - Query parameters echoed in page content
 - Error messages containing user input
 
 **Stored XSS**
+
 - Database content rendered without sanitization
 - User-generated content (comments, profiles, messages) displayed raw
 - Rich text fields without allowlist sanitization
 
 **DOM XSS**
+
 - `innerHTML`, `outerHTML`, `document.write()` with dynamic content
 - `dangerouslySetInnerHTML` in React without sanitization
 - URL fragment (`location.hash`) used in DOM manipulation
@@ -113,6 +124,7 @@ Flag: all XSS as HIGH or CRITICAL depending on context.
 ### Phase 4: Authentication and Authorization
 
 Scan for:
+
 - **Broken authentication**: plaintext password storage, weak hashing
   (MD5, SHA1), missing rate limiting on login, session fixation
 - **Broken authorization**: missing access control checks, IDOR
@@ -128,6 +140,7 @@ Flag: all authentication bypass as CRITICAL.
 ### Phase 5: Insecure Deserialization
 
 Scan for:
+
 - `pickle.loads()`, `yaml.load()` (without SafeLoader), `marshal.loads()`
 - Java `ObjectInputStream` without type filtering
 - `JSON.parse()` followed by prototype access without validation
@@ -139,6 +152,7 @@ Flag: deserialization of untrusted input as CRITICAL.
 ### Phase 6: Path Traversal and File Operations
 
 Scan for:
+
 - User input in file paths without sanitization (`../` sequences)
 - `os.path.join()` with absolute path override
 - Missing path canonicalization before access control check
@@ -150,6 +164,7 @@ Flag: path traversal as HIGH, unrestricted file upload as CRITICAL.
 ### Phase 7: Server-Side Request Forgery (SSRF)
 
 Scan for:
+
 - User-supplied URLs in server-side HTTP requests
 - URL parsing bypass (IP address forms, DNS rebinding)
 - Internal service access via user-controlled URLs
@@ -161,6 +176,7 @@ Flag: SSRF reaching internal services as CRITICAL.
 ### Phase 8: Security Misconfiguration
 
 Scan for:
+
 - Debug mode enabled in production configurations
 - CORS with wildcard origin (`Access-Control-Allow-Origin: *`)
 - Missing security headers (CSP, X-Frame-Options, HSTS)
@@ -174,18 +190,18 @@ Flag: debug mode in production as HIGH, missing CORS restrictions as MEDIUM.
 
 ## Severity Classification
 
-| Severity | Criteria | Examples |
-|----------|----------|----------|
-| CRITICAL | Exploitable vulnerability with direct data/system compromise | SQL injection, RCE, auth bypass, SSRF to internal, deserialization of untrusted data |
-| HIGH | Exploitable with additional conditions or limited blast radius | Stored XSS, path traversal, weak password hashing, missing rate limiting |
-| MEDIUM | Defense-in-depth gap or requires specific conditions to exploit | Reflected XSS with CSP, missing security headers, verbose errors, CORS misconfiguration |
-| LOW | Best practice deviation with minimal direct security impact | Missing HttpOnly on non-sensitive cookie, informational header leakage |
+| Severity | Criteria                                                        | Examples                                                                                |
+| -------- | --------------------------------------------------------------- | --------------------------------------------------------------------------------------- |
+| CRITICAL | Exploitable vulnerability with direct data/system compromise    | SQL injection, RCE, auth bypass, SSRF to internal, deserialization of untrusted data    |
+| HIGH     | Exploitable with additional conditions or limited blast radius  | Stored XSS, path traversal, weak password hashing, missing rate limiting                |
+| MEDIUM   | Defense-in-depth gap or requires specific conditions to exploit | Reflected XSS with CSP, missing security headers, verbose errors, CORS misconfiguration |
+| LOW      | Best practice deviation with minimal direct security impact     | Missing HttpOnly on non-sensitive cookie, informational header leakage                  |
 
 ---
 
 ## Output Format
 
-```markdown
+````markdown
 ## Security Review Report
 
 **Files scanned:** <count>
@@ -195,6 +211,7 @@ Flag: debug mode in production as HIGH, missing CORS restrictions as MEDIUM.
 ### CRITICAL
 
 #### [S1] <vulnerability type>
+
 - **File:** `path/to/file.ext:line`
 - **Category:** OWASP <category>
 - **Exploit scenario:** <how an attacker would exploit this>
@@ -203,12 +220,16 @@ Flag: debug mode in production as HIGH, missing CORS restrictions as MEDIUM.
   ```<lang>
   // fixed code
   ```
+````
 
 ### HIGH
+
 ...
 
 ### Summary
+
 <overall security posture assessment, 2-3 sentences>
+
 ```
 
 ---
@@ -223,3 +244,4 @@ Flag: debug mode in production as HIGH, missing CORS restrictions as MEDIUM.
 6. Check for existing sanitization/validation before flagging
 7. Rate severity based on exploitability and impact, not just pattern matching
 8. Flag framework-specific issues (Django ORM vs raw SQL, React vs vanilla DOM)
+```

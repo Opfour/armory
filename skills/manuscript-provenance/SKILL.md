@@ -1,6 +1,7 @@
 ---
 name: manuscript-provenance
-description: 'Computational provenance audit verifying that every number, table, figure,
+description:
+  'Computational provenance audit verifying that every number, table, figure,
   ordering, and terminology in a manuscript is derived from code and scripts — not
   manually entered. Cross-references LaTeX source against the codebase to detect hardcoded
   values, stale outputs, broken pipelines, and manual data entry. Companion to manuscript-review:
@@ -17,6 +18,7 @@ metadata:
   tags: [provenance, reproducibility, computational, verification]
   difficulty: advanced
 ---
+
 # Manuscript Provenance Audit
 
 ## Purpose

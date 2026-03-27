@@ -1,6 +1,7 @@
 ---
 name: market-analyzer
-description: 'Performs structured market analysis including TAM/SAM/SOM sizing, trend
+description:
+  'Performs structured market analysis including TAM/SAM/SOM sizing, trend
   identification, and competitive landscape assessment. Uses WebSearch to gather industry
   data, growth rates, funding signals, and consumer trends. Produces investor-grade
   market reports with cited sources and confidence-rated estimates. Triggers on: "market
@@ -19,6 +20,7 @@ metadata:
   tags: [market-sizing, tam-sam-som, trends, industry]
   difficulty: intermediate
 ---
+
 # Market Analyzer
 
 Produces structured market analysis reports: sizes the addressable market using top-down
@@ -28,11 +30,11 @@ assumption explicitly.
 
 ## Reference Files
 
-| File                         | Contents                                                       | Load When              |
-| ---------------------------- | -------------------------------------------------------------- | ---------------------- |
-| `references/tam-sam-som.md`  | TAM/SAM/SOM definitions, calculation formulas, common mistakes | Always                 |
-| `references/trend-analysis.md` | Trend categorization framework, adoption lifecycle, timing signals | Always            |
-| `references/market-sizing.md`  | Data sources, estimation techniques, confidence framework      | Always                 |
+| File                           | Contents                                                           | Load When |
+| ------------------------------ | ------------------------------------------------------------------ | --------- |
+| `references/tam-sam-som.md`    | TAM/SAM/SOM definitions, calculation formulas, common mistakes     | Always    |
+| `references/trend-analysis.md` | Trend categorization framework, adoption lifecycle, timing signals | Always    |
+| `references/market-sizing.md`  | Data sources, estimation techniques, confidence framework          | Always    |
 
 ## Prerequisites
 
@@ -183,13 +185,13 @@ Produce the structured output below.
 
 ## Scoring Criteria: Market Opportunity Score
 
-| Score | Meaning | Criteria |
-|-------|---------|----------|
-| 5 | Exceptional | Large TAM (> $10B), growing (> 15% CAGR), early adoption stage, regulatory tailwinds |
-| 4 | Strong | Large TAM or high growth, favorable timing, manageable competition |
-| 3 | Moderate | Mid-size market, moderate growth, competitive but differentiation possible |
-| 2 | Challenging | Small or saturated market, mature stage, significant headwinds |
-| 1 | Unfavorable | Declining market, regulatory barriers, limited differentiation |
+| Score | Meaning     | Criteria                                                                             |
+| ----- | ----------- | ------------------------------------------------------------------------------------ |
+| 5     | Exceptional | Large TAM (> $10B), growing (> 15% CAGR), early adoption stage, regulatory tailwinds |
+| 4     | Strong      | Large TAM or high growth, favorable timing, manageable competition                   |
+| 3     | Moderate    | Mid-size market, moderate growth, competitive but differentiation possible           |
+| 2     | Challenging | Small or saturated market, mature stage, significant headwinds                       |
+| 1     | Unfavorable | Declining market, regulatory barriers, limited differentiation                       |
 
 ## Quality Rules
 
@@ -209,13 +211,13 @@ Produce the structured output below.
 
 ## Error Handling
 
-| Problem | Resolution |
-| ------- | ---------- |
-| No market data available | Use proxy markets and analogies. State the proxy explicitly. Reduce confidence to Low. |
-| Input too vague to size | Ask clarifying questions (target customer, geography, price point) before proceeding. |
-| Conflicting data sources | Present both figures, explain the discrepancy, use the more conservative estimate. |
-| Market is too new for reliable data | Size the adjacent market the product displaces. Note the nascent stage. |
-| User wants a single TAM number | Provide the range (conservative to optimistic) with the methodology behind each bound. |
+| Problem                             | Resolution                                                                             |
+| ----------------------------------- | -------------------------------------------------------------------------------------- |
+| No market data available            | Use proxy markets and analogies. State the proxy explicitly. Reduce confidence to Low. |
+| Input too vague to size             | Ask clarifying questions (target customer, geography, price point) before proceeding.  |
+| Conflicting data sources            | Present both figures, explain the discrepancy, use the more conservative estimate.     |
+| Market is too new for reliable data | Size the adjacent market the product displaces. Note the nascent stage.                |
+| User wants a single TAM number      | Provide the range (conservative to optimistic) with the methodology behind each bound. |
 
 ## When NOT to Analyze
 

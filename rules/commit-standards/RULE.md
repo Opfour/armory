@@ -1,7 +1,8 @@
 ---
 name: commit-standards
 type: rule
-description: 'Enforces conventional commit format, branch naming conventions, and
+description:
+  'Enforces conventional commit format, branch naming conventions, and
   commit message structure for consistent version control history. Covers type prefixes
   (feat, fix, chore, docs, refactor, test, perf, ci, build, style), scope requirements,
   subject line constraints, body formatting, BREAKING CHANGE footers, and merge/squash
@@ -15,11 +16,12 @@ metadata:
   version: 1.0.0
   scope: global
   applies_to:
-    languages: ['*']
+    languages: ["*"]
   category: content
   tags: [commits, conventional, git, branch-naming]
   difficulty: beginner
 ---
+
 # Commit Standards
 
 Standards for commit messages, branch naming, and merge strategy across all repositories.

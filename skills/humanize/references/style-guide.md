@@ -10,7 +10,8 @@ Voice calibration rules per writing domain. Apply the matching profile during Ph
 **Audience:** Researchers, reviewers, graduate students.
 
 Rules:
-- Maintain hedging where epistemically appropriate ("suggests" vs. "proves") — but remove *excessive* hedging (Pattern 23)
+
+- Maintain hedging where epistemically appropriate ("suggests" vs. "proves") — but remove _excessive_ hedging (Pattern 23)
 - Preserve citation structure and in-text references exactly
 - Passive voice is acceptable where convention demands it (methods sections)
 - Do not inject personality or first-person unless the original uses it
@@ -31,6 +32,7 @@ Rules:
 **Audience:** Engineers, developers, technical practitioners.
 
 Rules:
+
 - Clarity over style — if a sentence is clear but boring, leave it
 - Code blocks, terminal output, config snippets pass through unchanged
 - Numbered steps and bullet lists are natural in technical writing — do not convert all lists to prose
@@ -51,6 +53,7 @@ Rules:
 **Audience:** General readers, tech-curious non-specialists.
 
 Rules:
+
 - First person is expected and natural
 - Contractions, fragments, rhetorical questions all allowed
 - Opinions and reactions are good — "I genuinely don't know how to feel about this"
@@ -72,6 +75,7 @@ Rules:
 **Audience:** Reddit, Twitter/X, forum users.
 
 Rules:
+
 - Extremely short paragraphs (1-3 sentences)
 - Fragments and incomplete sentences are natural
 - Slang and informal language acceptable
@@ -94,6 +98,7 @@ Rules:
 **Audience:** Colleagues, clients, stakeholders.
 
 Rules:
+
 - Polite but not sycophantic — remove "I hope this finds you well" only if it reads as filler
 - Contractions acceptable in internal communication, avoid in external/formal
 - No promotional language unless the context is genuinely marketing
@@ -114,6 +119,7 @@ Rules:
 **Audience:** Potential customers, users, decision-makers.
 
 Rules:
+
 - Some promotional language is expected — but it must be specific, not generic
 - "Blazing fast" is AI slop; "loads in 0.3 seconds" is marketing with substance
 - Remove vague superlatives, keep specific claims

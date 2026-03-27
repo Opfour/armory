@@ -24,24 +24,31 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [1.2.0] - 2026-02-25
 
 ### Added
+
 - New feature description. ([#123](url))
 
 ### Changed
+
 - Modified behavior description. ([#124](url))
 
 ### Deprecated
+
 - Feature X is deprecated and will be removed in v2.0.
 
 ### Removed
+
 - Removed deprecated function Y. ([#125](url))
 
 ### Fixed
+
 - Fixed crash when processing empty input. ([#126](url))
 
 ### Security
+
 - Updated dependency Z to fix CVE-XXXX-XXXX. ([#127](url))
 
 ## [1.1.0] - 2026-01-15
+
 ...
 
 [Unreleased]: https://github.com/user/repo/compare/v1.2.0...HEAD
@@ -51,14 +58,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Category Mapping
 
-| Keep a Changelog | Our Category |
-|-----------------|--------------|
-| Added | Features |
-| Changed | Breaking Changes (behavioral) |
-| Deprecated | (include in Features or Breaking) |
-| Removed | Breaking Changes (removal) |
-| Fixed | Fixes |
-| Security | Security (subset of Fixes) |
+| Keep a Changelog | Our Category                      |
+| ---------------- | --------------------------------- |
+| Added            | Features                          |
+| Changed          | Breaking Changes (behavioral)     |
+| Deprecated       | (include in Features or Breaking) |
+| Removed          | Breaking Changes (removal)        |
+| Fixed            | Fixes                             |
+| Security         | Security (subset of Fixes)        |
 
 ### Rules
 
@@ -80,15 +87,19 @@ Format for GitHub's release feature (`gh release create`).
 ## What's New
 
 ### Breaking Changes ⚠️
+
 - **`function_name` parameter renamed** — `old` → `new`. See migration guide. (#123)
 
 ### Features ✨
+
 - **Feature name** — description of what's new. (#124)
 
 ### Bug Fixes 🐛
+
 - Fixed issue where X happened under Y conditions. (#125)
 
 ### Performance ⚡
+
 - Improved Z processing speed by 40%. (#126)
 
 **Full Changelog**: https://github.com/user/repo/compare/v1.1.0...v1.2.0
@@ -110,7 +121,7 @@ For blog posts, social media, or team communication.
 
 ### Structure
 
-```markdown
+````markdown
 # {Project} v{X.Y.Z} Released
 
 {One sentence summary of the most important change.}
@@ -130,8 +141,10 @@ For blog posts, social media, or team communication.
 ```bash
 pip install project==X.Y.Z
 ```
+````
 
 Full changelog: {link}
+
 ```
 
 ### Writing Guidelines
@@ -153,3 +166,4 @@ Full changelog: {link}
 | Team Slack/email | Announcement Copy | Brief, highlights only |
 | User documentation | Keep a Changelog variant | Detailed, searchable |
 | Marketing blog | Announcement Copy | Benefit-oriented, non-technical |
+```

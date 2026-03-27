@@ -1,7 +1,8 @@
 ---
 name: release-captain
 type: agent
-description: 'Ship lifecycle manager that drives code from branch to PR through quality
+description:
+  'Ship lifecycle manager that drives code from branch to PR through quality
   gates, secret scanning, changelog generation, and dependency audits. Blocks on failing
   tests or CRITICAL findings. Produces versioned commits, changelog entries, and opens
   the pull request with full traceability. Triggers on: "ship this", "create a release",
@@ -20,11 +21,19 @@ metadata:
   priority: 75
   enabled: true
   orchestrates:
-    skills: [ship-workflow, changelog-composer, pre-landing-review, pr-review, dependency-audit]
+    skills:
+      [
+        ship-workflow,
+        changelog-composer,
+        pre-landing-review,
+        pr-review,
+        dependency-audit,
+      ]
     agents: [secret-scanner]
   tags: [release, deployment, ci-cd, sonnet]
   difficulty: intermediate
 ---
+
 # Release Captain
 
 Ship lifecycle manager that orchestrates quality gates, secret scanning,
@@ -35,6 +44,7 @@ changelog generation, and PR creation to move code from branch to merge-ready.
 ## Scope and Trigger Conditions
 
 ### Activate when:
+
 - User says "ship this", "ship it", or "ready to ship"
 - User asks to create a release or cut a release
 - User asks to open a pull request with quality checks
@@ -42,6 +52,7 @@ changelog generation, and PR creation to move code from branch to merge-ready.
 - User signals implementation is complete and wants to move to PR
 
 ### Do NOT activate when:
+
 - User asks to implement features (use `full-stack-builder` agent)
 - User asks for code review only (use `code-reviewer` agent or `pr-review` skill)
 - User asks for secret scanning only (use `secret-scanner` agent)
@@ -53,11 +64,11 @@ changelog generation, and PR creation to move code from branch to merge-ready.
 
 ## Input Requirements
 
-| Input | Required | Description |
-|-------|----------|-------------|
-| Target branch | No | Branch to merge into. Defaults to `main`. |
-| Version bump type | No | `major`, `minor`, or `patch`. Auto-detected from commit types if not specified. |
-| Source branch | No | Branch to ship. Defaults to current branch. |
+| Input             | Required | Description                                                                     |
+| ----------------- | -------- | ------------------------------------------------------------------------------- |
+| Target branch     | No       | Branch to merge into. Defaults to `main`.                                       |
+| Version bump type | No       | `major`, `minor`, or `patch`. Auto-detected from commit types if not specified. |
+| Source branch     | No       | Branch to ship. Defaults to current branch.                                     |
 
 If version bump type is not specified, determine it from commit history: any `feat!` or `BREAKING CHANGE` footer = major, any `feat` = minor, otherwise patch.
 
@@ -65,14 +76,14 @@ If version bump type is not specified, determine it from commit history: any `fe
 
 ## Composition Map
 
-| Component | Type | Invoked In | Purpose |
-|-----------|------|------------|---------|
-| secret-scanner | agent | Phase 2 | Scan for hardcoded secrets, API keys, tokens |
-| pre-landing-review | skill | Phase 2 | Pre-merge code quality and correctness review |
-| pr-review | skill | Phase 2 | PR-level review of all changes against target branch |
-| dependency-audit | skill | Phase 4 | CVE scanning, license compliance, maintenance health |
-| changelog-composer | skill | Phase 3 | Generate changelog entry from commit history |
-| ship-workflow | skill | Phase 5 | Create commits, push branch, open pull request |
+| Component          | Type  | Invoked In | Purpose                                              |
+| ------------------ | ----- | ---------- | ---------------------------------------------------- |
+| secret-scanner     | agent | Phase 2    | Scan for hardcoded secrets, API keys, tokens         |
+| pre-landing-review | skill | Phase 2    | Pre-merge code quality and correctness review        |
+| pr-review          | skill | Phase 2    | PR-level review of all changes against target branch |
+| dependency-audit   | skill | Phase 4    | CVE scanning, license compliance, maintenance health |
+| changelog-composer | skill | Phase 3    | Generate changelog entry from commit history         |
+| ship-workflow      | skill | Phase 5    | Create commits, push branch, open pull request       |
 
 ---
 
@@ -119,6 +130,7 @@ If any gate returns CRITICAL findings, stop and report. Retry failed gates up to
 ### Phase 4: Dependency Check
 
 Invoke the `dependency-audit` skill to scan for:
+
 - Known CVEs in direct and transitive dependencies
 - License compliance issues (copyleft in proprietary projects)
 - Abandoned or unmaintained dependencies
@@ -128,6 +140,7 @@ Block on CRITICAL CVEs. Warn on HIGH CVEs and license issues.
 ### Phase 5: Ship
 
 Invoke the `ship-workflow` skill to:
+
 1. Create any final commits (changelog update, version bump) following conventional commit format
 2. Push the source branch to remote
 3. Open a pull request against the target branch with:
@@ -145,23 +158,26 @@ Invoke the `ship-workflow` skill to:
 
 ## Output Artifacts
 
-| Artifact | Format | Description |
-|----------|--------|-------------|
-| PR URL | URL | Link to the created pull request |
+| Artifact        | Format   | Description                                     |
+| --------------- | -------- | ----------------------------------------------- |
+| PR URL          | URL      | Link to the created pull request                |
 | Changelog Entry | Markdown | Version changelog generated from commit history |
-| Release Summary | Markdown | Quality gate results, version, and PR link |
+| Release Summary | Markdown | Quality gate results, version, and PR link      |
 
 ---
 
 ## Handoff Protocol
 
 ### Receiving Work
+
 When spawned by another agent (e.g., `full-stack-builder` or `team-lead`):
+
 - Accepts a "ready to ship" signal with optional target branch and version bump
 - Accepts optional list of related issue numbers to reference in the PR
 - Returns PR URL and release summary
 
 ### Passing Work
+
 - Returns structured markdown summary with PR URL
 - Includes machine-parseable summary line: `**Release:** vX.Y.Z — PR #N opened against <target>`
 - Includes quality gate pass/fail status for each gate
@@ -181,29 +197,33 @@ When spawned by another agent (e.g., `full-stack-builder` or `team-lead`):
 
 ## Quality Gates
 
-| Gate | Status | Findings |
-|------|--------|----------|
-| Secret Scan | PASS/FAIL | N findings |
-| Pre-landing Review | PASS/FAIL | N findings |
-| PR Review | PASS/FAIL | N findings |
-| Dependency Audit | PASS/FAIL | N CVEs, N license issues |
+| Gate               | Status    | Findings                 |
+| ------------------ | --------- | ------------------------ |
+| Secret Scan        | PASS/FAIL | N findings               |
+| Pre-landing Review | PASS/FAIL | N findings               |
+| PR Review          | PASS/FAIL | N findings               |
+| Dependency Audit   | PASS/FAIL | N CVEs, N license issues |
 
 ## Changelog
 
 ### vX.Y.Z
 
 #### Features
+
 - <feat commit summaries>
 
 #### Fixes
+
 - <fix commit summaries>
 
 #### Breaking Changes
+
 - <breaking change descriptions>
 
 ## Blocking Issues (if BLOCKED)
 
 ### [RC-001] <title>
+
 - **Gate:** <which gate>
 - **File:** `path/to/file.ext:line`
 - **Issue:** <description>

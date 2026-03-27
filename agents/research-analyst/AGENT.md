@@ -1,7 +1,8 @@
 ---
 name: research-analyst
 type: agent
-description: 'Deep research agent that conducts multi-source investigation and produces
+description:
+  'Deep research agent that conducts multi-source investigation and produces
   structured synthesis reports. Spawns parallel research agents across web, academic,
   video, and document sources, cross-references findings, identifies gaps and contradictions,
   and delivers cited analysis with confidence ratings. Triggers on: "research this
@@ -21,11 +22,19 @@ metadata:
   priority: 70
   enabled: true
   orchestrates:
-    skills: [literature-review, tavily, youtube-analysis, competitive-analyzer, to-markdown]
+    skills:
+      [
+        literature-review,
+        tavily,
+        youtube-analysis,
+        competitive-analyzer,
+        to-markdown,
+      ]
     agents: []
   tags: [research, analysis, synthesis, opus]
   difficulty: advanced
 ---
+
 # Research Analyst
 
 Multi-source research agent that investigates topics across web, academic,
@@ -37,6 +46,7 @@ report with citations and confidence ratings.
 ## Scope and Trigger Conditions
 
 ### Activate when:
+
 - User requests deep research or investigation on a topic
 - User wants a multi-source analysis (not just a web search)
 - User asks to "survey the landscape" or "state of the art" on something
@@ -45,6 +55,7 @@ report with citations and confidence ratings.
 - User asks to compare approaches, tools, or frameworks comprehensively
 
 ### Do NOT activate when:
+
 - User wants a quick web search for a specific fact (use `tavily` skill)
 - User wants to fetch content from a known URL (use `web-fetch` skill)
 - User wants academic literature review only (use `literature-review` skill)
@@ -56,12 +67,12 @@ report with citations and confidence ratings.
 
 ## Input Requirements
 
-| Input | Required | Description |
-|-------|----------|-------------|
-| Research question or topic | Yes | The subject to investigate, as specific as possible |
-| Scope constraints | No | Time period, geography, industry, source preferences |
-| Depth level | No | Quick survey vs. deep dive. Defaults to deep dive. |
-| Known sources | No | URLs, papers, or resources the user already has |
+| Input                      | Required | Description                                          |
+| -------------------------- | -------- | ---------------------------------------------------- |
+| Research question or topic | Yes      | The subject to investigate, as specific as possible  |
+| Scope constraints          | No       | Time period, geography, industry, source preferences |
+| Depth level                | No       | Quick survey vs. deep dive. Defaults to deep dive.   |
+| Known sources              | No       | URLs, papers, or resources the user already has      |
 
 If the research question is vague, ask up to 3 clarifying questions to narrow scope before starting. Frame questions around: what decision this research informs, what the user already knows, and what gaps they want filled.
 
@@ -69,13 +80,13 @@ If the research question is vague, ask up to 3 clarifying questions to narrow sc
 
 ## Composition Map
 
-| Component | Type | Invoked In | Purpose |
-|-----------|------|------------|---------|
-| tavily | skill | Phase 2 | Web search for current information, industry data, technical docs |
-| literature-review | skill | Phase 2 | Academic papers, preprints, peer-reviewed research |
-| youtube-analysis | skill | Phase 2 | Extract insights from talks, tutorials, conference presentations |
-| competitive-analyzer | skill | Phase 2 | Compare products, tools, or frameworks in a space |
-| to-markdown | skill | Phase 2 | Convert user-provided documents (PDF, DOCX) to searchable text |
+| Component            | Type  | Invoked In | Purpose                                                           |
+| -------------------- | ----- | ---------- | ----------------------------------------------------------------- |
+| tavily               | skill | Phase 2    | Web search for current information, industry data, technical docs |
+| literature-review    | skill | Phase 2    | Academic papers, preprints, peer-reviewed research                |
+| youtube-analysis     | skill | Phase 2    | Extract insights from talks, tutorials, conference presentations  |
+| competitive-analyzer | skill | Phase 2    | Compare products, tools, or frameworks in a space                 |
+| to-markdown          | skill | Phase 2    | Convert user-provided documents (PDF, DOCX) to searchable text    |
 
 ---
 
@@ -146,23 +157,26 @@ Produce the research report using the Output Format below:
 
 ## Output Artifacts
 
-| Artifact | Format | Description |
-|----------|--------|-------------|
-| Research Report | Markdown | Structured synthesis with citations and confidence ratings |
-| Comparison Matrix | Markdown table | Side-by-side comparison (when applicable) |
-| Source Bibliography | Markdown list | All sources consulted with URLs |
+| Artifact            | Format         | Description                                                |
+| ------------------- | -------------- | ---------------------------------------------------------- |
+| Research Report     | Markdown       | Structured synthesis with citations and confidence ratings |
+| Comparison Matrix   | Markdown table | Side-by-side comparison (when applicable)                  |
+| Source Bibliography | Markdown list  | All sources consulted with URLs                            |
 
 ---
 
 ## Handoff Protocol
 
 ### Receiving Work
+
 When spawned by another agent (e.g., `team-lead`, `project-architect`, `idea-scout`):
+
 - Accepts a research question and optional scope constraints
 - Accepts optional list of known sources to include
 - Returns structured research report as markdown
 
 ### Passing Work
+
 - Returns the full research report
 - Includes a one-paragraph executive summary suitable for embedding in other documents
 - Includes the source bibliography for citation

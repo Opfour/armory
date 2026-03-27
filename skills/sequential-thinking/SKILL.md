@@ -1,10 +1,11 @@
 ---
 name: sequential-thinking
-description: 'DEPRECATED: Use the model''s native extended thinking instead. Structured,
+description:
+  "DEPRECATED: Use the model's native extended thinking instead. Structured,
   reflective problem-solving through sequential chain-of-thought reasoning that replaced
   the Sequential Thinking MCP server.
 
-  '
+  "
 metadata:
   version: 1.1.0
   status: deprecated
@@ -12,6 +13,7 @@ metadata:
   tags: [reasoning, chain-of-thought, analysis, problem-solving]
   difficulty: intermediate
 ---
+
 > **DEPRECATED** — Sonnet 4 and Opus 4 handle structured chain-of-thought natively,
 > including revision, branching, and scope adjustment. This skill no longer provides
 > meaningful uplift over the base model. Retained for reference only.

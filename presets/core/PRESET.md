@@ -1,7 +1,8 @@
 ---
 name: core
 type: preset
-description: 'Essential packages for every Claude Code user. Bundles pull request
+description:
+  "Essential packages for every Claude Code user. Bundles pull request
   review, code refinement, pre-landing checks, git branch protection, and commit message
   standards into a single install. Use this preset when setting up a new project or
   onboarding a teammate who needs a reliable baseline without opinionated language-specific
@@ -9,7 +10,7 @@ description: 'Essential packages for every Claude Code user. Bundles pull reques
   verify pre-merge readiness, prevent force-pushes to protected branches, and enforce
   consistent commit messages.
 
-  '
+  "
 metadata:
   version: 1.0.0
   category: review
@@ -18,16 +19,17 @@ metadata:
 preset:
   packages:
     skills:
-    - {name: pr-review}
-    - {name: code-refiner}
-    - {name: pre-landing-review}
+      - { name: pr-review }
+      - { name: code-refiner }
+      - { name: pre-landing-review }
     hooks:
-    - {name: git-protection}
+      - { name: git-protection }
     rules:
-    - {name: commit-standards}
+      - { name: commit-standards }
   compatibility:
     platforms: [darwin, linux]
 ---
+
 # Core Preset
 
 A minimal, opinionated baseline for Claude Code projects. Installs five packages that

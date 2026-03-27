@@ -6,7 +6,7 @@ Common SQL performance anti-patterns with detection rules, impact analysis, and 
 
 ## Query-Level Anti-Patterns
 
-### 1. SELECT *
+### 1. SELECT \*
 
 ```sql
 -- BAD
@@ -134,7 +134,7 @@ SELECT * FROM users JOIN orders ON orders.user_id = users.id;
 **Impact:** Without a join condition, the result is the cross product of both tables.
 1K users × 10K orders = 10M rows.
 
-### 9. COUNT(*) for Existence Check
+### 9. COUNT(\*) for Existence Check
 
 ```sql
 -- BAD: Counts all matching rows
@@ -144,7 +144,7 @@ IF (SELECT COUNT(*) FROM orders WHERE user_id = 42) > 0
 IF EXISTS (SELECT 1 FROM orders WHERE user_id = 42)
 ```
 
-**Impact:** COUNT(*) scans all matching rows. EXISTS stops at the first match.
+**Impact:** COUNT(\*) scans all matching rows. EXISTS stops at the first match.
 
 ### 10. Unnecessary Sorting
 

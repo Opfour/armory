@@ -8,13 +8,13 @@ correct code, but low coverage guarantees untested code paths.
 
 ## Threshold Table
 
-| Code Category | Minimum Coverage | Rationale |
-|---------------|-----------------|-----------|
-| Overall project | 80% | General baseline — catches major gaps |
-| New or modified code | 90% | Higher bar for fresh code with no legacy excuse |
-| Critical paths | 95% | Auth, payments, public API, security — failure is expensive |
-| Generated code | Exempt | Protobuf, OpenAPI clients — test the generator instead |
-| Configuration / constants | Exempt | No logic to cover |
+| Code Category             | Minimum Coverage | Rationale                                                   |
+| ------------------------- | ---------------- | ----------------------------------------------------------- |
+| Overall project           | 80%              | General baseline — catches major gaps                       |
+| New or modified code      | 90%              | Higher bar for fresh code with no legacy excuse             |
+| Critical paths            | 95%              | Auth, payments, public API, security — failure is expensive |
+| Generated code            | Exempt           | Protobuf, OpenAPI clients — test the generator instead      |
+| Configuration / constants | Exempt           | No logic to cover                                           |
 
 These thresholds align with the project-level testing standards. Enforce them in CI
 to prevent coverage regression.
@@ -23,9 +23,9 @@ to prevent coverage regression.
 
 ## Branch vs Line Coverage
 
-| Metric | What It Measures | Catches |
-|--------|-----------------|---------|
-| **Line coverage** | Which lines executed | Dead code, untouched functions |
+| Metric              | What It Measures                           | Catches                                     |
+| ------------------- | ------------------------------------------ | ------------------------------------------- |
+| **Line coverage**   | Which lines executed                       | Dead code, untouched functions              |
 | **Branch coverage** | Which branches taken (if/else, match arms) | Missing else handling, untested error paths |
 
 **Branch coverage is the stronger metric.** A function can have 100% line coverage
@@ -109,14 +109,14 @@ have the highest cost.
 
 ### Critical Path Indicators
 
-| Indicator | Examples | Target |
-|-----------|----------|--------|
-| Handles money | Payment processing, billing, refunds | 95% |
-| Handles authentication | Login, token validation, password reset | 95% |
-| Public API surface | REST endpoints, GraphQL resolvers | 95% |
-| Security boundaries | Input validation, authorization checks | 95% |
-| Data integrity | Database writes, migrations, serialization | 90% |
-| Error handling | Exception handlers, fallback logic | 90% |
+| Indicator              | Examples                                   | Target |
+| ---------------------- | ------------------------------------------ | ------ |
+| Handles money          | Payment processing, billing, refunds       | 95%    |
+| Handles authentication | Login, token validation, password reset    | 95%    |
+| Public API surface     | REST endpoints, GraphQL resolvers          | 95%    |
+| Security boundaries    | Input validation, authorization checks     | 95%    |
+| Data integrity         | Database writes, migrations, serialization | 90%    |
+| Error handling         | Exception handlers, fallback logic         | 90%    |
 
 ### Finding Low-Coverage Critical Code
 
@@ -159,6 +159,7 @@ if sys.platform == "win32":  # pragma: no cover
 ### Unacceptable Exclusions
 
 Do NOT exclude:
+
 - Error handling code — this is exactly what needs testing
 - Complex conditional logic — branches are where bugs hide
 - "Obvious" code — obvious code can still be wrong
@@ -221,6 +222,7 @@ counted as covered even without explicit tests. This can mask gaps.
 ### 4. Coverage ≠ Correctness
 
 100% coverage means every line ran during tests. It does not mean:
+
 - Every edge case was tested
 - Assertions were meaningful
 - Concurrent behavior was verified

@@ -38,12 +38,12 @@ app = FastAPI(
 
 ### Tag Assignment Rules
 
-| Rule | Example |
-|------|---------|
+| Rule                         | Example                                        |
+| ---------------------------- | ---------------------------------------------- |
 | One primary tag per endpoint | `tags=["Users"]` not `tags=["Users", "Admin"]` |
-| Tag names are nouns | "Users" not "Get Users" |
-| Order tags by importance | Most-used tags first |
-| Group CRUD by resource | All `/users/*` endpoints share the "Users" tag |
+| Tag names are nouns          | "Users" not "Get Users"                        |
+| Order tags by importance     | Most-used tags first                           |
+| Group CRUD by resource       | All `/users/*` endpoints share the "Users" tag |
 
 ---
 
@@ -129,7 +129,7 @@ oauth2 = OAuth2PasswordBearer(
 
 ## API Metadata
 
-```python
+````python
 app = FastAPI(
     title="Order Management API",
     description="""
@@ -169,7 +169,7 @@ app = FastAPI(
         "url": "https://opensource.org/licenses/MIT",
     },
 )
-```
+````
 
 ---
 
@@ -221,6 +221,7 @@ app.openapi = custom_openapi
 ## Documentation Completeness Checklist
 
 For each endpoint:
+
 - [ ] Has summary (short) and description (detailed)
 - [ ] All path parameters have descriptions and examples
 - [ ] All query parameters have descriptions, examples, and defaults

@@ -1,14 +1,15 @@
 ---
 name: python-strict
 type: preset
-description: 'Full-stack Python enforcement preset. Extends the core review-commit
+description:
+  "Full-stack Python enforcement preset. Extends the core review-commit
   lifecycle with test-driven development, automated code review agents, secret scanning,
   security standards, test coverage rules, and pre-edit backups. Use this preset when
   working on Python projects that demand strict quality gates: typed codebases, libraries
   with public APIs, or services handling sensitive data. Bundles 12 packages across
   skills, agents, rules, hooks, and commands into a single install.
 
-  '
+  "
 metadata:
   version: 1.0.0
   category: review
@@ -17,26 +18,27 @@ metadata:
 preset:
   packages:
     skills:
-    - {name: pr-review}
-    - {name: code-refiner}
-    - {name: pre-landing-review}
-    - {name: test-harness}
+      - { name: pr-review }
+      - { name: code-refiner }
+      - { name: pre-landing-review }
+      - { name: test-harness }
     agents:
-    - {name: code-reviewer}
-    - {name: secret-scanner}
+      - { name: code-reviewer }
+      - { name: secret-scanner }
     rules:
-    - {name: commit-standards}
-    - {name: test-standards}
-    - {name: security-standards}
+      - { name: commit-standards }
+      - { name: test-standards }
+      - { name: security-standards }
     hooks:
-    - {name: git-protection}
-    - {name: pre-edit-backup}
+      - { name: git-protection }
+      - { name: pre-edit-backup }
     commands:
-    - {name: tdd}
-    - {name: refactor}
+      - { name: tdd }
+      - { name: refactor }
   compatibility:
     platforms: [darwin, linux]
 ---
+
 # Python Strict Preset
 
 A comprehensive enforcement stack for Python projects that demand high code quality,

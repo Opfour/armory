@@ -92,42 +92,42 @@ class UserCreate(BaseModel):
 
 ### Strings
 
-| Field Purpose | Example Value |
-|--------------|---------------|
-| Name (person) | `"Alice Smith"`, `"Bob Johnson"` |
-| Email | `"alice@example.com"`, `"bob.johnson@company.org"` |
-| Username | `"alice_smith"`, `"bjohnson"` |
-| URL | `"https://example.com/resource"` |
-| Description | `"A detailed description of the item"` |
-| UUID | `"550e8400-e29b-41d4-a716-446655440000"` |
-| Date (ISO) | `"2026-02-25"` |
-| Datetime (ISO) | `"2026-02-25T14:30:00Z"` |
-| Phone | `"+1-555-123-4567"` |
-| Address | `"123 Main St, Springfield, IL 62701"` |
-| Color (hex) | `"#FF5733"` |
-| File path | `"/documents/report.pdf"` |
-| API key | `"sk_live_abc123..."` (truncated) |
+| Field Purpose  | Example Value                                      |
+| -------------- | -------------------------------------------------- |
+| Name (person)  | `"Alice Smith"`, `"Bob Johnson"`                   |
+| Email          | `"alice@example.com"`, `"bob.johnson@company.org"` |
+| Username       | `"alice_smith"`, `"bjohnson"`                      |
+| URL            | `"https://example.com/resource"`                   |
+| Description    | `"A detailed description of the item"`             |
+| UUID           | `"550e8400-e29b-41d4-a716-446655440000"`           |
+| Date (ISO)     | `"2026-02-25"`                                     |
+| Datetime (ISO) | `"2026-02-25T14:30:00Z"`                           |
+| Phone          | `"+1-555-123-4567"`                                |
+| Address        | `"123 Main St, Springfield, IL 62701"`             |
+| Color (hex)    | `"#FF5733"`                                        |
+| File path      | `"/documents/report.pdf"`                          |
+| API key        | `"sk_live_abc123..."` (truncated)                  |
 
 ### Numbers
 
-| Field Purpose | Example Value |
-|--------------|---------------|
-| ID | `42`, `1001` (avoid `0` and `1`) |
-| Count | `15`, `100` |
-| Price | `29.99`, `99.95` |
-| Percentage | `75.5`, `42.0` |
-| Age | `28`, `35` |
-| Latitude | `37.7749` |
-| Longitude | `-122.4194` |
-| Port | `8080`, `5432` |
+| Field Purpose | Example Value                    |
+| ------------- | -------------------------------- |
+| ID            | `42`, `1001` (avoid `0` and `1`) |
+| Count         | `15`, `100`                      |
+| Price         | `29.99`, `99.95`                 |
+| Percentage    | `75.5`, `42.0`                   |
+| Age           | `28`, `35`                       |
+| Latitude      | `37.7749`                        |
+| Longitude     | `-122.4194`                      |
+| Port          | `8080`, `5432`                   |
 
 ### Collections
 
-| Field Purpose | Example Value |
-|--------------|---------------|
-| Tags | `["python", "api", "rest"]` |
-| Roles | `["admin", "editor"]` |
-| IDs | `[1, 2, 3]` |
+| Field Purpose | Example Value                                 |
+| ------------- | --------------------------------------------- |
+| Tags          | `["python", "api", "rest"]`                   |
+| Roles         | `["admin", "editor"]`                         |
+| IDs           | `[1, 2, 3]`                                   |
 | Empty allowed | `[]` (show both empty and populated examples) |
 
 ---

@@ -1,6 +1,7 @@
 ---
 name: competitive-analyzer
-description: 'Systematic competitive landscape analysis covering Porter''s Five Forces,
+description:
+  'Systematic competitive landscape analysis covering Porter''s Five Forces,
   competitor discovery, feature and pricing comparison matrices, market positioning
   maps, and moat/defensibility assessment. Uses WebSearch to identify direct, indirect,
   and potential competitors across Product Hunt, G2, Capterra, and Crunchbase. Produces
@@ -20,17 +21,18 @@ metadata:
   tags: [competitive-analysis, market, porters-five-forces, positioning]
   difficulty: advanced
 ---
+
 # Competitive Analyzer
 
 Systematic competitive landscape analysis: discovery, force analysis, feature comparison, pricing, positioning, and defensibility assessment.
 
 ## When to use this skill vs. others
 
-| Need | Skill |
-|------|-------|
+| Need                                                | Skill                                 |
+| --------------------------------------------------- | ------------------------------------- |
 | Analyze competitors, compare features, assess moats | **competitive-analyzer** (this skill) |
-| Market sizing, TAM/SAM/SOM, demand signals | market-analyzer |
-| General web research and data gathering | tavily / web-fetch |
+| Market sizing, TAM/SAM/SOM, demand signals          | market-analyzer                       |
+| General web research and data gathering             | tavily / web-fetch                    |
 
 ## Workflow
 
@@ -39,11 +41,13 @@ Systematic competitive landscape analysis: discovery, force analysis, feature co
 Identify competitors across three tiers using WebSearch.
 
 **Tier classification:**
+
 - **Direct competitors** — Same solution to the same customer segment. Search: `"[product category] alternatives"`, `"[product] vs"`, `"best [category] tools 2024"`
 - **Indirect competitors** — Different solution to the same underlying problem. Search: `"how to [solve problem] without [category]"`, adjacent category leaders
 - **Potential competitors** — Adjacent players with capability and incentive to enter. Search: recent funding rounds, platform expansion announcements, acqui-hires
 
 **Discovery sources:**
+
 - Product Hunt: `site:producthunt.com [category]`
 - G2: `site:g2.com [category] reviews`
 - Capterra: `site:capterra.com [category]`
@@ -52,8 +56,8 @@ Identify competitors across three tiers using WebSearch.
 
 **Output:** A competitor roster table:
 
-| Competitor | Tier | Founded | Funding | HQ | Est. Revenue | Target Segment |
-|-----------|------|---------|---------|-----|-------------|----------------|
+| Competitor | Tier | Founded | Funding | HQ  | Est. Revenue | Target Segment |
+| ---------- | ---- | ------- | ------- | --- | ------------ | -------------- |
 
 Include 5-15 competitors. Fewer than 5 suggests the search was too narrow; more than 15 suggests the scope needs tightening.
 
@@ -62,6 +66,7 @@ Include 5-15 competitors. Fewer than 5 suggests the search was too narrow; more 
 Score each force 1-5 with supporting evidence. Reference `references/porters-five-forces.md` for scoring rubric and sub-criteria.
 
 **1. Threat of New Entrants (1-5)**
+
 - Capital requirements and startup costs
 - Regulatory and compliance barriers
 - Technology and IP barriers
@@ -70,6 +75,7 @@ Score each force 1-5 with supporting evidence. Reference `references/porters-fiv
 - Economies of scale advantages
 
 **2. Supplier Power (1-5)**
+
 - Number of available suppliers
 - Uniqueness of supplier inputs
 - Switching costs between suppliers
@@ -77,6 +83,7 @@ Score each force 1-5 with supporting evidence. Reference `references/porters-fiv
 - Dependence on key vendors (cloud, APIs, data)
 
 **3. Buyer Power (1-5)**
+
 - Buyer concentration relative to sellers
 - Price sensitivity and transparency
 - Switching costs for buyers
@@ -84,12 +91,14 @@ Score each force 1-5 with supporting evidence. Reference `references/porters-fiv
 - Availability of substitute information
 
 **4. Threat of Substitutes (1-5)**
+
 - Availability of alternative solutions
 - Performance-to-price ratio of substitutes
 - Buyer propensity to switch
 - Switching costs to substitutes
 
 **5. Competitive Rivalry (1-5)**
+
 - Number and size distribution of competitors
 - Industry growth rate
 - Product differentiation level
@@ -104,15 +113,16 @@ Build a comprehensive comparison. Reference `references/competitive-matrix.md` f
 
 **Feature comparison table:**
 
-| Feature Category | Feature | Competitor A | Competitor B | Competitor C | Our Product |
-|-----------------|---------|-------------|-------------|-------------|-------------|
-| Core | Feature 1 | Full | Partial | None | Full |
-| Integration | API | REST | GraphQL | None | REST+GraphQL |
-| Support | SLA | 99.9% | 99.5% | None | 99.95% |
+| Feature Category | Feature   | Competitor A | Competitor B | Competitor C | Our Product  |
+| ---------------- | --------- | ------------ | ------------ | ------------ | ------------ |
+| Core             | Feature 1 | Full         | Partial      | None         | Full         |
+| Integration      | API       | REST         | GraphQL      | None         | REST+GraphQL |
+| Support          | SLA       | 99.9%        | 99.5%        | None         | 99.95%       |
 
 Use: Full / Partial / None / Superior (exceeds category standard)
 
 **Feature analysis:**
+
 - **Table stakes** — Features every competitor offers. Missing any = disqualifier.
 - **Differentiators** — Features only 1-2 competitors offer. Potential positioning angles.
 - **Gaps** — Features no competitor offers. Potential innovation opportunities.
@@ -120,12 +130,13 @@ Use: Full / Partial / None / Superior (exceeds category standard)
 
 **Pricing comparison table:**
 
-| Competitor | Model | Free Tier | Entry Price | Mid Tier | Enterprise | Billing |
-|-----------|-------|-----------|------------|----------|------------|---------|
-| A | Subscription | Yes | $29/mo | $99/mo | Custom | Monthly/Annual |
-| B | Usage-based | Trial | $0.01/unit | Volume discount | Custom | Monthly |
+| Competitor | Model        | Free Tier | Entry Price | Mid Tier        | Enterprise | Billing        |
+| ---------- | ------------ | --------- | ----------- | --------------- | ---------- | -------------- |
+| A          | Subscription | Yes       | $29/mo      | $99/mo          | Custom     | Monthly/Annual |
+| B          | Usage-based  | Trial     | $0.01/unit  | Volume discount | Custom     | Monthly        |
 
 **Pricing analysis:**
+
 - Price-to-feature ratio positioning (value vs. premium)
 - Pricing model trends in the category
 - Customer segment alignment by price point
@@ -136,6 +147,7 @@ Reference `references/positioning-analysis.md` for dimension selection and mappi
 
 **Step 1: Dimension selection**
 Select the two dimensions most important to target customers. Common pairs:
+
 - Price vs. Feature richness
 - Ease of use vs. Power/flexibility
 - SMB-focused vs. Enterprise-focused
@@ -160,6 +172,7 @@ Low  ─────────────────────────
 ```
 
 **Step 3: White space identification**
+
 - Quadrants with no or few competitors = potential positioning opportunities
 - Assess whether white space is genuinely underserved or intentionally avoided (no demand)
 - Evaluate feasibility of occupying the white space
@@ -168,17 +181,18 @@ Low  ─────────────────────────
 
 Evaluate each moat type. Reference `references/positioning-analysis.md` for the moat taxonomy.
 
-| Moat Type | Present? | Strength | Evidence |
-|-----------|----------|----------|----------|
-| Network effects | Yes/No | Weak/Moderate/Strong | Description |
-| Switching costs | Yes/No | Weak/Moderate/Strong | Description |
-| IP / Technology | Yes/No | Weak/Moderate/Strong | Description |
-| Brand | Yes/No | Weak/Moderate/Strong | Description |
-| Data advantage | Yes/No | Weak/Moderate/Strong | Description |
-| Cost advantage | Yes/No | Weak/Moderate/Strong | Description |
-| Regulatory | Yes/No | Weak/Moderate/Strong | Description |
+| Moat Type       | Present? | Strength             | Evidence    |
+| --------------- | -------- | -------------------- | ----------- |
+| Network effects | Yes/No   | Weak/Moderate/Strong | Description |
+| Switching costs | Yes/No   | Weak/Moderate/Strong | Description |
+| IP / Technology | Yes/No   | Weak/Moderate/Strong | Description |
+| Brand           | Yes/No   | Weak/Moderate/Strong | Description |
+| Data advantage  | Yes/No   | Weak/Moderate/Strong | Description |
+| Cost advantage  | Yes/No   | Weak/Moderate/Strong | Description |
+| Regulatory      | Yes/No   | Weak/Moderate/Strong | Description |
 
 **Overall moat rating:**
+
 - **Weak** — No meaningful barriers. Competitors can replicate within 6 months.
 - **Moderate** — 1-2 barriers provide temporary advantage. Replication takes 1-2 years.
 - **Strong** — Multiple reinforcing barriers. Replication takes 2-5 years.
@@ -216,11 +230,11 @@ Before delivering the report, verify:
 
 ## Edge Cases
 
-| Situation | Adaptation |
-|-----------|------------|
+| Situation                                     | Adaptation                                                                                                                                                                                   |
+| --------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Pre-launch product with no direct competitors | Focus on indirect competitors and substitutes. Emphasize the "potential entrants" tier. The absence of direct competitors is itself a signal worth analyzing (nascent market vs. no market). |
-| Highly fragmented market (50+ competitors) | Segment competitors into strategic groups. Analyze 2-3 representative competitors per group rather than every player. |
-| Monopoly or duopoly market | Five Forces analysis becomes more important. Focus on substitute threats and potential entrants. Analyze the dominant player's moats in detail. |
-| B2B enterprise with opaque pricing | Note pricing opacity as a finding. Use job postings, case studies, and review sites for indirect pricing signals. |
-| User provides a competitor list | Skip discovery in Phase 1. Validate the list for completeness (are there missing tiers?) and proceed to Phase 2. |
-| Rapidly changing market | Date-stamp all findings. Flag data older than 6 months as potentially stale. Emphasize monitoring recommendations. |
+| Highly fragmented market (50+ competitors)    | Segment competitors into strategic groups. Analyze 2-3 representative competitors per group rather than every player.                                                                        |
+| Monopoly or duopoly market                    | Five Forces analysis becomes more important. Focus on substitute threats and potential entrants. Analyze the dominant player's moats in detail.                                              |
+| B2B enterprise with opaque pricing            | Note pricing opacity as a finding. Use job postings, case studies, and review sites for indirect pricing signals.                                                                            |
+| User provides a competitor list               | Skip discovery in Phase 1. Validate the list for completeness (are there missing tiers?) and proceed to Phase 2.                                                                             |
+| Rapidly changing market                       | Date-stamp all findings. Flag data older than 6 months as potentially stale. Emphasize monitoring recommendations.                                                                           |
