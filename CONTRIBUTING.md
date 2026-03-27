@@ -336,6 +336,16 @@ Run the packaging script to produce a distributable archive:
 uv run scripts/package.py skills/my-skill-name
 ```
 
+## RFCs — Design Proposals
+
+For changes to the package system, adapter architecture, new package types, or infrastructure decisions, open an [RFC discussion](https://github.com/Mathews-Tom/armory/discussions/new?category=rfcs) before writing code. RFCs ensure alignment on design before implementation effort is spent.
+
+An RFC should include: problem statement, proposed solution, alternatives considered, and migration impact.
+
+## Contribution Opportunities
+
+See [WANTED.md](WANTED.md) for missing skill domains, requested agents, and infrastructure improvements. Each item lists difficulty and scope to help you pick the right contribution.
+
 ## Pull Request Checklist
 
 Before opening a PR, confirm:

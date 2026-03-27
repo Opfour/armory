@@ -450,6 +450,14 @@ Not all package types have equivalents on every platform:
 
 See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines on submitting new packages or improving existing ones.
 
+Looking for something to build? Check [WANTED.md](WANTED.md) for missing skill domains, requested agents, and infrastructure improvements.
+
+---
+
+## Contributors
+
+See [CONTRIBUTORS.md](CONTRIBUTORS.md) for the full list.
+
 ---
 
 ## License

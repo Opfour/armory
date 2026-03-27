@@ -1,0 +1,43 @@
+name: Package Improvement
+description: Suggest improvements to an existing package
+labels: [improvement]
+body:
+  - type: input
+    id: package-name
+    attributes:
+      label: Package Name
+      description: Name of the package to improve (kebab-case).
+      placeholder: e.g. pr-review
+    validations:
+      required: true
+
+  - type: dropdown
+    id: improvement-type
+    attributes:
+      label: Improvement Type
+      options:
+        - Missing workflow steps or phases
+        - Better trigger phrase coverage
+        - Missing error handling or edge cases
+        - New reference files needed
+        - Description quality
+        - Incorrect or outdated content
+        - Other
+    validations:
+      required: true
+
+  - type: textarea
+    id: description
+    attributes:
+      label: What should change?
+      description: Describe the improvement and why it matters.
+    validations:
+      required: true
+
+  - type: textarea
+    id: example
+    attributes:
+      label: Example scenario
+      description: A concrete scenario where the current package falls short.
+    validations:
+      required: false
