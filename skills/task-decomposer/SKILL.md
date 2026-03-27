@@ -1,6 +1,7 @@
 ---
 name: task-decomposer
-description: 'Produces structured phased task boards from feature requests: dependency-mapped
+description:
+  'Produces structured phased task boards from feature requests: dependency-mapped
   work items with parallelization flags, risk flags, edge case tables, and test strategy
   matrices. Triggers on: "decompose this feature", "task breakdown with dependencies",
   "phased implementation plan", "dependency map for", "break this into tasks with
@@ -17,6 +18,7 @@ metadata:
   tags: [task-breakdown, dependencies, planning, phased]
   difficulty: intermediate
 ---
+
 # Task Decomposer
 
 Transforms ambiguous feature requests into concrete, implementable task sequences:

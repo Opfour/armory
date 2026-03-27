@@ -1,6 +1,7 @@
 ---
 name: feasibility-assessor
-description: 'Evaluate whether a business idea, product concept, or feature is technically
+description:
+  "Evaluate whether a business idea, product concept, or feature is technically
   buildable and financially viable. Covers unit economics (CAC, LTV, margins), revenue
   modeling, break-even analysis, architecture risk scoring, build estimation, and
   integrated feasibility verdicts. Triggers on: feasibility assessment, viability
@@ -10,13 +11,14 @@ description: 'Evaluate whether a business idea, product concept, or feature is t
   needs to determine whether a business idea, feature, or product is worth pursuing
   from financial and technical perspectives.
 
-  '
+  "
 metadata:
   version: 1.0.0
   category: review
   tags: [feasibility, unit-economics, viability, business-case]
   difficulty: advanced
 ---
+
 # Feasibility Assessor
 
 Evaluate business ideas and features across two tracks: financial viability and technical feasibility. Produce an integrated verdict with actionable de-risking recommendations.
@@ -89,12 +91,12 @@ Skip this phase only when the request is purely financial (e.g., "are the unit e
 
 Classify complexity:
 
-| Level | Description | Examples |
-|-------|-------------|----------|
-| 1 — Simple | Standard CRUD, single service | Landing page, basic CMS, form-based app |
-| 2 — Moderate | Multi-service integration, auth, payments | E-commerce, SaaS dashboard, API platform |
-| 3 — Complex | Distributed systems, real-time, high availability | Marketplace, streaming platform, fintech |
-| 4 — Novel | R&D required, unproven at scale | ML-driven product, novel protocol, hardware+software |
+| Level        | Description                                       | Examples                                             |
+| ------------ | ------------------------------------------------- | ---------------------------------------------------- |
+| 1 — Simple   | Standard CRUD, single service                     | Landing page, basic CMS, form-based app              |
+| 2 — Moderate | Multi-service integration, auth, payments         | E-commerce, SaaS dashboard, API platform             |
+| 3 — Complex  | Distributed systems, real-time, high availability | Marketplace, streaming platform, fintech             |
+| 4 — Novel    | R&D required, unproven at scale                   | ML-driven product, novel protocol, hardware+software |
 
 Evaluate:
 
@@ -116,13 +118,13 @@ Evaluate:
 
 Score each dimension 1-5 (1 = low risk, 5 = critical risk):
 
-| Dimension | What It Measures |
-|-----------|-----------------|
-| Technical novelty | Proven tech (1) vs active R&D required (5) |
-| Integration complexity | Self-contained (1) vs many external APIs (5) |
-| Scale readiness | Architecture handles 100x with config changes (1) vs requires re-architecture (5) |
-| Data risk | Public/owned data, no regulation (1) vs restricted data, heavy compliance (5) |
-| Security/compliance | No sensitive data (1) vs PCI/HIPAA/SOC2 required (5) |
+| Dimension              | What It Measures                                                                  |
+| ---------------------- | --------------------------------------------------------------------------------- |
+| Technical novelty      | Proven tech (1) vs active R&D required (5)                                        |
+| Integration complexity | Self-contained (1) vs many external APIs (5)                                      |
+| Scale readiness        | Architecture handles 100x with config changes (1) vs requires re-architecture (5) |
+| Data risk              | Public/owned data, no regulation (1) vs restricted data, heavy compliance (5)     |
+| Security/compliance    | No sensitive data (1) vs PCI/HIPAA/SOC2 required (5)                              |
 
 Composite technical risk = weighted average. Flag any dimension scoring 4+ as a blocker requiring mitigation plan.
 
@@ -143,14 +145,14 @@ Composite technical risk = weighted average. Flag any dimension scoring 4+ as a 
 
 ### Overall Verdict
 
-| Financial | Technical | Verdict |
-|-----------|-----------|---------|
-| Viable | Straightforward | **Green** — proceed |
-| Viable | Challenging | **Yellow** — proceed with caution, mitigate tech risks |
-| Risky | Straightforward | **Yellow** — validate financial assumptions first |
-| Risky | Challenging | **Yellow** — high uncertainty, run cheap experiments |
-| Not viable | Any | **Red** — reconsider fundamentals |
-| Any | High-risk/Research | **Red** — reduce technical unknowns before committing |
+| Financial  | Technical          | Verdict                                                |
+| ---------- | ------------------ | ------------------------------------------------------ |
+| Viable     | Straightforward    | **Green** — proceed                                    |
+| Viable     | Challenging        | **Yellow** — proceed with caution, mitigate tech risks |
+| Risky      | Straightforward    | **Yellow** — validate financial assumptions first      |
+| Risky      | Challenging        | **Yellow** — high uncertainty, run cheap experiments   |
+| Not viable | Any                | **Red** — reconsider fundamentals                      |
+| Any        | High-risk/Research | **Red** — reduce technical unknowns before committing  |
 
 ### Assumption Sensitivity
 
@@ -169,25 +171,30 @@ Rank experiments by cost-to-run vs information-value. Prioritize experiments tha
 Structure the output as:
 
 ### Executive Summary
+
 - One-paragraph verdict with go/no-go signal
 - Top 3 risks and top 3 strengths
 
 ### Financial Dashboard (if applicable)
+
 - Unit economics table: CAC, LTV, LTV:CAC, contribution margin, payback period
 - Revenue projection under 3 scenarios (table or description)
 - Break-even point and timeline
 
 ### Technical Scorecard (if applicable)
+
 - Complexity classification
 - Risk dimension scores (table)
 - MVP scope and timeline estimate
 - Critical dependencies and mitigation
 
 ### Sensitivity Analysis
+
 - Which assumptions, if wrong, flip the verdict
 - Threshold values for each critical assumption
 
 ### Recommended Next Steps
+
 - Ordered list of actions, cheapest validation first
 - Clear owners or skill requirements for each step
 - Decision gates: what evidence triggers proceed vs pivot vs stop

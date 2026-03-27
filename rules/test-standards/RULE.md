@@ -1,7 +1,8 @@
 ---
 name: test-standards
 type: rule
-description: 'Defines testing standards including coverage thresholds (80% overall,
+description:
+  'Defines testing standards including coverage thresholds (80% overall,
   90% new code, 95% critical paths), test naming conventions, structural patterns
   (arrange-act-assert), test categorization (unit/integration/e2e), fixture management,
   mock boundaries, and CI gate requirements. Use this rule when writing tests, setting
@@ -15,22 +16,23 @@ metadata:
   version: 1.0.0
   scope: global
   applies_to:
-    languages: ['*']
+    languages: ["*"]
   category: review
   tags: [testing, coverage, pytest, ci]
   difficulty: beginner
 ---
+
 # Test Standards
 
 Standards for test coverage, structure, naming, and CI enforcement across all repositories.
 
 ## Coverage Thresholds
 
-| Scope              | Minimum Coverage |
-| ------------------ | ---------------- |
-| Overall codebase   | 80%              |
-| New/modified code  | 90%              |
-| Critical paths     | 95%              |
+| Scope             | Minimum Coverage |
+| ----------------- | ---------------- |
+| Overall codebase  | 80%              |
+| New/modified code | 90%              |
+| Critical paths    | 95%              |
 
 ### Critical Path Definition
 
@@ -61,9 +63,9 @@ def test_parse_config_missing_file_uses_defaults():
 ```
 
 ```typescript
-it("returns 401 when token is expired")
-it("creates user with valid email and hashed password")
-it("rejects duplicate usernames with conflict error")
+it("returns 401 when token is expired");
+it("creates user with valid email and hashed password");
+it("rejects duplicate usernames with conflict error");
 ```
 
 ### Rules
@@ -124,15 +126,15 @@ One logical assertion per test. Multiple `assert` statements are acceptable when
 
 ### When to Use Each
 
-| Signal                           | Test Type   |
-| -------------------------------- | ----------- |
-| Pure function, no side effects   | Unit        |
-| Database query correctness       | Integration |
-| API contract between services    | Integration |
-| User login through UI            | E2E         |
-| Payment flow across services     | E2E         |
-| Config parsing logic             | Unit        |
-| File upload and storage          | Integration |
+| Signal                         | Test Type   |
+| ------------------------------ | ----------- |
+| Pure function, no side effects | Unit        |
+| Database query correctness     | Integration |
+| API contract between services  | Integration |
+| User login through UI          | E2E         |
+| Payment flow across services   | E2E         |
+| Config parsing logic           | Unit        |
+| File upload and storage        | Integration |
 
 ## Fixture Patterns
 

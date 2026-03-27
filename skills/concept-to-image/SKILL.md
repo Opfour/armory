@@ -1,6 +1,7 @@
 ---
 name: concept-to-image
-description: 'Turn any concept, idea, or description into a polished static HTML visual,
+description:
+  'Turn any concept, idea, or description into a polished static HTML visual,
   then export it as a PNG or SVG image file. Use this skill when the user explicitly
   needs an image file output (PNG or SVG). This includes: concept diagrams, flowcharts,
   comparison charts, process visuals, educational diagrams, social media graphics,
@@ -19,6 +20,7 @@ metadata:
   tags: [image-generation, html-to-png, svg, visual-design]
   difficulty: intermediate
 ---
+
 # Concept to Image
 
 Creates polished visuals from concepts using HTML/CSS/SVG as a refineable intermediate, then exports to PNG or SVG.

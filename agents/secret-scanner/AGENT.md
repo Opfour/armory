@@ -1,7 +1,8 @@
 ---
 name: secret-scanner
 type: agent
-description: 'Pre-commit secret detection agent scanning for hardcoded API keys, passwords,
+description:
+  'Pre-commit secret detection agent scanning for hardcoded API keys, passwords,
   tokens, connection strings, private keys, and high-entropy strings. Detects known
   provider key patterns (AWS, GitHub, Slack, Stripe, Google, Azure), .env values leaked
   into source code, and PEM-encoded private keys. Designed for fast pre-commit gating
@@ -19,10 +20,11 @@ metadata:
   execution_phase: pre-commit
   priority: 200
   enabled: true
-  language_targets: ['*']
+  language_targets: ["*"]
   tags: [secrets, scanning, security, haiku]
   difficulty: intermediate
 ---
+
 # Secret Scanner
 
 Pre-commit credential detection scanning for hardcoded secrets, known
@@ -33,12 +35,14 @@ provider key patterns, high-entropy strings, and private key material.
 ## Scope and Trigger Conditions
 
 Activate when:
+
 - User is about to commit code and wants a secrets check
 - User asks to scan for hardcoded keys, passwords, or tokens
 - User asks for credential detection or secret scanning
 - Pre-commit hook context where secrets gate is needed
 
 Do NOT activate when:
+
 - User asks for full security vulnerability review (use security-reviewer)
 - User asks for general code quality review (use code-reviewer)
 - User asks for dependency audit (use dependency-audit)
@@ -69,11 +73,13 @@ Do NOT activate when:
 Scan each file for known secret formats using pattern matching:
 
 **AWS**
+
 - `AKIA[0-9A-Z]{16}` — AWS Access Key ID
 - `aws_secret_access_key\s*=\s*[A-Za-z0-9/+=]{40}`
 - `aws_session_token` assignments
 
 **GitHub**
+
 - `ghp_[A-Za-z0-9]{36}` — Personal access token
 - `gho_[A-Za-z0-9]{36}` — OAuth token
 - `ghs_[A-Za-z0-9]{36}` — Server-to-server token
@@ -81,30 +87,36 @@ Scan each file for known secret formats using pattern matching:
 - `github_pat_[A-Za-z0-9]{22}_[A-Za-z0-9]{59}` — Fine-grained PAT
 
 **Slack**
+
 - `xoxb-[0-9]{10,}-[0-9]{10,}-[A-Za-z0-9]{24}` — Bot token
 - `xoxp-[0-9]{10,}-[0-9]{10,}-[0-9]{10,}-[a-f0-9]{32}` — User token
 - `xoxs-[0-9]{10,}-[0-9]{10,}-[0-9]{10,}-[a-f0-9]{32}` — Legacy token
 
 **Stripe**
+
 - `sk_live_[A-Za-z0-9]{24,}` — Secret key
 - `rk_live_[A-Za-z0-9]{24,}` — Restricted key
 - `whsec_[A-Za-z0-9]{32,}` — Webhook secret
 
 **Google**
+
 - `AIza[A-Za-z0-9_-]{35}` — API key
 - Service account JSON with `"type": "service_account"`
 
 **Azure**
+
 - `DefaultEndpointsProtocol=https;AccountName=`
 - `SharedAccessSignature=` patterns
 
 **Generic**
+
 - `Bearer [A-Za-z0-9_-]{20,}` in non-example code
 - `Authorization:` header with literal token values
 
 ### Phase 3: Private Key Detection
 
 Scan for PEM-encoded key material:
+
 - `-----BEGIN RSA PRIVATE KEY-----`
 - `-----BEGIN EC PRIVATE KEY-----`
 - `-----BEGIN OPENSSH PRIVATE KEY-----`
@@ -117,6 +129,7 @@ Flag: any private key in source as CRITICAL. No exceptions.
 ### Phase 4: Connection String Detection
 
 Scan for database and service connection strings:
+
 - `postgresql://user:password@`
 - `mysql://user:password@`
 - `mongodb://user:password@`
@@ -130,12 +143,14 @@ Flag: connection strings with embedded credentials as CRITICAL.
 ### Phase 5: Environment Variable Leakage
 
 Detect .env values that have leaked into source code:
+
 1. Read `.env`, `.env.local`, `.env.production` if present
 2. Extract key-value pairs
 3. Search source files for literal values matching env var contents
 4. Flag matches where the value is a secret (password, key, token)
 
 Also detect:
+
 - `os.environ["SECRET"]` with fallback to hardcoded value
 - `process.env.SECRET || "hardcoded_fallback"`
 - Default values in config that contain real credentials
@@ -143,6 +158,7 @@ Also detect:
 ### Phase 6: High-Entropy String Detection
 
 Scan for suspicious high-entropy strings that may be secrets:
+
 1. Extract string literals > 16 characters
 2. Calculate Shannon entropy
 3. Flag strings with entropy > 4.5 bits/character that:
@@ -158,12 +174,12 @@ Scan for suspicious high-entropy strings that may be secrets:
 
 ## Severity Classification
 
-| Severity | Criteria | Examples |
-|----------|----------|----------|
-| CRITICAL | Confirmed secret that grants access to external services or data | AWS key, GitHub PAT, private key, DB connection string with password |
-| HIGH | Probable secret based on pattern and context | High-entropy string in credential variable, env value leaked to source |
-| MEDIUM | Potential secret requiring manual verification | High-entropy string in ambiguous context, generic Bearer token |
-| LOW | Informational finding | Placeholder that resembles a secret pattern, test fixture token |
+| Severity | Criteria                                                         | Examples                                                               |
+| -------- | ---------------------------------------------------------------- | ---------------------------------------------------------------------- |
+| CRITICAL | Confirmed secret that grants access to external services or data | AWS key, GitHub PAT, private key, DB connection string with password   |
+| HIGH     | Probable secret based on pattern and context                     | High-entropy string in credential variable, env value leaked to source |
+| MEDIUM   | Potential secret requiring manual verification                   | High-entropy string in ambiguous context, generic Bearer token         |
+| LOW      | Informational finding                                            | Placeholder that resembles a secret pattern, test fixture token        |
 
 ---
 
@@ -179,14 +195,17 @@ Scan for suspicious high-entropy strings that may be secrets:
 ### CRITICAL
 
 #### [K1] <provider> <secret_type>
+
 - **File:** `path/to/file.ext:line`
 - **Pattern:** `<first_4_chars>....<last_4_chars>` (redacted)
 - **Action:** Remove from source, rotate credential, add to .gitignore
 
 ### HIGH
+
 ...
 
 ### Remediation Steps
+
 1. Remove the secret from source code
 2. Add the file pattern to `.gitignore` if applicable
 3. Use environment variables or a secrets manager

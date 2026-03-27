@@ -18,14 +18,14 @@ CAC = (Marketing Spend + Sales Spend + Overhead Allocation) / New Customers Acqu
 
 Track CAC per acquisition channel independently. Blended CAC masks underperforming channels.
 
-| Channel | Typical B2B SaaS CAC | Typical B2C CAC |
-|---------|---------------------|-----------------|
-| Organic search | $50-200 | $10-50 |
-| Paid search | $200-800 | $30-150 |
-| Content marketing | $100-400 | $15-80 |
-| Social ads | $150-500 | $20-100 |
-| Outbound sales | $500-2000 | N/A |
-| Referral | $50-150 | $5-30 |
+| Channel           | Typical B2B SaaS CAC | Typical B2C CAC |
+| ----------------- | -------------------- | --------------- |
+| Organic search    | $50-200              | $10-50          |
+| Paid search       | $200-800             | $30-150         |
+| Content marketing | $100-400             | $15-80          |
+| Social ads        | $150-500             | $20-100         |
+| Outbound sales    | $500-2000            | N/A             |
+| Referral          | $50-150              | $5-30           |
 
 These ranges are directional. Actual CAC depends on market, product, and execution quality.
 
@@ -36,6 +36,7 @@ Payback Period (months) = CAC / (ARPU * Gross Margin %)
 ```
 
 Benchmark targets:
+
 - SaaS: < 12 months (good), < 18 months (acceptable), > 24 months (concerning)
 - E-commerce: < 3 months (good), < 6 months (acceptable)
 - Marketplace: < 18 months (good), < 24 months (acceptable)
@@ -70,14 +71,14 @@ Net revenue retention > 100% means existing customers grow in value over time. T
 
 ## LTV:CAC Benchmarks by Industry
 
-| Industry | Minimum Viable | Good | Excellent |
-|----------|---------------|------|-----------|
-| B2B SaaS | 3:1 | 5:1 | 7:1+ |
-| E-commerce / DTC | 2:1 | 3:1 | 4:1+ |
-| Marketplace | 3:1 | 4:1 | 6:1+ |
-| Consumer subscription | 2.5:1 | 4:1 | 5:1+ |
-| Fintech | 3:1 | 5:1 | 8:1+ |
-| Enterprise software | 5:1 | 8:1 | 10:1+ |
+| Industry              | Minimum Viable | Good | Excellent |
+| --------------------- | -------------- | ---- | --------- |
+| B2B SaaS              | 3:1            | 5:1  | 7:1+      |
+| E-commerce / DTC      | 2:1            | 3:1  | 4:1+      |
+| Marketplace           | 3:1            | 4:1  | 6:1+      |
+| Consumer subscription | 2.5:1          | 4:1  | 5:1+      |
+| Fintech               | 3:1            | 5:1  | 8:1+      |
+| Enterprise software   | 5:1            | 8:1  | 10:1+     |
 
 An LTV:CAC below the minimum viable ratio indicates the business burns cash on every customer acquired.
 
@@ -93,6 +94,7 @@ Contribution Margin % = Contribution Margin / Revenue per Unit
 **Fixed costs excluded**: salaries (non-variable), office rent, insurance, SaaS tools with flat pricing.
 
 Target contribution margins:
+
 - Software / SaaS: 70-85%
 - Marketplace (net revenue): 60-80%
 - E-commerce: 30-50%
@@ -107,6 +109,7 @@ MRR = Number of paying customers * Average revenue per account
 ```
 
 MRR components:
+
 - **New MRR**: revenue from new customers this month
 - **Expansion MRR**: upsells, cross-sells, seat additions from existing customers
 - **Churned MRR**: revenue lost from cancellations
@@ -128,6 +131,7 @@ NRR = (Starting MRR + Expansion - Contraction - Churn) / Starting MRR
 ```
 
 Benchmarks:
+
 - < 90%: churn problem, business contracts over time
 - 90-100%: stable but no growth from existing base
 - 100-110%: healthy, existing customers grow modestly
@@ -151,6 +155,7 @@ Take Rate = Marketplace Revenue / GMV
 ```
 
 Benchmarks by category:
+
 - Ride-sharing: 20-30%
 - Food delivery: 15-30%
 - E-commerce marketplace: 8-15%

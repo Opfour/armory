@@ -1,6 +1,7 @@
 ---
 name: package-evaluator
-description: 'Evaluate Claude Code package quality across 6 weighted dimensions: frontmatter
+description:
+  'Evaluate Claude Code package quality across 6 weighted dimensions: frontmatter
   quality, trigger coverage, structural completeness, content depth, consistency and
   integrity, and CONTRIBUTING.md compliance. Covers all 7 package types with type-specific
   signals. Produces scored audit reports with severity-classified findings. Two modes:
@@ -18,6 +19,7 @@ metadata:
   tags: [quality, audit, scoring, frontmatter]
   difficulty: intermediate
 ---
+
 # Package Evaluator
 
 Packages that do not activate on relevant queries waste the entire investment in writing
@@ -30,8 +32,8 @@ reliable tool.
 
 ## Reference Files
 
-| File | Contents |
-| ---- | -------- |
+| File                              | Contents                                                                                                                    |
+| --------------------------------- | --------------------------------------------------------------------------------------------------------------------------- |
 | `references/evaluation-rubric.md` | Detailed 1-5 scoring criteria per dimension, weight justifications, type-specific criteria, worked examples for calibration |
 
 ## Audit Modes
@@ -46,12 +48,12 @@ Two modes, selected by input:
 
 ### Mode Selection
 
-| Input | Mode |
-| ----- | ---- |
-| Path to a specific package directory or definition file | Quick Audit |
-| "all", "every package", no path specified | Full Audit |
-| "--type agents" or type filter | Full Audit filtered to one type |
-| Multiple specific paths | Quick Audit for each, then comparative summary |
+| Input                                                   | Mode                                           |
+| ------------------------------------------------------- | ---------------------------------------------- |
+| Path to a specific package directory or definition file | Quick Audit                                    |
+| "all", "every package", no path specified               | Full Audit                                     |
+| "--type agents" or type filter                          | Full Audit filtered to one type                |
+| Multiple specific paths                                 | Quick Audit for each, then comparative summary |
 
 ---
 
@@ -64,6 +66,7 @@ Six dimensions, each scored 1-5. Weighted sum determines overall percentage.
 Evaluates the YAML frontmatter block for completeness and discoverability.
 
 **Signals:**
+
 - `name` field present and non-empty
 - `description` field present and non-empty
 - Description length between 200-800 characters (sweet spot for keyword density without bloat)
@@ -79,6 +82,7 @@ A missing `name` or `description` field caps at 1/5.
 Evaluates whether the package activates on the queries users actually type.
 
 **Signals:**
+
 - Synonym breadth — multiple phrasings for the same intent (e.g., "review", "audit",
   "critique", "evaluate", "assess", "check")
 - Implied contexts — situations where the package applies even without explicit keywords
@@ -95,6 +99,7 @@ phrases in the description caps at 1/5.
 Evaluates whether the package contains the sections needed to function reliably.
 
 **Signals:**
+
 - Prerequisites or setup instructions (if applicable)
 - Multi-phase workflow or step-by-step procedure
 - Error handling guidance or edge case documentation
@@ -112,6 +117,7 @@ Evaluates the substantive quality of the package's guidance — whether it provi
 detail for an agent to execute well without human intervention.
 
 **Signals:**
+
 - Multi-step workflows with decision points, not bare command lists
 - Error cases documented with recovery actions
 - Decision frameworks (when to do X vs Y, mode selection tables)
@@ -128,6 +134,7 @@ substantive guidance (checklists, rubrics, criteria), not just link collections.
 Evaluates internal consistency and structural integrity.
 
 **Signals:**
+
 - Directory name matches the `name` field in frontmatter exactly
 - All files referenced in the definition file exist on disk (reference files, scripts, assets)
 - Description content aligns with body content (description does not promise features
@@ -148,6 +155,7 @@ at 1/5 — they break standalone packaging. Missing referenced files cap at 2/5.
 Evaluates adherence to the repository's contribution guidelines.
 
 **Signals:**
+
 - Package name is kebab-case
 - Package name is 64 characters or fewer
 - Description is 1024 characters or fewer
@@ -170,6 +178,7 @@ signals that influence D3 (Structural Completeness) and D4 (Content Depth) scori
 When evaluating an AGENT.md:
 
 **D3 additions:**
+
 - `model` field specified (opus/sonnet/haiku)
 - `color` field specified
 - `metadata.category` specified
@@ -177,6 +186,7 @@ When evaluating an AGENT.md:
 - `metadata.language_targets` specified
 
 **D4 additions:**
+
 - Decision tree or algorithm section present with clear phases
 - START/END or phase markers for structured execution flow
 - Severity classification for findings (CRITICAL/HIGH/MEDIUM/LOW)
@@ -191,12 +201,14 @@ model/category/phase metadata caps D3 at 3/5.
 When evaluating a HOOK.md:
 
 **D3 additions:**
+
 - `hook.events` list specified (PreToolUse, PostToolUse, Stop, etc.)
 - `hook.handler.type` specified (command/python-module)
 - `hook.handler.command` specified
 - `handler.sh` or equivalent handler script exists in directory
 
 **D4 additions:**
+
 - Handler script is functional (not placeholder/stub)
 - Handler reads stdin JSON correctly
 - Exit code semantics documented (non-zero blocks for PreToolUse)
@@ -210,10 +222,12 @@ documented events caps D3 at 2/5.
 When evaluating a RULE.md:
 
 **D3 additions:**
+
 - `metadata.scope` specified (global/project)
 - `metadata.applies_to.languages` specified if scope is language-specific
 
 **D4 additions:**
+
 - Concrete, actionable requirements (not vague principles)
 - Code examples for key rules
 - Anti-patterns shown alongside correct patterns
@@ -227,10 +241,12 @@ D4 at 2/5.
 When evaluating a COMMAND.md:
 
 **D3 additions:**
+
 - `command.syntax` specified with argument documentation
 - `command.handler` specified (inline/command)
 
 **D4 additions:**
+
 - Numbered step-by-step workflow
 - Decision points clearly marked
 - Output format specified
@@ -243,11 +259,13 @@ When evaluating a COMMAND.md:
 When evaluating a UTILITY.md:
 
 **D3 additions:**
+
 - `utility.runtime` specified (python/node/shell)
 - `utility.entry_point` specified and the file exists
 - `utility.executable` specified
 
 **D4 additions:**
+
 - Entry point script uses argparse or equivalent for CLI
 - Script has proper error handling (not bare except)
 - Usage examples in the body
@@ -260,11 +278,13 @@ When evaluating a UTILITY.md:
 When evaluating a PRESET.md:
 
 **D3 additions:**
+
 - `preset.packages` specified with at least one type section
 - Each referenced package exists in the manifest
 - `preset.compatibility.platforms` specified
 
 **D4 additions:**
+
 - Body explains why these packages work together
 - Describes the target workflow or use case
 - References are to existing packages (not aspirational)
@@ -275,12 +295,12 @@ When evaluating a PRESET.md:
 
 ## Severity Classification
 
-| Severity | Criteria | Score Impact |
-| -------- | -------- | ------------ |
-| CRITICAL | Package cannot activate or breaks on load — missing frontmatter, name mismatch, invalid YAML, non-existent preset references | Caps overall score at 40% |
-| HIGH | Significant trigger gap or missing core section — no workflow, no error handling, zero trigger phrases, missing handler script | Caps affected dimension at 3/5 |
-| MEDIUM | Weak coverage, shallow content, few trigger synonyms, missing type-specific metadata | Dimension needs improvement but functions |
-| LOW | Minor polish — formatting inconsistencies, slightly short description, missing calibration rules | Fix when convenient |
+| Severity | Criteria                                                                                                                       | Score Impact                              |
+| -------- | ------------------------------------------------------------------------------------------------------------------------------ | ----------------------------------------- |
+| CRITICAL | Package cannot activate or breaks on load — missing frontmatter, name mismatch, invalid YAML, non-existent preset references   | Caps overall score at 40%                 |
+| HIGH     | Significant trigger gap or missing core section — no workflow, no error handling, zero trigger phrases, missing handler script | Caps affected dimension at 3/5            |
+| MEDIUM   | Weak coverage, shallow content, few trigger synonyms, missing type-specific metadata                                           | Dimension needs improvement but functions |
+| LOW      | Minor polish — formatting inconsistencies, slightly short description, missing calibration rules                               | Fix when convenient                       |
 
 ---
 
@@ -326,13 +346,13 @@ For each package under evaluation:
 3. Compute weighted score: `Overall% = (sum of dimension_score x weight) / 5 x 100`.
 4. Determine verdict from the scale below.
 
-| Range | Verdict |
-| ----- | ------- |
-| 90-100% | Exemplary |
-| 80-89% | Strong |
-| 70-79% | Adequate |
-| 60-69% | Needs Work |
-| Below 60% | Deficient |
+| Range     | Verdict    |
+| --------- | ---------- |
+| 90-100%   | Exemplary  |
+| 80-89%    | Strong     |
+| 70-79%    | Adequate   |
+| 60-69%    | Needs Work |
+| Below 60% | Deficient  |
 
 ### Phase 4: Report
 
@@ -404,17 +424,17 @@ Omit the full Score Calculation section in condensed mode.]
 
 ## Error Handling
 
-| Problem | Cause | Fix |
-| ------- | ----- | --- |
-| Definition file not found in directory | Path incorrect or file missing | Report as CRITICAL; do not attempt evaluation; surface the path and stop |
-| Unknown definition file | Directory has no recognized definition file (SKILL.md, AGENT.md, HOOK.md, RULE.md, COMMAND.md, UTILITY.md, PRESET.md) | Skip directory; report as warning in Full Audit; report as CRITICAL in Quick Audit |
-| YAML frontmatter parse failure | Invalid YAML syntax (unclosed quotes, bad indentation) | Report as CRITICAL finding; score D1 and D6 as 1/5; continue evaluating the body content where parseable |
-| `references/` directory missing | Package has no reference files | Not an error — score D5 normally; check only that any files referenced in the definition file body actually exist on disk |
-| `references/` exists but referenced file is absent | File path in definition file body doesn't resolve | Record as a CRITICAL D5 finding; missing referenced files cap D5 at 2/5 |
-| Empty definition file (zero bytes or whitespace only) | File created but never populated | Treat as CRITICAL; score all dimensions 1/5; overall verdict: Deficient |
-| `references/evaluation-rubric.md` not found | Evaluator's own reference file missing | Note the irony; evaluate using the criteria inline in this SKILL.md; flag D5 as a CRITICAL finding |
-| Handler script missing for hook | HOOK.md references a handler that doesn't exist | Record as CRITICAL D4 finding; cap D4 at 1/5 |
-| Preset references non-existent package | PRESET.md lists a package not in the manifest | Record as CRITICAL finding; caps overall at 40% |
+| Problem                                               | Cause                                                                                                                 | Fix                                                                                                                       |
+| ----------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------- |
+| Definition file not found in directory                | Path incorrect or file missing                                                                                        | Report as CRITICAL; do not attempt evaluation; surface the path and stop                                                  |
+| Unknown definition file                               | Directory has no recognized definition file (SKILL.md, AGENT.md, HOOK.md, RULE.md, COMMAND.md, UTILITY.md, PRESET.md) | Skip directory; report as warning in Full Audit; report as CRITICAL in Quick Audit                                        |
+| YAML frontmatter parse failure                        | Invalid YAML syntax (unclosed quotes, bad indentation)                                                                | Report as CRITICAL finding; score D1 and D6 as 1/5; continue evaluating the body content where parseable                  |
+| `references/` directory missing                       | Package has no reference files                                                                                        | Not an error — score D5 normally; check only that any files referenced in the definition file body actually exist on disk |
+| `references/` exists but referenced file is absent    | File path in definition file body doesn't resolve                                                                     | Record as a CRITICAL D5 finding; missing referenced files cap D5 at 2/5                                                   |
+| Empty definition file (zero bytes or whitespace only) | File created but never populated                                                                                      | Treat as CRITICAL; score all dimensions 1/5; overall verdict: Deficient                                                   |
+| `references/evaluation-rubric.md` not found           | Evaluator's own reference file missing                                                                                | Note the irony; evaluate using the criteria inline in this SKILL.md; flag D5 as a CRITICAL finding                        |
+| Handler script missing for hook                       | HOOK.md references a handler that doesn't exist                                                                       | Record as CRITICAL D4 finding; cap D4 at 1/5                                                                              |
+| Preset references non-existent package                | PRESET.md lists a package not in the manifest                                                                         | Record as CRITICAL finding; caps overall at 40%                                                                           |
 
 ## Calibration Rules
 

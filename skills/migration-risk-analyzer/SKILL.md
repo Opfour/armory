@@ -1,6 +1,7 @@
 ---
 name: migration-risk-analyzer
-description: 'Analyzes database migration scripts for risk: lock contention, downtime
+description:
+  'Analyzes database migration scripts for risk: lock contention, downtime
   estimation, rollback strategy, and deployment recommendations. Classifies DDL and
   DML operations by lock type and duration, identifies irreversible changes, generates
   rollback scripts, and produces pre/post validation queries. Triggers on: "analyze
@@ -16,6 +17,7 @@ metadata:
   tags: [database, migration, ddl, rollback]
   difficulty: advanced
 ---
+
 # Migration Risk Analyzer
 
 Systematic risk assessment for database migrations: parse DDL/DML operations, classify

@@ -1,6 +1,7 @@
 ---
 name: github
-description: 'GitHub CLI operations via `gh` for issues, pull requests, CI/Actions,
+description:
+  'GitHub CLI operations via `gh` for issues, pull requests, CI/Actions,
   releases, repos, search, gists, and the REST/GraphQL API. Structured output with
   `--json` and `--jq` for parsing. Covers `gh issue create/list/view/edit/close`,
   `gh pr create/review/merge/checks`, `gh run list/view/rerun/watch`, `gh release
@@ -20,6 +21,7 @@ metadata:
   tags: [github, cli, issues, pull-requests]
   difficulty: intermediate
 ---
+
 # GitHub
 
 All GitHub operations use the `gh` CLI. Prefer `--json` with `--jq` for structured,
@@ -584,14 +586,14 @@ limit management patterns.
 
 ### REST vs GraphQL Decision Table
 
-| Scenario                                          | Use              | Reason                                               |
-| ------------------------------------------------- | ---------------- | ---------------------------------------------------- |
-| Fetch a single resource (one PR, one issue)       | REST (`gh api`)  | Simple, predictable, low overhead                    |
-| Fetch nested or related data in one round-trip    | GraphQL          | Avoids N+1 requests; select only needed fields       |
-| Bulk operations across many resources             | GraphQL          | Query complexity points are cheaper than REST calls  |
-| Creating or updating a resource (mutation)        | Either           | REST: `-X POST/PATCH`; GraphQL: `mutation {}` block  |
-| Rate-limit-sensitive pipeline or script           | REST             | REST has a simple 5000 req/hr counter; easier to budget |
-| ProjectV2 board operations                        | GraphQL          | ProjectV2 has no REST API; GraphQL only              |
+| Scenario                                       | Use             | Reason                                                  |
+| ---------------------------------------------- | --------------- | ------------------------------------------------------- |
+| Fetch a single resource (one PR, one issue)    | REST (`gh api`) | Simple, predictable, low overhead                       |
+| Fetch nested or related data in one round-trip | GraphQL         | Avoids N+1 requests; select only needed fields          |
+| Bulk operations across many resources          | GraphQL         | Query complexity points are cheaper than REST calls     |
+| Creating or updating a resource (mutation)     | Either          | REST: `-X POST/PATCH`; GraphQL: `mutation {}` block     |
+| Rate-limit-sensitive pipeline or script        | REST            | REST has a simple 5000 req/hr counter; easier to budget |
+| ProjectV2 board operations                     | GraphQL         | ProjectV2 has no REST API; GraphQL only                 |
 
 ---
 

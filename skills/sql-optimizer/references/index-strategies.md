@@ -7,13 +7,13 @@ maintenance considerations.
 
 ## Index Types
 
-| Type | Supports | Use When |
-|------|---------|----------|
-| B-tree (default) | `=`, `<`, `>`, `<=`, `>=`, `BETWEEN`, `LIKE 'prefix%'` | Default for most columns |
-| Hash | `=` only | Equality lookups only (PostgreSQL) |
-| GIN | Array containment, full-text search, JSONB | `@>`, `@@`, `?` operators |
-| GiST | Range types, geometric, full-text | Overlaps, nearest-neighbor |
-| BRIN | Range queries on naturally ordered data | Timestamp columns in append-only tables |
+| Type             | Supports                                               | Use When                                |
+| ---------------- | ------------------------------------------------------ | --------------------------------------- |
+| B-tree (default) | `=`, `<`, `>`, `<=`, `>=`, `BETWEEN`, `LIKE 'prefix%'` | Default for most columns                |
+| Hash             | `=` only                                               | Equality lookups only (PostgreSQL)      |
+| GIN              | Array containment, full-text search, JSONB             | `@>`, `@@`, `?` operators               |
+| GiST             | Range types, geometric, full-text                      | Overlaps, nearest-neighbor              |
+| BRIN             | Range queries on naturally ordered data                | Timestamp columns in append-only tables |
 
 ### B-tree (Default Choice)
 
@@ -30,6 +30,7 @@ CREATE INDEX idx_orders_user_status ON orders(user_id, status);
 ```
 
 **Column order matters.** The index is usable for queries that filter on:
+
 - `user_id` alone ✅
 - `user_id` AND `status` ✅
 - `status` alone ❌ (leftmost prefix rule)
@@ -83,14 +84,14 @@ CREATE INDEX idx_users_active_email ON users(email) WHERE active = true;
 
 ### From WHERE Clause
 
-| WHERE Pattern | Index Recommendation |
-|--------------|---------------------|
-| `WHERE col = value` | Single-column index on `col` |
-| `WHERE col1 = v1 AND col2 = v2` | Composite index `(col1, col2)` |
+| WHERE Pattern                   | Index Recommendation                      |
+| ------------------------------- | ----------------------------------------- |
+| `WHERE col = value`             | Single-column index on `col`              |
+| `WHERE col1 = v1 AND col2 = v2` | Composite index `(col1, col2)`            |
 | `WHERE col1 = v1 AND col2 > v2` | Composite `(col1, col2)` — equality first |
-| `WHERE col IN (v1, v2, v3)` | Single-column index on `col` |
-| `WHERE col LIKE 'prefix%'` | B-tree index on `col` |
-| `WHERE col IS NOT NULL` | Partial index `WHERE col IS NOT NULL` |
+| `WHERE col IN (v1, v2, v3)`     | Single-column index on `col`              |
+| `WHERE col LIKE 'prefix%'`      | B-tree index on `col`                     |
+| `WHERE col IS NOT NULL`         | Partial index `WHERE col IS NOT NULL`     |
 
 ### From JOIN Clause
 
@@ -120,13 +121,13 @@ SELECT status, COUNT(*) FROM orders GROUP BY status;
 
 ## When NOT to Index
 
-| Scenario | Why |
-|----------|-----|
-| Small tables (< 1000 rows) | Full scan is faster than index lookup |
+| Scenario                          | Why                                                    |
+| --------------------------------- | ------------------------------------------------------ |
+| Small tables (< 1000 rows)        | Full scan is faster than index lookup                  |
 | Columns with very low cardinality | Boolean columns (true/false) — index doesn't help much |
-| Columns rarely queried in WHERE | Index overhead without benefit |
-| Tables with heavy write load | Each write updates every index |
-| Temporary/staging tables | Short-lived data doesn't benefit |
+| Columns rarely queried in WHERE   | Index overhead without benefit                         |
+| Tables with heavy write load      | Each write updates every index                         |
+| Temporary/staging tables          | Short-lived data doesn't benefit                       |
 
 ---
 

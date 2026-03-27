@@ -3,6 +3,7 @@
 ## In-Text Citation Styles
 
 ### APA 7th Edition
+
 - Single author: `(Smith, 2023)` or `Smith (2023)`
 - Two authors: `(Smith & Jones, 2023)` or `Smith and Jones (2023)`
 - Three+ authors: `(Smith et al., 2023)` or `Smith et al. (2023)`
@@ -10,21 +11,25 @@
 - Direct quote: `(Smith, 2023, p. 42)`
 
 ### IEEE
+
 - Numbered brackets: `[1]`, `[2]`, `[1], [3]`, `[1]–[5]`
 - Ordered by appearance in text, not alphabetically
 
 ### Chicago (Author-Date)
+
 - Single author: `(Smith 2023)` or `Smith (2023)`
 - Two authors: `(Smith and Jones 2023)`
 - Three+ authors: `(Smith et al. 2023)`
 
 ### ACM
+
 - Numbered brackets: `[Smith et al. 2023]` or `[42]`
 - Varies by venue (numbered vs. author-date)
 
 ## Reference List Formats
 
 ### APA 7th Edition
+
 ```
 Smith, J. A., & Jones, B. C. (2023). Title of the paper in sentence case.
     Journal Name in Title Case, 42(3), 123–145.
@@ -36,6 +41,7 @@ Smith, J. A., Jones, B. C., & Lee, D. (2023). Conference paper title.
 ```
 
 ### IEEE
+
 ```
 [1] J. A. Smith and B. C. Jones, "Title of the paper in sentence case,"
     Journal Name, vol. 42, no. 3, pp. 123–145, Mar. 2023,
@@ -46,6 +52,7 @@ Smith, J. A., Jones, B. C., & Lee, D. (2023). Conference paper title.
 ```
 
 ### arXiv Preprint
+
 ```
 # APA
 Smith, J. A., & Jones, B. C. (2023). Title of the preprint. arXiv.
@@ -65,6 +72,7 @@ For NLP and AI conference papers (ACL, EMNLP, NeurIPS, ICML, ICLR), note that pu
 ## Constructing Citations from arxiv-search Output
 
 The `arxiv-search` utility returns:
+
 ```json
 {
   "id": "2301.07041v1",
@@ -78,12 +86,14 @@ The `arxiv-search` utility returns:
 ```
 
 Map to APA:
+
 ```
 Author, F., & Author, S. (2023). Paper title. Nature.
     https://doi.org/10.1234/example
 ```
 
 If `journal_ref` is null (preprint only):
+
 ```
 Author, F., & Author, S. (2023). Paper title. arXiv.
     https://arxiv.org/abs/2301.07041

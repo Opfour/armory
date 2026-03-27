@@ -1,6 +1,7 @@
 ---
 name: concept-to-video
-description: 'Turn any concept into an animated explainer video using Manim (Python).
+description:
+  'Turn any concept into an animated explainer video using Manim (Python).
   Use whenever the user wants animated visualizations, motion graphics, or video output
   (MP4/GIF) for technical concepts. Covers: architecture animations, data flows, algorithm
   step-throughs, pipeline explainers, math proofs, comparisons, agent interactions,
@@ -19,6 +20,7 @@ metadata:
   tags: [video, manim, animation, explainer]
   difficulty: advanced
 ---
+
 # Concept to Video
 
 Creates animated explainer videos from concepts using Manim (Python) as a programmatic animation engine.

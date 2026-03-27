@@ -11,6 +11,7 @@ Structural rewrite strategies (Phase 2) and entropy techniques (Phase 4).
 AI text tends toward uniform paragraph length (3-5 sentences each, roughly equal). Human writing varies.
 
 Techniques:
+
 - Split a long paragraph into a short declarative statement + a longer elaboration paragraph
 - Merge two related short paragraphs into one cohesive block
 - Allow single-sentence paragraphs at impact positions (conclusions, transitions, revelations)
@@ -27,11 +28,13 @@ AI produces uniform sentence length. Target: visible variance.
 ### List-to-Narrative Conversion
 
 Not all lists should become narrative. Convert when:
+
 - The list has 3 items and reads as Rule of Three (Pattern 10)
 - The list items are complete sentences disguised as bullets
 - The list has inline bold headers (Pattern 15)
 
 Keep lists when:
+
 - Items are genuinely parallel (feature comparisons, step-by-step instructions)
 - Items are short noun phrases or values
 - The context is technical documentation
@@ -53,6 +56,7 @@ These techniques target the statistical regularity signals documented in `statis
 ### Sentence Length Variance (Signal 3)
 
 Target distribution across any 5-sentence window:
+
 - At least one sentence under 8 words
 - At least one sentence over 20 words
 - No three consecutive sentences within 5 words of each other in length
@@ -79,11 +83,13 @@ AI distributes information evenly — every sentence carries roughly the same lo
 ### Syntactic Variation
 
 Rotate sentence openings across a paragraph. Avoid:
+
 - Three sentences starting with "The [noun]..."
 - Two consecutive sentences starting with the same word
 - Subject-verb-object in every sentence
 
 Introduce:
+
 - Occasional inverted structures: "Gone is the assumption that..."
 - Adverbial openers: "By Friday, the team had..."
 - Participial openers (sparingly — avoid creating Pattern 3): "Having reviewed the data, the team concluded..."
@@ -102,6 +108,7 @@ Target type-token ratio: 0.45-0.65. Replace repeated words through restructuring
 AI text relies on stock collocations — high-frequency bigrams and trigrams that detectors measure via n-gram rarity scores.
 
 Common templates to break:
+
 - "plays a role in" -> name the specific action
 - "a wide range of" -> specify the range or delete
 - "in terms of" -> delete, restructure the sentence
@@ -117,6 +124,7 @@ The goal is not to avoid all common phrases — just to prevent them from domina
 AI text produces tightly chained sentences where each directly continues the previous. Human-typical cosine similarity between adjacent sentences: 0.3-0.6.
 
 Introduce:
+
 - **Topic micro-shifts**: "The API handled authentication well. On the deployment side, things were rougher." (shift from feature to infrastructure)
 - **Brief asides**: "The team shipped on Friday — not the best day for a deploy, but deadlines."
 - **Perspective pivots**: "The metrics looked good. Whether they'll hold under real traffic is a different question."
@@ -129,6 +137,7 @@ Target: 2-3 small topic shifts or asides per 500 words.
 AI uses connectors and prepositions in standardized distributions. Human authors show consistent but personalized patterns.
 
 Within a single piece:
+
 - Pick preferred connectors and use them consistently: if you use "but" early, don't switch to "however" without reason
 - Vary connector type: "but", "still", "and yet", "though" — not the same one every time
 - Allow some sentences to connect with no explicit marker at all
@@ -151,6 +160,7 @@ Use sparingly. One fragment per 500 words maximum. These are seasoning, not stru
 AI overuses transitions: "Additionally", "Furthermore", "Moreover", "In conclusion", "However". Human-typical range: 3-8 formal transitions per 1,000 words.
 
 Human writing uses:
+
 - No transition (just start the next thought)
 - Short conjunctions: "But", "And", "So", "Still"
 - Paragraph breaks as implicit transitions

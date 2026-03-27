@@ -15,16 +15,16 @@ Avoid redundant installs.
 
 ## Install Table
 
-| Use case                    | Install command                                                        |
-| --------------------------- | ---------------------------------------------------------------------- |
-| Everything (recommended)    | `uv pip install 'markitdown[all]'`                                     |
-| PDF only                    | `uv pip install 'markitdown[pdf]'`                                     |
-| Office docs                 | `uv pip install 'markitdown[docx,pptx,xlsx]'`                          |
-| Audio transcription         | `uv pip install 'markitdown[audio-transcription]'`                     |
-| Azure Document Intelligence | `uv pip install 'markitdown[az-doc-intel]'`                            |
-| URL fetching (static)       | `uv pip install trafilatura`                                           |
-| URL fetching (JS-rendered)  | `uv pip install playwright && playwright install chromium`             |
-| LLM image description       | `uv pip install anthropic`                                             |
+| Use case                    | Install command                                            |
+| --------------------------- | ---------------------------------------------------------- |
+| Everything (recommended)    | `uv pip install 'markitdown[all]'`                         |
+| PDF only                    | `uv pip install 'markitdown[pdf]'`                         |
+| Office docs                 | `uv pip install 'markitdown[docx,pptx,xlsx]'`              |
+| Audio transcription         | `uv pip install 'markitdown[audio-transcription]'`         |
+| Azure Document Intelligence | `uv pip install 'markitdown[az-doc-intel]'`                |
+| URL fetching (static)       | `uv pip install trafilatura`                               |
+| URL fetching (JS-rendered)  | `uv pip install playwright && playwright install chromium` |
+| LLM image description       | `uv pip install anthropic`                                 |
 
 ## Recommended First Install
 

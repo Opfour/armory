@@ -1,7 +1,8 @@
 ---
 name: sec-strict
 type: preset
-description: 'Security-focused preset for projects requiring audit-grade protection.
+description:
+  "Security-focused preset for projects requiring audit-grade protection.
   Extends the core review-commit lifecycle with security-specific review agents, secret
   scanning, dependency vulnerability auditing, repository configuration sentinel,
   cost tracking, and security coding standards. Use this preset for applications handling
@@ -9,7 +10,7 @@ description: 'Security-focused preset for projects requiring audit-grade protect
   a primary concern. Bundles 12 packages across skills, agents, rules, hooks, and
   commands.
 
-  '
+  "
 metadata:
   version: 1.0.0
   category: review
@@ -18,26 +19,27 @@ metadata:
 preset:
   packages:
     skills:
-    - {name: pr-review}
-    - {name: code-refiner}
-    - {name: pre-landing-review}
-    - {name: repo-sentinel}
-    - {name: dependency-audit}
+      - { name: pr-review }
+      - { name: code-refiner }
+      - { name: pre-landing-review }
+      - { name: repo-sentinel }
+      - { name: dependency-audit }
     agents:
-    - {name: security-reviewer}
-    - {name: secret-scanner}
-    - {name: codebase-auditor}
+      - { name: security-reviewer }
+      - { name: secret-scanner }
+      - { name: codebase-auditor }
     rules:
-    - {name: security-standards}
-    - {name: commit-standards}
+      - { name: security-standards }
+      - { name: commit-standards }
     hooks:
-    - {name: git-protection}
-    - {name: cost-tracker}
+      - { name: git-protection }
+      - { name: cost-tracker }
     commands:
-    - {name: security-scan}
+      - { name: security-scan }
   compatibility:
     platforms: [darwin, linux]
 ---
+
 # Sec Strict Preset
 
 An audit-grade security stack for projects where security posture is a primary concern.

@@ -1,6 +1,7 @@
 ---
 name: idea-validator
-description: 'Comprehensive business idea validation orchestrator that delegates parallel
+description:
+  'Comprehensive business idea validation orchestrator that delegates parallel
   research to sub-agents and synthesizes a structured report. Constructs a Lean Canvas,
   applies Jobs-to-be-Done analysis, spawns market research, competitive analysis,
   and feasibility assessment agents, runs SWOT/PESTLE, and produces a weighted validation
@@ -21,6 +22,7 @@ metadata:
   tags: [idea-validation, lean-canvas, jtbd, swot]
   difficulty: advanced
 ---
+
 # Business Idea Validator
 
 ## Purpose
@@ -31,15 +33,16 @@ Perform rigorous, multi-dimensional validation of business ideas by orchestratin
 
 Classify the input:
 
-| Input Type | Indicators | Adaptation |
-|------------|-----------|------------|
-| Elevator pitch | 1-3 sentences, informal | Extract hypothesis, ask for missing details |
-| Business plan | Structured, multiple sections | Validate claims against research |
-| Feature proposal | Technical focus, existing product context | Narrow scope to feature viability |
-| Repo/codebase | File paths, code references | Technical feasibility + market fit |
-| Pivot assessment | "Should we pivot to...", comparison context | Compare current vs proposed direction |
+| Input Type       | Indicators                                  | Adaptation                                  |
+| ---------------- | ------------------------------------------- | ------------------------------------------- |
+| Elevator pitch   | 1-3 sentences, informal                     | Extract hypothesis, ask for missing details |
+| Business plan    | Structured, multiple sections               | Validate claims against research            |
+| Feature proposal | Technical focus, existing product context   | Narrow scope to feature viability           |
+| Repo/codebase    | File paths, code references                 | Technical feasibility + market fit          |
+| Pivot assessment | "Should we pivot to...", comparison context | Compare current vs proposed direction       |
 
 Extract core elements from the input:
+
 - **Problem statement** — what pain point exists
 - **Proposed solution** — how it addresses the pain
 - **Target customer** — who experiences this problem
@@ -53,6 +56,7 @@ If any core element is missing or ambiguous, ask clarifying questions. Cap at 5 
 Build a complete Lean Canvas using `references/lean-canvas.md` as the framework guide.
 
 Populate all 9 boxes:
+
 1. **Problem** — top 3 problems the customer faces
 2. **Customer Segments** — target market + early adopter profile
 3. **Unique Value Proposition** — single clear compelling message
@@ -64,6 +68,7 @@ Populate all 9 boxes:
 9. **Unfair Advantage** — what cannot be easily copied or bought
 
 For each box:
+
 - Assess completeness and specificity
 - Flag vague entries ("everyone" as a segment, "best product" as UVP)
 - Check cross-box coherence (solution must address stated problems, channels must reach stated segments)
@@ -120,6 +125,7 @@ Derive strategy implications: SO strategies (use strengths to capture opportunit
 ### PESTLE Scan
 
 Assess macro-environment factors:
+
 - **Political** — regulation, government policy, trade restrictions, political stability
 - **Economic** — market conditions, funding environment, consumer spending, interest rates
 - **Social** — demographic trends, cultural shifts, consumer behavior changes
@@ -133,16 +139,17 @@ Prioritize factors by impact and likelihood. Feed high-impact factors into SWOT 
 
 Score across 6 dimensions using `references/validation-scoring.md`:
 
-| Dimension | Weight | Score Range | Primary Sources |
-|-----------|--------|-------------|-----------------|
-| Problem-Solution Fit | 25% | 1-5 | Lean Canvas, JTBD |
-| Market Opportunity | 20% | 1-5 | Market Research Agent |
-| Competitive Position | 15% | 1-5 | Competitive Analysis Agent |
-| Financial Viability | 20% | 1-5 | Feasibility Agent |
-| Technical Feasibility | 10% | 1-5 | Feasibility Agent |
-| Timing & Environment | 10% | 1-5 | PESTLE, Market Research |
+| Dimension             | Weight | Score Range | Primary Sources            |
+| --------------------- | ------ | ----------- | -------------------------- |
+| Problem-Solution Fit  | 25%    | 1-5         | Lean Canvas, JTBD          |
+| Market Opportunity    | 20%    | 1-5         | Market Research Agent      |
+| Competitive Position  | 15%    | 1-5         | Competitive Analysis Agent |
+| Financial Viability   | 20%    | 1-5         | Feasibility Agent          |
+| Technical Feasibility | 10%    | 1-5         | Feasibility Agent          |
+| Timing & Environment  | 10%    | 1-5         | PESTLE, Market Research    |
 
 Compute weighted overall score. Map to verdict:
+
 - **4.0-5.0: Strong** — pursue aggressively, competitive advantage is clear
 - **3.0-3.9: Promising** — proceed with targeted validation of key assumptions
 - **2.0-2.9: Risky** — significant concerns must be addressed before investment
@@ -160,49 +167,63 @@ Produce the final validation report in this structure:
 # Business Idea Validation Report
 
 ## Meta
-| Field | Value |
-|-------|-------|
-| Date | YYYY-MM-DD |
-| Input Type | [elevator pitch / business plan / feature / repo / pivot] |
-| Overall Score | X.X / 5.0 |
-| Verdict | [Strong / Promising / Risky / Weak] |
+
+| Field         | Value                                                     |
+| ------------- | --------------------------------------------------------- |
+| Date          | YYYY-MM-DD                                                |
+| Input Type    | [elevator pitch / business plan / feature / repo / pivot] |
+| Overall Score | X.X / 5.0                                                 |
+| Verdict       | [Strong / Promising / Risky / Weak]                       |
 
 ## Executive Summary
+
 [3-5 sentences: what the idea is, the key finding, the main risk, the recommendation]
 
 ## Lean Canvas
+
 [Completed canvas with assessment notes per box]
 
 ## Problem-Solution Fit
+
 [JTBD analysis, switching triggers, current alternatives, fit assessment]
 
 ## Market Opportunity
+
 [TAM/SAM/SOM, growth trends, timing assessment — from market research agent]
 
 ## Competitive Landscape
+
 [Competitor matrix, Porter's Five Forces, positioning — from competitive agent]
 
 ## Financial & Technical Feasibility
+
 [Unit economics, build estimate, risk scores — from feasibility agent]
 
 ## SWOT Analysis
+
 [4-quadrant analysis with strategy implications]
 
 ## PESTLE Scan
+
 [Macro environment factors prioritized by impact]
 
 ## Validation Scorecard
+
 [6 dimensions with scores, weights, justification, confidence levels]
 
 ## Red Flags
+
 [Ranked list of critical concerns that could invalidate the idea]
 
 ## Recommended Validation Experiments
+
 [Ordered by: cheapest test of riskiest assumption]
+
 1. [Experiment] — tests [assumption] — cost: [effort/money] — timeline: [days]
 2. ...
 
 ## What Survives Scrutiny
+
 [Honest assessment of what holds up after thorough analysis]
 ```
 

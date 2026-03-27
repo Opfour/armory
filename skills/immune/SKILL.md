@@ -1,6 +1,7 @@
 ---
 name: immune
-description: 'Hybrid adaptive memory system with two complementary memories: Cheatsheet
+description:
+  'Hybrid adaptive memory system with two complementary memories: Cheatsheet
   (positive patterns injected before generation) and Immune (negative patterns scanned
   after generation). Uses Hot/Cold tiered memory with multi-domain support and auto-learning.
   Detects known errors via antibodies, discovers new threats, and learns winning strategies
@@ -20,9 +21,11 @@ metadata:
   tags: [memory, error-detection, antibodies, adaptive]
   difficulty: intermediate
 ---
+
 # Immune System v3 — Hybrid Cheatsheet + Immune
 
 You operate a hybrid adaptive system with two complementary memories:
+
 - **Cheatsheet** (positive patterns): domain-specific strategies injected BEFORE generation to improve output quality
 - **Immune** (negative patterns): antibodies that detect known errors and discover new threats AFTER generation
 
@@ -33,7 +36,7 @@ Both memories use Hot/Cold tiering to keep context lean.
 The user invokes with content to scan. Parse these parameters:
 
 - **input**: The text/code/content to scan (required — either inline or from context)
-- **domain**: One of: fitness, code, writing, research, strategy, webdesign, _global (default: auto-detect)
+- **domain**: One of: fitness, code, writing, research, strategy, webdesign, \_global (default: auto-detect)
 - **domains**: Array of domains (overrides single domain). Example: `domains=fitness,code`
 - **constraints**: Any specific requirements the output should satisfy (optional)
 - **mode**: `full` (cheatsheet + scan, default) | `scan-only` (skip cheatsheet) | `cheatsheet-only` (return cheatsheet, no scan)
@@ -75,6 +78,7 @@ Keep strategies where ANY of the strategy's `domains` overlaps with the detected
 
 **0c. Classify into tiers (same logic as antibodies):**
 A strategy is HOT if ANY of:
+
 - `effectiveness >= 0.7`
 - `seen_count >= 3`
 - `last_seen` less than 30 days ago
@@ -87,6 +91,7 @@ Keep max **15** (from `config.yaml` → `cheatsheet.max_hot`).
 
 **0e. Build cheatsheet block:**
 Format HOT strategies as XML:
+
 ```xml
 <cheatsheet domain="{domains}">
   <strategy id="{id}" effectiveness="{effectiveness}">
@@ -98,6 +103,7 @@ Format HOT strategies as XML:
 ```
 
 If there are COLD strategies, add a one-liner:
+
 ```xml
 <cheatsheet_cold>Also consider: {comma-separated COLD pattern keywords}</cheatsheet_cold>
 ```
@@ -105,6 +111,7 @@ If there are COLD strategies, add a one-liner:
 If `mode == "cheatsheet-only"`, output the cheatsheet block and stop here.
 
 Log:
+
 ```
 [IMMUNE] Cheatsheet: {n_hot} HOT + {n_cold} COLD strategies (domains: {domains})
 ```
@@ -123,6 +130,7 @@ Keep antibodies where ANY of the antibody's `domains` overlaps with detected `do
 
 **1b. Classify into tiers:**
 For each filtered antibody, classify as HOT if **any** of these is true:
+
 - `severity == "critical"`
 - `seen_count >= 3`
 - `last_seen` is less than 30 days ago (relative to today's date)
@@ -139,6 +147,7 @@ For each COLD antibody, extract a short keyword from its `pattern` field.
 Join as comma-separated list. Example: `"SQL transactions, épicondylite, debug flags, tautologies"`
 
 Log:
+
 ```
 [IMMUNE] Tier split: {n_hot} HOT + {n_cold} COLD / {total} total (domains: {domains})
 ```
@@ -175,11 +184,11 @@ Log: `[IMMUNE] Scanning... ({n_hot} active antibodies)`
 Wait for result.
 
 If corrections applied:
-  Log: `[IMMUNE] Match {antibody_id}: {original} → {corrected}`
+Log: `[IMMUNE] Match {antibody_id}: {original} → {corrected}`
 If new threats detected:
-  Log: `[IMMUNE] New threat: {pattern}`
+Log: `[IMMUNE] New threat: {pattern}`
 If new strategies detected:
-  Log: `[IMMUNE] New strategy: {pattern}`
+Log: `[IMMUNE] New strategy: {pattern}`
 
 ### Step 3 — Update Immune Memory (with COLD deduplication)
 
@@ -190,6 +199,7 @@ For each antibody matched by the scanner, increment `seen_count` and update `las
 
 **3b. New threats — deduplicate against COLD:**
 For each new threat in `new_threats_detected`:
+
 1. Compare its `pattern` against ALL COLD antibodies (fuzzy match — same domains + similar keywords).
 2. **If it matches a COLD antibody** → REACTIVATE:
    - Increment the COLD antibody's `seen_count`
@@ -206,6 +216,7 @@ For each new threat in `new_threats_detected`:
    - Log: `[IMMUNE] + New antibody {id}: {pattern}`
 
 **3c. Update stats:**
+
 - Increment `stats.outputs_checked`
 - Increment `stats.issues_caught` by number of corrections + new threats
 - Update `stats.antibodies_total` to current antibody count
@@ -222,6 +233,7 @@ Read current `cheatsheet_memory.json`.
 
 **3b-i. Deduplicate:**
 For each new strategy in `new_strategies_detected`:
+
 1. Compare against ALL existing strategies (fuzzy match — overlapping domains + similar pattern).
 2. **If it matches an existing strategy** → REINFORCE:
    - Increment `seen_count`
@@ -240,10 +252,12 @@ For each new strategy in `new_strategies_detected`:
 
 **3b-ii. Prune low-effectiveness:**
 If any strategy has `effectiveness < config.cheatsheet.min_effectiveness` AND `seen_count >= 5`:
+
 - Remove it
 - Log: `[IMMUNE] - Pruned strategy {id}: {pattern} (eff: {eff})`
 
 **3b-iii. Update stats:**
+
 - Increment `stats.outputs_assisted`
 - Increment `stats.strategies_applied` by number of cheatsheet strategies that were used
 - Update `stats.strategies_total` to current count
@@ -255,6 +269,7 @@ Log: `[IMMUNE] Cheatsheet: {total} strategies | +{new} added | Reinforced: {rein
 ### Step 4 — Output
 
 **If clean:**
+
 ```
 ───
 IMMUNE v3 | domains={domains} | Status: CLEAN
@@ -264,6 +279,7 @@ IMMUNE v3 | domains={domains} | Status: CLEAN
 ```
 
 **If corrections or threats found:**
+
 ```
 ───
 IMMUNE v3 | domains={domains} | Status: {CORRECTED|FLAGGED}

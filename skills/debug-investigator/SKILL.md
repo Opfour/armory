@@ -1,6 +1,7 @@
 ---
 name: debug-investigator
-description: 'Hypothesis-driven debugging methodology: ranked hypotheses with confirming/refuting
+description:
+  'Hypothesis-driven debugging methodology: ranked hypotheses with confirming/refuting
   tests, git bisect strategy, log analysis, instrumentation point planning, and minimal
   reproduction design. Triggers on: "debug this systematically", "root cause analysis",
   "bisect this bug", "rank hypotheses for this error", "help me isolate this issue",
@@ -18,6 +19,7 @@ metadata:
   tags: [debugging, root-cause, hypothesis, bisect]
   difficulty: intermediate
 ---
+
 # Debug Investigator
 
 Structured debugging methodology that replaces ad-hoc exploration with hypothesis-driven

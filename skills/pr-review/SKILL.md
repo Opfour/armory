@@ -1,6 +1,7 @@
 ---
 name: pr-review
-description: 'Pull request and code review with diff-based routing across five dimensions:
+description:
+  'Pull request and code review with diff-based routing across five dimensions:
   code quality and guideline compliance, test coverage analysis, silent failure detection,
   type design and invariant analysis, and comment quality auditing. Classifies changed
   files and loads only relevant review methodologies. Produces severity-ranked findings
@@ -18,6 +19,7 @@ metadata:
   tags: [code-review, pull-request, quality, diff-analysis]
   difficulty: intermediate
 ---
+
 # PR Review
 
 Diff-based code review across five dimensions. Reads the changed files, selects

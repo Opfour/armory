@@ -1,6 +1,7 @@
 ---
 name: engineering-retro
-description: 'Git-based engineering retrospective analyzing commit history, PR patterns,
+description:
+  'Git-based engineering retrospective analyzing commit history, PR patterns,
   and development velocity over a configurable time window. Use this skill when the
   user asks for a retrospective, retro, sprint review, weekly review, engineering
   review, development summary, commit analysis, team velocity report, or says "what
@@ -15,6 +16,7 @@ metadata:
   tags: [retrospective, velocity, git-analysis, sprint]
   difficulty: intermediate
 ---
+
 # Engineering Retrospective
 
 Generate a structured, git-based engineering retrospective for a configurable time window. This is a **read-only analysis** — no files are modified except the optional JSON snapshot.
@@ -29,6 +31,7 @@ Generate a structured, git-based engineering retrospective for a configurable ti
 - **PATH_SCOPE** (optional): restrict analysis to a subdirectory (monorepo support), e.g. `services/api`
 
 Examples:
+
 - `/engineering-retro` — last 7 days, full repo
 - `/engineering-retro 30d` — last 30 days, full repo
 - `/engineering-retro 14d services/api` — last 14 days, scoped to `services/api/`
@@ -107,18 +110,19 @@ Sessions with a single commit get a default duration of 0 (point-in-time).
 
 Classify each commit using conventional commit prefixes from the subject line:
 
-| Prefix pattern | Category |
-|---|---|
-| `feat:`, `feat(` | feature |
-| `fix:`, `fix(`, `bugfix` | fix |
-| `refactor:`, `refactor(` | refactor |
-| `chore:`, `chore(`, `build:`, `ci:` | chore |
-| `docs:`, `doc:` | docs |
-| `test:`, `tests:` | test |
-| `perf:` | perf |
-| `style:` | style |
+| Prefix pattern                      | Category |
+| ----------------------------------- | -------- |
+| `feat:`, `feat(`                    | feature  |
+| `fix:`, `fix(`, `bugfix`            | fix      |
+| `refactor:`, `refactor(`            | refactor |
+| `chore:`, `chore(`, `build:`, `ci:` | chore    |
+| `docs:`, `doc:`                     | docs     |
+| `test:`, `tests:`                   | test     |
+| `perf:`                             | perf     |
+| `style:`                            | style    |
 
 For commits without conventional prefixes, apply diff heuristics:
+
 - Primarily new files added → feature
 - Primarily deletions → refactor
 - Test files only → test
@@ -137,6 +141,7 @@ git log origin/$DEFAULT_BRANCH --since="$SINCE" --name-only --format="" -- $PATH
 ```
 
 Flag any file modified in **>50% of total commits** as a hotspot. Hotspots indicate:
+
 - Active area of development (expected during feature work)
 - Potential coupling issues (if unrelated commits keep touching the same file)
 - Possible need for decomposition (if the file is large)
@@ -151,6 +156,7 @@ gh pr list --state merged --base $DEFAULT_BRANCH --search "merged:>=$SINCE_DATE"
 ```
 
 Compute:
+
 - **Total merged PRs**
 - **Size distribution**: S (<50 lines), M (50-200), L (200-500), XL (>500)
 - **Review turnaround**: time from PR creation to first review (median, p90)
@@ -167,6 +173,7 @@ focus_score = commits_touching_le_3_files / total_commits
 ```
 
 Interpretation:
+
 - **>0.8**: highly focused, small incremental changes
 - **0.5-0.8**: moderate focus, mix of targeted and broad changes
 - **<0.5**: broad changes dominating, may indicate large refactors or low commit discipline
@@ -174,6 +181,7 @@ Interpretation:
 ### Step 10: Per-Author Breakdown
 
 For each contributor, report:
+
 - Commit count
 - Lines added / removed
 - Top 3 most-touched files
@@ -185,6 +193,7 @@ Frame this as **contributor highlights** — recognition of work done, not a ran
 ### Step 11: Week-over-Week Comparison
 
 Check for a prior snapshot in `.engineering-retros/`:
+
 - Find the most recent `*.json` file
 - If it exists and covers the adjacent prior window, compute deltas:
   - Commit count delta (%)
@@ -204,6 +213,7 @@ Save a JSON snapshot for future comparisons:
 ```
 
 Schema:
+
 ```json
 {
   "date": "YYYY-MM-DD",
@@ -243,34 +253,42 @@ Produce the final output in this structure:
 **Branch:** [DEFAULT_BRANCH] | **Scope:** [PATH_SCOPE or "full repo"]
 
 #### Metrics
+
 - Commits: N | Contributors: N | Files changed: N
 - Lines: +N / -N (net: +/-N)
 - Avg commit size: N lines | Focus score: N.NN
 
 #### Time Patterns
+
 - Peak day: [DAY] | Peak hours: [RANGE]
 - [compact histogram]
 - Sessions: N total | Avg length: Nm | Longest: Nm
 
 #### Work Breakdown
+
 - [category]: N commits (NN%)
 - ...
 
 #### Hotspots
+
 - `path/to/file` — N commits [HOTSPOT if >50%]
 - ...
 
 #### Contributor Highlights
+
 - **[Author]**: N commits, +N/-N lines, focused on [top files], primarily [categories]
 - ...
 
 #### PR Summary (if available)
+
 - Merged: N | Size dist: S/M/L/XL | Median review turnaround: Xh
 
 #### Week-over-Week (if available)
+
 - Commits: +/-N% | Lines: +/-N% | Focus: +/-N.NN
 
 #### Observations
+
 - [2-4 bullet points identifying patterns, achievements, and areas worth attention]
 - Based on data only — no speculation about intent or quality judgments about individuals
 

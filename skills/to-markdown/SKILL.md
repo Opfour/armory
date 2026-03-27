@@ -1,6 +1,7 @@
 ---
 name: to-markdown
-description: 'Convert any file or URL to clean Markdown. Handles PDF, Word (DOCX),
+description:
+  'Convert any file or URL to clean Markdown. Handles PDF, Word (DOCX),
   Excel (XLSX), PowerPoint (PPTX), HTML, images (EXIF + OCR), audio (transcription),
   CSV, JSON, XML, YouTube URLs, EPubs, and more. Output is optimised for LLM pipelines,
   knowledge bases, and document ingestion workflows. Use this skill whenever the user
@@ -18,17 +19,18 @@ metadata:
   tags: [conversion, markdown, document-ingestion, pdf]
   difficulty: beginner
 ---
+
 # To Markdown
 
 Convert any file or URL to clean Markdown using [MarkItDown](https://github.com/microsoft/markitdown) as the conversion engine, with a lightweight fetch layer for URLs.
 
 ## Reference Files
 
-| File                    | Purpose                                               |
-| ----------------------- | ----------------------------------------------------- |
+| File                    | Purpose                                                 |
+| ----------------------- | ------------------------------------------------------- |
 | `references/formats.md` | Per-format handling notes, internal engines, known gaps |
-| `references/fetch.md`   | URL fetch layer: trafilatura + Playwright strategies   |
-| `references/install.md` | Dependency install guide for all variants              |
+| `references/fetch.md`   | URL fetch layer: trafilatura + Playwright strategies    |
+| `references/install.md` | Dependency install guide for all variants               |
 
 ## Decision Tree
 
@@ -76,13 +78,13 @@ print(result.text_content)
 
 ## Output Conventions
 
-| Context                     | Output behaviour                                         |
-| --------------------------- | -------------------------------------------------------- |
+| Context                      | Output behaviour                                        |
+| ---------------------------- | ------------------------------------------------------- |
 | Single file, user wants file | Write `<input_stem>.md` to same directory               |
-| Single file, inline request | Return Markdown in conversation                          |
-| Batch (multiple files)      | Write each to `<stem>.md`, summarise what was produced   |
-| URL                         | Write `<slug>.md` to current directory or return inline  |
-| Piped into another workflow | Return `result.text_content` string only                 |
+| Single file, inline request  | Return Markdown in conversation                         |
+| Batch (multiple files)       | Write each to `<stem>.md`, summarise what was produced  |
+| URL                          | Write `<slug>.md` to current directory or return inline |
+| Piped into another workflow  | Return `result.text_content` string only                |
 
 Default: "convert this file" -> write a file. "Read this" or "what does this say" -> return inline.
 
@@ -129,15 +131,15 @@ result = md.convert("presentation.pptx")
 
 ## Error Handling
 
-| Severity     | Condition                                  | Action                                                                 |
-| ------------ | ------------------------------------------ | ---------------------------------------------------------------------- |
-| **Terminal** | Unsupported format (no converter exists)   | Report to user immediately; do not retry                               |
-| **Terminal** | Password-protected Office file             | Report to user; no programmatic workaround                             |
-| **Terminal** | File not found / path invalid              | Report exact path; ask user to verify                                  |
-| **Recover**  | Empty output from PDF                      | Likely scanned — escalate to OCR path in `references/formats.md`       |
-| **Recover**  | Missing optional dependency (e.g. playwright) | Install the dependency, then retry the conversion                   |
-| **Recover**  | URL fetch returns paywall page             | Report fetch limitation; do not retry or attempt bypass                 |
-| **Recover**  | trafilatura returns empty                  | Escalate to Playwright fetch strategy per `references/fetch.md`        |
+| Severity     | Condition                                     | Action                                                           |
+| ------------ | --------------------------------------------- | ---------------------------------------------------------------- |
+| **Terminal** | Unsupported format (no converter exists)      | Report to user immediately; do not retry                         |
+| **Terminal** | Password-protected Office file                | Report to user; no programmatic workaround                       |
+| **Terminal** | File not found / path invalid                 | Report exact path; ask user to verify                            |
+| **Recover**  | Empty output from PDF                         | Likely scanned — escalate to OCR path in `references/formats.md` |
+| **Recover**  | Missing optional dependency (e.g. playwright) | Install the dependency, then retry the conversion                |
+| **Recover**  | URL fetch returns paywall page                | Report fetch limitation; do not retry or attempt bypass          |
+| **Recover**  | trafilatura returns empty                     | Escalate to Playwright fetch strategy per `references/fetch.md`  |
 
 ```python
 result = md.convert(path)

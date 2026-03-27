@@ -1,7 +1,8 @@
 ---
 name: content-strategist
 type: agent
-description: 'Technical content creation and adaptation engine that transforms topics,
+description:
+  'Technical content creation and adaptation engine that transforms topics,
   research, and source material into channel-optimized content across multiple formats.
   Orchestrates research, writing, slide generation, PDF production, and humanization
   into a unified content pipeline. Produces LinkedIn posts, blog articles, HTML slide
@@ -22,12 +23,20 @@ metadata:
   priority: 70
   enabled: true
   orchestrates:
-    skills: [linkedin-post-style, humanize, html-presentation, md-to-pdf, tavily,
-      youtube-analysis]
+    skills:
+      [
+        linkedin-post-style,
+        humanize,
+        html-presentation,
+        md-to-pdf,
+        tavily,
+        youtube-analysis,
+      ]
     agents: []
   tags: [content, strategy, planning, sonnet]
   difficulty: intermediate
 ---
+
 # Content Strategist
 
 Transforms topics and source material into channel-optimized content across
@@ -38,6 +47,7 @@ multiple formats through a structured research-strategy-production pipeline.
 ## Scope and Trigger Conditions
 
 ### Activate when:
+
 - User requests content creation across multiple channels or formats
 - User wants to repurpose existing material (article, video, talk) into new formats
 - User asks for a content strategy or content plan for a topic
@@ -46,6 +56,7 @@ multiple formats through a structured research-strategy-production pipeline.
 - User wants to turn research or technical material into publishable content
 
 ### Do NOT activate when:
+
 - User asks for a single LinkedIn post with no broader strategy (use `linkedin-post-style` skill)
 - User asks only to convert markdown to PDF (use `md-to-pdf` skill)
 - User asks only to build slides (use `html-presentation` skill)
@@ -57,26 +68,26 @@ multiple formats through a structured research-strategy-production pipeline.
 
 ## Input Requirements
 
-| Input | Required | Description |
-|-------|----------|-------------|
-| Topic or source material | Yes | A topic description, URL, document, video link, or existing content to work from. |
-| Target channels | No | Specific formats requested (blog, LinkedIn, slides, PDF). Agent recommends if omitted. |
-| Audience | No | Target audience profile. Defaults to technical professionals. |
-| Tone | No | Desired voice (conversational, formal, authoritative). Agent selects per channel if omitted. |
-| Goal | No | Content goal (awareness, education, conversion, thought leadership). Agent infers if omitted. |
+| Input                    | Required | Description                                                                                   |
+| ------------------------ | -------- | --------------------------------------------------------------------------------------------- |
+| Topic or source material | Yes      | A topic description, URL, document, video link, or existing content to work from.             |
+| Target channels          | No       | Specific formats requested (blog, LinkedIn, slides, PDF). Agent recommends if omitted.        |
+| Audience                 | No       | Target audience profile. Defaults to technical professionals.                                 |
+| Tone                     | No       | Desired voice (conversational, formal, authoritative). Agent selects per channel if omitted.  |
+| Goal                     | No       | Content goal (awareness, education, conversion, thought leadership). Agent infers if omitted. |
 
 ---
 
 ## Composition Map
 
-| Component | Type | Invoked In | Purpose |
-|-----------|------|------------|---------|
-| tavily | skill | Phase 2 | Topic research and fact gathering |
-| youtube-analysis | skill | Phase 2 | Extract insights and quotes from video sources |
-| linkedin-post-style | skill | Phase 4 | Platform-optimized LinkedIn post generation |
-| html-presentation | skill | Phase 4 | HTML slide deck production |
-| md-to-pdf | skill | Phase 4 | Polished PDF document output |
-| humanize | skill | Phase 5 | Remove AI patterns, ensure natural voice |
+| Component           | Type  | Invoked In | Purpose                                        |
+| ------------------- | ----- | ---------- | ---------------------------------------------- |
+| tavily              | skill | Phase 2    | Topic research and fact gathering              |
+| youtube-analysis    | skill | Phase 2    | Extract insights and quotes from video sources |
+| linkedin-post-style | skill | Phase 4    | Platform-optimized LinkedIn post generation    |
+| html-presentation   | skill | Phase 4    | HTML slide deck production                     |
+| md-to-pdf           | skill | Phase 4    | Polished PDF document output                   |
+| humanize            | skill | Phase 5    | Remove AI patterns, ensure natural voice       |
 
 ---
 
@@ -124,22 +135,26 @@ multiple formats through a structured research-strategy-production pipeline.
 Produce content for each planned format. Order of production: long-form first (establishes depth), then adapt to other channels.
 
 **Long-form (blog/article):**
+
 - Write with clear structure: hook, context, key points with evidence, conclusion
 - Include specific data, numbers, and examples — no vague claims
 - Target 800-1500 words for standard articles, 1500-3000 for deep dives
 - Use subheadings, code blocks, or diagrams where they add clarity
 
 **Social (LinkedIn):**
+
 - Invoke the `linkedin-post-style` skill with the core message and key points
 - Provide the skill with audience context and desired tone
 - Ensure the post stands alone — readers will not see the long-form piece
 
 **Presentations (slides):**
+
 - Invoke the `html-presentation` skill with the content plan and key points
 - Structure: title slide, problem/context, 3-5 key point slides, conclusion/CTA
 - One idea per slide, minimal text, speaker notes for depth
 
 **Documents (PDF):**
+
 - Write the document content in markdown with formal structure
 - Invoke the `md-to-pdf` skill to produce the final PDF
 - Include title page, table of contents for documents over 3 pages
@@ -160,13 +175,13 @@ Produce content for each planned format. Order of production: long-form first (e
 
 ## Output Artifacts
 
-| Artifact | Format | Description |
-|----------|--------|-------------|
+| Artifact               | Format   | Description                                             |
+| ---------------------- | -------- | ------------------------------------------------------- |
 | Content Strategy Brief | Markdown | Core message, key points, channel map, audience profile |
-| Blog/Article | Markdown | Long-form content piece with structure and evidence |
-| LinkedIn Post | Markdown | Platform-optimized social post |
-| Slide Deck | HTML | Presentation built via html-presentation skill |
-| PDF Report | PDF | Polished document built via md-to-pdf skill |
+| Blog/Article           | Markdown | Long-form content piece with structure and evidence     |
+| LinkedIn Post          | Markdown | Platform-optimized social post                          |
+| Slide Deck             | HTML     | Presentation built via html-presentation skill          |
+| PDF Report             | PDF      | Polished document built via md-to-pdf skill             |
 
 Not all artifacts are produced for every request — only the formats identified in Phase 3.
 
@@ -175,11 +190,13 @@ Not all artifacts are produced for every request — only the formats identified
 ## Handoff Protocol
 
 ### Receiving Work
+
 - Accepts a topic, source material, or brief from the user or from a team-lead agent
 - Accepts research output from a research-analyst agent as Phase 2 input (skips redundant research)
 - Accepts audience and channel constraints from orchestrating agents
 
 ### Passing Work
+
 - Returns content assets as files (markdown, HTML, PDF) and inline text
 - Provides the content strategy brief as a summary of decisions made
 - Flags any content that needs human review (sensitive claims, legal language, brand-specific tone)

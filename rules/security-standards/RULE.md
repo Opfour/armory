@@ -1,7 +1,8 @@
 ---
 name: security-standards
 type: rule
-description: 'Defines security standards for application development including secret
+description:
+  'Defines security standards for application development including secret
   management (environment variables, vault integration, never hardcode), input validation
   at system boundaries, authentication and session handling (JWT, refresh tokens,
   session expiry), HTTP security headers, file upload restrictions, SQL parameterization,
@@ -16,11 +17,12 @@ metadata:
   version: 1.0.0
   scope: global
   applies_to:
-    languages: ['*']
+    languages: ["*"]
   category: security
   tags: [security, secrets, input-validation, authentication]
   difficulty: beginner
 ---
+
 # Security Standards
 
 Standards for secure application development across all repositories and languages.

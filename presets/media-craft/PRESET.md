@@ -1,10 +1,11 @@
 ---
 name: media-craft
 type: preset
-description: 'DEPRECATED: Superseded by the media-producer agent, which orchestrates
+description:
+  "DEPRECATED: Superseded by the media-producer agent, which orchestrates
   the same skills (concept-to-image, concept-to-video, remotion-video, html-presentation,
   static-web-artifacts-builder, architecture-diagram) with intelligent format routing
-  based on content type. Use media-producer agent instead.'
+  based on content type. Use media-producer agent instead."
 metadata:
   version: 1.1.0
   status: deprecated
@@ -14,15 +15,16 @@ metadata:
 preset:
   packages:
     skills:
-    - {name: concept-to-image}
-    - {name: concept-to-video}
-    - {name: remotion-video}
-    - {name: html-presentation}
-    - {name: static-web-artifacts-builder}
-    - {name: architecture-diagram}
+      - { name: concept-to-image }
+      - { name: concept-to-video }
+      - { name: remotion-video }
+      - { name: html-presentation }
+      - { name: static-web-artifacts-builder }
+      - { name: architecture-diagram }
   compatibility:
     platforms: [darwin, linux]
 ---
+
 # Media Craft
 
 > **DEPRECATED** — The `media-producer` agent supersedes this preset. It orchestrates the
@@ -37,10 +39,10 @@ A concept-to-deliverable pipeline for generating images, videos, presentations, 
 | Skill                        | Purpose                                      | Output Format |
 | ---------------------------- | -------------------------------------------- | ------------- |
 | concept-to-image             | Generate illustrations from descriptions     | PNG, SVG      |
-| concept-to-video             | Produce animated explainers and motion clips  | MP4, GIF      |
-| remotion-video               | Build branded, programmatic video content     | MP4           |
+| concept-to-video             | Produce animated explainers and motion clips | MP4, GIF      |
+| remotion-video               | Build branded, programmatic video content    | MP4           |
 | html-presentation            | Author slide decks from structured content   | HTML          |
-| static-web-artifacts-builder | Create interactive data visuals and widgets   | HTML          |
+| static-web-artifacts-builder | Create interactive data visuals and widgets  | HTML          |
 | architecture-diagram         | Render system topology and architecture maps | SVG, PNG      |
 
 ## Workflow

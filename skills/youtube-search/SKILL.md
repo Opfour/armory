@@ -1,6 +1,7 @@
 ---
 name: youtube-search
-description: 'Search YouTube by keyword and return structured video metadata (title,
+description:
+  "Search YouTube by keyword and return structured video metadata (title,
   URL, channel, views, duration, upload date). Uses yt-dlp for scraping — no API keys
   required. Returns ranked results for discovery, trend analysis, and source curation.
   Use this skill when the user mentions: search youtube, youtube search, find youtube
@@ -10,13 +11,14 @@ description: 'Search YouTube by keyword and return structured video metadata (ti
   youtube trending, popular videos about, latest videos on, youtube discovery, or
   uses /yt-search.
 
-  '
+  "
 metadata:
   version: 1.1.0
   category: research
   tags: [youtube, search, skill]
   difficulty: beginner
 ---
+
 # YouTube Search
 
 Search YouTube by keyword and return structured video metadata — title, URL,

@@ -1,7 +1,8 @@
 ---
 name: project-planner
 type: agent
-description: 'Task breakdown and project planning agent that decomposes work into
+description:
+  'Task breakdown and project planning agent that decomposes work into
   dependency-mapped items with three-point estimates, milestones, and risk tracking.
   Produces actionable project plans with parallelization flags and realistic timelines
   calibrated against historical data. Triggers on: "plan this project", "break down
@@ -21,11 +22,13 @@ metadata:
   priority: 70
   enabled: true
   orchestrates:
-    skills: [task-decomposer, estimate-calibrator, plan-review, engineering-retro]
+    skills:
+      [task-decomposer, estimate-calibrator, plan-review, engineering-retro]
     agents: []
   tags: [planning, decomposition, estimation, sonnet]
   difficulty: intermediate
 ---
+
 # Project Planner
 
 Task breakdown and project planning agent that produces dependency-mapped work
@@ -36,6 +39,7 @@ items, three-point estimates, milestone timelines, and risk logs.
 ## Scope and Trigger Conditions
 
 ### Activate when:
+
 - User requests a project plan, timeline, or task breakdown
 - User asks "how long will this take" or "what are the milestones"
 - User provides an architecture document or feature spec and needs implementation planning
@@ -43,6 +47,7 @@ items, three-point estimates, milestone timelines, and risk logs.
 - User needs risk assessment for a planned implementation
 
 ### Do NOT activate when:
+
 - User asks for architecture design (use `project-architect` agent)
 - User asks to implement code (use `full-stack-builder` agent)
 - User asks for a code review (use `code-reviewer` agent)
@@ -53,11 +58,11 @@ items, three-point estimates, milestone timelines, and risk logs.
 
 ## Input Requirements
 
-| Input | Required | Description |
-|-------|----------|-------------|
-| Project description or architecture document | Yes | Feature spec, architecture doc, user story, or codebase to plan against. |
-| Deadline | No | Target completion date. Used for feasibility check and compression analysis. |
-| Team size | No | Number of contributors. Defaults to 1. Affects parallelization and timeline. |
+| Input                                        | Required | Description                                                                  |
+| -------------------------------------------- | -------- | ---------------------------------------------------------------------------- |
+| Project description or architecture document | Yes      | Feature spec, architecture doc, user story, or codebase to plan against.     |
+| Deadline                                     | No       | Target completion date. Used for feasibility check and compression analysis. |
+| Team size                                    | No       | Number of contributors. Defaults to 1. Affects parallelization and timeline. |
 
 If an architecture document is provided, extract scope from it. If only a description is given, perform scope analysis from the codebase and description combined.
 
@@ -65,12 +70,12 @@ If an architecture document is provided, extract scope from it. If only a descri
 
 ## Composition Map
 
-| Component | Type | Invoked In | Purpose |
-|-----------|------|------------|---------|
-| task-decomposer | skill | Phase 2 | Break scope into dependency-mapped work items with parallelization flags |
-| estimate-calibrator | skill | Phase 3 | Three-point estimates (optimistic, expected, pessimistic) per task and phase |
-| plan-review | skill | Phase 6 | Stress-test the plan for gaps, unrealistic estimates, missing dependencies |
-| engineering-retro | skill | Post-delivery | Retrospective comparing actual vs estimated for calibration feedback |
+| Component           | Type  | Invoked In    | Purpose                                                                      |
+| ------------------- | ----- | ------------- | ---------------------------------------------------------------------------- |
+| task-decomposer     | skill | Phase 2       | Break scope into dependency-mapped work items with parallelization flags     |
+| estimate-calibrator | skill | Phase 3       | Three-point estimates (optimistic, expected, pessimistic) per task and phase |
+| plan-review         | skill | Phase 6       | Stress-test the plan for gaps, unrealistic estimates, missing dependencies   |
+| engineering-retro   | skill | Post-delivery | Retrospective comparing actual vs estimated for calibration feedback         |
 
 ---
 
@@ -91,6 +96,7 @@ If an architecture document is provided, extract scope from it. If only a descri
 Invoke the `task-decomposer` skill with the scope from Phase 1.
 
 Requirements for the decomposition:
+
 - Every task is 1-4 hours of work (break larger items further)
 - Each task has a clear definition of done
 - Dependencies between tasks are explicit (task B requires task A)
@@ -102,6 +108,7 @@ Requirements for the decomposition:
 Invoke the `estimate-calibrator` skill with the task list from Phase 2.
 
 For each task and each phase, produce:
+
 - **Optimistic estimate:** assuming no surprises, familiar territory
 - **Expected estimate:** realistic with normal friction
 - **Pessimistic estimate:** assuming unfamiliar code, integration issues, or requirement ambiguity
@@ -123,6 +130,7 @@ Assign probability (LOW/MEDIUM/HIGH) and impact (LOW/MEDIUM/HIGH) to each risk.
 ### Phase 5: Plan Assembly
 
 Produce the final plan containing:
+
 - Milestone timeline with dates (if deadline provided) or durations
 - Task board with all work items, dependencies, estimates, and assignability
 - Risk log with mitigations
@@ -132,6 +140,7 @@ Produce the final plan containing:
 ### Phase 6: Plan Validation
 
 Invoke the `plan-review` skill to stress-test the plan:
+
 - Are any tasks over 4 hours?
 - Are dependencies complete (no orphaned tasks)?
 - Is the critical path realistic?
@@ -144,24 +153,27 @@ Revise the plan based on review findings before delivering.
 
 ## Output Artifacts
 
-| Artifact | Format | Description |
-|----------|--------|-------------|
-| Project Plan | Markdown | Complete plan with milestones, timeline, and summary |
+| Artifact             | Format         | Description                                                   |
+| -------------------- | -------------- | ------------------------------------------------------------- |
+| Project Plan         | Markdown       | Complete plan with milestones, timeline, and summary          |
 | Task Breakdown Table | Markdown table | All tasks with estimates, dependencies, parallelization flags |
-| Milestone Timeline | Markdown list | Ordered milestones with durations or target dates |
-| Risk Log | Markdown table | Risks with probability, impact, and mitigation |
+| Milestone Timeline   | Markdown list  | Ordered milestones with durations or target dates             |
+| Risk Log             | Markdown table | Risks with probability, impact, and mitigation                |
 
 ---
 
 ## Handoff Protocol
 
 ### Receiving Work
+
 When spawned by another agent (e.g., `project-architect` or `team-lead`):
+
 - Accepts an architecture document or project description as input
 - Accepts optional deadline and team size constraints
 - Returns the complete project plan as markdown text
 
 ### Passing Work
+
 - Returns structured markdown plan with clear sections
 - Includes machine-parseable summary line: `**Estimate:** X-Y hours across Z milestones, W tasks`
 - Passes task breakdown to `full-stack-builder` or implementation agents
@@ -182,25 +194,29 @@ When spawned by another agent (e.g., `project-architect` or `team-lead`):
 ## Milestones
 
 ### M1: <name> — <duration or date>
+
 - <task summary>
 - <task summary>
 
 ### M2: <name> — <duration or date>
+
 ...
 
 ## Task Breakdown
 
-| ID | Task | Phase | Depends On | Parallel | Optimistic | Expected | Pessimistic | Weighted |
-|----|------|-------|------------|----------|------------|----------|-------------|----------|
-| T1 | ... | Setup | — | Yes | 1h | 2h | 4h | 2.2h |
-| T2 | ... | Core | T1 | No | 2h | 3h | 6h | 3.3h |
+| ID  | Task | Phase | Depends On | Parallel | Optimistic | Expected | Pessimistic | Weighted |
+| --- | ---- | ----- | ---------- | -------- | ---------- | -------- | ----------- | -------- |
+| T1  | ...  | Setup | —          | Yes      | 1h         | 2h       | 4h          | 2.2h     |
+| T2  | ...  | Core  | T1         | No       | 2h         | 3h       | 6h          | 3.3h     |
+
 ...
 
 ## Risk Log
 
-| ID | Risk | Category | Probability | Impact | Mitigation |
-|----|------|----------|-------------|--------|------------|
-| R1 | ... | Technical | MEDIUM | HIGH | ... |
+| ID  | Risk | Category  | Probability | Impact | Mitigation |
+| --- | ---- | --------- | ----------- | ------ | ---------- |
+| R1  | ...  | Technical | MEDIUM      | HIGH   | ...        |
+
 ...
 
 ## Critical Path

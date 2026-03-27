@@ -8,15 +8,15 @@ New entrants bring new capacity and a desire for market share, putting pressure 
 
 ### Sub-Criteria
 
-| Factor | Low Threat (1) | Moderate (3) | High Threat (5) |
-|--------|---------------|-------------|-----------------|
-| Capital requirements | >$10M to compete | $1-10M | <$1M, bootstrappable |
-| Regulatory barriers | Licensed, regulated industry | Some compliance requirements | No regulatory barriers |
-| Technology barriers | Deep proprietary tech required | Moderate technical complexity | Off-the-shelf tech stack |
-| Brand loyalty | Incumbents have strong brand lock-in | Some brand preference | Commoditized, brand-agnostic |
-| Distribution access | Exclusive channels, long sales cycles | Established but accessible channels | Direct-to-consumer, self-serve |
-| Economies of scale | Massive scale advantages in cost | Moderate scale benefits | Minimal scale advantage |
-| Network effects | Strong network effects in incumbents | Mild network effects | No network effects |
+| Factor               | Low Threat (1)                        | Moderate (3)                        | High Threat (5)                |
+| -------------------- | ------------------------------------- | ----------------------------------- | ------------------------------ |
+| Capital requirements | >$10M to compete                      | $1-10M                              | <$1M, bootstrappable           |
+| Regulatory barriers  | Licensed, regulated industry          | Some compliance requirements        | No regulatory barriers         |
+| Technology barriers  | Deep proprietary tech required        | Moderate technical complexity       | Off-the-shelf tech stack       |
+| Brand loyalty        | Incumbents have strong brand lock-in  | Some brand preference               | Commoditized, brand-agnostic   |
+| Distribution access  | Exclusive channels, long sales cycles | Established but accessible channels | Direct-to-consumer, self-serve |
+| Economies of scale   | Massive scale advantages in cost      | Moderate scale benefits             | Minimal scale advantage        |
+| Network effects      | Strong network effects in incumbents  | Mild network effects                | No network effects             |
 
 ### Scoring Rubric
 
@@ -39,13 +39,13 @@ Suppliers with leverage can capture value by charging higher prices, limiting qu
 
 ### Sub-Criteria
 
-| Factor | Low Power (1) | Moderate (3) | High Power (5) |
-|--------|--------------|-------------|----------------|
-| Supplier concentration | Many suppliers, commoditized inputs | Several suppliers, some differentiation | Few suppliers, unique inputs |
-| Switching costs | Easy to switch, standard interfaces | Moderate migration effort | High switching costs, deep integration |
-| Forward integration threat | Suppliers unlikely to compete | Suppliers have explored direct offerings | Suppliers actively moving downstream |
-| Input uniqueness | Commodity inputs, many alternatives | Some specialized inputs | Unique, irreplaceable inputs |
-| Revenue dependency | Supplier depends heavily on the industry | Balanced dependency | Industry depends heavily on supplier |
+| Factor                     | Low Power (1)                            | Moderate (3)                             | High Power (5)                         |
+| -------------------------- | ---------------------------------------- | ---------------------------------------- | -------------------------------------- |
+| Supplier concentration     | Many suppliers, commoditized inputs      | Several suppliers, some differentiation  | Few suppliers, unique inputs           |
+| Switching costs            | Easy to switch, standard interfaces      | Moderate migration effort                | High switching costs, deep integration |
+| Forward integration threat | Suppliers unlikely to compete            | Suppliers have explored direct offerings | Suppliers actively moving downstream   |
+| Input uniqueness           | Commodity inputs, many alternatives      | Some specialized inputs                  | Unique, irreplaceable inputs           |
+| Revenue dependency         | Supplier depends heavily on the industry | Balanced dependency                      | Industry depends heavily on supplier   |
 
 ### Industry-Specific Considerations
 
@@ -67,13 +67,13 @@ Buyers with leverage can force down prices, demand better quality or service, an
 
 ### Sub-Criteria
 
-| Factor | Low Power (1) | Moderate (3) | High Power (5) |
-|--------|--------------|-------------|----------------|
-| Buyer concentration | Highly fragmented buyers | Some large buyers | Few buyers, large contracts |
-| Price sensitivity | Price-insensitive, value-driven | Moderate price awareness | Highly price-sensitive, commoditized |
-| Switching costs | High switching costs for buyers | Moderate switching effort | Low switching costs, easy migration |
-| Information availability | Opaque pricing, complex comparison | Some price transparency | Full price transparency, comparison tools |
-| Backward integration | Buyers cannot build it themselves | Some buyers have build capability | Buyers can and do build in-house |
+| Factor                   | Low Power (1)                      | Moderate (3)                      | High Power (5)                            |
+| ------------------------ | ---------------------------------- | --------------------------------- | ----------------------------------------- |
+| Buyer concentration      | Highly fragmented buyers           | Some large buyers                 | Few buyers, large contracts               |
+| Price sensitivity        | Price-insensitive, value-driven    | Moderate price awareness          | Highly price-sensitive, commoditized      |
+| Switching costs          | High switching costs for buyers    | Moderate switching effort         | Low switching costs, easy migration       |
+| Information availability | Opaque pricing, complex comparison | Some price transparency           | Full price transparency, comparison tools |
+| Backward integration     | Buyers cannot build it themselves  | Some buyers have build capability | Buyers can and do build in-house          |
 
 ### Scoring Rubric
 
@@ -89,12 +89,12 @@ Substitutes perform the same function through different means. They cap the prof
 
 ### Sub-Criteria
 
-| Factor | Low Threat (1) | Moderate (3) | High Threat (5) |
-|--------|---------------|-------------|-----------------|
-| Substitute availability | No viable alternatives | Some alternatives in adjacent categories | Many ways to solve the same problem |
-| Performance/price ratio | Substitutes inferior on value | Substitutes comparable | Substitutes offer better value |
-| Switching costs to substitute | High effort to adopt substitute | Moderate adoption effort | Easy to switch to substitute |
-| Buyer propensity | Buyers loyal to current approach | Buyers open to alternatives | Buyers actively exploring alternatives |
+| Factor                        | Low Threat (1)                   | Moderate (3)                             | High Threat (5)                        |
+| ----------------------------- | -------------------------------- | ---------------------------------------- | -------------------------------------- |
+| Substitute availability       | No viable alternatives           | Some alternatives in adjacent categories | Many ways to solve the same problem    |
+| Performance/price ratio       | Substitutes inferior on value    | Substitutes comparable                   | Substitutes offer better value         |
+| Switching costs to substitute | High effort to adopt substitute  | Moderate adoption effort                 | Easy to switch to substitute           |
+| Buyer propensity              | Buyers loyal to current approach | Buyers open to alternatives              | Buyers actively exploring alternatives |
 
 ### Scoring Rubric
 
@@ -116,14 +116,14 @@ The intensity of competition among existing competitors determines how much of t
 
 ### Sub-Criteria
 
-| Factor | Low Rivalry (1) | Moderate (3) | High Rivalry (5) |
-|--------|----------------|-------------|-----------------|
-| Number of competitors | Few players, clear leader | Several players, some differentiation | Many players, fragmented |
-| Industry growth | High growth, expanding pie | Moderate growth | Slow/no growth, zero-sum |
-| Product differentiation | Highly differentiated offerings | Some differentiation | Commoditized, feature parity |
-| Exit barriers | Low exit barriers, consolidation possible | Moderate exit barriers | High exit barriers, players stay despite losses |
-| Fixed costs | Low fixed costs, variable model | Moderate fixed costs | High fixed costs, pressure to fill capacity |
-| Strategic stakes | Low strategic importance | Moderate stakes | High stakes, flagship products |
+| Factor                  | Low Rivalry (1)                           | Moderate (3)                          | High Rivalry (5)                                |
+| ----------------------- | ----------------------------------------- | ------------------------------------- | ----------------------------------------------- |
+| Number of competitors   | Few players, clear leader                 | Several players, some differentiation | Many players, fragmented                        |
+| Industry growth         | High growth, expanding pie                | Moderate growth                       | Slow/no growth, zero-sum                        |
+| Product differentiation | Highly differentiated offerings           | Some differentiation                  | Commoditized, feature parity                    |
+| Exit barriers           | Low exit barriers, consolidation possible | Moderate exit barriers                | High exit barriers, players stay despite losses |
+| Fixed costs             | Low fixed costs, variable model           | Moderate fixed costs                  | High fixed costs, pressure to fill capacity     |
+| Strategic stakes        | Low strategic importance                  | Moderate stakes                       | High stakes, flagship products                  |
 
 ### Scoring Rubric
 
@@ -145,13 +145,13 @@ After scoring all five forces, synthesize:
 
 ### Interpretation
 
-| Average Score | Industry Attractiveness | Implication |
-|--------------|------------------------|-------------|
-| 1.0 - 1.5 | Very Attractive | High profit potential, favorable structure |
-| 1.6 - 2.5 | Attractive | Above-average profit potential |
-| 2.6 - 3.5 | Moderate | Average profit potential, selective positioning needed |
-| 3.6 - 4.5 | Unattractive | Below-average profit potential, requires strong positioning |
-| 4.6 - 5.0 | Very Unattractive | Low profit potential, consider adjacent markets |
+| Average Score | Industry Attractiveness | Implication                                                 |
+| ------------- | ----------------------- | ----------------------------------------------------------- |
+| 1.0 - 1.5     | Very Attractive         | High profit potential, favorable structure                  |
+| 1.6 - 2.5     | Attractive              | Above-average profit potential                              |
+| 2.6 - 3.5     | Moderate                | Average profit potential, selective positioning needed      |
+| 3.6 - 4.5     | Unattractive            | Below-average profit potential, requires strong positioning |
+| 4.6 - 5.0     | Very Unattractive       | Low profit potential, consider adjacent markets             |
 
 ### Connecting to Strategy
 

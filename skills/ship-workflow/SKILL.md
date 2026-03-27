@@ -1,6 +1,7 @@
 ---
 name: ship-workflow
-description: 'Automated release pipeline that merges main, runs tests, performs pre-landing
+description:
+  'Automated release pipeline that merges main, runs tests, performs pre-landing
   review, bumps version, updates changelog, creates bisectable commits, and opens
   a pull request. Use this skill when the user says "ship it", "ship this", "release
   this", "prepare for release", "open a PR", "push and PR", "land this", "get this
@@ -14,6 +15,7 @@ metadata:
   tags: [release, ci-cd, pull-request, changelog]
   difficulty: intermediate
 ---
+
 # Ship Workflow
 
 Automated release pipeline that takes a feature branch from working state to
@@ -36,9 +38,11 @@ Each step has explicit stop conditions. The pipeline never auto-resolves ambigui
 Run all three checks before proceeding:
 
 1. **Not on default branch** — detect the default branch dynamically:
+
    ```bash
    git symbolic-ref refs/remotes/origin/HEAD | sed 's@^refs/remotes/origin/@@'
    ```
+
    If the current branch matches: STOP. Instruct the user to create a feature branch.
 
 2. **Clean working tree** — `git status --porcelain` must produce no output.
@@ -68,14 +72,14 @@ git merge origin/<default-branch>
 
 Detect the test command from project configuration using `references/project-detection.md`:
 
-| Indicator | Test Command |
-|-----------|-------------|
-| `Makefile` with `test` target | `make test` |
-| `package.json` with `test` script | `<detected-pkg-manager> run test` |
+| Indicator                           | Test Command                         |
+| ----------------------------------- | ------------------------------------ |
+| `Makefile` with `test` target       | `make test`                          |
+| `package.json` with `test` script   | `<detected-pkg-manager> run test`    |
 | `pyproject.toml` with pytest config | `uv run pytest` (or detected runner) |
-| `Cargo.toml` | `cargo test` |
-| `go.mod` | `go test ./...` |
-| `Gemfile` + `Rakefile` | `bundle exec rake test` |
+| `Cargo.toml`                        | `cargo test`                         |
+| `go.mod`                            | `go test ./...`                      |
+| `Gemfile` + `Rakefile`              | `bundle exec rake test`              |
 
 Detection order: check each indicator top-to-bottom; use the first match.
 
@@ -94,11 +98,13 @@ git diff origin/<default-branch>...HEAD
 ```
 
 Review the diff for:
+
 - Obvious bugs or logic errors
 - Security concerns (credentials, injection vectors)
 - Missing error handling on new code paths
 
 Classification:
+
 - **CRITICAL** findings: STOP. Resolve before proceeding.
 - **INFORMATIONAL** findings: note them for inclusion in the PR description. Proceed.
 
@@ -108,13 +114,13 @@ Classification:
 
 Detect the version strategy from project configuration using `references/project-detection.md`:
 
-| Indicator | Version Location |
-|-----------|-----------------|
-| `VERSION` file | Update file contents directly |
-| `package.json` `version` field | Update the field |
-| `pyproject.toml` `version` field | Update the field |
-| `Cargo.toml` `version` field | Update the field |
-| Git tags only | Create tag at push time |
+| Indicator                        | Version Location              |
+| -------------------------------- | ----------------------------- |
+| `VERSION` file                   | Update file contents directly |
+| `package.json` `version` field   | Update the field              |
+| `pyproject.toml` `version` field | Update the field              |
+| `Cargo.toml` `version` field     | Update the field              |
+| Git tags only                    | Create tag at push time       |
 
 Default bump level: **PATCH**.
 
@@ -136,12 +142,15 @@ entries by conventional commit type:
 ## [<new-version>] - <date>
 
 ### Added
+
 - feat: ...
 
 ### Fixed
+
 - fix: ...
 
 ### Changed
+
 - refactor: ...
 ```
 
@@ -179,6 +188,7 @@ gh pr create \
 ```
 
 PR body includes:
+
 - Summary of changes (grouped by commit)
 - Test results (pass confirmation)
 - Version bump details (old → new, or "skipped")
@@ -192,15 +202,15 @@ Output the PR URL as the final result.
 
 The pipeline halts immediately and reports when any of these occur:
 
-| Condition | Step | Action |
-|-----------|------|--------|
-| On default branch | 1 | Stop, instruct to create feature branch |
-| Dirty working tree | 1 | Stop, list files, instruct to commit/stash |
-| Behind remote | 1 | Stop, instruct to pull/rebase |
-| Merge conflicts | 2 | Stop, report conflicting files |
-| Test failures | 3 | Stop, report failure output |
-| Critical review findings | 4 | Stop, resolve before proceeding |
-| MINOR/MAJOR version bump | 5 | Stop, confirm with user |
+| Condition                | Step | Action                                     |
+| ------------------------ | ---- | ------------------------------------------ |
+| On default branch        | 1    | Stop, instruct to create feature branch    |
+| Dirty working tree       | 1    | Stop, list files, instruct to commit/stash |
+| Behind remote            | 1    | Stop, instruct to pull/rebase              |
+| Merge conflicts          | 2    | Stop, report conflicting files             |
+| Test failures            | 3    | Stop, report failure output                |
+| Critical review findings | 4    | Stop, resolve before proceeding            |
+| MINOR/MAJOR version bump | 5    | Stop, confirm with user                    |
 
 ---
 

@@ -73,5 +73,6 @@ URL received
 **This skill does not bypass paywalls.** Both trafilatura and Playwright return the regwall/paywall page for paywalled content. This is a fetch-layer limitation — no conversion tool solves it.
 
 When the fetched content looks like a paywall page (short content, login prompts, subscription CTAs), report this clearly to the user:
+
 - "The page returned a paywall. The conversion contains the paywall page, not the article."
 - Do not retry or attempt workarounds.

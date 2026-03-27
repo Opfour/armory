@@ -1,7 +1,8 @@
 ---
 name: codebase-auditor
 type: agent
-description: 'Unified multi-dimensional codebase quality assessment that spawns specialized
+description:
+  'Unified multi-dimensional codebase quality assessment that spawns specialized
   review agents in parallel and aggregates findings into a single prioritized report.
   Covers code quality, security vulnerabilities, secret detection, architectural concerns,
   dependency health, and test coverage gaps. Triggers on: "audit the codebase", "full
@@ -25,6 +26,7 @@ metadata:
   tags: [audit, codebase, quality, sonnet]
   difficulty: intermediate
 ---
+
 # Codebase Auditor
 
 Unified quality assessment that orchestrates specialized agents and skills to
@@ -35,6 +37,7 @@ produce a single, deduplicated, severity-ranked report across all dimensions.
 ## Scope and Trigger Conditions
 
 ### Activate when:
+
 - User requests a broad codebase audit or quality assessment
 - User asks to "check everything" or "run all reviews"
 - User wants a pre-release quality gate covering multiple dimensions
@@ -42,6 +45,7 @@ produce a single, deduplicated, severity-ranked report across all dimensions.
 - User wants a single report combining code quality, security, and dependency findings
 
 ### Do NOT activate when:
+
 - User asks for code review only (use `code-reviewer` agent)
 - User asks for security scan only (use `security-reviewer` agent)
 - User asks for secret detection only (use `secret-scanner` agent)
@@ -53,11 +57,11 @@ produce a single, deduplicated, severity-ranked report across all dimensions.
 
 ## Input Requirements
 
-| Input | Required | Description |
-|-------|----------|-------------|
-| Target scope | No | Specific files, directories, or branch. Defaults to entire repo or recent changes. |
-| Focus areas | No | Which dimensions to prioritize. Defaults to all dimensions. |
-| Severity threshold | No | Minimum severity to report. Defaults to MEDIUM and above. |
+| Input              | Required | Description                                                                        |
+| ------------------ | -------- | ---------------------------------------------------------------------------------- |
+| Target scope       | No       | Specific files, directories, or branch. Defaults to entire repo or recent changes. |
+| Focus areas        | No       | Which dimensions to prioritize. Defaults to all dimensions.                        |
+| Severity threshold | No       | Minimum severity to report. Defaults to MEDIUM and above.                          |
 
 If no scope is specified, determine scope from context: if recent changes exist (unstaged or staged), audit those; otherwise audit the full repository.
 
@@ -65,13 +69,13 @@ If no scope is specified, determine scope from context: if recent changes exist 
 
 ## Composition Map
 
-| Component | Type | Invoked In | Purpose |
-|-----------|------|------------|---------|
-| code-reviewer | agent | Phase 2 | Code quality: naming, complexity, DRY, error handling |
-| security-reviewer | agent | Phase 2 | OWASP Top 10 vulnerability scanning |
-| secret-scanner | agent | Phase 2 | Hardcoded credentials and secret detection |
-| architecture-reviewer | skill | Phase 3 | Structural integrity, scalability, design patterns |
-| dependency-audit | skill | Phase 3 | License compliance, CVEs, maintenance health |
+| Component             | Type  | Invoked In | Purpose                                               |
+| --------------------- | ----- | ---------- | ----------------------------------------------------- |
+| code-reviewer         | agent | Phase 2    | Code quality: naming, complexity, DRY, error handling |
+| security-reviewer     | agent | Phase 2    | OWASP Top 10 vulnerability scanning                   |
+| secret-scanner        | agent | Phase 2    | Hardcoded credentials and secret detection            |
+| architecture-reviewer | skill | Phase 3    | Structural integrity, scalability, design patterns    |
+| dependency-audit      | skill | Phase 3    | License compliance, CVEs, maintenance health          |
 
 ---
 
@@ -124,6 +128,7 @@ Run additional assessments that the three agents do not cover:
 ### Phase 5: Report Generation
 
 Produce the unified audit report using the Output Format below. Include:
+
 - Executive summary with aggregate metrics
 - Per-dimension breakdown with finding counts
 - Individual findings with file:line references and fix recommendations
@@ -134,22 +139,25 @@ Produce the unified audit report using the Output Format below. Include:
 
 ## Output Artifacts
 
-| Artifact | Format | Description |
-|----------|--------|-------------|
-| Unified Audit Report | Markdown | Single document with all findings, severity-ranked and deduplicated |
-| Action Items | Markdown list | Top 5-10 highest-impact fixes to prioritize |
+| Artifact             | Format        | Description                                                         |
+| -------------------- | ------------- | ------------------------------------------------------------------- |
+| Unified Audit Report | Markdown      | Single document with all findings, severity-ranked and deduplicated |
+| Action Items         | Markdown list | Top 5-10 highest-impact fixes to prioritize                         |
 
 ---
 
 ## Handoff Protocol
 
 ### Receiving Work
+
 When spawned by another agent (e.g., `team-lead` or `release-captain`):
+
 - Accepts scope as a list of file paths or a branch name
 - Accepts optional severity threshold
 - Returns the unified audit report as markdown text
 
 ### Passing Work
+
 - Returns structured markdown report with clear sections
 - Includes machine-parseable summary line: `**Findings:** X CRITICAL, Y HIGH, Z MEDIUM, W LOW`
 - Includes pass/fail verdict based on: PASS if zero CRITICAL and zero HIGH; FAIL otherwise
@@ -169,32 +177,37 @@ When spawned by another agent (e.g., `team-lead` or `release-captain`):
 
 ## Dimension Summary
 
-| Dimension | Critical | High | Medium | Low |
-|-----------|----------|------|--------|-----|
-| Code Quality | - | - | - | - |
-| Security | - | - | - | - |
-| Secrets | - | - | - | - |
-| Architecture | - | - | - | - |
-| Dependencies | - | - | - | - |
+| Dimension    | Critical | High | Medium | Low |
+| ------------ | -------- | ---- | ------ | --- |
+| Code Quality | -        | -    | -      | -   |
+| Security     | -        | -    | -      | -   |
+| Secrets      | -        | -    | -      | -   |
+| Architecture | -        | -    | -      | -   |
+| Dependencies | -        | -    | -      | -   |
 
 ## CRITICAL
 
 ### [CBA-001] <title>
+
 - **Dimension:** <Security|Secrets|...>
 - **File:** `path/to/file.ext:line`
 - **Issue:** <description>
 - **Fix:** <specific recommendation>
 
 ## HIGH
+
 ...
 
 ## MEDIUM
+
 ...
 
 ## Strengths
+
 - <positive observations from each dimension>
 
 ## Priority Action Items
+
 1. <highest impact fix>
 2. ...
 ```

@@ -1,7 +1,8 @@
 ---
 name: proposal-writer
 type: agent
-description: 'Technical proposal generation with ROI calculation, three-tier pricing,
+description:
+  'Technical proposal generation with ROI calculation, three-tier pricing,
   and business-value framing. Gathers project scope and client context, models return
   on investment with calibrated estimates, structures a Problem-Agitate-Solve narrative,
   and produces a complete proposal document with optional PDF export. Triggers on:
@@ -27,6 +28,7 @@ metadata:
   tags: [proposals, writing, business, opus]
   difficulty: intermediate
 ---
+
 # Proposal Writer
 
 Technical proposal generation that combines ROI modeling, calibrated estimates,
@@ -38,6 +40,7 @@ three pricing tiers and optional PDF export.
 ## Scope and Trigger Conditions
 
 ### Activate when:
+
 - User requests a client-facing technical proposal
 - User asks to draft a proposal with pricing or ROI analysis
 - User needs a bid document with scope, timeline, and cost breakdown
@@ -46,6 +49,7 @@ three pricing tiers and optional PDF export.
 - User needs a scoped engagement document with deliverables and milestones
 
 ### Do NOT activate when:
+
 - User asks for an internal architecture decision document (use `project-architect` agent)
 - User asks for a project plan or timeline only (use `project-planner` agent)
 - User asks for a content strategy or marketing copy (use `content-strategist` agent)
@@ -57,14 +61,14 @@ three pricing tiers and optional PDF export.
 
 ## Input Requirements
 
-| Input | Required | Description |
-|-------|----------|-------------|
-| Project scope | Yes | What the project delivers — features, systems, integrations. |
-| Technical approach | No | Architecture, stack, methodology. Derived from scope if omitted. |
-| Budget range | No | Client budget constraints. Used to calibrate tier pricing. |
-| Client context | No | Industry, company size, decision makers, pain points. Improves framing. |
-| Architecture document | No | Existing architecture from `project-architect`. Feeds solution section. |
-| Timeline constraints | No | Hard deadlines, phasing requirements. Feeds milestone table. |
+| Input                 | Required | Description                                                             |
+| --------------------- | -------- | ----------------------------------------------------------------------- |
+| Project scope         | Yes      | What the project delivers — features, systems, integrations.            |
+| Technical approach    | No       | Architecture, stack, methodology. Derived from scope if omitted.        |
+| Budget range          | No       | Client budget constraints. Used to calibrate tier pricing.              |
+| Client context        | No       | Industry, company size, decision makers, pain points. Improves framing. |
+| Architecture document | No       | Existing architecture from `project-architect`. Feeds solution section. |
+| Timeline constraints  | No       | Hard deadlines, phasing requirements. Feeds milestone table.            |
 
 If project scope is missing, ask for it before proceeding. Do not draft a proposal without a defined scope.
 
@@ -74,11 +78,11 @@ If technical approach is missing, derive it from scope and state assumptions exp
 
 ## Composition Map
 
-| Component | Type | Invoked In | Purpose |
-|-----------|------|------------|---------|
-| estimate-calibrator | skill | Phase 2 | Effort/cost estimation with calibrated ranges |
-| architecture-diagram | skill | Phase 5 | Solution architecture visual for proposal |
-| md-to-pdf | skill | Phase 6 | PDF export of final proposal document |
+| Component            | Type  | Invoked In | Purpose                                       |
+| -------------------- | ----- | ---------- | --------------------------------------------- |
+| estimate-calibrator  | skill | Phase 2    | Effort/cost estimation with calibrated ranges |
+| architecture-diagram | skill | Phase 5    | Solution architecture visual for proposal     |
+| md-to-pdf            | skill | Phase 6    | PDF export of final proposal document         |
 
 ---
 
@@ -110,7 +114,7 @@ If technical approach is missing, derive it from scope and state assumptions exp
    - New revenue enabled by the solution
    - Revenue protected (risk mitigation)
 5. Compute payback period: total investment / monthly net benefit.
-6. Compute 3-year ROI: ((3-year net benefit - total investment) / total investment) * 100.
+6. Compute 3-year ROI: ((3-year net benefit - total investment) / total investment) \* 100.
 7. Use specific numbers. Replace every "significant savings" with a dollar figure or percentage.
 
 ### Phase 3: Solution Framing
@@ -138,7 +142,7 @@ Produce the structured proposal document using the Output Format below. Sections
    - **Essential:** Core scope, minimum viable delivery.
    - **Professional:** Full scope with recommended additions.
    - **Enterprise:** Full scope plus premium options (extended support, SLA, training).
-   Each tier lists: included items, price, payment schedule.
+     Each tier lists: included items, price, payment schedule.
 8. **Return on Investment** — ROI table from Phase 2 with payback period and 3-year projection.
 9. **Team & Approach** — Methodology, team composition, communication cadence.
 10. **Governance** — Change request process, escalation path, status reporting.
@@ -161,23 +165,25 @@ Produce the structured proposal document using the Output Format below. Sections
 
 ## Output Artifacts
 
-| Artifact | Format | Description |
-|----------|--------|-------------|
-| Proposal Document | Markdown | Complete proposal with all sections from Phase 4 |
-| ROI Calculation | Markdown table | Itemized cost/benefit analysis with payback period and 3-year ROI |
-| PDF Export | PDF (optional) | Formatted proposal via md-to-pdf skill, produced on request |
+| Artifact          | Format         | Description                                                       |
+| ----------------- | -------------- | ----------------------------------------------------------------- |
+| Proposal Document | Markdown       | Complete proposal with all sections from Phase 4                  |
+| ROI Calculation   | Markdown table | Itemized cost/benefit analysis with payback period and 3-year ROI |
+| PDF Export        | PDF (optional) | Formatted proposal via md-to-pdf skill, produced on request       |
 
 ---
 
 ## Handoff Protocol
 
 ### Receiving Work
+
 - Accepts architecture documents from `project-architect` agent
 - Accepts timeline and milestone plans from `project-planner` agent
 - Accepts scope and requirements as freeform text or structured input
 - Accepts budget range and client context as optional parameters
 
 ### Passing Work
+
 - Returns proposal document as markdown text
 - Returns ROI summary as a standalone table for use in other documents
 - Includes investment range (min tier to max tier) as a machine-parseable line: `**Investment Range:** $X - $Y`
@@ -217,42 +223,45 @@ Produce the structured proposal document using the Output Format below. Sections
 ## Scope of Work
 
 | Included | Excluded | Optional |
-|----------|----------|----------|
-| ... | ... | ... |
+| -------- | -------- | -------- |
+| ...      | ...      | ...      |
 
 ## Deliverables
 
-| # | Deliverable | Description | Acceptance Criteria | Target Date |
-|---|-------------|-------------|---------------------|-------------|
-| 1 | ... | ... | ... | ... |
+| #   | Deliverable | Description | Acceptance Criteria | Target Date |
+| --- | ----------- | ----------- | ------------------- | ----------- |
+| 1   | ...         | ...         | ...                 | ...         |
 
 ## Timeline & Milestones
 
 | Phase | Milestone | Duration | Gate Criteria |
-|-------|-----------|----------|---------------|
-| 1 | ... | ... | ... |
+| ----- | --------- | -------- | ------------- |
+| 1     | ...       | ...      | ...           |
 
 ## Investment
 
 ### Essential — $X
+
 <included items, payment schedule>
 
 ### Professional — $Y
+
 <included items, payment schedule>
 
 ### Enterprise — $Z
+
 <included items, payment schedule>
 
 ## Return on Investment
 
-| Metric | Value |
-|--------|-------|
-| Total Investment (Professional tier) | $Y |
-| Annual Cost Savings | $A |
-| Annual Efficiency Gains | $B |
-| Annual Revenue Impact | $C |
-| Payback Period | N months |
-| 3-Year ROI | X% |
+| Metric                               | Value    |
+| ------------------------------------ | -------- |
+| Total Investment (Professional tier) | $Y       |
+| Annual Cost Savings                  | $A       |
+| Annual Efficiency Gains              | $B       |
+| Annual Revenue Impact                | $C       |
+| Payback Period                       | N months |
+| 3-Year ROI                           | X%       |
 
 ## Team & Approach
 

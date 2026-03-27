@@ -1,6 +1,7 @@
 ---
 name: rag-auditor
-description: 'Evaluates RAG (Retrieval-Augmented Generation) pipeline quality across
+description:
+  'Evaluates RAG (Retrieval-Augmented Generation) pipeline quality across
   retrieval and generation stages. Measures precision, recall, MRR for retrieval;
   groundedness, completeness, and hallucination rate for generation. Diagnoses failure
   root causes and recommends chunk, retrieval, and prompt improvements. Triggers on:
@@ -17,6 +18,7 @@ metadata:
   tags: [rag, retrieval, hallucination, grounding]
   difficulty: advanced
 ---
+
 # RAG Auditor
 
 Systematic RAG pipeline evaluation across the full retrieval-generation chain: designs

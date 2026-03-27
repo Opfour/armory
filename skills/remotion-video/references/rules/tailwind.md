@@ -14,8 +14,8 @@ Add the plugin to `remotion.config.ts`:
 
 ```ts
 // remotion.config.ts
-import { Config } from '@remotion/cli/config';
-import { enableTailwind } from '@remotion/tailwind';
+import { Config } from "@remotion/cli/config";
+import { enableTailwind } from "@remotion/tailwind";
 
 Config.overrideWebpackConfig((currentConfiguration) => {
   return enableTailwind(currentConfiguration);
@@ -27,7 +27,7 @@ Create `tailwind.config.js`:
 ```js
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: ['./src/**/*.{ts,tsx}'],
+  content: ["./src/**/*.{ts,tsx}"],
   theme: {
     extend: {},
   },
@@ -47,7 +47,7 @@ Import the CSS in your root file:
 
 ```tsx
 // src/Root.tsx
-import './style.css';
+import "./style.css";
 ```
 
 ## Using Tailwind Classes
@@ -55,7 +55,7 @@ import './style.css';
 Apply Tailwind classes via the `className` prop on any HTML element inside Remotion components:
 
 ```tsx
-import { AbsoluteFill } from 'remotion';
+import { AbsoluteFill } from "remotion";
 
 const TitleCard: React.FC = () => {
   return (
@@ -73,12 +73,16 @@ const TitleCard: React.FC = () => {
 Use Tailwind for static styling and inline `style` for animated values (since Tailwind classes cannot contain frame-derived values):
 
 ```tsx
-import { interpolate, useCurrentFrame } from 'remotion';
+import { interpolate, useCurrentFrame } from "remotion";
 
 const AnimatedCard: React.FC = () => {
   const frame = useCurrentFrame();
-  const opacity = interpolate(frame, [0, 30], [0, 1], { extrapolateRight: 'clamp' });
-  const translateY = interpolate(frame, [0, 30], [40, 0], { extrapolateRight: 'clamp' });
+  const opacity = interpolate(frame, [0, 30], [0, 1], {
+    extrapolateRight: "clamp",
+  });
+  const translateY = interpolate(frame, [0, 30], [40, 0], {
+    extrapolateRight: "clamp",
+  });
 
   return (
     <div
@@ -86,7 +90,9 @@ const AnimatedCard: React.FC = () => {
       style={{ opacity, transform: `translateY(${translateY}px)` }}
     >
       <h2 className="text-2xl font-semibold text-zinc-900 mb-2">Card Title</h2>
-      <p className="text-zinc-500 text-base leading-relaxed">Card body text here.</p>
+      <p className="text-zinc-500 text-base leading-relaxed">
+        Card body text here.
+      </p>
     </div>
   );
 };
@@ -97,7 +103,7 @@ const AnimatedCard: React.FC = () => {
 Remotion renders at a fixed pixel resolution. Tailwind's responsive breakpoints are not meaningful. Use Tailwind's base utility classes directly. For values that scale with resolution, use inline styles with pixel values derived from `useVideoConfig()`:
 
 ```tsx
-import { useVideoConfig } from 'remotion';
+import { useVideoConfig } from "remotion";
 
 const ResponsiveTitle: React.FC = () => {
   const { width, height } = useVideoConfig();
@@ -116,6 +122,7 @@ const ResponsiveTitle: React.FC = () => {
 Tailwind's `transition`, `duration`, and `ease` classes do not work in Remotion (CSS transitions are frame-independent; Remotion ignores them). Always animate via `interpolate` or `spring` in inline styles.
 
 Tailwind IS useful for:
+
 - Background colors, gradients (`bg-gradient-to-r from-violet-600 to-indigo-600`)
 - Border radius (`rounded-xl`, `rounded-full`)
 - Typography (`font-bold`, `tracking-tight`, `leading-snug`)
@@ -149,10 +156,12 @@ const FeatureGrid: React.FC<{ features: FeatureItem[] }> = ({ features }) => {
       {features.map((f, i) => {
         const delay = i * 8;
         const opacity = interpolate(frame, [delay, delay + 20], [0, 1], {
-          extrapolateLeft: 'clamp', extrapolateRight: 'clamp',
+          extrapolateLeft: "clamp",
+          extrapolateRight: "clamp",
         });
         const y = interpolate(frame, [delay, delay + 20], [30, 0], {
-          extrapolateLeft: 'clamp', extrapolateRight: 'clamp',
+          extrapolateLeft: "clamp",
+          extrapolateRight: "clamp",
         });
         return (
           <div
@@ -174,11 +183,20 @@ const FeatureGrid: React.FC<{ features: FeatureItem[] }> = ({ features }) => {
 ## Complete Working Example
 
 ```tsx
-import React from 'react';
-import { loadFont } from '@remotion/google-fonts/Inter';
-import { AbsoluteFill, interpolate, spring, useCurrentFrame, useVideoConfig } from 'remotion';
+import React from "react";
+import { loadFont } from "@remotion/google-fonts/Inter";
+import {
+  AbsoluteFill,
+  interpolate,
+  spring,
+  useCurrentFrame,
+  useVideoConfig,
+} from "remotion";
 
-const { fontFamily } = loadFont('normal', { weights: ['400', '600', '700'], subsets: ['latin'] });
+const { fontFamily } = loadFont("normal", {
+  weights: ["400", "600", "700"],
+  subsets: ["latin"],
+});
 
 type HeroProps = {
   badge: string;
@@ -187,13 +205,27 @@ type HeroProps = {
   ctaLabel: string;
 };
 
-export const HeroScene: React.FC<HeroProps> = ({ badge, headline, subheadline, ctaLabel }) => {
+export const HeroScene: React.FC<HeroProps> = ({
+  badge,
+  headline,
+  subheadline,
+  ctaLabel,
+}) => {
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
 
-  const containerOpacity = interpolate(frame, [0, 15], [0, 1], { extrapolateRight: 'clamp' });
-  const headlineScale = spring({ frame, fps, config: { damping: 14, stiffness: 100 } });
-  const ctaOpacity = interpolate(frame, [30, 50], [0, 1], { extrapolateLeft: 'clamp', extrapolateRight: 'clamp' });
+  const containerOpacity = interpolate(frame, [0, 15], [0, 1], {
+    extrapolateRight: "clamp",
+  });
+  const headlineScale = spring({
+    frame,
+    fps,
+    config: { damping: 14, stiffness: 100 },
+  });
+  const ctaOpacity = interpolate(frame, [30, 50], [0, 1], {
+    extrapolateLeft: "clamp",
+    extrapolateRight: "clamp",
+  });
 
   return (
     <AbsoluteFill
@@ -221,7 +253,7 @@ export const HeroScene: React.FC<HeroProps> = ({ badge, headline, subheadline, c
       {/* CTA */}
       <button
         className="bg-white text-zinc-900 font-semibold text-2xl px-10 py-4 rounded-2xl"
-        style={{ opacity: ctaOpacity, border: 'none', cursor: 'default' }}
+        style={{ opacity: ctaOpacity, border: "none", cursor: "default" }}
       >
         {ctaLabel}
       </button>

@@ -1,6 +1,7 @@
 ---
 name: humanize
-description: 'Detect and remove AI-generated writing patterns from text while preserving
+description:
+  'Detect and remove AI-generated writing patterns from text while preserving
   semantic meaning and factual accuracy. Rewrites text to sound natural, varied, and
   human-authored across domains including academic, technical, blog, professional,
   and social media writing. Use this skill when the user asks to "humanize text",
@@ -17,6 +18,7 @@ metadata:
   tags: [writing, ai-detection, natural-language, rewriting]
   difficulty: intermediate
 ---
+
 # Humanize: AI Pattern Detection and Removal
 
 Remove AI-generated writing patterns from text. Produce natural, human-sounding output that preserves meaning.
@@ -33,36 +35,36 @@ Read the input text. Load `references/detection-patterns.md`. Scan for two categ
 
 **A. Lexical patterns** (the 24 catalogued AI-writing patterns):
 
-| Category | Patterns | Priority |
-|----------|----------|----------|
-| Content inflation | Significance puffing, notability claims, superficial -ing analyses, promotional language, vague attributions, formulaic challenges sections | HIGH — loudest AI tells |
-| Vocabulary | AI-frequency words, copula avoidance, filler phrases, excessive hedging | HIGH — statistically detectable |
-| Structure | Rule of three, negative parallelisms, elegant variation, false ranges, inline-header lists | MEDIUM — structural fingerprints |
-| Style | Em dash overuse, boldface overuse, title case headings, emoji decoration, curly quotes | MEDIUM — formatting tells |
-| Communication | Chatbot artifacts, knowledge-cutoff disclaimers, sycophantic tone, generic conclusions | LOW — obvious, usually caught by author |
+| Category          | Patterns                                                                                                                                    | Priority                                |
+| ----------------- | ------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------- |
+| Content inflation | Significance puffing, notability claims, superficial -ing analyses, promotional language, vague attributions, formulaic challenges sections | HIGH — loudest AI tells                 |
+| Vocabulary        | AI-frequency words, copula avoidance, filler phrases, excessive hedging                                                                     | HIGH — statistically detectable         |
+| Structure         | Rule of three, negative parallelisms, elegant variation, false ranges, inline-header lists                                                  | MEDIUM — structural fingerprints        |
+| Style             | Em dash overuse, boldface overuse, title case headings, emoji decoration, curly quotes                                                      | MEDIUM — formatting tells               |
+| Communication     | Chatbot artifacts, knowledge-cutoff disclaimers, sycophantic tone, generic conclusions                                                      | LOW — obvious, usually caught by author |
 
 **B. Statistical regularity signals** (see `references/statistical-signals.md`):
 
-| Signal | What to look for |
-|--------|-----------------|
-| Sentence length uniformity | Sentences clustering within a narrow word-count range |
-| Low clause density variation | Every sentence has the same number of clauses |
-| Flat information density | Every sentence carries roughly the same amount of detail |
-| High-frequency phrase templates | Stock collocations and common bigrams/trigrams dominating the text |
-| Excessive transition markers | Formal connectives appearing more than 8 per 1,000 words |
-| Structural symmetry | Paragraphs and sentences following balanced, mirror-like patterns |
-| Uniform inter-sentence cohesion | Every sentence tightly follows the previous with no topic shifts or digressions |
-| Generic function word usage | Connectors and prepositions used in textbook-standard distribution with no personal tendencies |
+| Signal                          | What to look for                                                                               |
+| ------------------------------- | ---------------------------------------------------------------------------------------------- |
+| Sentence length uniformity      | Sentences clustering within a narrow word-count range                                          |
+| Low clause density variation    | Every sentence has the same number of clauses                                                  |
+| Flat information density        | Every sentence carries roughly the same amount of detail                                       |
+| High-frequency phrase templates | Stock collocations and common bigrams/trigrams dominating the text                             |
+| Excessive transition markers    | Formal connectives appearing more than 8 per 1,000 words                                       |
+| Structural symmetry             | Paragraphs and sentences following balanced, mirror-like patterns                              |
+| Uniform inter-sentence cohesion | Every sentence tightly follows the previous with no topic shifts or digressions                |
+| Generic function word usage     | Connectors and prepositions used in textbook-standard distribution with no personal tendencies |
 
 Output a detection report using the detection report template (see Output Format).
 
 **Instance severity rating:**
 
-| Severity | Criteria |
-|----------|----------|
-| HIGH | 3+ patterns co-occurring in a single paragraph, or any paragraph saturated with AI vocabulary (5+ signal words) |
-| MEDIUM | 1-2 patterns in a paragraph, or a statistical signal present across 3+ consecutive sentences |
-| LOW | Isolated single instance of any pattern, or a borderline statistical signal |
+| Severity | Criteria                                                                                                        |
+| -------- | --------------------------------------------------------------------------------------------------------------- |
+| HIGH     | 3+ patterns co-occurring in a single paragraph, or any paragraph saturated with AI vocabulary (5+ signal words) |
+| MEDIUM   | 1-2 patterns in a paragraph, or a statistical signal present across 3+ consecutive sentences                    |
+| LOW      | Isolated single instance of any pattern, or a borderline statistical signal                                     |
 
 ### Phase 2: Structural Rewrite
 
@@ -160,15 +162,15 @@ For short texts (under 100 words), skip the changes summary unless the user requ
 
 ## Reference Files
 
-| File | Purpose | Load When |
-|------|---------|-----------|
-| `references/detection-patterns.md` | 24 AI-writing patterns with examples | Always (Phase 1) |
-| `references/statistical-signals.md` | 12 statistical regularity signals with target ranges | Phase 1 (scan) and Phase 4 (targets) |
-| `references/style-guide.md` | Domain-specific voice profiles and calibration rules | Phase 3 (match to domain) |
-| `references/transformation-rules.md` | Structural rewrite strategies and entropy techniques | Phase 2 and Phase 4 |
-| `examples/academic.md` | Before/after pairs for academic writing | When domain is academic |
-| `examples/blog.md` | Before/after pairs for blog/casual writing | When domain is blog or social |
-| `examples/professional.md` | Before/after pairs for professional/business writing | When domain is professional |
+| File                                 | Purpose                                              | Load When                            |
+| ------------------------------------ | ---------------------------------------------------- | ------------------------------------ |
+| `references/detection-patterns.md`   | 24 AI-writing patterns with examples                 | Always (Phase 1)                     |
+| `references/statistical-signals.md`  | 12 statistical regularity signals with target ranges | Phase 1 (scan) and Phase 4 (targets) |
+| `references/style-guide.md`          | Domain-specific voice profiles and calibration rules | Phase 3 (match to domain)            |
+| `references/transformation-rules.md` | Structural rewrite strategies and entropy techniques | Phase 2 and Phase 4                  |
+| `examples/academic.md`               | Before/after pairs for academic writing              | When domain is academic              |
+| `examples/blog.md`                   | Before/after pairs for blog/casual writing           | When domain is blog or social        |
+| `examples/professional.md`           | Before/after pairs for professional/business writing | When domain is professional          |
 
 ## Domain Detection
 
@@ -194,24 +196,24 @@ Supported domains: `academic`, `technical`, `blog`, `social`, `professional`, `m
 
 ## Scope Modes
 
-| Mode | Trigger | Behavior |
-|------|---------|----------|
-| **Full rewrite** | "humanize this", "rewrite naturally" | Run all 5 phases |
-| **Detection only** | "check for AI patterns", "does this sound AI" | Run Phase 1 only, output detection report |
-| **Targeted fix** | "fix the AI-sounding parts", "just clean up the obvious stuff" | Run Phase 1, then apply fixes only to HIGH-priority patterns |
-| **Style shift** | "make this more casual/academic/professional" | Run Phases 3-4 with specified domain profile |
+| Mode               | Trigger                                                        | Behavior                                                     |
+| ------------------ | -------------------------------------------------------------- | ------------------------------------------------------------ |
+| **Full rewrite**   | "humanize this", "rewrite naturally"                           | Run all 5 phases                                             |
+| **Detection only** | "check for AI patterns", "does this sound AI"                  | Run Phase 1 only, output detection report                    |
+| **Targeted fix**   | "fix the AI-sounding parts", "just clean up the obvious stuff" | Run Phase 1, then apply fixes only to HIGH-priority patterns |
+| **Style shift**    | "make this more casual/academic/professional"                  | Run Phases 3-4 with specified domain profile                 |
 
 ## Error Handling
 
-| Problem | Cause | Resolution |
-|---------|-------|------------|
-| Input under 20 words | Insufficient signal for pattern detection | Report: "Text too short for reliable pattern detection." Apply vocabulary fixes only (Phase 3) if obvious patterns are present. Skip statistical signal analysis. |
-| Input is entirely code/structured data | No prose to humanize | Report: "Input is structured data — no humanization applicable." Return input unchanged. |
-| Mixed human + AI text | Partial AI generation or human-edited AI output | Run Phase 1 on full text. Flag only paragraphs/sections with detected patterns. Apply Phases 2-4 selectively to flagged sections. Leave clean sections untouched. |
-| Domain ambiguous after detection | Input mixes registers (e.g., academic citations in a blog post) | Default to **professional**. Note the ambiguity in the output: "Domain defaulted to professional — specify if another profile is preferred." |
-| Semantic drift detected in Phase 5 | Rewrite altered meaning during structural/vocabulary changes | Restore the drifted factual claim from the original. Do not re-run the full pipeline. Note the restoration in the changes summary. |
-| Input contains fabricated citations | Original text has hallucinated sources | Not detectable — this skill humanizes style, not factual accuracy. Pass through unchanged. Note in limitations if the user asks about accuracy. |
-| All patterns are LOW severity | Text is mostly human-written with minor tells | In targeted fix mode, report findings but recommend no changes. In full rewrite mode, apply light-touch fixes only — do not over-edit clean text. |
+| Problem                                | Cause                                                           | Resolution                                                                                                                                                        |
+| -------------------------------------- | --------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Input under 20 words                   | Insufficient signal for pattern detection                       | Report: "Text too short for reliable pattern detection." Apply vocabulary fixes only (Phase 3) if obvious patterns are present. Skip statistical signal analysis. |
+| Input is entirely code/structured data | No prose to humanize                                            | Report: "Input is structured data — no humanization applicable." Return input unchanged.                                                                          |
+| Mixed human + AI text                  | Partial AI generation or human-edited AI output                 | Run Phase 1 on full text. Flag only paragraphs/sections with detected patterns. Apply Phases 2-4 selectively to flagged sections. Leave clean sections untouched. |
+| Domain ambiguous after detection       | Input mixes registers (e.g., academic citations in a blog post) | Default to **professional**. Note the ambiguity in the output: "Domain defaulted to professional — specify if another profile is preferred."                      |
+| Semantic drift detected in Phase 5     | Rewrite altered meaning during structural/vocabulary changes    | Restore the drifted factual claim from the original. Do not re-run the full pipeline. Note the restoration in the changes summary.                                |
+| Input contains fabricated citations    | Original text has hallucinated sources                          | Not detectable — this skill humanizes style, not factual accuracy. Pass through unchanged. Note in limitations if the user asks about accuracy.                   |
+| All patterns are LOW severity          | Text is mostly human-written with minor tells                   | In targeted fix mode, report findings but recommend no changes. In full rewrite mode, apply light-touch fixes only — do not over-edit clean text.                 |
 
 ## Integration Point
 

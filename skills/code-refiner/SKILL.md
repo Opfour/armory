@@ -1,6 +1,7 @@
 ---
 name: code-refiner
-description: 'Deep code simplification, refactoring, and quality refinement. Analyzes
+description:
+  'Deep code simplification, refactoring, and quality refinement. Analyzes
   structural complexity, anti-patterns, and readability debt, then applies targeted
   refactoring preserving exact behavior. Language-agnostic: Python, Go, TypeScript/JavaScript,
   Rust. Use this skill when the goal is simplification and clarity rather than bug-finding.
@@ -17,6 +18,7 @@ metadata:
   tags: [refactoring, code-quality, simplification, readability]
   difficulty: intermediate
 ---
+
 # Code Refiner
 
 A structured, multi-pass code refinement skill that transforms complex, verbose, or tangled code

@@ -26,25 +26,25 @@ Before adding a mock, answer these questions in order:
 
 ## What to Mock
 
-| Dependency Type | Mock Strategy | Example |
-|----------------|---------------|---------|
-| HTTP API calls | `patch("module.requests.get")` | Third-party REST API |
-| Database queries | `patch("module.db.execute")` or use test DB | SQL queries, ORM calls |
-| Filesystem I/O | `tmp_path` fixture or `patch("builtins.open")` | File reads/writes |
-| Current time | `patch("module.datetime")` with fixed return | Time-dependent logic |
-| Random values | `patch("module.random.randint")` with fixed return | Non-deterministic logic |
-| Email/SMS sending | `patch("module.send_email")` | Side-effect-only operations |
-| External processes | `patch("module.subprocess.run")` | Shell commands |
+| Dependency Type    | Mock Strategy                                      | Example                     |
+| ------------------ | -------------------------------------------------- | --------------------------- |
+| HTTP API calls     | `patch("module.requests.get")`                     | Third-party REST API        |
+| Database queries   | `patch("module.db.execute")` or use test DB        | SQL queries, ORM calls      |
+| Filesystem I/O     | `tmp_path` fixture or `patch("builtins.open")`     | File reads/writes           |
+| Current time       | `patch("module.datetime")` with fixed return       | Time-dependent logic        |
+| Random values      | `patch("module.random.randint")` with fixed return | Non-deterministic logic     |
+| Email/SMS sending  | `patch("module.send_email")`                       | Side-effect-only operations |
+| External processes | `patch("module.subprocess.run")`                   | Shell commands              |
 
 ## What NOT to Mock
 
-| Do Not Mock | Why | Test Instead |
-|-------------|-----|--------------|
-| The function under test | Defeats the purpose of testing | Call the real function |
-| Pure helper functions | Testing through the caller covers them | Call the caller with real helpers |
-| Data classes / value objects | No side effects to isolate | Use real instances |
-| Standard library operations | They are tested; you are not testing Python | Use real operations |
-| Simple constructors | No benefit to mocking `__init__` | Create real objects |
+| Do Not Mock                  | Why                                         | Test Instead                      |
+| ---------------------------- | ------------------------------------------- | --------------------------------- |
+| The function under test      | Defeats the purpose of testing              | Call the real function            |
+| Pure helper functions        | Testing through the caller covers them      | Call the caller with real helpers |
+| Data classes / value objects | No side effects to isolate                  | Use real instances                |
+| Standard library operations  | They are tested; you are not testing Python | Use real operations               |
+| Simple constructors          | No benefit to mocking `__init__`            | Create real objects               |
 
 **Anti-pattern: mock cascade.** If you find yourself mocking 5+ things for a single test,
 the code under test likely has too many dependencies. Flag this as a design issue rather
@@ -223,16 +223,16 @@ Use `@patch` decorator, `with` statement, or `mocker` fixture to auto-cleanup.
 
 ## Mock Types Reference
 
-| Type | Import | Use When |
-|------|--------|----------|
-| `Mock` | `unittest.mock.Mock` | General-purpose mock object |
-| `MagicMock` | `unittest.mock.MagicMock` | Mock with magic methods (`__len__`, `__iter__`, etc.) |
-| `AsyncMock` | `unittest.mock.AsyncMock` | Mock for coroutines and async methods |
-| `PropertyMock` | `unittest.mock.PropertyMock` | Mock a `@property` |
-| `patch` | `unittest.mock.patch` | Replace an attribute with a mock during a test |
-| `patch.object` | `unittest.mock.patch.object` | Patch attribute on an object instance |
-| `patch.dict` | `unittest.mock.patch.dict` | Temporarily modify a dictionary |
-| `create_autospec` | `unittest.mock.create_autospec` | Mock that enforces the original's signature |
+| Type              | Import                          | Use When                                              |
+| ----------------- | ------------------------------- | ----------------------------------------------------- |
+| `Mock`            | `unittest.mock.Mock`            | General-purpose mock object                           |
+| `MagicMock`       | `unittest.mock.MagicMock`       | Mock with magic methods (`__len__`, `__iter__`, etc.) |
+| `AsyncMock`       | `unittest.mock.AsyncMock`       | Mock for coroutines and async methods                 |
+| `PropertyMock`    | `unittest.mock.PropertyMock`    | Mock a `@property`                                    |
+| `patch`           | `unittest.mock.patch`           | Replace an attribute with a mock during a test        |
+| `patch.object`    | `unittest.mock.patch.object`    | Patch attribute on an object instance                 |
+| `patch.dict`      | `unittest.mock.patch.dict`      | Temporarily modify a dictionary                       |
+| `create_autospec` | `unittest.mock.create_autospec` | Mock that enforces the original's signature           |
 
 `create_autospec` is the safest choice for complex interfaces — it raises `TypeError`
 if the mock is called with the wrong number of arguments.
