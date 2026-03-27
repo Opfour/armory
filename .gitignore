@@ -38,6 +38,7 @@ playwright-report/
 
 # ── Generated output ──────────────────────────
 adapters/
+site/dist/
 *.pdf
 *.png
 *.svg
