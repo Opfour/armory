@@ -1277,22 +1277,26 @@ packages:
     difficulty: advanced
   hooks:
   - name: cost-tracker
-    version: 1.0.0
-    description: Logs session cost and token usage to a CSV file after each Claude Code session completes. Fires on the Stop
-      event, reads cost and token data from the session summary JSON on stdin, and appends a row to ~/.claude/cost-log.csv.
-      Use this hook when you want to track API spending over time, identify expensive sessions, or generate usage reports
-      from the CSV data.
+    version: 2.0.0
+    description: Tracks per-tool token usage, waste indicators, and session costs. Fires on PostToolUse for Read/Write/Edit
+      to estimate tokens per operation and detect wasteful patterns (repeated reads, large reads with anatomy summaries, full-file
+      reads). On Stop, writes a backward-compatible CSV row and a companion JSON summary with per-tool token breakdowns, waste
+      percentage, and top 5 wasteful operations. Integrates with read-dedup tracker and anatomy-index for cross-hook waste
+      detection.
     path: hooks/cost-tracker
     source: https://github.com/Mathews-Tom/armory/blob/main/hooks/cost-tracker/HOOK.md
     events:
+    - PostToolUse
     - Stop
     tags:
     - cost
     - tokens
     - usage
     - logging
+    - waste
+    - efficiency
     category: operations
-    difficulty: beginner
+    difficulty: intermediate
   - name: git-protection
     version: 1.0.0
     description: 'Blocks dangerous git operations that can cause irreversible data loss. Intercepts Bash tool invocations
