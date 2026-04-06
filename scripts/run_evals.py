@@ -14,8 +14,10 @@ from __future__ import annotations
 
 import argparse
 import json
+import shutil
 import subprocess
 import sys
+import tempfile
 import time
 from dataclasses import asdict, dataclass
 from pathlib import Path
@@ -77,6 +79,32 @@ def load_cases(pkg_dir: Path) -> list[dict] | None:
     return data["cases"]
 
 
+def _git_untracked_files(repo_root: Path) -> set[str]:
+    """List untracked files in a git repo via git status --porcelain."""
+    try:
+        result = subprocess.run(
+            ["git", "status", "--porcelain"],
+            capture_output=True, text=True, cwd=str(repo_root),
+        )
+        files: set[str] = set()
+        for line in result.stdout.strip().splitlines():
+            if line.startswith("??"):
+                files.add(str(repo_root / line[3:].strip()))
+        return files
+    except (subprocess.SubprocessError, OSError):
+        return set()
+
+
+def _snapshot_files(directory: str) -> set[str]:
+    """Take a snapshot of files — git untracked for repos, rglob for temp dirs."""
+    root = Path(directory)
+    if not root.is_dir():
+        return set()
+    if (root / ".git").exists():
+        return _git_untracked_files(root)
+    return {str(p) for p in root.rglob("*") if p.is_file()}
+
+
 def execute_case(
     case: dict,
     pkg_dir: Path,
@@ -106,6 +134,12 @@ def execute_case(
 
     start_ms = time.monotonic_ns() // 1_000_000
 
+    # Snapshot existing files so we can detect new files written by the skill.
+    # Skills often write artifacts (ADRs, test files, reports) that contain
+    # the structured content assertions need to check.
+    tmpdir = tempfile.mkdtemp(prefix="armory_eval_")
+    pre_files = _snapshot_files(tmpdir) | _snapshot_files(str(_REPO_ROOT))
+
     try:
         result = subprocess.run(
             [
@@ -113,15 +147,42 @@ def execute_case(
                 "-p", prompt,
                 "--add-dir", str(pkg_dir),
                 "--output-format", "text",
+                "--allowedTools", "Read", "Glob", "Grep", "Write", "Edit", "Bash",
             ],
             capture_output=True,
             text=True,
             timeout=timeout_seconds,
+            cwd=tmpdir,
         )
         output = result.stdout
         exit_code = result.returncode
+
+        # Collect new files written during execution and append to output.
+        post_files = _snapshot_files(tmpdir) | _snapshot_files(str(_REPO_ROOT))
+        new_files = post_files - pre_files
+        for fpath_str in sorted(new_files):
+            fpath = Path(fpath_str)
+            if fpath.is_file() and fpath.stat().st_size < 100_000:
+                try:
+                    content = fpath.read_text(encoding="utf-8")
+                    output += f"\n\n--- FILE: {fpath.name} ---\n{content}"
+                except (UnicodeDecodeError, OSError):
+                    pass
+        # Clean up files written to the repo by the skill
+        for fpath_str in sorted(new_files):
+            fpath = Path(fpath_str)
+            if fpath.is_file() and str(_REPO_ROOT) in fpath_str:
+                fpath.unlink(missing_ok=True)
+        # Clean up empty directories left behind
+        for fpath_str in sorted(new_files, reverse=True):
+            fpath = Path(fpath_str)
+            parent = fpath.parent
+            if parent.is_dir() and parent != _REPO_ROOT and not any(parent.iterdir()):
+                parent.rmdir()
+
     except subprocess.TimeoutExpired:
         elapsed_ms = (time.monotonic_ns() // 1_000_000) - start_ms
+        shutil.rmtree(tmpdir, ignore_errors=True)
         return CaseResult(
             case_id=case_id,
             prompt=prompt,
@@ -134,6 +195,7 @@ def execute_case(
         )
     except FileNotFoundError:
         elapsed_ms = (time.monotonic_ns() // 1_000_000) - start_ms
+        shutil.rmtree(tmpdir, ignore_errors=True)
         return CaseResult(
             case_id=case_id,
             prompt=prompt,
@@ -145,6 +207,7 @@ def execute_case(
             error="'claude' CLI not found in PATH",
         )
 
+    shutil.rmtree(tmpdir, ignore_errors=True)
     elapsed_ms = (time.monotonic_ns() // 1_000_000) - start_ms
 
     # For negative cases (trigger_expected: false), pass if no substantial output

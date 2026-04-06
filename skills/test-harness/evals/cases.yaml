@@ -9,6 +9,25 @@ cases:
       - "uses pytest.raises for exception testing"
       - "uses pytest.mark.parametrize for boundary cases"
     trigger_expected: true
+    assertions:
+      - type: matches_regex
+        target: "def test_\\w+"
+        weight: 1.0
+      - type: contains
+        target: "pytest.raises"
+        weight: 0.8
+      - type: contains
+        target: "parametrize"
+        weight: 0.6
+      - type: output_format
+        target: code_block
+        weight: 0.8
+      - type: contains
+        target: "calculate_discount"
+        weight: 0.6
+      - type: not_contains
+        target: "placeholder"
+        weight: 0.3
 
   - id: generate_tests_for_module
     prompt: "Generate a comprehensive test suite for fixtures/sample_module.py"
@@ -21,6 +40,25 @@ cases:
       - "preserves duplicate order in assertions"
       - "uses concrete test data (not placeholders)"
     trigger_expected: true
+    assertions:
+      - type: contains
+        target: "calculate_discount"
+        weight: 1.0
+      - type: contains
+        target: "find_duplicates"
+        weight: 1.0
+      - type: matches_regex
+        target: "def test_\\w+"
+        weight: 1.0
+      - type: output_format
+        target: code_block
+        weight: 0.8
+      - type: not_contains
+        target: "TODO"
+        weight: 0.3
+      - type: not_contains
+        target: "placeholder"
+        weight: 0.3
 
   - id: mock_strategy_request
     prompt: "Write tests for a function that calls an external API. The function is: def fetch_user(user_id: str) -> dict: response = requests.get(f'https://api.example.com/users/{user_id}'); response.raise_for_status(); return response.json()"
@@ -32,6 +70,22 @@ cases:
       - "asserts mock was called with correct URL"
       - "does not make real HTTP requests"
     trigger_expected: true
+    assertions:
+      - type: matches_regex
+        target: "(?i)(mock|patch|monkeypatch)"
+        weight: 1.0
+      - type: contains
+        target: "fetch_user"
+        weight: 0.8
+      - type: matches_regex
+        target: "(?i)(404|raise|error|exception)"
+        weight: 0.8
+      - type: output_format
+        target: code_block
+        weight: 0.8
+      - type: matches_regex
+        target: "def test_\\w+"
+        weight: 1.0
 
   - id: run_existing_tests
     prompt: "Run the tests in tests/ and tell me what fails."
