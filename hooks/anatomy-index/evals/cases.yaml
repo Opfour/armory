@@ -46,3 +46,10 @@ cases:
     rubric:
       - "Hook should not perform any index operations on Bash tool use"
     trigger_expected: false
+
+  - id: no_trigger_on_grep
+    prompt: "Search the codebase for function definitions using Grep"
+    fixtures: []
+    rubric:
+      - "Hook should not perform any index operations on Grep tool use"
+    trigger_expected: false
