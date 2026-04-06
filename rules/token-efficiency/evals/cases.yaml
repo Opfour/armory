@@ -1,0 +1,39 @@
+cases:
+  - id: reduce_token_usage
+    prompt: "How can I reduce token consumption when using Claude Code?"
+    fixtures: []
+    rubric:
+      - "recommends Grep/Glob before full file reads"
+      - "mentions targeted line-range reads for large files"
+      - "advises against re-reading files already in context"
+    trigger_expected: true
+
+  - id: search_before_read
+    prompt: "I need to find where the authentication logic is defined in this codebase"
+    fixtures: []
+    rubric:
+      - "suggests using Grep to locate the function before reading files"
+      - "does not recommend reading every file in the directory"
+    trigger_expected: true
+
+  - id: efficient_file_editing
+    prompt: "I want to add a new export at the end of this module without wasting tokens"
+    fixtures: []
+    rubric:
+      - "recommends Edit with an anchor string near the end"
+      - "advises against reading the entire file first when appending"
+    trigger_expected: true
+
+  - id: negative_code_performance
+    prompt: "How do I optimize the runtime performance of my Python sorting algorithm?"
+    fixtures: []
+    rubric:
+      - "runtime performance optimization is about code execution speed, not token usage"
+    trigger_expected: false
+
+  - id: negative_cost_billing
+    prompt: "How much does Claude API usage cost per million tokens?"
+    fixtures: []
+    rubric:
+      - "API pricing is a billing question, not a tool usage efficiency pattern"
+    trigger_expected: false
