@@ -1,0 +1,24 @@
+cases:
+  # --- Positive cases ---
+  - id: install_evolution_pipeline
+    prompt: "I want to set up an automated skill generation pipeline. Install the skill evolution tools."
+    fixtures: []
+    rubric:
+      - "Recommends the skill-evolution preset"
+      - "Lists all included packages (test-engineer, surrogate-verifier, skill-distiller, etc.)"
+    trigger_expected: true
+
+  # --- Negative cases ---
+  - id: not_core_preset
+    prompt: "Set up basic code review and commit standards for my project"
+    fixtures: []
+    rubric:
+      - "Should NOT activate — this is the core preset, not skill-evolution"
+    trigger_expected: false
+
+  - id: not_security_preset
+    prompt: "Install security auditing tools for compliance scanning"
+    fixtures: []
+    rubric:
+      - "Should NOT activate — this is the security-engineer preset"
+    trigger_expected: false

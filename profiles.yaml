@@ -100,6 +100,22 @@ profiles:
         - repo-sentinel
         - dependency-audit
 
+  skill-evolution:
+    description: Skill generation and co-evolutionary refinement tools
+    includes: [core]
+    packages:
+      skills:
+        - surrogate-verifier
+        - skill-distiller
+        - paper-to-skill
+        - package-evaluator
+        - immune
+        - research-critique
+      agents:
+        - test-engineer
+      commands:
+        - evolve
+
   full:
     description: Every available package
     all: true
