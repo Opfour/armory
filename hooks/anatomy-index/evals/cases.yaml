@@ -1,0 +1,55 @@
+cases:
+  - id: index_generated_on_first_use
+    prompt: "Read a file in a project that has no .claude/anatomy.md yet"
+    fixtures: []
+    rubric:
+      - "Hook should generate .claude/anatomy.md on first invocation"
+      - "Index should contain file paths, descriptions, and token estimates"
+      - "Index should respect .gitignore and exclude node_modules, __pycache__, etc."
+    trigger_expected: true
+
+  - id: pre_read_shows_summary
+    prompt: "Read src/config.ts in a project with an existing anatomy index"
+    fixtures: []
+    rubric:
+      - "Hook should emit the file's summary line to stderr before the read proceeds"
+      - "Summary should include file path, description, and token estimate"
+    trigger_expected: true
+
+  - id: post_write_updates_index
+    prompt: "Write a new file src/utils.ts and verify the index updates"
+    fixtures: []
+    rubric:
+      - "Hook should add or update the file's entry in .claude/anatomy.md after Write"
+      - "Updated entry should reflect the new file's description and token count"
+    trigger_expected: true
+
+  - id: post_edit_updates_index
+    prompt: "Edit src/config.ts to add a new function"
+    fixtures: []
+    rubric:
+      - "Hook should update the file's entry in .claude/anatomy.md after Edit"
+      - "Token estimate should reflect the new file size"
+    trigger_expected: true
+
+  - id: gitignore_exclusion
+    prompt: "Generate index in a project with node_modules and __pycache__ directories"
+    fixtures: []
+    rubric:
+      - "Index should not contain any files from node_modules or __pycache__"
+      - "Index should only contain tracked/untracked non-ignored files"
+    trigger_expected: true
+
+  - id: no_trigger_on_bash
+    prompt: "Run a Bash command to check disk space"
+    fixtures: []
+    rubric:
+      - "Hook should not perform any index operations on Bash tool use"
+    trigger_expected: false
+
+  - id: no_trigger_on_grep
+    prompt: "Search the codebase for function definitions using Grep"
+    fixtures: []
+    rubric:
+      - "Hook should not perform any index operations on Grep tool use"
+    trigger_expected: false

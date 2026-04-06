@@ -1276,23 +1276,44 @@ packages:
     category: operations
     difficulty: advanced
   hooks:
-  - name: cost-tracker
+  - name: anatomy-index
     version: 1.0.0
-    description: Logs session cost and token usage to a CSV file after each Claude Code session completes. Fires on the Stop
-      event, reads cost and token data from the session summary JSON on stdin, and appends a row to ~/.claude/cost-log.csv.
-      Use this hook when you want to track API spending over time, identify expensive sessions, or generate usage reports
-      from the CSV data.
+    description: Generates and maintains a project file index with one-line descriptions and token estimates. On session start
+      or first tool use, builds .claude/anatomy.md by walking the project tree. Before Read, displays the target file summary
+      so Claude can decide to skip. After Write/Edit, updates the changed file entry in the index. Respects .gitignore exclusions.
+    path: hooks/anatomy-index
+    source: https://github.com/Mathews-Tom/armory/blob/main/hooks/anatomy-index/HOOK.md
+    events:
+    - PreToolUse
+    - PostToolUse
+    tags:
+    - context
+    - index
+    - anatomy
+    - efficiency
+    category: operations
+    difficulty: intermediate
+  - name: cost-tracker
+    version: 2.0.0
+    description: Tracks per-tool token usage, waste indicators, and session costs. Fires on PostToolUse for Read/Write/Edit
+      to estimate tokens per operation and detect wasteful patterns (repeated reads, large reads with anatomy summaries, full-file
+      reads). On Stop, writes a backward-compatible CSV row and a companion JSON summary with per-tool token breakdowns, waste
+      percentage, and top 5 wasteful operations. Integrates with read-dedup tracker and anatomy-index for cross-hook waste
+      detection.
     path: hooks/cost-tracker
     source: https://github.com/Mathews-Tom/armory/blob/main/hooks/cost-tracker/HOOK.md
     events:
+    - PostToolUse
     - Stop
     tags:
     - cost
     - tokens
     - usage
     - logging
+    - waste
+    - efficiency
     category: operations
-    difficulty: beginner
+    difficulty: intermediate
   - name: git-protection
     version: 1.0.0
     description: 'Blocks dangerous git operations that can cause irreversible data loss. Intercepts Bash tool invocations
@@ -1326,6 +1347,22 @@ packages:
     - files
     - safety
     - pre-edit
+    category: operations
+    difficulty: beginner
+  - name: read-dedup
+    version: 1.0.0
+    description: Detects and warns about duplicate file reads within a Claude Code session. Fires on PreToolUse for the Read
+      tool, tracks files read in a session-scoped temp file, and emits a stderr warning with estimated token count when a
+      file is read again. Reduces wasted context by nudging the model to reuse knowledge from earlier reads.
+    path: hooks/read-dedup
+    source: https://github.com/Mathews-Tom/armory/blob/main/hooks/read-dedup/HOOK.md
+    events:
+    - PreToolUse
+    tags:
+    - context
+    - dedup
+    - tokens
+    - efficiency
     category: operations
     difficulty: beginner
   rules:
@@ -1383,6 +1420,24 @@ packages:
     - pytest
     - ci
     category: review
+    difficulty: beginner
+  - name: token-efficiency
+    version: 1.0.0
+    description: Enforces token-efficient tool usage patterns to reduce context waste and lower session costs. Covers file
+      reading strategies (targeted line-range reads, avoiding re-reads of in-context files), search-first patterns (Grep/Glob
+      before full Read), write discipline (never write unchanged content, append without full read), and context management
+      (check summaries before committing to full reads). Use this rule when optimizing Claude Code session efficiency, reducing
+      token consumption, or establishing tool-usage best practices. Triggers on "token efficiency", "reduce tokens", "context
+      waste", "tool usage", "read efficiency", "minimize reads".
+    path: rules/token-efficiency
+    source: https://github.com/Mathews-Tom/armory/blob/main/rules/token-efficiency/RULE.md
+    scope: global
+    tags:
+    - token-efficiency
+    - context-management
+    - tool-usage
+    - cost-reduction
+    category: development
     difficulty: beginner
   commands:
   - name: refactor

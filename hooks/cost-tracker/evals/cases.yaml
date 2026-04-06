@@ -1,10 +1,13 @@
 cases:
+  # --- Stop event (backward compatible) ---
+
   - id: log_session_with_cost
     prompt: "Session ended with $0.45 cost and 12500 tokens used"
     fixtures: []
     rubric:
       - "Hook should fire on Stop event and append a row to cost-log.csv"
       - "CSV row should contain timestamp, session_id, cost, and token count"
+      - "A companion JSON summary should be written to ~/.claude/"
     trigger_expected: true
 
   - id: log_session_zero_cost
@@ -12,18 +15,99 @@ cases:
     fixtures: []
     rubric:
       - "Hook should still log a row even when cost is zero"
+      - "Companion JSON summary should have empty tool_tokens and 0 waste"
     trigger_expected: true
 
-  - id: no_log_on_tool_use
+  # --- PostToolUse: Read ---
+
+  - id: track_read_tokens
+    prompt: "Read a 2KB Python file at /src/utils.py"
+    fixtures: []
+    rubric:
+      - "Hook should fire on PostToolUse for Read tool"
+      - "Should append a JSONL record with tool=Read and tokens ~500"
+      - "Waste type should be none for a first-time, small read"
+    trigger_expected: true
+
+  - id: detect_repeated_read
+    prompt: "Read /src/config.ts for the second time in this session"
+    fixtures: []
+    rubric:
+      - "Hook should detect the file was already in the read-dedup tracker"
+      - "JSONL record waste field should be repeated_read"
+    trigger_expected: true
+
+  - id: detect_large_read_with_anatomy
+    prompt: "Read a 6KB file /src/server.ts that has an anatomy-index entry"
+    fixtures: []
+    rubric:
+      - "Hook should check anatomy.md for the file entry"
+      - "Since the file is >1000 tokens and has an anatomy entry, waste should be large_read_with_anatomy"
+    trigger_expected: true
+
+  - id: detect_full_file_read
+    prompt: "Read a 12KB file /src/big-module.ts without offset or limit"
+    fixtures: []
+    rubric:
+      - "File is >2000 tokens and read without offset/limit params"
+      - "Waste type should include full_file_read"
+    trigger_expected: true
+
+  - id: no_waste_on_partial_read
+    prompt: "Read /src/big-module.ts with offset=100 and limit=50"
+    fixtures: []
+    rubric:
+      - "Even though file is large, offset/limit were provided"
+      - "Waste type should be none (partial read is efficient)"
+    trigger_expected: true
+
+  # --- PostToolUse: Write ---
+
+  - id: track_write_tokens
+    prompt: "Write a new file /src/output.ts with 1KB of content"
+    fixtures: []
+    rubric:
+      - "Hook should fire on PostToolUse for Write tool"
+      - "Should append a JSONL record with tool=Write and tokens ~250"
+      - "Waste type should be none for writes"
+    trigger_expected: true
+
+  # --- PostToolUse: Edit ---
+
+  - id: track_edit_tokens
+    prompt: "Edit /src/config.ts replacing a 50-byte string with a 80-byte string"
+    fixtures: []
+    rubric:
+      - "Hook should fire on PostToolUse for Edit tool"
+      - "Token estimate should be based on old_string + new_string size, not full file"
+      - "Should append a JSONL record with tool=Edit"
+    trigger_expected: true
+
+  # --- Session summary ---
+
+  - id: session_summary_with_waste
+    prompt: "Session ending after 5 reads (2 wasteful), 3 writes, 1 edit"
+    fixtures: []
+    rubric:
+      - "Stop handler should aggregate per-tool tokens from JSONL state"
+      - "Summary JSON should show Read/Write/Edit token breakdowns"
+      - "Waste section should report waste_pct > 0 and list top operations"
+      - "CSV row should still be written for backward compatibility"
+      - "JSONL state file should be cleaned up after summary generation"
+    trigger_expected: true
+
+  # --- Non-matching events ---
+
+  - id: no_track_on_bash
     prompt: "Run a Bash command to check disk space"
     fixtures: []
     rubric:
-      - "Hook should not fire on PreToolUse events — only on Stop"
+      - "Hook should not track tokens for Bash tool invocations"
     trigger_expected: false
 
-  - id: no_log_on_edit
-    prompt: "Edit a Python file to fix a typo"
+  - id: no_track_on_grep
+    prompt: "Search codebase for function definitions"
     fixtures: []
     rubric:
-      - "Hook should not fire on Edit tool use — only on Stop"
+      - "Hook should not track tokens for Grep tool invocations"
     trigger_expected: false

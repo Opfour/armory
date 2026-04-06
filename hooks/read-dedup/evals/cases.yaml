@@ -1,0 +1,40 @@
+cases:
+  - id: first_read_no_warning
+    prompt: "Read the file src/config.ts for the first time in a session"
+    fixtures: []
+    rubric:
+      - "Hook should fire on PreToolUse for Read tool"
+      - "No warning should be emitted since this is the first read of the file"
+      - "File path should be recorded in the session tracker"
+    trigger_expected: true
+
+  - id: duplicate_read_warns
+    prompt: "Read src/config.ts again after it was already read earlier in the session"
+    fixtures: []
+    rubric:
+      - "Hook should emit a stderr warning mentioning the file path and estimated token count"
+      - "Warning should suggest using existing knowledge instead of re-reading"
+      - "Hook should still exit 0 (read is not blocked)"
+    trigger_expected: true
+
+  - id: different_file_no_warning
+    prompt: "Read src/utils.ts after previously reading src/config.ts"
+    fixtures: []
+    rubric:
+      - "No warning should be emitted since this is a different file"
+      - "Both file paths should be tracked independently"
+    trigger_expected: true
+
+  - id: no_trigger_on_edit
+    prompt: "Edit a Python file to fix a typo"
+    fixtures: []
+    rubric:
+      - "Hook should not fire on Edit tool use — only on Read"
+    trigger_expected: false
+
+  - id: no_trigger_on_bash
+    prompt: "Run a Bash command to list directory contents"
+    fixtures: []
+    rubric:
+      - "Hook should not fire on Bash tool use — only on Read"
+    trigger_expected: false
