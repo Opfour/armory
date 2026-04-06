@@ -1,0 +1,50 @@
+cases:
+  # --- Positive cases ---
+  - id: distill_skill_for_haiku
+    prompt: "Distill the architecture-reviewer skill so it works reliably on Haiku. It currently requires Opus-level reasoning for the 7-dimension scoring."
+    fixtures: []
+    rubric:
+      - "Produces a complexity analysis mapping each section to HIGH/MED/LOW"
+      - "Rewrites HIGH-complexity sections with deterministic lookup tables or checklists"
+      - "Validates the distilled skill on Haiku and reports cross-model comparison"
+    trigger_expected: true
+
+  - id: cross_model_optimization
+    prompt: "This skill for SQL optimization works on Opus but fails on Sonnet. Run cross-model skill distillation to make it deterministic enough for Sonnet."
+    fixtures: []
+    rubric:
+      - "Collects execution traces on representative tasks"
+      - "Extracts deterministic decision paths from traces"
+      - "Produces a distilled SKILL.md with reduced reasoning complexity"
+    trigger_expected: true
+
+  - id: reduce_skill_cost
+    prompt: "Optimize this skill for cost by making it Haiku-compatible. It currently uses too much reasoning and extended thinking."
+    fixtures: []
+    rubric:
+      - "Identifies sections requiring extended thinking and replaces with explicit steps"
+      - "Produces cross-model performance comparison table"
+      - "Outputs a recommendation (SHIP, ITERATE, or MANUAL_REVIEW_NEEDED)"
+    trigger_expected: true
+
+  # --- Negative cases ---
+  - id: not_code_refiner
+    prompt: "Simplify this Python function to reduce cyclomatic complexity and improve readability"
+    fixtures: []
+    rubric:
+      - "Should NOT activate — this is code simplification for code-refiner skill"
+    trigger_expected: false
+
+  - id: not_prompt_lab
+    prompt: "Optimize this LLM prompt to get better outputs with fewer tokens"
+    fixtures: []
+    rubric:
+      - "Should NOT activate — this is prompt engineering for prompt-lab skill"
+    trigger_expected: false
+
+  - id: not_test_engineer
+    prompt: "Evolve a new skill for data validation through co-evolutionary refinement"
+    fixtures: []
+    rubric:
+      - "Should NOT activate — this is skill creation for test-engineer agent"
+    trigger_expected: false

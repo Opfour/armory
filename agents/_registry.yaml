@@ -83,6 +83,13 @@ composition:
         - proposal-writer
         - media-producer
 
+    evolution_pipeline:
+      description: >
+        Co-evolutionary skill generation and refinement.
+        Generator-Verifier loop with oracle verification.
+      sequence:
+        - test-engineer
+
     meta:
       description: >
         Orchestrator that delegates to all other agents.

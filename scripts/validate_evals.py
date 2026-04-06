@@ -15,6 +15,9 @@ from scripts.frontmatter import parse_frontmatter
 from scripts.package_types import REPO_ROOT, TYPES, PackageType
 
 REQUIRED_CASE_FIELDS = {"id", "prompt", "rubric", "trigger_expected"}
+OPTIONAL_CASE_FIELDS = {"fixtures", "assertions", "oracle_verdict", "diagnostics"}
+VALID_ASSERTION_TYPES = {"contains", "not_contains", "matches_regex", "output_format", "calls_tool"}
+VALID_ORACLE_VERDICTS = {None, "pass", "fail"}
 
 
 def is_deprecated(pkg_dir: Path, pkg_type: PackageType) -> bool:
@@ -54,6 +57,48 @@ def validate_case(case: dict, pkg_name: str, idx: int) -> list[str]:
 
     if not isinstance(case["rubric"], list) or len(case["rubric"]) == 0:
         errors.append(f"{prefix}: 'rubric' must be a non-empty list")
+
+    # Validate optional assertions field (EvoSkills structured assertions)
+    if "assertions" in case:
+        assertions = case["assertions"]
+        if not isinstance(assertions, list):
+            errors.append(f"{prefix}: 'assertions' must be a list")
+        else:
+            for j, assertion in enumerate(assertions, 1):
+                a_prefix = f"{prefix} assertion #{j}"
+                if not isinstance(assertion, dict):
+                    errors.append(f"{a_prefix}: must be a dict")
+                    continue
+                if "type" not in assertion:
+                    errors.append(f"{a_prefix}: missing required 'type' field")
+                elif assertion["type"] not in VALID_ASSERTION_TYPES:
+                    errors.append(
+                        f"{a_prefix}: invalid type '{assertion['type']}', "
+                        f"must be one of {sorted(VALID_ASSERTION_TYPES)}"
+                    )
+                if "target" not in assertion:
+                    errors.append(f"{a_prefix}: missing required 'target' field")
+                elif not isinstance(assertion["target"], str):
+                    errors.append(f"{a_prefix}: 'target' must be a string")
+                if "weight" in assertion:
+                    weight = assertion["weight"]
+                    if not isinstance(weight, (int, float)) or weight < 0 or weight > 1:
+                        errors.append(f"{a_prefix}: 'weight' must be a number between 0 and 1")
+
+    # Validate optional oracle_verdict field
+    if "oracle_verdict" in case:
+        verdict = case["oracle_verdict"]
+        if verdict not in VALID_ORACLE_VERDICTS:
+            errors.append(
+                f"{prefix}: 'oracle_verdict' must be null, 'pass', or 'fail', "
+                f"got '{verdict}'"
+            )
+
+    # Validate optional diagnostics field
+    if "diagnostics" in case:
+        diag = case["diagnostics"]
+        if diag is not None and not isinstance(diag, str):
+            errors.append(f"{prefix}: 'diagnostics' must be null or a string")
 
     return errors
 

@@ -1,0 +1,50 @@
+cases:
+  # --- Positive cases ---
+  - id: evolve_domain_skill
+    prompt: "/evolve SQL query optimization"
+    fixtures: []
+    rubric:
+      - "Parses 'SQL query optimization' as a domain description"
+      - "Routes to test-engineer agent for direct evolution"
+      - "Reports evolution results with quality score and oracle verdict"
+    trigger_expected: true
+
+  - id: evolve_from_paper
+    prompt: "/evolve https://arxiv.org/abs/2604.01687 --budget 3"
+    fixtures: []
+    rubric:
+      - "Detects arXiv URL and routes to paper-to-skill pipeline"
+      - "Passes --budget 3 as oracle round limit"
+      - "Shows extracted specification before proceeding"
+    trigger_expected: true
+
+  - id: evolve_with_distill
+    prompt: "/evolve data validation --distill"
+    fixtures: []
+    rubric:
+      - "Runs evolution via test-engineer"
+      - "After evolution, invokes skill-distiller for Haiku compatibility"
+      - "Reports cross-model comparison from distillation"
+    trigger_expected: true
+
+  # --- Negative cases ---
+  - id: not_tdd
+    prompt: "/tdd validate_email function"
+    fixtures: []
+    rubric:
+      - "Should NOT activate — this is a TDD command, not skill evolution"
+    trigger_expected: false
+
+  - id: not_security_scan
+    prompt: "/security-scan check for OWASP vulnerabilities"
+    fixtures: []
+    rubric:
+      - "Should NOT activate — this is a security scan command"
+    trigger_expected: false
+
+  - id: not_manual_skill_creation
+    prompt: "Create a new skill directory with SKILL.md following the package checklist"
+    fixtures: []
+    rubric:
+      - "Should NOT activate — manual skill creation uses the checklist, not /evolve"
+    trigger_expected: false

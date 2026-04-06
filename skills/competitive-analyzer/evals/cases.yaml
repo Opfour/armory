@@ -8,6 +8,22 @@ cases:
       - "builds a feature comparison matrix"
       - "includes pricing analysis and positioning"
     trigger_expected: true
+    assertions:
+      - type: matches_regex
+        target: "(?i)(direct|indirect|potential)\\s+competitor"
+        weight: 1.0
+      - type: matches_regex
+        target: "(?i)porter.s five forces"
+        weight: 0.8
+      - type: output_format
+        target: markdown_table
+        weight: 0.8
+      - type: matches_regex
+        target: "(?i)(pricing|price|cost)"
+        weight: 0.6
+      - type: matches_regex
+        target: "(?i)(position|differentiat)"
+        weight: 0.6
 
   - id: competitor_comparison
     prompt: "Compare Notion, Coda, and Confluence as competitors in the knowledge management space"
@@ -17,6 +33,22 @@ cases:
       - "analyzes pricing models and positioning differences"
       - "identifies gaps and differentiators"
     trigger_expected: true
+    assertions:
+      - type: contains
+        target: "Notion"
+        weight: 1.0
+      - type: contains
+        target: "Coda"
+        weight: 1.0
+      - type: contains
+        target: "Confluence"
+        weight: 1.0
+      - type: output_format
+        target: markdown_table
+        weight: 0.8
+      - type: matches_regex
+        target: "(?i)(gap|differentiator|advantage|weakness)"
+        weight: 0.6
 
   - id: porters_five_forces
     prompt: "Do a Porter's Five Forces analysis of the cloud infrastructure market"
@@ -26,6 +58,19 @@ cases:
       - "synthesizes overall industry attractiveness"
       - "identifies the dominant competitive pressures"
     trigger_expected: true
+    assertions:
+      - type: matches_regex
+        target: "(?i)bargaining power.*(supplier|buyer)"
+        weight: 0.8
+      - type: matches_regex
+        target: "(?i)threat.*(entry|new entrant|substitut)"
+        weight: 0.8
+      - type: matches_regex
+        target: "(?i)(competitive rivalry|rivalry among)"
+        weight: 0.8
+      - type: output_format
+        target: markdown_table
+        weight: 0.6
 
   - id: moat_assessment
     prompt: "What competitive moats does Stripe have and how defensible are they?"

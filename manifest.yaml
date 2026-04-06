@@ -264,6 +264,25 @@ packages:
     - sprint
     category: review
     difficulty: intermediate
+  - name: env-validator
+    version: 1.0.0
+    description: 'Validates .env files and environment variable configurations against project requirements. Checks for missing
+      required variables, type mismatches, insecure defaults, unreferenced variables, and common configuration errors. Compares
+      .env against .env.example, code references, and deployment manifests. Produces a structured validation report with severity-ranked
+      findings. Triggers on: "validate env file", "check environment variables", "env file audit", "missing env vars", "env
+      validation", "check .env", "environment config check", "validate configuration", "env file review", "dotenv validation".
+      Use this skill when verifying environment configuration completeness and correctness before deployment or after onboarding.
+      NOT for secret scanning (use repo-sentinel or secret-scanner). NOT for general config file editing (use filesystem skill).'
+    path: skills/env-validator
+    source: https://github.com/Mathews-Tom/armory/blob/main/skills/env-validator/SKILL.md
+    tags:
+    - env
+    - configuration
+    - validation
+    - dotenv
+    - deployment
+    category: operations
+    difficulty: intermediate
   - name: estimate-calibrator
     version: 1.1.0
     description: 'Produces calibrated three-point estimates (best/likely/worst case) with explicit unknowns, confidence intervals,
@@ -642,6 +661,26 @@ packages:
     - frontmatter
     category: review
     difficulty: intermediate
+  - name: paper-to-skill
+    version: 1.0.0
+    description: 'Converts research papers into executable skill packages by extracting actionable methodologies and feeding
+      them through co-evolutionary refinement. Chains document conversion (to-markdown), critical analysis (research-critique),
+      specification extraction, and automated skill generation (test-engineer). Produces attributed, validated skill packages
+      from arXiv papers, PDFs, or pasted content. Triggers on: "convert this paper to a skill", "paper-to-skill", "implement
+      this paper as a skill", "extract methodology from paper", "turn this research into a skill", "make a skill from this
+      arXiv paper", "create skill from research", "paper implementation". Use this skill when a research paper describes a
+      methodology that should become a reusable skill package. NOT for literature review or paper summarization (use research-critique
+      or literature-review). NOT for general skill creation without a paper source (use test-engineer agent).'
+    path: skills/paper-to-skill
+    source: https://github.com/Mathews-Tom/armory/blob/main/skills/paper-to-skill/SKILL.md
+    tags:
+    - paper
+    - arxiv
+    - research
+    - skill-generation
+    - methodology-extraction
+    category: research
+    difficulty: advanced
   - name: plan-review
     version: 1.0.0
     description: Pre-implementation plan audit that stress-tests scope, assumptions, risks, and failure modes before code
@@ -843,6 +882,27 @@ packages:
     - changelog
     category: review
     difficulty: intermediate
+  - name: skill-distiller
+    version: 1.0.0
+    description: 'Converts Opus-quality skill packages into deterministic, Haiku-executable workflows through trace-driven
+      distillation. Analyzes reasoning complexity per section, collects execution traces on representative tasks, extracts
+      deterministic decision paths, and rewrites abstract instructions as constrained templates. Validates the distilled skill
+      on lower-cost models and produces a cross-model comparison report. Implements cross-model skill transfer from EvoSkills
+      (+35-45pp gains). Triggers on: "distill this skill", "make this skill work on Haiku", "simplify skill for lower model",
+      "cross-model optimization", "skill distillation", "optimize skill for cost", "reduce skill complexity", "deterministic
+      skill rewrite", "convert to Haiku-compatible". Use this skill when an existing skill works on Opus but needs to run
+      reliably on Sonnet or Haiku. NOT for general code simplification (use code-refiner). NOT for prompt optimization (use
+      prompt-lab).'
+    path: skills/skill-distiller
+    source: https://github.com/Mathews-Tom/armory/blob/main/skills/skill-distiller/SKILL.md
+    tags:
+    - distillation
+    - cross-model
+    - optimization
+    - haiku
+    - deterministic
+    category: development
+    difficulty: advanced
   - name: skill-library
     version: 2.0.0
     description: 'Agent-native catalog and installer for armory packages across all 7 types: skills, agents, hooks, rules,
@@ -895,6 +955,28 @@ packages:
     - svg
     category: visualization
     difficulty: intermediate
+  - name: surrogate-verifier
+    version: 1.0.0
+    description: 'Information-isolated verification skill that generates structured test assertions and failure diagnostics
+      for skill packages. Given a skill definition and task prompt, produces machine-checkable assertions (contains, regex,
+      format, tool-call checks) and root-cause diagnostics when assertions fail. Implements the surrogate verifier role from
+      co-evolutionary skill generation (EvoSkills). Triggers on: "verify this skill", "generate assertions for", "surrogate
+      verification", "test this skill output", "diagnose skill failure", "generate test cases for skill", "skill verification",
+      "assertion generation", "check skill quality against tasks", "generate eval assertions". Use this skill when evaluating
+      skill output quality through automated assertion testing rather than manual review. NOT for general code review (use
+      pr-review). NOT for package metadata evaluation (use package-evaluator). NOT for test suite generation for application
+      code (use test-harness).'
+    path: skills/surrogate-verifier
+    source: https://github.com/Mathews-Tom/armory/blob/main/skills/surrogate-verifier/SKILL.md
+    tags:
+    - verification
+    - assertions
+    - testing
+    - co-evolution
+    - diagnostics
+    - eval
+    category: review
+    difficulty: advanced
   - name: task-decomposer
     version: 1.1.0
     description: 'Produces structured phased task boards from feature requests: dependency-mapped work items with parallelization
@@ -1275,6 +1357,27 @@ packages:
     - opus
     category: operations
     difficulty: advanced
+  - name: test-engineer
+    version: 1.0.0
+    description: 'Co-evolutionary skill evolution agent that orchestrates generate-verify-refine loops to produce high-quality
+      skill packages. Implements EvoSkills Algorithm 1: a Generator (Opus) writes multi-file skill packages, a Surrogate Verifier
+      (Sonnet) generates test assertions and failure diagnostics in an informationally isolated session, and a Ground-Truth
+      Oracle returns opaque pass/fail. Iterates until convergence or budget exhaustion. Triggers on: "evolve a skill", "generate
+      skill for", "create and test skill", "skill evolution", "co-evolutionary skill", "improve this skill", "refine skill
+      quality", "evo-skill", "auto-generate skill", "evolve skill from scratch". Use this agent when creating new skills or
+      significantly improving existing ones through automated refinement rather than manual editing. NOT for generating application
+      tests (use test-harness skill). NOT for reviewing existing code (use code-reviewer agent).'
+    path: agents/test-engineer
+    source: https://github.com/Mathews-Tom/armory/blob/main/agents/test-engineer/AGENT.md
+    model: opus
+    tags:
+    - evolution
+    - skill-generation
+    - co-evolutionary
+    - testing
+    - opus
+    category: meta
+    difficulty: advanced
   hooks:
   - name: anatomy-index
     version: 1.0.0
@@ -1440,6 +1543,23 @@ packages:
     category: development
     difficulty: beginner
   commands:
+  - name: evolve
+    version: 1.0.0
+    description: 'Co-evolutionary skill generation command. Given a task domain or research paper, generates a complete skill
+      package through automated generate-verify-refine loops. Wraps the test-engineer agent for one-shot skill creation. Supports
+      paper-to-skill conversion via arXiv URLs and optional Haiku distillation. Triggers on: "/evolve", "evolve a skill",
+      "generate skill from paper", "auto-generate skill", "create skill via evolution", "evo-skill command". Use this command
+      for streamlined skill creation rather than invoking the full test-engineer agent workflow manually. NOT for running
+      application tests (use /tdd). NOT for security scanning (use /security-scan).'
+    path: commands/evolve
+    source: https://github.com/Mathews-Tom/armory/blob/main/commands/evolve/COMMAND.md
+    tags:
+    - evolution
+    - skill-generation
+    - co-evolutionary
+    - command
+    category: meta
+    difficulty: intermediate
   - name: refactor
     version: 1.0.0
     description: 'Code simplification workflow that identifies and cleans recently modified files. Uses git diff to find changed
@@ -1677,3 +1797,21 @@ packages:
     - strict
     category: review
     difficulty: intermediate
+  - name: skill-evolution
+    version: 1.0.0
+    description: 'Skill generation and co-evolutionary refinement tools. Bundles the test-engineer agent (co-evolutionary
+      loop), surrogate-verifier (isolated assertion generation), skill-distiller (Opus-to-Haiku conversion), paper-to-skill
+      (research-to-skill pipeline), plus supporting skills (package-evaluator, immune, research-critique) and the /evolve
+      command. Installs the complete EvoSkills-inspired skill factory. Triggers on: "install skill evolution", "set up skill
+      generation", "install evo-skill tools", "skill factory preset", "co-evolutionary tools", "install skill refinement pipeline".
+      Use this preset when building an autonomous skill generation pipeline or when you want to automatically create, test,
+      and refine skill packages.'
+    path: presets/skill-evolution
+    source: https://github.com/Mathews-Tom/armory/blob/main/presets/skill-evolution/PRESET.md
+    tags:
+    - evolution
+    - skill-generation
+    - co-evolutionary
+    - pipeline
+    category: meta
+    difficulty: advanced
