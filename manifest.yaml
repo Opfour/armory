@@ -264,6 +264,25 @@ packages:
     - sprint
     category: review
     difficulty: intermediate
+  - name: env-validator
+    version: 1.0.0
+    description: 'Validates .env files and environment variable configurations against project requirements. Checks for missing
+      required variables, type mismatches, insecure defaults, unreferenced variables, and common configuration errors. Compares
+      .env against .env.example, code references, and deployment manifests. Produces a structured validation report with severity-ranked
+      findings. Triggers on: "validate env file", "check environment variables", "env file audit", "missing env vars", "env
+      validation", "check .env", "environment config check", "validate configuration", "env file review", "dotenv validation".
+      Use this skill when verifying environment configuration completeness and correctness before deployment or after onboarding.
+      NOT for secret scanning (use repo-sentinel or secret-scanner). NOT for general config file editing (use filesystem skill).'
+    path: skills/env-validator
+    source: https://github.com/Mathews-Tom/armory/blob/main/skills/env-validator/SKILL.md
+    tags:
+    - env
+    - configuration
+    - validation
+    - dotenv
+    - deployment
+    category: operations
+    difficulty: intermediate
   - name: estimate-calibrator
     version: 1.1.0
     description: 'Produces calibrated three-point estimates (best/likely/worst case) with explicit unknowns, confidence intervals,
