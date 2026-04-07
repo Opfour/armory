@@ -13,7 +13,7 @@ description:
   asking the user for clarification on theme, navigation direction, and content structure
   if not already specified.
 metadata:
-  version: 1.1.0
+  version: 1.1.1
   category: visualization
   tags: [slides, presentation, reveal-js, html]
   difficulty: intermediate

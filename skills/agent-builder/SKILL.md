@@ -10,7 +10,7 @@ description:
   control, session management, and CLI flag reference. Authentication uses existing
   ~/.claude/ config — no API keys required.
 metadata:
-  version: 1.1.0
+  version: 1.1.1
   category: development
   tags: [agent-sdk, headless, automation, mcp]
   difficulty: intermediate

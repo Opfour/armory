@@ -14,7 +14,7 @@ description:
 
   '
 metadata:
-  version: 1.1.0
+  version: 1.1.1
   category: development
   tags: [debugging, root-cause, hypothesis, bisect]
   difficulty: intermediate

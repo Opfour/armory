@@ -7,6 +7,22 @@ cases:
       - "produces MP4 or GIF output"
       - "animates the algorithm steps showing search progression"
     trigger_expected: true
+    assertions:
+      - type: output_format
+        target: code_block
+        weight: 1.0
+      - type: matches_regex
+        target: "(manim|Manim|Scene)"
+        weight: 1.0
+      - type: matches_regex
+        target: "(\\.mp4|\\.gif|MP4|GIF)"
+        weight: 0.8
+      - type: matches_regex
+        target: "(binary.search|BinarySearch)"
+        weight: 0.8
+      - type: matches_regex
+        target: "(animate|Animation|play|Play)"
+        weight: 0.6
 
   - id: data_pipeline_flow
     prompt: "Animate a data pipeline flowing from ingestion to processing to storage"
@@ -15,6 +31,19 @@ cases:
       - "creates a Manim scene with appropriate classes"
       - "shows temporal flow between pipeline stages"
     trigger_expected: true
+    assertions:
+      - type: output_format
+        target: code_block
+        weight: 1.0
+      - type: matches_regex
+        target: "(Scene|manim|Manim)"
+        weight: 1.0
+      - type: matches_regex
+        target: "(ingestion|processing|storage)"
+        weight: 0.8
+      - type: matches_regex
+        target: "(Arrow|arrow|flow|animate)"
+        weight: 0.6
 
   - id: negative_branded_product_demo
     prompt: "Create a branded product demo video with our company logo and music"

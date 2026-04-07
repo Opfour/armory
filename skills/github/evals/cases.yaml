@@ -7,6 +7,19 @@ cases:
       - "includes title and body flags with descriptive content"
       - "applies appropriate labels (e.g., bug)"
     trigger_expected: true
+    assertions:
+      - type: matches_regex
+        target: "(gh issue create|gh issue)"
+        weight: 1.0
+      - type: matches_regex
+        target: "(--title|--body|-t|-b)"
+        weight: 0.8
+      - type: matches_regex
+        target: "(--label|bug|label)"
+        weight: 0.8
+      - type: contains
+        target: "login"
+        weight: 0.6
 
   - id: check_ci_failing_pr
     prompt: "Check why CI is failing on our latest PR"
@@ -16,6 +29,19 @@ cases:
       - "identifies failing workflow or job"
       - "shows error details or suggests viewing logs"
     trigger_expected: true
+    assertions:
+      - type: matches_regex
+        target: "(gh run|gh pr checks|gh pr view)"
+        weight: 1.0
+      - type: matches_regex
+        target: "(fail|error|log)"
+        weight: 0.8
+      - type: matches_regex
+        target: "(workflow|job|check|CI)"
+        weight: 0.8
+      - type: matches_regex
+        target: "(--json|--jq|view)"
+        weight: 0.6
 
   - id: git_commit_message
     prompt: "Write a git commit message for my changes"

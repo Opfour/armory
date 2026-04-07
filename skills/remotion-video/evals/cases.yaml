@@ -9,6 +9,22 @@ cases:
       - "uses TailwindCSS or styled-components for styling with specified brand colors"
       - "includes audio sync via Remotion Audio component with the background music file"
     trigger_expected: true
+    assertions:
+      - type: contains
+        target: "Composition"
+        weight: 1.0
+      - type: matches_regex
+        target: "(useCurrentFrame|interpolate|spring)"
+        weight: 1.0
+      - type: matches_regex
+        target: "(Audio|audio)"
+        weight: 0.8
+      - type: matches_regex
+        target: "(#1A1A2E|#E94560)"
+        weight: 0.8
+      - type: matches_regex
+        target: "(tsx|jsx|React)"
+        weight: 0.6
 
   - id: data_driven_revenue_video
     prompt: >
@@ -20,6 +36,22 @@ cases:
       - "animates chart or data visualization using Remotion interpolate/spring"
       - "produces renderable video via Remotion CLI or renderMedia"
     trigger_expected: true
+    assertions:
+      - type: contains
+        target: "Composition"
+        weight: 1.0
+      - type: matches_regex
+        target: "(interpolate|spring)"
+        weight: 1.0
+      - type: matches_regex
+        target: "(chart|bar|data)"
+        weight: 0.8
+      - type: matches_regex
+        target: "(props|Props)"
+        weight: 0.6
+      - type: matches_regex
+        target: "(render|npx remotion)"
+        weight: 0.6
 
   - id: negative_math_proof_animation
     prompt: "Animate a math proof step by step showing the derivation of Euler's identity"

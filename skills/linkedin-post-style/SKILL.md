@@ -14,7 +14,7 @@ description:
 
   '
 metadata:
-  version: 1.2.1
+  version: 1.2.2
   category: review
   tags: [linkedin, social-media, writing, content]
   difficulty: intermediate

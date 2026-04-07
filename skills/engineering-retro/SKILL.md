@@ -11,7 +11,7 @@ description:
 
   '
 metadata:
-  version: 1.0.0
+  version: 1.0.1
   category: review
   tags: [retrospective, velocity, git-analysis, sprint]
   difficulty: intermediate

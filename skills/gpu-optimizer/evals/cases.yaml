@@ -7,6 +7,22 @@ cases:
       - "suggests gradient checkpointing to reduce VRAM usage"
       - "addresses VRAM management (batch size reduction, memory clearing, or accumulation)"
     trigger_expected: true
+    assertions:
+      - type: matches_regex
+        target: "(mixed precision|fp16|bf16|float16|bfloat16)"
+        weight: 1.0
+      - type: matches_regex
+        target: "(gradient checkpointing|checkpoint_sequential)"
+        weight: 0.8
+      - type: matches_regex
+        target: "(VRAM|OOM|memory|batch.size)"
+        weight: 1.0
+      - type: output_format
+        target: code_block
+        weight: 0.8
+      - type: matches_regex
+        target: "(24.?GB|RTX.?4090)"
+        weight: 0.6
 
   - id: xgboost_gpu_training
     prompt: "Speed up my XGBoost training using GPU"
@@ -16,6 +32,19 @@ cases:
       - "sets device parameter for GPU execution"
       - "addresses GPU-specific tuning (max_bin, subsample, or grow_policy)"
     trigger_expected: true
+    assertions:
+      - type: contains
+        target: "gpu_hist"
+        weight: 1.0
+      - type: matches_regex
+        target: "(device|tree_method)"
+        weight: 0.8
+      - type: output_format
+        target: code_block
+        weight: 0.8
+      - type: matches_regex
+        target: "(max_bin|subsample|grow_policy)"
+        weight: 0.6
 
   - id: sql_query_optimization
     prompt: "Optimize this SQL query for better performance"

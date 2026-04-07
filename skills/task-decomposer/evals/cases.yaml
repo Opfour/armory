@@ -9,6 +9,22 @@ cases:
       - "includes dependency mapping between tasks"
       - "includes parallelization flags indicating which tasks can run concurrently"
     trigger_expected: true
+    assertions:
+      - type: matches_regex
+        target: "(Phase 1|Phase 2|Foundation|Core)"
+        weight: 1.0
+      - type: output_format
+        target: markdown_table
+        weight: 1.0
+      - type: matches_regex
+        target: "(Dependencies|Depends|depends on)"
+        weight: 0.8
+      - type: matches_regex
+        target: "(Parallel|parallel|concurrent)"
+        weight: 0.8
+      - type: matches_regex
+        target: "(S|M|L)"
+        weight: 0.6
 
   - id: wbs_oauth2_migration
     prompt: >
@@ -20,6 +36,22 @@ cases:
       - "includes risk flags for high-impact subtasks"
       - "maps test strategy per phase or task group"
     trigger_expected: true
+    assertions:
+      - type: matches_regex
+        target: "(Edge Case|edge case)"
+        weight: 1.0
+      - type: matches_regex
+        target: "(Risk|risk)"
+        weight: 1.0
+      - type: matches_regex
+        target: "(Test|test|Unit|Integration)"
+        weight: 0.8
+      - type: output_format
+        target: markdown_table
+        weight: 0.8
+      - type: matches_regex
+        target: "(token refresh|session migration|backward)"
+        weight: 0.6
 
   - id: negative_time_estimate
     prompt: "How long will this feature take to build? Give me a time estimate for adding search."

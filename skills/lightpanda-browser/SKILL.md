@@ -10,7 +10,7 @@ description:
   memory", "how do I scrape without chromium", or any browser automation task where
   speed and resource efficiency matter more than visual fidelity.
 metadata:
-  version: 1.0.0
+  version: 1.0.1
   category: visualization
   tags: [browser, headless, scraping, lightweight]
   difficulty: beginner

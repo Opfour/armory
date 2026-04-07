@@ -11,6 +11,22 @@ cases:
       - "produces a validation scorecard with weighted scores across 6 dimensions"
       - "delivers a verdict with overall score"
     trigger_expected: true
+    assertions:
+      - type: contains
+        target: "Lean Canvas"
+        weight: 1.0
+      - type: matches_regex
+        target: "Strong|Promising|Risky|Weak"
+        weight: 1.0
+      - type: matches_regex
+        target: "\\d\\.\\d\\s*/\\s*5"
+        weight: 0.8
+      - type: contains
+        target: "Validation Scorecard"
+        weight: 0.8
+      - type: contains
+        target: "Recommended Validation Experiments"
+        weight: 0.6
 
   - id: assess_business_concept
     prompt: "Assess this business idea: an AI-powered tool that automatically generates compliance documentation for healthcare startups"
@@ -21,6 +37,22 @@ cases:
       - "produces SWOT and PESTLE analyses"
       - "scores problem-solution fit and market opportunity"
     trigger_expected: true
+    assertions:
+      - type: contains
+        target: "SWOT"
+        weight: 1.0
+      - type: contains
+        target: "PESTLE"
+        weight: 0.8
+      - type: matches_regex
+        target: "Strong|Promising|Risky|Weak"
+        weight: 0.8
+      - type: contains
+        target: "Problem-Solution Fit"
+        weight: 0.6
+      - type: matches_regex
+        target: "(?i)regulatory|compliance|legal"
+        weight: 0.6
 
   - id: evaluate_product_concept
     prompt: "Evaluate this product concept — a browser extension that summarizes terms of service agreements and flags concerning clauses for consumers"
@@ -31,6 +63,22 @@ cases:
       - "assesses technical feasibility"
       - "recommends validation experiments"
     trigger_expected: true
+    assertions:
+      - type: contains
+        target: "Lean Canvas"
+        weight: 1.0
+      - type: contains
+        target: "Competitive"
+        weight: 0.8
+      - type: contains
+        target: "Recommended Validation Experiments"
+        weight: 0.8
+      - type: matches_regex
+        target: "\\d\\.\\d\\s*/\\s*5"
+        weight: 0.6
+      - type: contains
+        target: "Revenue"
+        weight: 0.6
 
   - id: critique_business_plan
     prompt: "Critique this business plan for a subscription-based meal prep delivery service targeting remote workers"
@@ -41,6 +89,22 @@ cases:
       - "identifies competitive threats from existing meal delivery services"
       - "produces scored validation report"
     trigger_expected: true
+    assertions:
+      - type: contains
+        target: "Validation Scorecard"
+        weight: 0.8
+      - type: matches_regex
+        target: "Strong|Promising|Risky|Weak"
+        weight: 1.0
+      - type: contains
+        target: "Red Flags"
+        weight: 0.6
+      - type: contains
+        target: "Financial"
+        weight: 0.6
+      - type: contains
+        target: "Competitive"
+        weight: 0.6
 
   - id: review_idea_viability
     prompt: "Review my idea and tell me if it's viable: a marketplace connecting local craftspeople with interior designers"
@@ -51,6 +115,19 @@ cases:
       - "evaluates financial viability including marketplace take rates"
       - "delivers clear verdict with justification"
     trigger_expected: true
+    assertions:
+      - type: matches_regex
+        target: "Strong|Promising|Risky|Weak"
+        weight: 1.0
+      - type: contains
+        target: "Market Opportunity"
+        weight: 0.8
+      - type: contains
+        target: "Executive Summary"
+        weight: 0.8
+      - type: matches_regex
+        target: "\\d\\.\\d\\s*/\\s*5"
+        weight: 0.6
 
   - id: check_idea_feasibility
     prompt: "Check if this idea is feasible — building an open-source alternative to Salesforce CRM for small businesses"
@@ -61,6 +138,22 @@ cases:
       - "assesses open-source business model viability"
       - "identifies key risks and red flags"
     trigger_expected: true
+    assertions:
+      - type: contains
+        target: "Technical Feasibility"
+        weight: 0.8
+      - type: contains
+        target: "Red Flags"
+        weight: 0.8
+      - type: matches_regex
+        target: "Strong|Promising|Risky|Weak"
+        weight: 1.0
+      - type: contains
+        target: "Competitive"
+        weight: 0.6
+      - type: matches_regex
+        target: "\\d\\.\\d\\s*/\\s*5"
+        weight: 0.6
 
   - id: score_pivot_scenario
     prompt: "We're a B2B analytics tool considering pivoting to serve individual content creators instead. Score this pivot idea."
@@ -71,6 +164,19 @@ cases:
       - "evaluates market size difference and go-to-market implications"
       - "produces validation scorecard for the pivot"
     trigger_expected: true
+    assertions:
+      - type: matches_regex
+        target: "(?i)pivot"
+        weight: 1.0
+      - type: contains
+        target: "Validation Scorecard"
+        weight: 0.8
+      - type: matches_regex
+        target: "Strong|Promising|Risky|Weak"
+        weight: 0.8
+      - type: matches_regex
+        target: "B2B|B2C"
+        weight: 0.6
 
   - id: audit_business_concept
     prompt: "Audit this business concept: a peer-to-peer energy trading platform using blockchain for residential solar panel owners"
@@ -81,6 +187,22 @@ cases:
       - "assesses market readiness and timing"
       - "flags regulatory red flags"
     trigger_expected: true
+    assertions:
+      - type: contains
+        target: "PESTLE"
+        weight: 1.0
+      - type: contains
+        target: "Red Flags"
+        weight: 0.8
+      - type: matches_regex
+        target: "(?i)regulatory|legal|compliance"
+        weight: 0.8
+      - type: matches_regex
+        target: "Strong|Promising|Risky|Weak"
+        weight: 0.6
+      - type: contains
+        target: "Technical Feasibility"
+        weight: 0.6
 
   # Negative cases — should NOT trigger
 

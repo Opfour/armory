@@ -7,6 +7,22 @@ cases:
       - "detects test command and version strategy from project configuration"
       - "creates bisectable commits and opens a pull request"
     trigger_expected: true
+    assertions:
+      - type: matches_regex
+        target: "(pre-flight|preflight|pre.flight)"
+        weight: 1.0
+      - type: matches_regex
+        target: "(test|pytest|jest|cargo test)"
+        weight: 1.0
+      - type: matches_regex
+        target: "(PR|pull request|gh pr create)"
+        weight: 0.8
+      - type: matches_regex
+        target: "(version|bump|changelog)"
+        weight: 0.6
+      - type: matches_regex
+        target: "(git push|push)"
+        weight: 0.6
 
   - id: release_with_context
     prompt: "Get this feature ready to ship. Run the tests, bump the version, and create the PR."
@@ -16,6 +32,22 @@ cases:
       - "runs detected test suite and stops on failure"
       - "bumps version and updates changelog before creating PR"
     trigger_expected: true
+    assertions:
+      - type: matches_regex
+        target: "(pre-flight|clean working tree|not on.*branch)"
+        weight: 1.0
+      - type: matches_regex
+        target: "(test|pytest|jest)"
+        weight: 1.0
+      - type: matches_regex
+        target: "(version|bump)"
+        weight: 0.8
+      - type: matches_regex
+        target: "(changelog|CHANGELOG)"
+        weight: 0.6
+      - type: matches_regex
+        target: "(PR|pull request)"
+        weight: 0.8
 
   - id: deploy_to_prod
     prompt: "Deploy this to production"

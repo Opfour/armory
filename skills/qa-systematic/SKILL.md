@@ -10,7 +10,7 @@ description:
 
   '
 metadata:
-  version: 1.0.0
+  version: 1.0.1
   category: development
   tags: [qa, testing, browser, regression]
   difficulty: advanced

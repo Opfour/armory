@@ -14,7 +14,7 @@ description:
 
   '
 metadata:
-  version: 1.3.0
+  version: 1.3.1
   category: review
   tags: [quality, audit, scoring, frontmatter]
   difficulty: intermediate

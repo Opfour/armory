@@ -8,6 +8,22 @@ cases:
       - "suggests increasing overlap or semantic chunking"
       - "recommends measuring Precision@K and Recall@K"
     trigger_expected: true
+    assertions:
+      - type: matches_regex
+        target: "(retrieval|Retrieval)"
+        weight: 1.0
+      - type: contains
+        target: "overlap"
+        weight: 1.0
+      - type: matches_regex
+        target: "(Precision|Recall|MRR)"
+        weight: 0.8
+      - type: matches_regex
+        target: "(chunk|Chunk)"
+        weight: 0.8
+      - type: not_contains
+        target: "TODO"
+        weight: 0.3
 
   - id: diagnose_hallucination
     prompt: "Our RAG system retrieves relevant documents but the generated answers contain facts not in the retrieved context. How do I audit this?"
@@ -18,6 +34,22 @@ cases:
       - "suggests strengthening grounding instructions in prompt"
       - "recommends measuring hallucination rate"
     trigger_expected: true
+    assertions:
+      - type: matches_regex
+        target: "(generation|Generation)"
+        weight: 1.0
+      - type: matches_regex
+        target: "(groundedness|Groundedness|grounding)"
+        weight: 1.0
+      - type: matches_regex
+        target: "(hallucination|Hallucination)"
+        weight: 0.8
+      - type: matches_regex
+        target: "(temperature|prompt|instruction)"
+        weight: 0.6
+      - type: not_contains
+        target: "TODO"
+        weight: 0.3
 
   - id: full_pipeline_audit
     prompt: "Audit our RAG pipeline: 10K documents chunked at 1024 tokens, BAAI/bge-large embeddings, ChromaDB, K=10, Claude Sonnet for generation. We're getting inconsistent quality."
@@ -28,6 +60,25 @@ cases:
       - "addresses chunk size for the embedding model"
       - "produces structured audit approach"
     trigger_expected: true
+    assertions:
+      - type: matches_regex
+        target: "(retrieval|Retrieval)"
+        weight: 1.0
+      - type: matches_regex
+        target: "(generation|Generation)"
+        weight: 1.0
+      - type: output_format
+        target: markdown_table
+        weight: 0.8
+      - type: matches_regex
+        target: "(Precision|Recall|MRR|groundedness)"
+        weight: 0.8
+      - type: matches_regex
+        target: "(query|evaluation|test)"
+        weight: 0.6
+      - type: not_contains
+        target: "TODO"
+        weight: 0.3
 
   - id: general_architecture_audit
     prompt: "Audit the architecture of our microservices system for scalability issues."

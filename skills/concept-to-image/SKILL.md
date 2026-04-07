@@ -15,7 +15,7 @@ description:
 
   '
 metadata:
-  version: 1.2.0
+  version: 1.2.1
   category: business
   tags: [image-generation, html-to-png, svg, visual-design]
   difficulty: intermediate

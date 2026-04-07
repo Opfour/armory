@@ -10,6 +10,22 @@ cases:
       - "Withholds first-person ('I', 'my', 'me') until late in the post"
       - "Post length is 150-300 words"
     trigger_expected: true
+    assertions:
+      - type: not_contains
+        target: "!"
+        weight: 1.0
+      - type: not_contains
+        target: "incredible"
+        weight: 0.8
+      - type: not_contains
+        target: "game-changing"
+        weight: 0.8
+      - type: not_contains
+        target: "#"
+        weight: 0.6
+      - type: matches_regex
+        target: "92%|SWE-bench|1M|Gemini"
+        weight: 0.6
 
   - id: rewrite_existing_draft
     prompt: "Rewrite this for LinkedIn in my style: 'Excited to announce that our team just shipped an amazing new AI feature! It's incredible how much faster developers can code now. What do you think? #AI #DevTools #Innovation'"
@@ -20,6 +36,22 @@ cases:
       - "Preserves the core technical content (team shipped an AI feature that speeds up developer coding)"
       - "Applies informed-casual voice throughout"
     trigger_expected: true
+    assertions:
+      - type: not_contains
+        target: "Excited to announce"
+        weight: 1.0
+      - type: not_contains
+        target: "amazing"
+        weight: 0.8
+      - type: not_contains
+        target: "What do you think?"
+        weight: 0.8
+      - type: not_contains
+        target: "!"
+        weight: 0.8
+      - type: not_contains
+        target: "#AI"
+        weight: 0.6
 
   - id: experience_post
     prompt: "Draft a post about my experience using Cursor vs Claude Code for the past month. Cursor is good for small edits but Claude Code handles complex refactors better. I switched fully to Claude Code."
@@ -30,6 +62,22 @@ cases:
       - "Contains specific observations rather than generalizations"
       - "Ends with a meaning layer (broader implication or insight), not a call-to-action or audience question"
     trigger_expected: true
+    assertions:
+      - type: not_contains
+        target: "!"
+        weight: 1.0
+      - type: not_contains
+        target: "What do you think"
+        weight: 0.8
+      - type: matches_regex
+        target: "(?i)cursor|claude code"
+        weight: 0.8
+      - type: not_contains
+        target: "incredible"
+        weight: 0.6
+      - type: not_contains
+        target: "#"
+        weight: 0.6
 
   - id: generic_writing_request
     prompt: "Write a professional email to my manager about taking time off next week."

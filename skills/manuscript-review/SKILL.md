@@ -15,7 +15,7 @@ description:
 
   '
 metadata:
-  version: 1.2.1
+  version: 1.2.2
   category: review
   tags: [manuscript, pre-publication, citation-hygiene, submission]
   difficulty: advanced

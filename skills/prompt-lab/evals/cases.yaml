@@ -11,6 +11,22 @@ cases:
       - "Includes complete prompt text for each variant (not just descriptions)"
       - "Designs an evaluation rubric with weighted criteria"
     trigger_expected: true
+    assertions:
+      - type: matches_regex
+        target: "(?i)variant|version|v\\d"
+        weight: 1.0
+      - type: matches_regex
+        target: "(?i)rubric|criteria|evaluat"
+        weight: 0.8
+      - type: matches_regex
+        target: "(?i)weakness|failure|issue"
+        weight: 0.8
+      - type: matches_regex
+        target: "(?i)weight|score"
+        weight: 0.6
+      - type: matches_regex
+        target: "(?i)few.shot|chain.of.thought|direct"
+        weight: 0.6
 
   - id: design_classification_prompt
     prompt: "Design a prompt for GPT-4 to classify customer support tickets into categories: billing, technical, account, feature-request, other."
@@ -22,6 +38,22 @@ cases:
       - "Specifies success criteria (classification accuracy)"
       - "Notes target model (GPT-4) in recommendations"
     trigger_expected: true
+    assertions:
+      - type: matches_regex
+        target: "(?i)few.shot"
+        weight: 1.0
+      - type: matches_regex
+        target: "(?i)billing|technical|account|feature.request"
+        weight: 0.8
+      - type: matches_regex
+        target: "(?i)test case|edge case"
+        weight: 0.8
+      - type: matches_regex
+        target: "(?i)accuracy|success.criteria"
+        weight: 0.6
+      - type: matches_regex
+        target: "(?i)GPT-4|gpt.4"
+        weight: 0.6
 
   - id: failure_mode_analysis
     prompt: "Why does this prompt sometimes produce hallucinated facts? 'You are an expert. Answer the user's question about our product based on your knowledge.'"
@@ -33,6 +65,22 @@ cases:
       - "Generates improved variants that constrain the model to provided context"
       - "Includes test cases specifically designed to trigger hallucination"
     trigger_expected: true
+    assertions:
+      - type: matches_regex
+        target: "(?i)hallucination|grounding|context"
+        weight: 1.0
+      - type: matches_regex
+        target: "(?i)based on your knowledge"
+        weight: 0.8
+      - type: matches_regex
+        target: "(?i)RAG|retrieval|source document"
+        weight: 0.8
+      - type: matches_regex
+        target: "(?i)variant|improved"
+        weight: 0.6
+      - type: matches_regex
+        target: "(?i)test case"
+        weight: 0.6
 
   # --- Negative cases ---
 

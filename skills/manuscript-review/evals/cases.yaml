@@ -7,6 +7,22 @@ cases:
       - "checks citation hygiene (formatting, completeness, consistency)"
       - "assesses overall submission readiness"
     trigger_expected: true
+    assertions:
+      - type: matches_regex
+        target: "(?i)executive summary|quality assessment"
+        weight: 1.0
+      - type: matches_regex
+        target: "HIGH|MEDIUM|LOW"
+        weight: 0.8
+      - type: matches_regex
+        target: "(?i)publication.ready|recommend revisions|needs work"
+        weight: 0.8
+      - type: matches_regex
+        target: "(?i)citation|reference"
+        weight: 0.6
+      - type: matches_regex
+        target: "(?i)priority|checklist"
+        weight: 0.6
 
   - id: reference_consistency_check
     prompt: "Check the references in my thesis chapter for consistency"
@@ -15,6 +31,19 @@ cases:
       - "identifies citation format issues across references"
       - "checks for missing or duplicate references"
     trigger_expected: true
+    assertions:
+      - type: matches_regex
+        target: "(?i)citation|reference"
+        weight: 1.0
+      - type: matches_regex
+        target: "HIGH|MEDIUM|LOW"
+        weight: 0.8
+      - type: matches_regex
+        target: "(?i)consistency|format|style"
+        weight: 0.6
+      - type: matches_regex
+        target: "(?i)missing|duplicate|orphan"
+        weight: 0.6
 
   - id: numbers_from_code
     prompt: "Verify that the numbers in my paper come from code"

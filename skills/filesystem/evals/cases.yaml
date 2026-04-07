@@ -7,6 +7,16 @@ cases:
       - "pattern matches *.ts files"
       - "returns file paths"
     trigger_expected: true
+    assertions:
+      - type: matches_regex
+        target: "(\\*\\.ts|glob|Glob|\\.ts)"
+        weight: 1.0
+      - type: contains
+        target: "src"
+        weight: 0.8
+      - type: matches_regex
+        target: "(file|path|match)"
+        weight: 0.6
 
   - id: show_directory_tree
     prompt: "Show the directory tree of my project"
@@ -15,6 +25,16 @@ cases:
       - "uses ls or tree via Bash to list directory contents"
       - "displays hierarchical directory structure"
     trigger_expected: true
+    assertions:
+      - type: matches_regex
+        target: "(tree|ls|directory)"
+        weight: 1.0
+      - type: matches_regex
+        target: "(\\|--|├──|└──|/)"
+        weight: 0.8
+      - type: not_contains
+        target: "web search"
+        weight: 0.6
 
   - id: negative_code_refactor
     prompt: "Refactor the code in this file"

@@ -7,6 +7,22 @@ cases:
       - "produces structured concept analysis"
       - "includes multi-level summary (overview, detailed, key concepts)"
     trigger_expected: true
+    assertions:
+      - type: matches_regex
+        target: "(fetch_transcript|youtube.transcript|transcript)"
+        weight: 1.0
+      - type: matches_regex
+        target: "(Key Concept|key concept|concept)"
+        weight: 1.0
+      - type: matches_regex
+        target: "(TL;DR|summary|Summary|overview)"
+        weight: 0.8
+      - type: matches_regex
+        target: "(takeaway|Takeaway|actionable)"
+        weight: 0.6
+      - type: not_contains
+        target: "TODO"
+        weight: 0.3
 
   - id: youtube_tech_talk_takeaways
     prompt: "Summarize the key takeaways from this tech talk: https://youtu.be/abc123"
@@ -15,6 +31,19 @@ cases:
       - "identifies actionable takeaways from video content"
       - "produces structured output with clear sections"
     trigger_expected: true
+    assertions:
+      - type: matches_regex
+        target: "(takeaway|Takeaway|key point)"
+        weight: 1.0
+      - type: matches_regex
+        target: "(transcript|fetch_transcript)"
+        weight: 0.8
+      - type: matches_regex
+        target: "(##|section|Section)"
+        weight: 0.6
+      - type: not_contains
+        target: "TODO"
+        weight: 0.3
 
   - id: vimeo_video_request
     prompt: "Watch this Vimeo video and summarize it"

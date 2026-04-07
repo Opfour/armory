@@ -13,7 +13,7 @@ description:
 
   '
 metadata:
-  version: 1.0.0
+  version: 1.0.1
   status: active
   classification: tooling-wrapper
   source: https://github.com/contactjccoaching-wq/immune

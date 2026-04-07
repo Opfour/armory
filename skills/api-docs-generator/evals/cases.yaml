@@ -7,6 +7,22 @@ cases:
       - "Output adds parameter descriptions and example values"
       - "Output generates OpenAPI-compatible documentation"
     trigger_expected: true
+    assertions:
+      - type: matches_regex
+        target: "(200|404|422|500)"
+        weight: 1.0
+      - type: contains
+        target: "response"
+        weight: 1.0
+      - type: output_format
+        target: code_block
+        weight: 0.8
+      - type: matches_regex
+        target: "(example|Example)"
+        weight: 0.8
+      - type: contains
+        target: "parameter"
+        weight: 0.6
 
   - id: audit_rest_api_docs
     prompt: "Audit the documentation on our REST API"
@@ -15,6 +31,19 @@ cases:
       - "Output identifies missing or incomplete descriptions"
       - "Output checks response code coverage across endpoints"
     trigger_expected: true
+    assertions:
+      - type: matches_regex
+        target: "(missing|Missing|incomplete|Incomplete)"
+        weight: 1.0
+      - type: contains
+        target: "endpoint"
+        weight: 0.8
+      - type: matches_regex
+        target: "(response code|status code|HTTP)"
+        weight: 0.8
+      - type: matches_regex
+        target: "(description|documentation)"
+        weight: 0.6
 
   - id: negative_project_readme
     prompt: "Write a README for my project"

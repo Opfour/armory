@@ -11,7 +11,7 @@ description: >
   "/library remove", "/library profiles", "show me armory packages". Use this skill
   when discovering, installing, updating, or removing armory packages within a session.
 metadata:
-  version: 2.0.0
+  version: 2.0.1
   category: operations
   tags: [armory, catalog, install, package-management, discovery]
   difficulty: beginner

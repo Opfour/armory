@@ -12,7 +12,7 @@ description:
 
   '
 metadata:
-  version: 1.1.0
+  version: 1.1.1
   category: review
   tags: [database, migration, ddl, rollback]
   difficulty: advanced

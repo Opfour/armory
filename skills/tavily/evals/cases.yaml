@@ -7,6 +7,19 @@ cases:
       - "returns AI-ready snippets with relevant pricing information"
       - "handles search-first intent without requiring a specific URL"
     trigger_expected: true
+    assertions:
+      - type: matches_regex
+        target: "(search\\.mjs|tavily|Tavily)"
+        weight: 1.0
+      - type: matches_regex
+        target: "(pric|rate limit|cost)"
+        weight: 0.8
+      - type: matches_regex
+        target: "(https?://|url|source)"
+        weight: 0.6
+      - type: not_contains
+        target: "TAVILY_API_KEY not set"
+        weight: 0.3
 
   - id: search_react_best_practices
     prompt: "Find recent information about React Server Components best practices and patterns"
@@ -15,6 +28,19 @@ cases:
       - "performs web search via Tavily for current information"
       - "returns relevant results with source attribution"
     trigger_expected: true
+    assertions:
+      - type: matches_regex
+        target: "(search\\.mjs|tavily|Tavily)"
+        weight: 1.0
+      - type: matches_regex
+        target: "(React|Server Component)"
+        weight: 0.8
+      - type: matches_regex
+        target: "(https?://|url|source)"
+        weight: 0.6
+      - type: not_contains
+        target: "TAVILY_API_KEY not set"
+        weight: 0.3
 
   - id: negative_url_fetch
     prompt: "Fetch the content from https://docs.anthropic.com/en/api/getting-started"

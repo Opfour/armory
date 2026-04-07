@@ -7,6 +7,22 @@ cases:
       - "produces metrics including commits, files changed, and lines modified"
       - "generates a narrative summary with patterns and highlights"
     trigger_expected: true
+    assertions:
+      - type: matches_regex
+        target: "(commit|Commit)"
+        weight: 1.0
+      - type: matches_regex
+        target: "(files? changed|lines? modified|insertions|deletions)"
+        weight: 0.8
+      - type: matches_regex
+        target: "(pattern|highlight|summary|Summary)"
+        weight: 0.8
+      - type: matches_regex
+        target: "(7d|week|7 day)"
+        weight: 0.6
+      - type: matches_regex
+        target: "(metric|Metric|velocity)"
+        weight: 0.6
 
   - id: time_windowed_retro
     prompt: "/engineering-retro 30d"
@@ -16,6 +32,19 @@ cases:
       - "analyzes git history for the specified period"
       - "produces comparative metrics if prior data exists"
     trigger_expected: true
+    assertions:
+      - type: matches_regex
+        target: "(30d|30.day|month)"
+        weight: 1.0
+      - type: matches_regex
+        target: "(commit|Commit)"
+        weight: 0.8
+      - type: matches_regex
+        target: "(metric|Metric|velocity|summary)"
+        weight: 0.8
+      - type: matches_regex
+        target: "(files? changed|lines?|PR)"
+        weight: 0.6
 
   - id: code_review_request
     prompt: "Review this pull request for code quality issues"

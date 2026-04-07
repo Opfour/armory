@@ -13,7 +13,7 @@ description:
 
   '
 metadata:
-  version: 1.1.0
+  version: 1.1.1
   category: development
   tags: [estimation, pert, confidence-interval, planning]
   difficulty: intermediate

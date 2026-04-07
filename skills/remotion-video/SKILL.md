@@ -15,7 +15,7 @@ description:
 
   '
 metadata:
-  version: 1.1.0
+  version: 1.1.1
   category: business
   tags: [video, react, remotion, motion-graphics]
   difficulty: advanced

@@ -12,7 +12,7 @@ description:
 
   '
 metadata:
-  version: 1.1.0
+  version: 1.1.1
   category: content
   tags: [changelog, release-notes, git-history, versioning]
   difficulty: intermediate

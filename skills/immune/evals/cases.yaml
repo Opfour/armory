@@ -10,6 +10,22 @@ cases:
       - "recommends parameterized queries with .bind()"
       - "classifies as critical severity"
     trigger_expected: true
+    assertions:
+      - type: matches_regex
+        target: "IMMUNE v3|\\[IMMUNE\\]"
+        weight: 1.0
+      - type: matches_regex
+        target: "(?i)sql injection|SQL.*inject"
+        weight: 1.0
+      - type: matches_regex
+        target: "(?i)critical|CRITICAL"
+        weight: 0.8
+      - type: matches_regex
+        target: "(?i)parameterized|bind|prepared"
+        weight: 0.8
+      - type: matches_regex
+        target: "CORRECTED|FLAGGED"
+        weight: 0.6
 
   - id: multi_domain_scan
     prompt: >
@@ -21,6 +37,22 @@ cases:
       - "detects hardcoded API key in source code"
       - "handles multi-domain scanning (fitness + code)"
     trigger_expected: true
+    assertions:
+      - type: matches_regex
+        target: "IMMUNE v3|\\[IMMUNE\\]"
+        weight: 1.0
+      - type: matches_regex
+        target: "(?i)fitness.*code|code.*fitness"
+        weight: 0.8
+      - type: matches_regex
+        target: "(?i)hardcoded|API.?key|STRIPE"
+        weight: 0.8
+      - type: matches_regex
+        target: "CORRECTED|FLAGGED"
+        weight: 0.6
+      - type: matches_regex
+        target: "(?i)squat|sedentary|beginner"
+        weight: 0.6
 
   - id: clean_code_no_issues
     prompt: >
@@ -41,6 +73,19 @@ cases:
       - "does not flag false positives on well-written code"
       - "may identify positive strategies (prepared statements, error handling)"
     trigger_expected: true
+    assertions:
+      - type: matches_regex
+        target: "IMMUNE v3|\\[IMMUNE\\]"
+        weight: 1.0
+      - type: contains
+        target: "CLEAN"
+        weight: 0.8
+      - type: not_contains
+        target: "CRITICAL"
+        weight: 0.8
+      - type: matches_regex
+        target: "(?i)no issues|clean|no threats"
+        weight: 0.6
 
   - id: general_code_review_request
     prompt: "Review the architecture of our microservices and suggest improvements"

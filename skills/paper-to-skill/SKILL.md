@@ -14,7 +14,7 @@ description:
   research-critique or literature-review). NOT for general skill creation without
   a paper source (use test-engineer agent).'
 metadata:
-  version: 1.0.0
+  version: 1.0.1
   category: research
   tags: [paper, arxiv, research, skill-generation, methodology-extraction]
   difficulty: advanced
