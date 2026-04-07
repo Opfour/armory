@@ -79,8 +79,10 @@ def check_output_format(output: str, target: str) -> bool:
 def check_calls_tool(output: str, target: str) -> bool:
     """Check if a tool invocation appears in the output.
 
-    Detects tool calls in Claude's structured output format
-    (tool use blocks) or in plain-text references to tool names.
+    Detects tool usage through multiple signals since ``claude -p``
+    text output does not include structured tool call metadata.
+    Checks for: XML tool blocks, invoke patterns, plain-text references,
+    and tool-specific output signatures.
     """
     # Structured tool use pattern (from Claude output)
     if re.search(rf"<tool_use>.*?{re.escape(target)}.*?</tool_use>", output, re.DOTALL):
@@ -89,7 +91,25 @@ def check_calls_tool(output: str, target: str) -> bool:
     if re.search(rf'invoke name="{re.escape(target)}"', output):
         return True
     # Plain-text reference to using the tool
-    return bool(re.search(rf"\b(used?|invoke[ds]?|call(?:ed|ing)?)\s+(?:the\s+)?{re.escape(target)}\b", output, re.IGNORECASE))
+    if re.search(rf"\b(used?|invoke[ds]?|call(?:ed|ing)?|ran|running)\s+(?:the\s+)?{re.escape(target)}\b", output, re.IGNORECASE):
+        return True
+
+    # Tool-specific output signatures (heuristic for text output mode)
+    tool_signatures: dict[str, str] = {
+        "Read": r"(?:read|reading|contents of)\s+[`'\"]?[\w/.-]+\.\w+",
+        "Grep": r"(?:search|grep|found \d+ match|rg )",
+        "Glob": r"(?:glob|matching files|found \d+ files)",
+        "Bash": r"(?:```(?:bash|sh|zsh)|^\$\s|\bran\b.*\bcommand\b)",
+        "Write": r"(?:(?:writ(?:ten|e|ing)|wrote)\s+(?:to\s+|the\s+|file\s+|a\s+)*[`'\"]?[\w/.-]+\.\w+|created?\s+(?:the\s+)?(?:a\s+)?file)",
+        "Edit": r"(?:edit(?:ed|ing)\s+(?:the\s+|a\s+)?(?:file\s+)?[`'\"]?[\w/.-]+\.\w+|modif(?:ied|ying)\s+(?:the\s+)?file)",
+        "WebSearch": r"(?:search(?:ed|ing)\s+(?:the\s+)?web|web search|found.*online)",
+        "WebFetch": r"(?:fetch(?:ed|ing)\s+(?:from\s+)?https?://|retrieved.*URL)",
+        "Agent": r"(?:spawn(?:ed|ing)\s+(?:a\s+)?(?:sub)?agent|delegat(?:ed|ing)\s+to)",
+    }
+    if target in tool_signatures:
+        return bool(re.search(tool_signatures[target], output, re.IGNORECASE | re.MULTILINE))
+
+    return False
 
 
 # Dispatch table mapping assertion type strings to checker functions
