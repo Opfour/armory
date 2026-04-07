@@ -7,6 +7,19 @@ cases:
       - "Fetches the armory catalog from GitHub"
       - "Displays a table of available skills with versions"
     trigger_expected: true
+    assertions:
+      - type: output_format
+        target: markdown_table
+        weight: 1.0
+      - type: matches_regex
+        target: "(version|Version)"
+        weight: 0.8
+      - type: matches_regex
+        target: "(skill|package)"
+        weight: 0.8
+      - type: matches_regex
+        target: "(manifest|catalog|armory)"
+        weight: 0.6
 
   - id: install_specific_skill
     prompt: "Pull the code-refiner skill"
@@ -16,6 +29,19 @@ cases:
       - "Fetches the skill via sparse checkout or API"
       - "Copies to ~/.claude/skills/code-refiner/"
     trigger_expected: true
+    assertions:
+      - type: contains
+        target: "code-refiner"
+        weight: 1.0
+      - type: matches_regex
+        target: "(~/.claude/skills|install|copied)"
+        weight: 0.8
+      - type: matches_regex
+        target: "(sparse checkout|gh api|curl|fetch)"
+        weight: 0.6
+      - type: not_contains
+        target: "not found"
+        weight: 0.3
 
   - id: search_skills
     prompt: "Search armory for anything related to testing"
@@ -24,6 +50,16 @@ cases:
       - "Searches catalog names and descriptions for testing-related keywords"
       - "Returns test-harness, qa-systematic, benchmark-runner as matches"
     trigger_expected: true
+    assertions:
+      - type: matches_regex
+        target: "(test-harness|qa-systematic|benchmark)"
+        weight: 1.0
+      - type: matches_regex
+        target: "(search|match|result)"
+        weight: 0.8
+      - type: matches_regex
+        target: "(testing|test)"
+        weight: 0.6
 
   - id: sync_installed
     prompt: "Update all my installed skills to the latest versions"
@@ -32,6 +68,16 @@ cases:
       - "Scans installed skills and compares against remote catalog"
       - "Shows update plan before executing"
     trigger_expected: true
+    assertions:
+      - type: matches_regex
+        target: "(update|sync|upgrade)"
+        weight: 1.0
+      - type: matches_regex
+        target: "(version|outdated|available)"
+        weight: 0.8
+      - type: matches_regex
+        target: "(installed|local|current)"
+        weight: 0.6
 
   - id: remove_skill
     prompt: "Remove the code-refiner skill from my machine"
@@ -41,6 +87,19 @@ cases:
       - "Asks for confirmation before deleting"
       - "Removes the skill directory"
     trigger_expected: true
+    assertions:
+      - type: contains
+        target: "code-refiner"
+        weight: 1.0
+      - type: matches_regex
+        target: "(remov|delet|uninstall)"
+        weight: 1.0
+      - type: matches_regex
+        target: "(confirm|sure|proceed)"
+        weight: 0.6
+      - type: matches_regex
+        target: "(~/.claude/skills|installed)"
+        weight: 0.6
 
   # Negative triggers
   - id: neg_create_new_skill

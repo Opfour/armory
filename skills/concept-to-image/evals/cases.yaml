@@ -7,6 +7,19 @@ cases:
       - "exports as PNG file"
       - "design is self-contained without external dependencies"
     trigger_expected: true
+    assertions:
+      - type: matches_regex
+        target: "(<html|<svg|\\.html|\\.png)"
+        weight: 1.0
+      - type: matches_regex
+        target: "(PNG|png|screenshot|export)"
+        weight: 1.0
+      - type: matches_regex
+        target: "(microservice|service)"
+        weight: 0.8
+      - type: not_contains
+        target: "cdn.jsdelivr"
+        weight: 0.6
 
   - id: comparison_chart_svg
     prompt: "Export this concept as an SVG: a comparison chart of React vs Vue vs Angular"
@@ -15,6 +28,19 @@ cases:
       - "outputs SVG file format"
       - "uses HTML/CSS rendering to produce the visual"
     trigger_expected: true
+    assertions:
+      - type: matches_regex
+        target: "(SVG|svg|\\.svg)"
+        weight: 1.0
+      - type: matches_regex
+        target: "(React|Vue|Angular)"
+        weight: 0.8
+      - type: matches_regex
+        target: "(comparison|chart|table)"
+        weight: 0.8
+      - type: not_contains
+        target: "external dependency"
+        weight: 0.6
 
   - id: negative_interactive_dashboard
     prompt: "Create an interactive dashboard I can open in my browser"

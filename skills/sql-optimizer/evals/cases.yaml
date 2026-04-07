@@ -10,6 +10,22 @@ cases:
       - "flags SELECT * as anti-pattern"
       - "suggests selecting specific columns instead of SELECT *"
     trigger_expected: true
+    assertions:
+      - type: contains
+        target: "CREATE INDEX"
+        weight: 1.0
+      - type: matches_regex
+        target: "(customer_email|status)"
+        weight: 1.0
+      - type: contains
+        target: "SELECT *"
+        weight: 0.8
+      - type: matches_regex
+        target: "(composite|compound|multi.column)"
+        weight: 0.6
+      - type: matches_regex
+        target: "```sql"
+        weight: 0.6
 
   - id: n_plus_one_pattern
     prompt: >
@@ -24,6 +40,19 @@ cases:
       - "suggests single query with JOIN or subquery"
       - "explains why N+1 causes N additional database roundtrips"
     trigger_expected: true
+    assertions:
+      - type: contains
+        target: "N+1"
+        weight: 1.0
+      - type: matches_regex
+        target: "(select_related|prefetch_related)"
+        weight: 1.0
+      - type: matches_regex
+        target: "(JOIN|join|subquery)"
+        weight: 0.8
+      - type: matches_regex
+        target: "(roundtrip|query per|additional quer)"
+        weight: 0.6
 
   - id: suboptimal_join_with_explain
     prompt: >
@@ -36,6 +65,22 @@ cases:
       - "considers composite or covering index"
       - "explains cost numbers from EXPLAIN output"
     trigger_expected: true
+    assertions:
+      - type: matches_regex
+        target: "(Seq Scan|sequential scan|full table scan)"
+        weight: 1.0
+      - type: contains
+        target: "CREATE INDEX"
+        weight: 1.0
+      - type: matches_regex
+        target: "(price|created_at)"
+        weight: 0.8
+      - type: matches_regex
+        target: "(cost|45000)"
+        weight: 0.6
+      - type: matches_regex
+        target: "```sql"
+        weight: 0.6
 
   - id: function_on_indexed_column
     prompt: >
@@ -48,6 +93,22 @@ cases:
       - "suggests application-level normalization as alternative"
       - "explains why the optimizer cannot use the existing index when a function wraps the column"
     trigger_expected: true
+    assertions:
+      - type: matches_regex
+        target: "(function|UPPER|expression)"
+        weight: 1.0
+      - type: contains
+        target: "CREATE INDEX"
+        weight: 1.0
+      - type: matches_regex
+        target: "(UPPER\\(email\\)|expression index)"
+        weight: 0.8
+      - type: matches_regex
+        target: "(normaliz|lowercase|application)"
+        weight: 0.6
+      - type: matches_regex
+        target: "(optimizer|index.*bypass|cannot use)"
+        weight: 0.6
 
   - id: migration_risk_question
     prompt: "Is this ALTER TABLE safe to run in production?"

@@ -7,6 +7,19 @@ cases:
       - "makes HTTP GET request to the specified endpoint"
       - "parses and presents the JSON response"
     trigger_expected: true
+    assertions:
+      - type: matches_regex
+        target: "(curl|WebFetch)"
+        weight: 1.0
+      - type: matches_regex
+        target: "(api\\.github\\.com|github)"
+        weight: 0.8
+      - type: matches_regex
+        target: "(jq|JSON|json)"
+        weight: 0.8
+      - type: matches_regex
+        target: "(-s|-sL|silent)"
+        weight: 0.6
 
   - id: fetch_html_extract_content
     prompt: "Download the HTML from https://example.com and extract the main content"
@@ -15,6 +28,19 @@ cases:
       - "retrieves full page content from the URL"
       - "supports HTML content extraction from the response"
     trigger_expected: true
+    assertions:
+      - type: matches_regex
+        target: "(curl|WebFetch)"
+        weight: 1.0
+      - type: matches_regex
+        target: "(example\\.com|URL)"
+        weight: 0.8
+      - type: matches_regex
+        target: "(HTML|html|content)"
+        weight: 0.6
+      - type: not_contains
+        target: "TODO"
+        weight: 0.3
 
   - id: negative_web_search
     prompt: "Search the web for information about Rust async patterns and best practices"

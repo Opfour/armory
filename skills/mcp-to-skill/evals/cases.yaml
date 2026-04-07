@@ -7,6 +7,22 @@ cases:
       - "classifies tools by replacement strategy (direct, composite, skip)"
       - "generates a SKILL.md file with converted instructions"
     trigger_expected: true
+    assertions:
+      - type: contains
+        target: "SKILL.md"
+        weight: 1.0
+      - type: matches_regex
+        target: "REST_API|CLI_WRAPPER|LOGIC_PATTERN|FILE_OP|STATEFUL|COMPOSITE"
+        weight: 0.8
+      - type: matches_regex
+        target: "(?i)token|context"
+        weight: 0.6
+      - type: matches_regex
+        target: "(?i)quick reference|replacement"
+        weight: 0.6
+      - type: matches_regex
+        target: "(?i)prerequisite|install"
+        weight: 0.3
 
   - id: slim_context_mcp_tools
     prompt: "My context window is too full from MCP tools, help me slim them down"
@@ -15,6 +31,19 @@ cases:
       - "identifies high-token-cost MCP tools"
       - "recommends conversion to skills for the most impactful tools"
     trigger_expected: true
+    assertions:
+      - type: matches_regex
+        target: "(?i)token|context"
+        weight: 1.0
+      - type: matches_regex
+        target: "(?i)convert|skill|migration"
+        weight: 0.8
+      - type: matches_regex
+        target: "(?i)MCP|tool"
+        weight: 0.8
+      - type: matches_regex
+        target: "(?i)saving|reduc|reclam"
+        weight: 0.6
 
   - id: build_new_mcp_server
     prompt: "Build a new MCP server from scratch"

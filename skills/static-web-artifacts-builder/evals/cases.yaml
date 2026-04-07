@@ -9,6 +9,22 @@ cases:
       - "uses HTML5, CSS3, and inline SVG or Canvas for visualizations"
       - "requires no build toolchain — opens directly in a browser"
     trigger_expected: true
+    assertions:
+      - type: matches_regex
+        target: "(<html|<!DOCTYPE)"
+        weight: 1.0
+      - type: matches_regex
+        target: "(<svg|<canvas)"
+        weight: 1.0
+      - type: matches_regex
+        target: "(grid|Grid|flexbox|Flexbox)"
+        weight: 0.8
+      - type: not_contains
+        target: "cdn.jsdelivr"
+        weight: 0.6
+      - type: not_contains
+        target: "unpkg.com"
+        weight: 0.6
 
   - id: interactive_data_flow_diagram
     prompt: >
@@ -19,6 +35,22 @@ cases:
       - "creates interactive elements with hover, click, or drag behavior via JS"
       - "uses pure HTML/CSS/JS without framework dependencies"
     trigger_expected: true
+    assertions:
+      - type: matches_regex
+        target: "(<html|<!DOCTYPE)"
+        weight: 1.0
+      - type: matches_regex
+        target: "(<svg|<path|<line)"
+        weight: 0.8
+      - type: matches_regex
+        target: "(addEventListener|onclick|onmouse)"
+        weight: 0.8
+      - type: not_contains
+        target: "node_modules"
+        weight: 0.6
+      - type: not_contains
+        target: "import React"
+        weight: 0.6
 
   - id: negative_png_export
     prompt: "Export this chart as a PNG image file"

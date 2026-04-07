@@ -10,6 +10,25 @@ cases:
       - "includes weighted overall score with letter grade"
       - "includes prioritized recommendations in three tiers: Quick Wins, Medium-Term, Strategic"
     trigger_expected: true
+    assertions:
+      - type: matches_regex
+        target: "(S[1-5]|CRITICAL|HIGH|MEDIUM|LOW)"
+        weight: 1.0
+      - type: matches_regex
+        target: "[1-5]/5"
+        weight: 0.8
+      - type: matches_regex
+        target: "(Quick Win|Medium.Term|Strategic)"
+        weight: 0.8
+      - type: matches_regex
+        target: "(scalability|Scalability|performance|Performance|security|Security)"
+        weight: 0.8
+      - type: matches_regex
+        target: "(recommendation|Recommendation)"
+        weight: 0.6
+      - type: output_format
+        target: markdown_table
+        weight: 0.6
 
   - id: document_review_mode
     prompt: "Critique this architecture design document for our new microservices migration. We're breaking a Django monolith into 6 services connected via RabbitMQ."
@@ -21,6 +40,22 @@ cases:
       - "checks for missing concerns: data consistency, service discovery, deployment strategy"
       - "produces a scored report"
     trigger_expected: true
+    assertions:
+      - type: matches_regex
+        target: "(risk|Risk)"
+        weight: 1.0
+      - type: matches_regex
+        target: "(data consistency|service discovery|deployment)"
+        weight: 0.8
+      - type: matches_regex
+        target: "(microservice|migration)"
+        weight: 0.8
+      - type: matches_regex
+        target: "(score|Score|[1-5]/5)"
+        weight: 0.6
+      - type: matches_regex
+        target: "(finding|Finding|recommendation|Recommendation)"
+        weight: 0.6
 
   - id: enterprise_readiness_focus
     prompt: "Assess our system's enterprise readiness. We need SOC2 compliance and handle PII for 500K users."
@@ -32,6 +67,22 @@ cases:
       - "produces findings with severity classifications"
       - "includes actionable compliance recommendations"
     trigger_expected: true
+    assertions:
+      - type: contains
+        target: "SOC2"
+        weight: 1.0
+      - type: matches_regex
+        target: "(PII|personally identifiable|data protection)"
+        weight: 1.0
+      - type: matches_regex
+        target: "(S[1-5]|CRITICAL|HIGH|MEDIUM|LOW)"
+        weight: 0.8
+      - type: matches_regex
+        target: "(compliance|Compliance)"
+        weight: 0.8
+      - type: matches_regex
+        target: "(recommendation|Recommendation|remediation)"
+        weight: 0.6
 
   - id: diagram_request
     prompt: "Draw an architecture diagram of our microservices system."

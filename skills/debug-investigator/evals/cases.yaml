@@ -7,6 +7,19 @@ cases:
       - "identifies good/bad commit range boundaries"
       - "creates systematic investigation plan with ordered steps"
     trigger_expected: true
+    assertions:
+      - type: matches_regex
+        target: "(git bisect|bisect)"
+        weight: 1.0
+      - type: matches_regex
+        target: "(good|bad|known.working)"
+        weight: 0.8
+      - type: matches_regex
+        target: "(step|Step|1\\.|2\\.|3\\.)"
+        weight: 0.8
+      - type: matches_regex
+        target: "(hypothesis|Hypothesis)"
+        weight: 0.6
 
   - id: race_condition_minimal_repro
     prompt: "Help me create a minimal reproduction for this race condition in our async code"
@@ -16,6 +29,22 @@ cases:
       - "plans instrumentation points for observing async behavior"
       - "designs minimal reproduction isolating the race condition"
     trigger_expected: true
+    assertions:
+      - type: matches_regex
+        target: "(hypothesis|Hypothesis|H[1-9])"
+        weight: 1.0
+      - type: matches_regex
+        target: "(race condition|concurrency|async|lock)"
+        weight: 1.0
+      - type: matches_regex
+        target: "(instrumentation|logging|trace|observe)"
+        weight: 0.8
+      - type: matches_regex
+        target: "(minimal repro|reproduction|isolat)"
+        weight: 0.8
+      - type: matches_regex
+        target: "(confirm|refute|test)"
+        weight: 0.6
 
   - id: abstract_tradeoff_reasoning
     prompt: "Think through the trade-offs of using PostgreSQL vs MongoDB for our use case"

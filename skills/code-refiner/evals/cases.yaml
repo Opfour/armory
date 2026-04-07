@@ -20,6 +20,22 @@ cases:
       - "preserves exact behavior including both ValueError raises and handle_a/handle_b dispatch"
       - "explains the refactoring approach applied"
     trigger_expected: true
+    assertions:
+      - type: output_format
+        target: code_block
+        weight: 1.0
+      - type: matches_regex
+        target: "(guard clause|early return)"
+        weight: 0.8
+      - type: contains
+        target: "ValueError"
+        weight: 1.0
+      - type: contains
+        target: "handle_a"
+        weight: 0.8
+      - type: not_contains
+        target: "TODO"
+        weight: 0.6
 
   - id: cleanup_before_pr
     prompt: "Clean up this code before I PR it"
@@ -29,6 +45,19 @@ cases:
       - "applies DRY principles to reduce duplication"
       - "produces cleaner output with improved readability"
     trigger_expected: true
+    assertions:
+      - type: matches_regex
+        target: "(anti.pattern|code smell|duplication|DRY|dead code)"
+        weight: 1.0
+      - type: matches_regex
+        target: "(refactor|simplif|clean)"
+        weight: 0.8
+      - type: output_format
+        target: code_block
+        weight: 0.8
+      - type: not_contains
+        target: "TODO"
+        weight: 0.6
 
   - id: negative_debug_wrong_result
     prompt: "Debug why this function returns the wrong result"

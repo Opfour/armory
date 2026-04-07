@@ -7,6 +7,22 @@ cases:
       - "Output uses SVG or CSS Grid for layout"
       - "Output includes connection lines or arrows between components"
     trigger_expected: true
+    assertions:
+      - type: matches_regex
+        target: "(<html|<HTML|\\.html)"
+        weight: 1.0
+      - type: matches_regex
+        target: "(<svg|SVG|svg)"
+        weight: 0.8
+      - type: contains
+        target: "API Gateway"
+        weight: 0.8
+      - type: matches_regex
+        target: "(connection|arrow|line|path)"
+        weight: 0.8
+      - type: not_contains
+        target: "external dependency"
+        weight: 0.6
 
   - id: aws_deployment_diagram
     prompt: "Draw a deployment diagram showing our AWS infrastructure"
@@ -15,6 +31,19 @@ cases:
       - "Output shows containment hierarchy (e.g., VPC > Subnet > Instance)"
       - "Output uses color-coded legends to distinguish component types"
     trigger_expected: true
+    assertions:
+      - type: matches_regex
+        target: "(<html|<HTML|\\.html)"
+        weight: 1.0
+      - type: matches_regex
+        target: "(VPC|Subnet|EC2|AWS|Region)"
+        weight: 0.8
+      - type: matches_regex
+        target: "(legend|Legend|color)"
+        weight: 0.6
+      - type: matches_regex
+        target: "(container|zone|hierarchy|nested)"
+        weight: 0.6
 
   - id: negative_architecture_review
     prompt: "Review the architecture of our system for flaws"
