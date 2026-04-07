@@ -8,7 +8,7 @@ description:
   XGBoost GPU acceleration, CuPy/cuDF migration, vectorization, torch.compile, and
   diagnostics. NVIDIA GPUs only. PyTorch, XGBoost, and RAPIDS frameworks.
 metadata:
-  version: 1.1.0
+  version: 1.1.1
   category: data
   tags: [gpu, cuda, vram, pytorch]
   difficulty: advanced

@@ -15,7 +15,7 @@ description:
 
   '
 metadata:
-  version: 1.0.0
+  version: 1.0.1
   category: research
   tags: [market-sizing, tam-sam-som, trends, industry]
   difficulty: intermediate

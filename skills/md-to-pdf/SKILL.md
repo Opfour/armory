@@ -14,7 +14,7 @@ description: 'Convert Markdown files to professionally styled PDF documents with
   '
 license: MIT. See LICENSE.txt for complete terms.
 metadata:
-  version: 1.2.0
+  version: 1.2.1
   category: visualization
   tags: [pdf, markdown, mermaid, latex]
   difficulty: intermediate

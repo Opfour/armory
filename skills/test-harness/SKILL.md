@@ -12,7 +12,7 @@ description:
 
   '
 metadata:
-  version: 1.1.0
+  version: 1.1.1
   category: development
   tags: [testing, pytest, test-generation, python]
   difficulty: intermediate

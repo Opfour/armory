@@ -15,7 +15,7 @@ description:
 
   '
 metadata:
-  version: 1.0.0
+  version: 1.0.1
   complements: [market-analyzer, tavily, web-fetch]
   category: business
   tags: [competitive-analysis, market, porters-five-forces, positioning]

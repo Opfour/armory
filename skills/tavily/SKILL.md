@@ -11,7 +11,7 @@ description:
 
   '
 metadata:
-  version: 1.1.0
+  version: 1.1.1
   category: research
   tags: [web-search, research, real-time, ai-optimized]
   difficulty: beginner

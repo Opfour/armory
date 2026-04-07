@@ -13,7 +13,7 @@ description:
   NOT for secret scanning (use repo-sentinel or secret-scanner). NOT for general
   config file editing (use filesystem skill).'
 metadata:
-  version: 1.0.0
+  version: 1.0.1
   category: operations
   tags: [env, configuration, validation, dotenv, deployment]
   difficulty: intermediate

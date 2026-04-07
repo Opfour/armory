@@ -14,7 +14,7 @@ description: 'Architecture reviews across 7 dimensions: structural integrity, sc
 
   '
 metadata:
-  version: 1.1.0
+  version: 1.1.1
   category: review
   tags: [architecture, scalability, enterprise, security-audit]
   difficulty: advanced

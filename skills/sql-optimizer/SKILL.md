@@ -11,7 +11,7 @@ description:
 
   '
 metadata:
-  version: 1.1.0
+  version: 1.1.1
   category: data
   tags: [sql, performance, database, optimization]
   difficulty: intermediate

@@ -13,7 +13,7 @@ description:
 
   '
 metadata:
-  version: 1.0.0
+  version: 1.0.1
   category: review
   tags: [writing, ai-detection, natural-language, rewriting]
   difficulty: intermediate

@@ -14,7 +14,7 @@ description:
   general code simplification (use code-refiner). NOT for prompt optimization (use
   prompt-lab).'
 metadata:
-  version: 1.0.0
+  version: 1.0.1
   category: development
   tags: [distillation, cross-model, optimization, haiku, deterministic]
   difficulty: advanced

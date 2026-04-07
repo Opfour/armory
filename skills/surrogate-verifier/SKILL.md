@@ -14,7 +14,7 @@ description:
   package metadata evaluation (use package-evaluator). NOT for test suite generation
   for application code (use test-harness).'
 metadata:
-  version: 1.0.0
+  version: 1.0.1
   category: review
   tags: [verification, assertions, testing, co-evolution, diagnostics, eval]
   difficulty: advanced
