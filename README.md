@@ -1,6 +1,6 @@
 # armory
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE) [![packages: 104](https://img.shields.io/badge/packages-104-informational)](manifest.yaml) [![evals: 100%](https://img.shields.io/badge/eval_coverage-100%25-success)](skills/) [![catalog](https://img.shields.io/badge/catalog-browse_packages-58a6ff)](https://mathews-tom.github.io/armory/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE) [![packages: 106](https://img.shields.io/badge/packages-106-informational)](manifest.yaml) [![evals: 100%](https://img.shields.io/badge/eval_coverage-100%25-success)](skills/) [![catalog](https://img.shields.io/badge/catalog-browse_packages-58a6ff)](https://mathews-tom.github.io/armory/)
 
 Curated, production-grade skills, agents, hooks, rules, commands, utilities, and presets for AI coding agents. No magic, no demos — battle-tested workflows built for developers who use AI seriously.
 
@@ -43,6 +43,7 @@ Orchestrator agents compose skills and other agents into multi-phase workflows. 
 | [code-reviewer](agents/code-reviewer/)         | sonnet | Multi-phase code review with severity-ranked findings |
 | [security-reviewer](agents/security-reviewer/) | sonnet | OWASP Top 10 vulnerability scanning                   |
 | [secret-scanner](agents/secret-scanner/)       | haiku  | Pre-commit detection of hardcoded credentials         |
+| [test-engineer](agents/test-engineer/)         | sonnet | Co-evolutionary skill evolution with generate-verify-refine loops |
 
 ### Skills — Development & Tooling
 
@@ -60,6 +61,7 @@ Orchestrator agents compose skills and other agents into multi-phase workflows. 
 | [web-fetch](skills/web-fetch/)                   | Web content fetching via curl and WebFetch — replaces the Fetch MCP server with native HTTP operations and jq parsing                                       |
 | [lightpanda-browser](skills/lightpanda-browser/) | Lightweight headless browser automation via Lightpanda + agent-browser CDP — 9x lower memory, 11x faster, for scraping, DOM extraction, and form automation |
 | [skill-library](skills/skill-library/)           | Agent-native catalog for browsing, installing, updating, syncing, and removing armory skills from within a Claude Code session                              |
+| [env-validator](skills/env-validator/)           | Validate `.env` files against project requirements — missing vars, type mismatches, insecure defaults, `.env.example` drift                                 |
 
 ### Skills — Research & Analysis
 
@@ -145,6 +147,14 @@ Orchestrator agents compose skills and other agents into multi-phase workflows. 
 | [humanize](skills/humanize/)                       | Detect and remove AI-generated writing patterns — 24 lexical patterns + 12 statistical signals, 6 domain profiles, 5-phase pipeline with semantic preservation      |
 | [linkedin-post-style](skills/linkedin-post-style/) | Write LinkedIn posts in a specific technical voice with visual companion support — carousels via md-to-pdf, images via concept-to-image, video via concept-to-video |
 
+### Skills — Skill Evolution (EvoSkills)
+
+| Skill                                                  | Description                                                                                                       |
+| ------------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------- |
+| [paper-to-skill](skills/paper-to-skill/)               | Convert research papers into executable skill packages via methodology extraction and co-evolutionary refinement |
+| [skill-distiller](skills/skill-distiller/)             | Distill Opus-quality skill packages into deterministic, Haiku-executable workflows via trace-driven distillation |
+| [surrogate-verifier](skills/surrogate-verifier/)       | Information-isolated verification generating structured test assertions and failure diagnostics for skills        |
+
 ### Skills — Deprecated
 
 Skills below are superseded by base model capabilities. They remain installable but receive no further updates.
@@ -162,6 +172,7 @@ Skills below are superseded by base model capabilities. They remain installable 
 | [commit-standards](rules/commit-standards/)     | Conventional commit format, branch naming      |
 | [test-standards](rules/test-standards/)         | Coverage thresholds, test quality requirements |
 | [security-standards](rules/security-standards/) | Secret management, input validation, auth      |
+| [token-efficiency](rules/token-efficiency/)     | Token-efficient tool usage patterns            |
 
 ## Commands
 
@@ -170,14 +181,18 @@ Skills below are superseded by base model capabilities. They remain installable 
 | [tdd](commands/tdd/)                     | Test-driven development workflow |
 | [security-scan](commands/security-scan/) | Security vulnerability audit     |
 | [refactor](commands/refactor/)           | Code simplification workflow     |
+| [evolve](commands/evolve/)               | Co-evolutionary skill generation |
 
 ## Hooks
 
-| Hook                                      | Description                    |
-| ----------------------------------------- | ------------------------------ |
-| [git-protection](hooks/git-protection/)   | Block dangerous git operations |
-| [pre-edit-backup](hooks/pre-edit-backup/) | Backup files before edits      |
-| [cost-tracker](hooks/cost-tracker/)       | Log session cost/token usage   |
+| Hook                                      | Description                                          |
+| ----------------------------------------- | ---------------------------------------------------- |
+| [git-protection](hooks/git-protection/)   | Block dangerous git operations                       |
+| [pre-edit-backup](hooks/pre-edit-backup/) | Backup files before edits                            |
+| [cost-tracker](hooks/cost-tracker/)       | Log session cost/token usage                         |
+| [anatomy-index](hooks/anatomy-index/)     | Maintain project file index with token estimates     |
+| [read-dedup](hooks/read-dedup/)           | Warn on duplicate file reads within a session        |
+| [prompt-context](hooks/prompt-context/)   | Inject text file as additionalContext on every prompt |
 
 ## Utilities
 
@@ -197,6 +212,8 @@ Presets install curated bundles of passive packages (rules, hooks, commands) in 
 | [sec-strict](presets/sec-strict/)       | 5 skills, 3 agents, 2 rules, 2 hooks, 1 command  | Audit-grade security stack with codebase-auditor. Superset of `core`.                           |
 | [python-strict](presets/python-strict/) | 4 skills, 2 agents, 3 rules, 2 hooks, 2 commands | Full Python enforcement — TDD, type checking, test coverage, security standards.                |
 | [ai-builder](presets/ai-builder/)       | 6 skills                                         | AI/ML development toolkit — agent building, prompt engineering, GPU optimization, RAG auditing. |
+| [skill-evolution](presets/skill-evolution/) | 6 skills, 1 agent, 1 command               | EvoSkills pipeline — co-evolutionary skill factory with paper-to-skill, distillation, and verification. |
+| [terse-mode](presets/terse-mode/)       | 1 hook                                           | Terse output enforcement via prompt-context hook with compaction-immune rule injection.          |
 
 ### Deprecated Presets
 
@@ -293,7 +310,7 @@ Packages activate when Claude detects a matching intent. Each package defines tr
 /refactor src/utils.py     -> code simplification
 ```
 
-**Hooks** fire automatically on Claude Code lifecycle events (PreToolUse, PostToolUse, Stop, SessionStart). **Rules** load as context when relevant. **Presets** install bundles via `just install-profile`.
+**Hooks** fire automatically on Claude Code lifecycle events (PreToolUse, PostToolUse, Stop, UserPromptSubmit). **Rules** load as context when relevant. **Presets** install bundles via `just install-profile`.
 
 ---
 
