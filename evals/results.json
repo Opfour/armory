@@ -1,0 +1,111 @@
+{
+  "timestamp": "2026-04-08T01:11:33Z",
+  "total_packages": 1,
+  "packages": [
+    {
+      "package_name": "devils-advocate",
+      "package_path": "skills/devils-advocate",
+      "total_cases": 5,
+      "passed": 5,
+      "failed": 0,
+      "skipped": 0,
+      "aggregate_score": 1.0,
+      "case_results": [
+        {
+          "case_id": "challenge_ai_plan",
+          "prompt": "I asked Claude to design a microservices architecture for our e-commerce platform. It proposed 6 services communicating via RabbitMQ, a shared PostgreSQL database, and JWT auth. Challenge this plan \u2014 what could go wrong?",
+          "trigger_expected": true,
+          "oracle_verdict": "pass",
+          "weighted_score": 1.0,
+          "assertion_details": [
+            {
+              "type": "matches_regex",
+              "target": "(?i)(strength|solid|reasonable|gets right|makes sense|good|well.thought)",
+              "passed": true,
+              "weight": 1.0,
+              "detail": "passed"
+            },
+            {
+              "type": "matches_regex",
+              "target": "(?i)(ship|verdict|recommend|conclusion|assessment|overall)",
+              "passed": true,
+              "weight": 0.8,
+              "detail": "passed"
+            },
+            {
+              "type": "matches_regex",
+              "target": "(?i)(critical|high|medium|severity|concern|risk|issue)",
+              "passed": true,
+              "weight": 0.8,
+              "detail": "passed"
+            },
+            {
+              "type": "matches_regex",
+              "target": "(?i)(pre.mortem|inversion|socratic|blind spot|assumption|failure mode)",
+              "passed": true,
+              "weight": 0.6,
+              "detail": "passed"
+            }
+          ],
+          "execution_time_ms": 96311,
+          "error": null
+        },
+        {
+          "case_id": "challenge_code_implementation",
+          "prompt": "I just wrote an authentication middleware that validates JWTs on every request, stores refresh tokens in localStorage, and returns detailed error messages including stack traces when auth fails. Run devil's advocate on this approach.",
+          "trigger_expected": true,
+          "oracle_verdict": "pass",
+          "weighted_score": 1.0,
+          "assertion_details": [
+            {
+              "type": "matches_regex",
+              "target": "(?i)(localStorage|storage|XSS|cookie|httpOnly)",
+              "passed": true,
+              "weight": 0.8,
+              "detail": "passed"
+            },
+            {
+              "type": "matches_regex",
+              "target": "(?i)(stack trace|error message|information leak|exposure|verbose)",
+              "passed": true,
+              "weight": 0.8,
+              "detail": "passed"
+            }
+          ],
+          "execution_time_ms": 82212,
+          "error": null
+        },
+        {
+          "case_id": "negative_code_writing",
+          "prompt": "Explain the difference between authentication and authorization.",
+          "trigger_expected": false,
+          "oracle_verdict": "pass",
+          "weighted_score": 1.0,
+          "assertion_details": [],
+          "execution_time_ms": 14984,
+          "error": null
+        },
+        {
+          "case_id": "negative_general_question",
+          "prompt": "What is the difference between REST and GraphQL?",
+          "trigger_expected": false,
+          "oracle_verdict": "pass",
+          "weighted_score": 1.0,
+          "assertion_details": [],
+          "execution_time_ms": 29190,
+          "error": null
+        },
+        {
+          "case_id": "negative_implementation_request",
+          "prompt": "Fix the bug in the payment processing module.",
+          "trigger_expected": false,
+          "oracle_verdict": "pass",
+          "weighted_score": 1.0,
+          "assertion_details": [],
+          "execution_time_ms": 22315,
+          "error": null
+        }
+      ]
+    }
+  ]
+}
