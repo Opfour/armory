@@ -235,6 +235,25 @@ packages:
     - supply-chain
     category: review
     difficulty: intermediate
+  - name: devils-advocate
+    version: 1.0.0
+    description: 'Challenges AI-generated plans, code, designs, and decisions before you commit. Pairs with any other skill
+      as a review layer. Uses pre-mortem analysis, inversion thinking, and Socratic questioning to find what AI missed — blind
+      spots, hidden assumptions, failure modes, and optimistic shortcuts. The skill that asks "are you sure about that?" so
+      you don''t have to. Triggers on: "challenge this", "devils advocate", "stress test this plan", "what could go wrong",
+      "poke holes in this", "review this critically", "second opinion on this design", "what am I missing". Use this skill
+      when you need critical review of any AI-generated output, architecture decision, implementation plan, or code before
+      committing to it.'
+    path: skills/devils-advocate
+    source: https://github.com/Mathews-Tom/armory/blob/main/skills/devils-advocate/SKILL.md
+    tags:
+    - review
+    - critical-thinking
+    - blind-spots
+    - decision-review
+    - pre-mortem
+    category: review
+    difficulty: intermediate
   - name: doc-condenser
     version: 1.1.1
     description: 'DEPRECATED: The base model handles document condensation and summarization natively at high quality. This
@@ -1047,6 +1066,26 @@ packages:
     - pdf
     category: visualization
     difficulty: beginner
+  - name: ux-expert
+    version: 1.0.0
+    description: 'UX design expert for auditing and redesigning pages, dashboards, and data-heavy interfaces. Conducts 4-phase
+      collaborative reviews: understand current state and user tasks, audit across 8 UX dimensions (information architecture,
+      visual hierarchy, screen real estate, interaction cost, cognitive load, context orientation, data presentation, responsiveness),
+      propose layout concepts with rationale, and spec actionable implementation details with wireframes and component recommendations.
+      Specializes in B2B SaaS, dashboards, analytics, and data-dense applications. Triggers on: "review UX", "audit this page",
+      "redesign the dashboard", "UX review", "improve the layout", "fix the information hierarchy", "component recommendations",
+      "dashboard UX audit". Use this skill when a page or interface needs professional UX evaluation, layout redesign, or
+      component selection guidance grounded in UX principles and cognitive psychology.'
+    path: skills/ux-expert
+    source: https://github.com/Mathews-Tom/armory/blob/main/skills/ux-expert/SKILL.md
+    tags:
+    - ux
+    - dashboard
+    - audit
+    - redesign
+    - b2b-saas
+    category: review
+    difficulty: intermediate
   - name: web-fetch
     version: 1.1.1
     description: 'Web content fetching and URL retrieval via curl and WebFetch — replaces the Fetch MCP server (fetch_html,
