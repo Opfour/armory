@@ -1491,6 +1491,25 @@ packages:
     - pre-edit
     category: operations
     difficulty: beginner
+  - name: prompt-context
+    version: 1.0.0
+    description: 'Injects a text file into every prompt as additionalContext via the UserPromptSubmit event. Reads from project-level
+      .claude/prompt-context.txt first, falling back to ~/.claude/prompt-context.txt. Fail-open: missing or unreadable files
+      exit 0 silently rather than blocking input. Use this hook to enforce output styles, inject project reminders, prime
+      roles, or apply constraints that survive context compaction — the injection lands adjacent to the user prompt on every
+      turn, the highest-attention slot in the context window.'
+    path: hooks/prompt-context
+    source: https://github.com/Mathews-Tom/armory/blob/main/hooks/prompt-context/HOOK.md
+    events:
+    - UserPromptSubmit
+    tags:
+    - context
+    - prompt
+    - style
+    - injection
+    - compaction-immune
+    category: operations
+    difficulty: beginner
   - name: read-dedup
     version: 1.0.0
     description: Detects and warns about duplicate file reads within a Claude Code session. Fires on PreToolUse for the Read
@@ -1854,3 +1873,19 @@ packages:
     - pipeline
     category: meta
     difficulty: advanced
+  - name: terse-mode
+    version: 1.0.0
+    description: Enforces terse, no-narration output from Claude Code. Bundles the prompt-context hook with a curated terse
+      rules file that strips hedging, praise, soft language, meta-commentary, engagement phrases, and unsolicited offers from
+      every response. Use this preset when you want action-only output without preambles, postambles, or trailing questions
+      — code over prose, facts over hedging, stop at the information boundary.
+    path: presets/terse-mode
+    source: https://github.com/Mathews-Tom/armory/blob/main/presets/terse-mode/PRESET.md
+    tags:
+    - terse
+    - concise
+    - style
+    - output
+    - verbosity
+    category: operations
+    difficulty: beginner

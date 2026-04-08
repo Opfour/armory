@@ -22,6 +22,7 @@ from rich.prompt import Prompt
 from rich.table import Table
 
 from scripts.frontmatter import extract_body, extract_version, parse_frontmatter
+from scripts.hooks_installer import install_hook as _install_hook_to_settings
 from scripts.package_types import (
     MANIFEST_PATH,
     REPO_ROOT,
@@ -382,7 +383,107 @@ def install_utility(source: Path, target: Path, pkg_type: PackageType) -> int:
     return count
 
 
-def install_package(plan: InstallPlan) -> int:
+def install_hook(source: Path, target: Path, claude_dir: Path) -> int:
+    """Install a hook package — copy files and register in settings.json."""
+    _install_hook_to_settings(source, claude_dir)
+    # Count handler files that were copied (HOOK.md excluded by hooks_installer)
+    target_dir = claude_dir / "hooks" / target.name
+    return sum(1 for f in target_dir.rglob("*") if f.is_file()) if target_dir.exists() else 0
+
+
+def resolve_preset_packages(
+    source_path: Path, pkg_type: PackageType,
+) -> dict[str, list[str]]:
+    """Read a preset's PRESET.md and return {type_key: [package_names]}.
+
+    The preset frontmatter has:
+      preset:
+        packages:
+          skills: [{name: x}, ...]
+          hooks: [{name: y}, ...]
+    """
+    def_file = source_path / pkg_type.definition_file
+    content = def_file.read_text(encoding="utf-8")
+    meta = parse_frontmatter(content)
+    preset_meta = meta.get("preset", {})
+    packages_meta = preset_meta.get("packages", {})
+
+    result: dict[str, list[str]] = {}
+    for section, entries in packages_meta.items():
+        # section is e.g. "skills", "hooks" — map to type key
+        type_key = _section_to_type_key(section)
+        if type_key and isinstance(entries, list):
+            names = [e["name"] for e in entries if isinstance(e, dict) and "name" in e]
+            if names:
+                result[type_key] = names
+    return result
+
+
+def install_preset(
+    plan: InstallPlan, claude_dir: Path,
+) -> tuple[int, list[str]]:
+    """Install a preset — copy directory, then transitively install bundled packages.
+
+    Returns (file_count, list of sub-package install messages).
+    """
+    pkg = plan.package
+    file_count = copy_package(pkg.source_path, plan.target_path)
+    messages: list[str] = []
+
+    # Resolve bundled packages
+    bundled = resolve_preset_packages(pkg.source_path, pkg.pkg_type)
+    if not bundled:
+        return file_count, messages
+
+    # Discover all available packages for resolution
+    all_packages = discover_packages()
+    pkg_index: dict[tuple[str, str], PackageInfo] = {
+        (p.pkg_type.key, p.name): p for p in all_packages
+    }
+
+    for type_key, names in bundled.items():
+        for name in names:
+            sub_pkg = pkg_index.get((type_key, name))
+            if sub_pkg is None:
+                messages.append(
+                    f"  [yellow]Warning: preset references {type_key}/{name} but it was not found[/yellow]"
+                )
+                continue
+
+            install_dir = claude_dir / sub_pkg.pkg_type.install_subdir
+            if sub_pkg.pkg_type.key in BODY_ONLY_TYPES:
+                target = install_dir / f"{name}.md"
+            else:
+                target = install_dir / name
+
+            installed_ver = get_installed_version(install_dir, name, sub_pkg.pkg_type)
+
+            # Skip if already at same or newer version
+            if installed_ver is not None and not is_newer(sub_pkg.version, installed_ver):
+                messages.append(
+                    f"  [dim]{type_key}/{name} v{installed_ver} already installed[/dim]"
+                )
+                continue
+
+            sub_plan = InstallPlan(
+                package=sub_pkg,
+                action=InstallAction.UPGRADE if installed_ver else InstallAction.INSTALL,
+                installed_version=installed_ver,
+                target_path=target,
+            )
+            sub_count = install_package(sub_plan, claude_dir)
+            file_count += sub_count
+            action_word = "Upgraded" if installed_ver else "Installed"
+            type_color = TYPE_COLORS.get(type_key, "white")
+            messages.append(
+                f"  {action_word} [{type_color}]{type_key}[/] "
+                f"[cyan]{name}[/cyan] v{sub_pkg.version} ({sub_count} files)"
+            )
+
+    return file_count, messages
+
+
+def install_package(plan: InstallPlan, claude_dir: Path | None = None) -> int:
     """Install a single package according to its type. Returns file count."""
     pkg = plan.package
     key = pkg.pkg_type.key
@@ -391,7 +492,9 @@ def install_package(plan: InstallPlan) -> int:
         return install_body_only(pkg.source_path, plan.target_path, pkg.pkg_type)
     if key == "utility":
         return install_utility(pkg.source_path, plan.target_path, pkg.pkg_type)
-    # skill, agent, hook, preset — copy full directory
+    if key == "hook" and claude_dir is not None:
+        return install_hook(pkg.source_path, plan.target_path, claude_dir)
+    # skill, agent, preset (without resolution) — copy full directory
     return copy_package(pkg.source_path, plan.target_path)
 
 
@@ -402,8 +505,13 @@ _ACTION_LABELS: dict[InstallAction, str] = {
 }
 
 
-def execute_plans(plans: list[InstallPlan], selected: list[int]) -> None:
+def execute_plans(
+    plans: list[InstallPlan], selected: list[int], claude_dir: Path | None = None,
+) -> None:
     """Execute selected installation plans."""
+    if claude_dir is None:
+        claude_dir = DEFAULT_CLAUDE_DIR
+
     to_install = [plans[i] for i in selected if plans[i].action != InstallAction.SKIP]
 
     if not to_install:
@@ -415,7 +523,13 @@ def execute_plans(plans: list[InstallPlan], selected: list[int]) -> None:
 
         for plan in to_install:
             progress.update(task, description=f"Installing {plan.package.name}...")
-            file_count = install_package(plan)
+
+            if plan.package.pkg_type.key == "preset":
+                file_count, sub_messages = install_preset(plan, claude_dir)
+            else:
+                file_count = install_package(plan, claude_dir)
+                sub_messages = []
+
             progress.advance(task)
             label = _ACTION_LABELS.get(plan.action, "Installed")
             console.print(
@@ -424,6 +538,8 @@ def execute_plans(plans: list[InstallPlan], selected: list[int]) -> None:
                 f"[cyan]{plan.package.name}[/cyan] "
                 f"v{plan.package.version} ({file_count} files)"
             )
+            for msg in sub_messages:
+                console.print(msg)
 
     # Summary
     console.print()
@@ -733,7 +849,7 @@ def main() -> int:
         return 0
 
     # Execute
-    execute_plans(plans, selected_actionable)
+    execute_plans(plans, selected_actionable, claude_dir)
     return 0
 
 

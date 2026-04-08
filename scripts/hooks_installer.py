@@ -13,7 +13,6 @@ if str(_REPO_ROOT) not in sys.path:
     sys.path.insert(0, str(_REPO_ROOT))
 
 from scripts.frontmatter import parse_frontmatter
-from scripts.package_types import REPO_ROOT
 
 
 def install_hook(hook_dir: Path, claude_dir: Path) -> None:
