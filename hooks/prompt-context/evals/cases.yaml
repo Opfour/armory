@@ -1,0 +1,57 @@
+cases:
+  - id: injects_global_context
+    prompt: "Send a prompt in a session with ~/.claude/prompt-context.txt configured"
+    fixtures: []
+    rubric:
+      - "Hook should fire on UserPromptSubmit event"
+      - "Content of prompt-context.txt should appear in additionalContext"
+      - "Hook should output valid JSON with hookSpecificOutput.hookEventName set to UserPromptSubmit"
+    trigger_expected: true
+
+  - id: project_overrides_global
+    prompt: "Send a prompt in a project that has .claude/prompt-context.txt while a global one also exists"
+    fixtures: []
+    rubric:
+      - "Hook should use the project-level file, not the global one"
+      - "Only project-level content should appear in additionalContext"
+    trigger_expected: true
+
+  - id: fail_open_no_file
+    prompt: "Send a prompt when no prompt-context.txt exists anywhere"
+    fixtures: []
+    rubric:
+      - "Hook should exit 0 with no output"
+      - "User prompt should not be blocked"
+      - "No error should be emitted to stderr"
+    trigger_expected: true
+
+  - id: fail_open_unreadable
+    prompt: "Send a prompt when prompt-context.txt exists but has no read permission"
+    fixtures: []
+    rubric:
+      - "Hook should exit 0 with no output"
+      - "User prompt should not be blocked"
+    trigger_expected: true
+
+  - id: no_trigger_on_tool_use
+    prompt: "Claude uses the Read tool to inspect a file"
+    fixtures: []
+    rubric:
+      - "Hook should not fire on PreToolUse or PostToolUse events"
+      - "Hook only fires on UserPromptSubmit"
+    trigger_expected: false
+
+  - id: no_trigger_on_stop
+    prompt: "Claude finishes a response and the session emits a Stop event"
+    fixtures: []
+    rubric:
+      - "Hook should not fire on Stop events"
+    trigger_expected: false
+
+  - id: survives_compaction
+    prompt: "Send a prompt after /compact has summarized earlier messages"
+    fixtures: []
+    rubric:
+      - "Hook should re-inject the full content of prompt-context.txt"
+      - "Content should not be affected by prior context compaction"
+    trigger_expected: true
