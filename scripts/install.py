@@ -456,6 +456,13 @@ def install_preset(
             else:
                 target = install_dir / name
 
+            # Skip symlinked packages (externally managed)
+            if sub_pkg.pkg_type.key not in BODY_ONLY_TYPES and target.is_symlink():
+                messages.append(
+                    f"  [dim]{type_key}/{name} is a symlink (externally managed), skipping[/dim]"
+                )
+                continue
+
             installed_ver = get_installed_version(install_dir, name, sub_pkg.pkg_type)
 
             # Skip if already at same or newer version
