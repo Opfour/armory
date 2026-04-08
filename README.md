@@ -500,13 +500,7 @@ See [CONTRIBUTORS.md](CONTRIBUTORS.md) for the full list.
 
 ## Attributions
 
-Some packages in this collection were inspired by or sourced from open-source repositories and academic research. We appreciate the community contributions that help make AI coding agents better for everyone.
-
-| Source                                                                                                     | Author                                             |
-| ---------------------------------------------------------------------------------------------------------- | -------------------------------------------------- |
-| [claude-code-skills](https://github.com/notmanas/claude-code-skills)                                       | [@notmanas](https://github.com/notmanas)           |
-| [EvoSkills: Self-Evolving Agent Skills via Co-Evolutionary Verification](https://arxiv.org/abs/2604.01687) | Zhang, Fan, Zou, Chen et al.                       |
-| [gitagent](https://github.com/open-gitagent/gitagent)                                                      | [@shreyaskapale](https://github.com/shreyaskapale) |
+See [ATTRIBUTIONS.md](ATTRIBUTIONS.md) for the full list of upstream libraries, tools, and projects that armory packages wrap, depend on, or were inspired by.
 
 ---
 
