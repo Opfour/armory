@@ -1,6 +1,6 @@
 # armory
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE) [![packages: 92](https://img.shields.io/badge/packages-92-informational)](manifest.yaml) [![evals: 100%](https://img.shields.io/badge/eval_coverage-100%25-success)](skills/) [![catalog](https://img.shields.io/badge/catalog-browse_packages-58a6ff)](https://mathews-tom.github.io/armory/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE) [![packages: 104](https://img.shields.io/badge/packages-104-informational)](manifest.yaml) [![evals: 100%](https://img.shields.io/badge/eval_coverage-100%25-success)](skills/) [![catalog](https://img.shields.io/badge/catalog-browse_packages-58a6ff)](https://mathews-tom.github.io/armory/)
 
 Curated, production-grade skills, agents, hooks, rules, commands, utilities, and presets for AI coding agents. No magic, no demos — battle-tested workflows built for developers who use AI seriously.
 
@@ -85,8 +85,10 @@ Orchestrator agents compose skills and other agents into multi-phase workflows. 
 | [manuscript-provenance](skills/manuscript-provenance/) | Computational provenance audit verifying every number, table, and figure in a manuscript traces back to code                                        |
 | [repo-sentinel](skills/repo-sentinel/)                 | Security audit and enforcement for public repos — 12 attack surfaces, pre-release readiness, history scrubbing, CI gates                            |
 | [package-evaluator](skills/package-evaluator/)         | Evaluate package quality across 6 weighted dimensions with type-specific signals — frontmatter, triggers, structure, depth, consistency, compliance |
+| [devils-advocate](skills/devils-advocate/)             | Challenges AI-generated plans, code, designs, and decisions — pre-mortem, inversion, Socratic questioning with steel-manning and clear verdicts     |
 | [dependency-audit](skills/dependency-audit/)           | Dependency risk assessment — license compliance, maintenance health scoring, CVE detection, bloat identification, supply chain analysis             |
 | [qa-systematic](skills/qa-systematic/)                 | Systematic web QA testing with 8-category health scoring, issue taxonomy, and regression tracking — full, quick, and regression modes               |
+| [ux-expert](skills/ux-expert/)                         | UX audit and redesign for B2B SaaS dashboards — 8-dimension analysis, wireframes, component recommendations, severity-ranked findings               |
 
 ### Skills — Visualization & Documents
 
@@ -493,6 +495,18 @@ Looking for something to build? Check [WANTED.md](WANTED.md) for missing skill d
 ## Contributors
 
 See [CONTRIBUTORS.md](CONTRIBUTORS.md) for the full list.
+
+---
+
+## Attributions
+
+Some packages in this collection were inspired by or sourced from open-source repositories and academic research. We appreciate the community contributions that help make AI coding agents better for everyone.
+
+| Source                                                                                                     | Author                                             |
+| ---------------------------------------------------------------------------------------------------------- | -------------------------------------------------- |
+| [claude-code-skills](https://github.com/notmanas/claude-code-skills)                                       | [@notmanas](https://github.com/notmanas)           |
+| [EvoSkills: Self-Evolving Agent Skills via Co-Evolutionary Verification](https://arxiv.org/abs/2604.01687) | Zhang, Fan, Zou, Chen et al.                       |
+| [gitagent](https://github.com/open-gitagent/gitagent)                                                      | [@shreyaskapale](https://github.com/shreyaskapale) |
 
 ---
 
