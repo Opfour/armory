@@ -13,6 +13,7 @@ Usage:
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
 import shutil
 import subprocess
@@ -30,6 +31,7 @@ import yaml
 
 from scripts.eval_assertions import run_all_assertions
 from scripts.package_types import TYPES
+from scripts.task_signature import task_signature
 
 
 @dataclass
@@ -324,6 +326,71 @@ def write_results(results: list[PackageResult], output_path: Path) -> None:
     output_path.write_text(json.dumps(data, indent=2), encoding="utf-8")
 
 
+def _prompt_hash(prompt: str) -> str:
+    """Return a short, stable, non-reversible fingerprint of a prompt.
+
+    Used in the history log for dedup and cross-run identification
+    without storing raw prompt text (which may contain secrets or PII).
+
+    Args:
+        prompt: The raw task prompt.
+
+    Returns:
+        First 16 hex characters of the SHA-256 digest.
+    """
+    digest = hashlib.sha256(prompt.encode("utf-8")).hexdigest()
+    return digest[:16]
+
+
+def write_history(results: list[PackageResult], history_path: Path) -> None:
+    """Append per-case eval outcomes to the history log as JSONL.
+
+    Each case becomes one JSON line with shape::
+
+        {
+          "timestamp": ISO8601 UTC,
+          "package_path": str,
+          "case_id": str,
+          "task_signature": str,
+          "prompt_hash": str (16-char SHA-256 prefix),
+          "trigger_expected": bool,
+          "oracle_verdict": "pass" | "fail" | "skipped",
+          "weighted_score": float,
+          "execution_time_ms": int
+        }
+
+    The history log is append-only. Raw prompt text is never stored —
+    only the normalized task signature (from :mod:`scripts.task_signature`)
+    and a truncated SHA-256 hash. This protects against prompts that
+    contain credentials, tokens, or PII.
+
+    Args:
+        results: Package results from a run_evals session.
+        history_path: Path to the history log. Parent dirs are created
+            if missing.
+    """
+    timestamp = time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime())
+    lines: list[str] = []
+    for pkg in results:
+        for case in pkg.case_results:
+            entry = {
+                "timestamp": timestamp,
+                "package_path": pkg.package_path,
+                "case_id": case.case_id,
+                "task_signature": task_signature(case.prompt),
+                "prompt_hash": _prompt_hash(case.prompt),
+                "trigger_expected": case.trigger_expected,
+                "oracle_verdict": case.oracle_verdict,
+                "weighted_score": case.weighted_score,
+                "execution_time_ms": case.execution_time_ms,
+            }
+            lines.append(json.dumps(entry, separators=(",", ":")))
+    history_path.parent.mkdir(parents=True, exist_ok=True)
+    with history_path.open("a", encoding="utf-8") as f:
+        for line in lines:
+            f.write(line + "\n")
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description="Execute eval cases against live Claude sessions")
     group = parser.add_mutually_exclusive_group(required=True)
@@ -331,6 +398,8 @@ def main() -> int:
     group.add_argument("--all", action="store_true", help="Run evals for all packages")
     parser.add_argument("--timeout-per-case", type=int, default=120, help="Timeout per case in seconds")
     parser.add_argument("--output", default="evals/results.json", help="Output file path")
+    parser.add_argument("--history", default="evals/history.jsonl", help="Append-only history log path")
+    parser.add_argument("--no-history", action="store_true", help="Skip appending to the history log")
     parser.add_argument("--dry-run", action="store_true", help="Skip actual execution, validate structure only")
     args = parser.parse_args()
 
@@ -349,6 +418,12 @@ def main() -> int:
     output_path.parent.mkdir(parents=True, exist_ok=True)
     write_results(results, output_path)
     print(f"\nResults written to {args.output}")
+
+    if not args.no_history and not args.dry_run:
+        history_path = _REPO_ROOT / args.history
+        write_history(results, history_path)
+        total_cases = sum(r.total_cases for r in results)
+        print(f"History appended: {total_cases} cases -> {args.history}")
 
     total_failed = sum(r.failed for r in results)
     return 1 if total_failed > 0 else 0
