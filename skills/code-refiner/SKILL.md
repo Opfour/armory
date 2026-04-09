@@ -17,6 +17,7 @@ metadata:
   category: review
   tags: [refactoring, code-quality, simplification, readability]
   difficulty: intermediate
+  phase: review
 ---
 
 # Code Refiner
@@ -241,3 +242,32 @@ For language-specific idiom guidance, read the appropriate reference file:
 
 Only load the reference file for the language(s) in the current scope. These provide detailed
 pattern catalogs that supplement the general methodology above.
+
+## Rationalizations
+
+| Rationalization | Reality |
+|---|---|
+| "It's readable enough" | "Enough" is not a standard — if the next developer needs to re-read a function 3 times, it's not readable |
+| "Refactoring risks regressions" | Not refactoring risks accumulating debt — run the test suite before and after, that's what tests are for |
+| "This is how the codebase has always done it" | Consistency with a bad pattern is still bad — improve incrementally, don't preserve anti-patterns |
+| "The performance might get worse" | Benchmark before and after — most readability refactors have zero performance impact; premature optimization is the root of all evil |
+| "It's not broken, don't fix it" | Refining isn't fixing — it's making working code maintainable, testable, and understandable for the next person |
+| "I'll refactor the whole module later" | Incremental refinement works; big-bang rewrites fail — improve what you touch now |
+
+## Red Flags
+
+- Changing behavior while claiming "just a refactor" — refining must preserve all existing behavior
+- Touching code outside the declared scope without justification
+- Removing error handling or validation during simplification
+- Introducing new abstractions for one-time operations
+- Refactoring without running the test suite before and after
+- Making style changes to code that wasn't part of the original task
+
+## Verification
+
+- [ ] All existing tests pass before and after refinement
+- [ ] No behavioral changes — output/side-effects identical for all inputs
+- [ ] Changes stay within declared scope — no drive-by edits to unrelated code
+- [ ] Cyclomatic complexity reduced or unchanged — never increased
+- [ ] No new abstractions introduced for single-use cases
+- [ ] Linter and type checker pass: `ruff check` + `mypy --strict` or `tsc --noEmit` + `eslint`

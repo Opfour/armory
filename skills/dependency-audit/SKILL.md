@@ -16,6 +16,7 @@ metadata:
   category: review
   tags: [dependencies, vulnerabilities, licenses, supply-chain]
   difficulty: intermediate
+  phase: review
 ---
 
 # Dependency Audit
@@ -205,3 +206,32 @@ Push back if:
 - The project is a prototype that won't ship — defer audit until production decision
 - The user wants dependency updates, not audit — different task (dependabot, renovate)
 - The project has no dependencies (pure standard library) — nothing to audit
+
+## Rationalizations
+
+| Rationalization | Reality |
+|---|---|
+| "It's a trusted package" | Trust is not a security model — trusted packages get compromised (event-stream, ua-parser-js, colors.js) |
+| "Only a minor version bump" | Minor versions can introduce vulnerabilities, change behavior, or add transitive dependencies — semver is a promise, not a guarantee |
+| "We don't use the vulnerable function" | Transitive dependencies might — and attack surface includes any code loaded into the process |
+| "The CVE is low severity" | Low severity in isolation can be critical in your context — a "low" SSRF in an internal service with cloud metadata access is critical |
+| "We'll update when there's a known exploit" | Known exploits mean you're already behind — patch within SLA, not after breach |
+| "Too many dependencies to audit" | That's the problem, not an excuse — high dependency count IS a risk finding |
+
+## Red Flags
+
+- Auditing only direct dependencies while ignoring transitive dependency tree
+- Dismissing CVEs without checking if the vulnerable code path is reachable
+- No license compatibility check — GPL in a proprietary codebase is a legal finding
+- Accepting "no known vulnerabilities" from a single scanner without cross-referencing
+- Ignoring dependency age — unmaintained packages with no updates in 2+ years are a risk
+- Skipping lockfile analysis (pinned vs. floating versions)
+
+## Verification
+
+- [ ] Both direct and transitive dependencies scanned
+- [ ] Vulnerability scanner output captured: `npm audit` / `pip-audit` / `cargo audit`
+- [ ] Each CVE finding includes: severity, affected version range, upgrade path, reachability assessment
+- [ ] License compatibility verified against project license
+- [ ] Dependency age and maintenance status checked for top-level deps
+- [ ] Lockfile present and version pinning verified — no floating ranges in production
