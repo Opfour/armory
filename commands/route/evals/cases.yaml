@@ -1,0 +1,55 @@
+cases:
+  - id: route_explicit_command
+    prompt: "/route I need to review a pull request"
+    fixtures: []
+    rubric:
+      - "activates route command"
+      - "recommends pr-review skill as primary"
+      - "suggests code-refiner as complement"
+    trigger_expected: true
+
+  - id: route_ambiguous_task
+    prompt: "/route I need to check my code"
+    fixtures: []
+    rubric:
+      - "activates route command"
+      - "asks clarifying question to distinguish review vs. security vs. refactor"
+    trigger_expected: true
+
+  - id: route_business_idea
+    prompt: "which skill should I use to validate a startup idea?"
+    fixtures: []
+    rubric:
+      - "recommends idea-validator or idea-scout"
+      - "mentions business validation presets as alternative"
+    trigger_expected: true
+
+  - id: route_research_task
+    prompt: "/route I want to research the state of WebAssembly for server-side rendering"
+    fixtures: []
+    rubric:
+      - "recommends research-analyst agent as primary"
+      - "may suggest literature-review or web-fetch as complements"
+    trigger_expected: true
+
+  - id: route_shipping
+    prompt: "find the right skill for creating a release with changelog"
+    fixtures: []
+    rubric:
+      - "recommends release-captain agent or ship-workflow skill"
+      - "mentions changelog-composer as complement"
+    trigger_expected: true
+
+  - id: negative_direct_task
+    prompt: "Review this PR for security issues"
+    fixtures: []
+    rubric:
+      - "does not activate route command (direct task — should invoke security-reviewer or pr-review directly)"
+    trigger_expected: false
+
+  - id: negative_code_generation
+    prompt: "Write a function to parse CSV files"
+    fixtures: []
+    rubric:
+      - "does not activate route command (direct implementation task, not a discovery question)"
+    trigger_expected: false
