@@ -1,0 +1,64 @@
+cases:
+  # --- Positive cases ---
+  - id: route_task_with_history
+    prompt: "Route this task: review my code for SQL injection vulnerabilities. Use the router index if available."
+    fixtures: []
+    rubric:
+      - "Activates skill-router agent"
+      - "Computes task signature via Phase 1 normalization"
+      - "Reads dist/router_index.json"
+      - "Returns ranked package list or fallback verdict"
+    trigger_expected: true
+
+  - id: rank_packages_for_task
+    prompt: "Rank the best armory packages for generating a pytest suite for a FastAPI endpoint. Use outcome-weighted routing."
+    fixtures: []
+    rubric:
+      - "Activates skill-router for outcome-weighted ranking"
+      - "Produces YAML response with verdict, task_signature, and packages list"
+      - "If index is empty, returns fallback verdict and points to /route"
+    trigger_expected: true
+
+  - id: skill_router_for_best_package
+    prompt: "skill-router: which package is best for scanning a repo for hardcoded credentials based on historical success?"
+    fixtures: []
+    rubric:
+      - "Activates skill-router agent"
+      - "Looks up task signature in the router index"
+      - "Returns top-K packages ranked by pass rate"
+    trigger_expected: true
+
+  - id: fallback_on_empty_index
+    prompt: "Route: help me plan a project timeline. (Assume the router index is missing.)"
+    fixtures: []
+    rubric:
+      - "Activates skill-router"
+      - "Detects missing index in Phase 2"
+      - "Returns verdict no_index with fallback=true"
+      - "Points the caller to the /route static command"
+    trigger_expected: true
+
+  # --- Negative cases ---
+  - id: install_package_request
+    prompt: "Install the code-reviewer agent in my project."
+    fixtures: []
+    rubric:
+      - "Package installation is skill-library's job, not router"
+      - "Router only ranks packages, it does not install them"
+    trigger_expected: false
+
+  - id: full_static_decision_tree
+    prompt: "/route I need help picking a package for content creation"
+    fixtures: []
+    rubric:
+      - "Explicit /route invocation should use the static decision tree command"
+      - "Router agent is for outcome-weighted routing, not the static tree"
+    trigger_expected: false
+
+  - id: browse_catalog_request
+    prompt: "Show me all available skills in the armory catalog."
+    fixtures: []
+    rubric:
+      - "Catalog browsing uses the skill-library skill or search_packages MCP tool"
+      - "Router is for task-to-package routing, not listing"
+    trigger_expected: false
