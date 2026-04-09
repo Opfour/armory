@@ -8,7 +8,8 @@ description:
   rather than blocking input. Use this hook to enforce output styles, inject project
   reminders, prime roles, or apply constraints that survive context compaction — the
   injection lands adjacent to the user prompt on every turn, the highest-attention
-  slot in the context window.
+  slot in the context window. Triggers on: inject prompt context, persistent
+  instructions, system prompt injection, context injection hook, output style hook.
 
   "
 metadata:

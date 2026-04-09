@@ -5,6 +5,8 @@ description: 'Detects and warns about duplicate file reads within a Claude Code 
   Fires on PreToolUse for the Read tool, tracks files read in a session-scoped temp
   file, and emits a stderr warning with estimated token count when a file is read again.
   Reduces wasted context by nudging the model to reuse knowledge from earlier reads.
+  Triggers on: duplicate read detection, token waste, re-read prevention, file read
+  tracker, context dedup.
 
   '
 metadata:

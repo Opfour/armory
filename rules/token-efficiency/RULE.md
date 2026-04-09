@@ -8,8 +8,10 @@ description: >
   write discipline (never write unchanged content, append without full read), and
   context management (check summaries before committing to full reads). Use this rule
   when optimizing Claude Code session efficiency, reducing token consumption, or
-  establishing tool-usage best practices. Triggers on "token efficiency", "reduce
-  tokens", "context waste", "tool usage", "read efficiency", "minimize reads".
+  establishing tool-usage best practices. Triggers on: "token efficiency",
+  "reduce tokens", "context waste", "tool usage", "read efficiency", "minimize
+  reads", "save tokens", "optimize reads", "how to reduce token usage",
+  "session cost", "context window management".
 metadata:
   version: 1.0.0
   scope: global
