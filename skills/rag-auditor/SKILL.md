@@ -17,6 +17,7 @@ metadata:
   category: review
   tags: [rag, retrieval, hallucination, grounding]
   difficulty: advanced
+  phase: build
 ---
 
 # RAG Auditor

@@ -20,6 +20,7 @@ metadata:
   category: review
   tags: [security, public-repo, secret-scanning, audit]
   difficulty: advanced
+  phase: review
 ---
 
 # Repo Sentinel

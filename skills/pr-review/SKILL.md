@@ -18,6 +18,7 @@ metadata:
   category: review
   tags: [code-review, pull-request, quality, diff-analysis]
   difficulty: intermediate
+  phase: review
 ---
 
 # PR Review
@@ -175,3 +176,32 @@ When a specific aspect is requested, load only that reference file and skip rout
    what's done well, even briefly.
 6. **Code-refiner handles simplification.** This skill reviews and reports. It does not
    refactor or simplify — that's the `code-refiner` skill's job. Keep the roles separate.
+
+## Rationalizations
+
+| Rationalization | Reality |
+|---|---|
+| "Tests pass, so the code is fine" | Tests are necessary but insufficient — they miss architecture, security, readability, and maintainability concerns |
+| "It's a small diff, no real review needed" | Small changes cause most production incidents; a 3-line auth bypass is worse than a 300-line refactor |
+| "We'll clean it up later" | Later never comes — the review IS the quality gate before code becomes legacy |
+| "The author is senior, I trust them" | Seniority doesn't prevent mistakes; fresh eyes catch what familiarity blinds |
+| "I already reviewed similar code recently" | Each diff has unique context — assumptions from past reviews cause missed issues |
+| "This is just a refactor, nothing can break" | Refactors change behavior in subtle ways — verify with tests and trace call sites |
+
+## Red Flags
+
+- Approving without reading every changed file in full (not just diff hunks)
+- No file:line references in findings — vague feedback is not actionable
+- Skipping a review dimension because "it looks fine"
+- Reporting only style issues while ignoring logic, security, or architecture
+- Reviewing generated code (migrations, protobuf stubs) with the same rigor as hand-written code
+- Merging findings from different dimensions without deduplication
+
+## Verification
+
+- [ ] Every changed file read in full, not just diff hunks
+- [ ] Each review dimension scored: correctness, security, performance, readability, architecture
+- [ ] Every finding includes a file:line reference
+- [ ] At least one actionable finding per 100 lines changed, or explicit "no issues found" with justification
+- [ ] Review summary includes risk level (LOW/MEDIUM/HIGH/CRITICAL) and blocking vs. non-blocking classification
+- [ ] Strengths acknowledged — review is not 100% negative

@@ -15,6 +15,7 @@ metadata:
   category: development
   tags: [refactoring, code-quality, simplification]
   difficulty: intermediate
+  phase: review
 command:
   syntax: /refactor [path]
   handler: inline

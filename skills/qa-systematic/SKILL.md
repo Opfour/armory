@@ -14,6 +14,7 @@ metadata:
   category: development
   tags: [qa, testing, browser, regression]
   difficulty: advanced
+  phase: verify
 ---
 
 # Systematic QA Testing

@@ -5,7 +5,8 @@ description: 'Generates and maintains a project file index with one-line descrip
   and token estimates. On session start or first tool use, builds .claude/anatomy.md
   by walking the project tree. Before Read, displays the target file summary so Claude
   can decide to skip. After Write/Edit, updates the changed file entry in the index.
-  Respects .gitignore exclusions.
+  Respects .gitignore exclusions. Triggers on: file index, project map, codebase
+  anatomy, file summary index, project structure overview.
 
   '
 metadata:

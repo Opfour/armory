@@ -2,10 +2,15 @@
 from __future__ import annotations
 
 import copy
+from pathlib import Path
 
 import pytest
 
-from scripts.hooks_installer import merge_hook_config, remove_hook_config
+from scripts.hooks_installer import (
+    _resolve_hook_command,
+    merge_hook_config,
+    remove_hook_config,
+)
 
 
 @pytest.fixture
@@ -62,6 +67,7 @@ class TestMergeHookConfig:
         assert groups[0]["matcher"] == "Bash"
         assert len(groups[0]["hooks"]) == 1
         assert groups[0]["hooks"][0]["_hook_name"] == "git-protection"
+        # Without claude_dir, command stays relative
         assert groups[0]["hooks"][0]["command"] == "bash handler.sh"
 
     def test_merge_appends_different_matcher(
@@ -216,3 +222,65 @@ class TestRoundTrip:
         result = remove_hook_config(result, "pre-edit-backup")
         result = remove_hook_config(result, "cost-tracker")
         assert result == original
+
+
+class TestResolveHookCommand:
+    """Tests for _resolve_hook_command path rewriting."""
+
+    def test_rewrites_bare_handler_sh(self) -> None:
+        hook_dir = Path("/home/user/.claude/hooks/git-protection")
+        result = _resolve_hook_command("bash handler.sh", hook_dir)
+        assert result == "bash /home/user/.claude/hooks/git-protection/handler.sh"
+
+    def test_rewrites_arbitrary_script_name(self) -> None:
+        hook_dir = Path("/home/user/.claude/hooks/cost-tracker")
+        result = _resolve_hook_command("bash my-script.sh", hook_dir)
+        assert result == "bash /home/user/.claude/hooks/cost-tracker/my-script.sh"
+
+    def test_leaves_absolute_path_untouched(self) -> None:
+        hook_dir = Path("/home/user/.claude/hooks/test")
+        cmd = "bash /usr/local/bin/handler.sh"
+        assert _resolve_hook_command(cmd, hook_dir) == cmd
+
+    def test_leaves_tilde_path_untouched(self) -> None:
+        hook_dir = Path("/home/user/.claude/hooks/test")
+        cmd = "bash ~/.claude/hooks/test/handler.sh"
+        assert _resolve_hook_command(cmd, hook_dir) == cmd
+
+    def test_leaves_non_bash_command_untouched(self) -> None:
+        hook_dir = Path("/home/user/.claude/hooks/test")
+        cmd = "python3 handler.py"
+        assert _resolve_hook_command(cmd, hook_dir) == cmd
+
+    def test_leaves_path_with_slashes_untouched(self) -> None:
+        hook_dir = Path("/home/user/.claude/hooks/test")
+        cmd = "bash ./scripts/handler.sh"
+        # Contains a slash — not a bare filename — should NOT be rewritten
+        assert _resolve_hook_command(cmd, hook_dir) == cmd
+
+
+class TestMergeWithClaudeDir:
+    """Tests for merge_hook_config with claude_dir path rewriting."""
+
+    def test_merge_rewrites_relative_handler(self) -> None:
+        claude_dir = Path("/home/user/.claude")
+        meta = {
+            "events": ["Stop"],
+            "matcher": "",
+            "handler": {"type": "command", "command": "bash handler.sh", "timeout_ms": 5000},
+        }
+        result = merge_hook_config({}, "cost-tracker", meta, claude_dir)
+
+        hook_cmd = result["hooks"]["Stop"][0]["hooks"][0]["command"]
+        assert hook_cmd == "bash /home/user/.claude/hooks/cost-tracker/handler.sh"
+
+    def test_merge_without_claude_dir_keeps_relative(self) -> None:
+        meta = {
+            "events": ["Stop"],
+            "matcher": "",
+            "handler": {"type": "command", "command": "bash handler.sh", "timeout_ms": 5000},
+        }
+        result = merge_hook_config({}, "cost-tracker", meta)
+
+        hook_cmd = result["hooks"]["Stop"][0]["hooks"][0]["command"]
+        assert hook_cmd == "bash handler.sh"

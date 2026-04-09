@@ -20,7 +20,7 @@ model: opus
 color: yellow
 metadata:
   version: 1.0.0
-  category: meta
+  category: development
   execution_phase: on-demand
   priority: 60
   enabled: true

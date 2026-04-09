@@ -17,6 +17,7 @@ packages:
     - adr
     category: operations
     difficulty: intermediate
+    phase: plan
   - name: agent-builder
     version: 1.1.1
     description: Build AI agents and automate Claude Code programmatically using the Claude Agent SDK and headless CLI mode.
@@ -34,6 +35,7 @@ packages:
     - mcp
     category: development
     difficulty: intermediate
+    phase: build
   - name: api-docs-generator
     version: 1.1.1
     description: 'Audits and enhances API documentation for FastAPI and REST endpoints. Identifies missing descriptions, incomplete
@@ -50,6 +52,7 @@ packages:
     - fastapi
     category: review
     difficulty: intermediate
+    phase: ship
   - name: architecture-diagram
     version: 1.1.1
     description: 'Generate detailed layered architecture diagrams as self-contained HTML artifacts with inline SVG icons,
@@ -86,6 +89,7 @@ packages:
     - security-audit
     category: review
     difficulty: advanced
+    phase: review
   - name: benchmark-runner
     version: 1.1.1
     description: 'Designs structured benchmarks for comparing algorithms, models, or implementations. Selects appropriate
@@ -103,6 +107,7 @@ packages:
     - metrics
     category: data
     difficulty: intermediate
+    phase: verify
   - name: changelog-composer
     version: 1.1.1
     description: 'Generates structured changelogs and release notes from git history and PR descriptions. Classifies changes
@@ -120,6 +125,7 @@ packages:
     - versioning
     category: content
     difficulty: intermediate
+    phase: ship
   - name: code-refiner
     version: 1.1.1
     description: 'Deep code simplification, refactoring, and quality refinement. Analyzes structural complexity, anti-patterns,
@@ -138,6 +144,7 @@ packages:
     - readability
     category: review
     difficulty: intermediate
+    phase: review
   - name: competitive-analyzer
     version: 1.0.1
     description: 'Systematic competitive landscape analysis covering Porter''s Five Forces, competitor discovery, feature
@@ -162,6 +169,7 @@ packages:
     - positioning
     category: business
     difficulty: advanced
+    phase: define
   - name: concept-to-image
     version: 1.2.1
     description: 'Turn any concept, idea, or description into a polished static HTML visual, then export it as a PNG or SVG
@@ -218,6 +226,7 @@ packages:
     - bisect
     category: development
     difficulty: intermediate
+    phase: build
   - name: dependency-audit
     version: 1.1.1
     description: 'Audits project dependencies for license compliance, maintenance health, security vulnerabilities, and bloat.
@@ -235,6 +244,7 @@ packages:
     - supply-chain
     category: review
     difficulty: intermediate
+    phase: review
   - name: devils-advocate
     version: 1.0.0
     description: 'Challenges AI-generated plans, code, designs, and decisions before you commit. Pairs with any other skill
@@ -254,6 +264,7 @@ packages:
     - pre-mortem
     category: review
     difficulty: intermediate
+    phase: review
   - name: doc-condenser
     version: 1.1.1
     description: 'DEPRECATED: The base model handles document condensation and summarization natively at high quality. This
@@ -283,6 +294,7 @@ packages:
     - sprint
     category: review
     difficulty: intermediate
+    phase: ship
   - name: env-validator
     version: 1.0.1
     description: 'Validates .env files and environment variable configurations against project requirements. Checks for missing
@@ -302,6 +314,7 @@ packages:
     - deployment
     category: operations
     difficulty: intermediate
+    phase: build
   - name: estimate-calibrator
     version: 1.1.1
     description: 'Produces calibrated three-point estimates (best/likely/worst case) with explicit unknowns, confidence intervals,
@@ -320,6 +333,7 @@ packages:
     - planning
     category: development
     difficulty: intermediate
+    phase: plan
   - name: feasibility-assessor
     version: 1.0.1
     description: 'Evaluate whether a business idea, product concept, or feature is technically buildable and financially viable.
@@ -337,6 +351,7 @@ packages:
     - business-case
     category: review
     difficulty: advanced
+    phase: define
     complements:
     - idea-validator
   - name: filesystem
@@ -392,6 +407,7 @@ packages:
     - pytorch
     category: data
     difficulty: advanced
+    phase: build
   - name: html-presentation
     version: 1.1.1
     description: Convert any document, outline, or content into a polished, self-contained HTML slide presentation. Use this
@@ -452,6 +468,7 @@ packages:
     - swot
     category: review
     difficulty: advanced
+    phase: define
   - name: immune
     version: 1.0.1
     description: 'Hybrid adaptive memory system with two complementary memories: Cheatsheet (positive patterns injected before
@@ -544,6 +561,7 @@ packages:
     - verification
     category: review
     difficulty: advanced
+    phase: review
     complements:
     - literature-review
   - name: manuscript-review
@@ -565,6 +583,7 @@ packages:
     - submission
     category: review
     difficulty: advanced
+    phase: review
     complements:
     - literature-review
   - name: market-analyzer
@@ -586,6 +605,7 @@ packages:
     - industry
     category: research
     difficulty: intermediate
+    phase: define
     complements:
     - competitive-analyzer
     - idea-validator
@@ -607,6 +627,7 @@ packages:
     - token-reduction
     category: data
     difficulty: intermediate
+    phase: build
   - name: md-to-pdf
     version: 1.2.1
     description: 'Convert Markdown files to professionally styled PDF documents with full support for Mermaid diagrams, LaTeX/KaTeX
@@ -642,6 +663,7 @@ packages:
     - rollback
     category: review
     difficulty: advanced
+    phase: review
   - name: notebooklm
     version: 1.1.1
     description: 'Complete API for Google NotebookLM — full programmatic access including features not in the web UI. Create
@@ -680,6 +702,7 @@ packages:
     - frontmatter
     category: review
     difficulty: intermediate
+    phase: review
   - name: paper-to-skill
     version: 1.0.1
     description: 'Converts research papers into executable skill packages by extracting actionable methodologies and feeding
@@ -700,6 +723,7 @@ packages:
     - methodology-extraction
     category: research
     difficulty: advanced
+    phase: build
   - name: plan-review
     version: 1.0.1
     description: Pre-implementation plan audit that stress-tests scope, assumptions, risks, and failure modes before code
@@ -734,6 +758,7 @@ packages:
     - diff-analysis
     category: review
     difficulty: intermediate
+    phase: review
   - name: pre-landing-review
     version: 1.0.1
     description: Gate-oriented safety audit for code changes before landing, using a structured checklist with two-pass severity
@@ -749,6 +774,7 @@ packages:
     - checklist
     category: review
     difficulty: intermediate
+    phase: review
   - name: prompt-lab
     version: 1.1.1
     description: 'Systematic LLM prompt engineering: analyzes existing prompts for failure modes, generates structured variants
@@ -767,6 +793,7 @@ packages:
     - chain-of-thought
     category: development
     difficulty: intermediate
+    phase: build
   - name: qa-systematic
     version: 1.0.1
     description: Systematic web application QA testing with structured issue taxonomy, health scoring, and regression tracking.
@@ -782,6 +809,7 @@ packages:
     - regression
     category: development
     difficulty: advanced
+    phase: verify
   - name: rag-auditor
     version: 1.1.1
     description: 'Evaluates RAG (Retrieval-Augmented Generation) pipeline quality across retrieval and generation stages.
@@ -800,6 +828,7 @@ packages:
     - grounding
     category: review
     difficulty: advanced
+    phase: build
   - name: regex-builder
     version: 1.1.1
     description: 'DEPRECATED: The base model generates, explains, and tests regex patterns natively with high accuracy. This
@@ -852,6 +881,7 @@ packages:
     - audit
     category: review
     difficulty: advanced
+    phase: review
   - name: research-critique
     version: 1.0.1
     description: 'Critical analysis of research papers, academic manuscripts, preprints, and technical studies — evaluating
@@ -871,6 +901,7 @@ packages:
     - peer-review
     category: review
     difficulty: intermediate
+    phase: review
     complements:
     - literature-review
   - name: sequential-thinking
@@ -901,6 +932,7 @@ packages:
     - changelog
     category: review
     difficulty: intermediate
+    phase: ship
   - name: skill-distiller
     version: 1.0.1
     description: 'Converts Opus-quality skill packages into deterministic, Haiku-executable workflows through trace-driven
@@ -922,6 +954,7 @@ packages:
     - deterministic
     category: development
     difficulty: advanced
+    phase: build
   - name: skill-library
     version: 2.0.1
     description: 'Agent-native catalog and installer for armory packages across all 7 types: skills, agents, hooks, rules,
@@ -957,6 +990,7 @@ packages:
     - optimization
     category: data
     difficulty: intermediate
+    phase: build
   - name: static-web-artifacts-builder
     version: 1.1.1
     description: 'Build elaborate, self-contained static HTML artifacts opened in a browser — interactive diagrams, architecture
@@ -996,6 +1030,7 @@ packages:
     - eval
     category: review
     difficulty: advanced
+    phase: verify
   - name: task-decomposer
     version: 1.1.1
     description: 'Produces structured phased task boards from feature requests: dependency-mapped work items with parallelization
@@ -1013,6 +1048,7 @@ packages:
     - phased
     category: development
     difficulty: intermediate
+    phase: plan
   - name: tavily
     version: 1.1.1
     description: 'AI-optimized web search via Tavily API. Use this skill when no specific URL is provided and the user needs
@@ -1048,6 +1084,7 @@ packages:
     - python
     category: development
     difficulty: intermediate
+    phase: build
   - name: to-markdown
     version: 1.0.1
     description: 'Convert any file or URL to clean Markdown. Handles PDF, Word (DOCX), Excel (XLSX), PowerPoint (PPTX), HTML,
@@ -1086,6 +1123,7 @@ packages:
     - b2b-saas
     category: review
     difficulty: intermediate
+    phase: review
   - name: web-fetch
     version: 1.1.1
     description: 'Web content fetching and URL retrieval via curl and WebFetch — replaces the Fetch MCP server (fetch_html,
@@ -1415,14 +1453,15 @@ packages:
     - co-evolutionary
     - testing
     - opus
-    category: meta
+    category: development
     difficulty: advanced
   hooks:
   - name: anatomy-index
     version: 1.0.0
-    description: Generates and maintains a project file index with one-line descriptions and token estimates. On session start
-      or first tool use, builds .claude/anatomy.md by walking the project tree. Before Read, displays the target file summary
-      so Claude can decide to skip. After Write/Edit, updates the changed file entry in the index. Respects .gitignore exclusions.
+    description: 'Generates and maintains a project file index with one-line descriptions and token estimates. On session
+      start or first tool use, builds .claude/anatomy.md by walking the project tree. Before Read, displays the target file
+      summary so Claude can decide to skip. After Write/Edit, updates the changed file entry in the index. Respects .gitignore
+      exclusions. Triggers on: file index, project map, codebase anatomy, file summary index, project structure overview.'
     path: hooks/anatomy-index
     source: https://github.com/Mathews-Tom/armory/blob/main/hooks/anatomy-index/HOOK.md
     events:
@@ -1497,7 +1536,8 @@ packages:
       .claude/prompt-context.txt first, falling back to ~/.claude/prompt-context.txt. Fail-open: missing or unreadable files
       exit 0 silently rather than blocking input. Use this hook to enforce output styles, inject project reminders, prime
       roles, or apply constraints that survive context compaction — the injection lands adjacent to the user prompt on every
-      turn, the highest-attention slot in the context window.'
+      turn, the highest-attention slot in the context window. Triggers on: inject prompt context, persistent instructions,
+      system prompt injection, context injection hook, output style hook.'
     path: hooks/prompt-context
     source: https://github.com/Mathews-Tom/armory/blob/main/hooks/prompt-context/HOOK.md
     events:
@@ -1512,9 +1552,10 @@ packages:
     difficulty: beginner
   - name: read-dedup
     version: 1.0.0
-    description: Detects and warns about duplicate file reads within a Claude Code session. Fires on PreToolUse for the Read
+    description: 'Detects and warns about duplicate file reads within a Claude Code session. Fires on PreToolUse for the Read
       tool, tracks files read in a session-scoped temp file, and emits a stderr warning with estimated token count when a
-      file is read again. Reduces wasted context by nudging the model to reuse knowledge from earlier reads.
+      file is read again. Reduces wasted context by nudging the model to reuse knowledge from earlier reads. Triggers on:
+      duplicate read detection, token waste, re-read prevention, file read tracker, context dedup.'
     path: hooks/read-dedup
     source: https://github.com/Mathews-Tom/armory/blob/main/hooks/read-dedup/HOOK.md
     events:
@@ -1526,6 +1567,26 @@ packages:
     - efficiency
     category: operations
     difficulty: beginner
+  - name: simplify-ignore
+    version: 1.1.0
+    description: 'Collapses code blocks marked with simplify-ignore-start/simplify-ignore-end comment markers before the agent
+      reads a file. Redirects the Read tool to a collapsed copy via updatedInput and adds additionalContext warning the agent
+      not to edit collapsed regions. On Stop, cleans up the session cache directory. Prevents agents from modifying infrastructure
+      code, generated code, or complex subsystems they should not touch. Language-agnostic — works with any comment syntax.
+      Triggers on: "hide code from agent", "code folding", "protect code sections", "collapse infrastructure code", "simplify-ignore
+      markers".'
+    path: hooks/simplify-ignore
+    source: https://github.com/Mathews-Tom/armory/blob/main/hooks/simplify-ignore/HOOK.md
+    events:
+    - PreToolUse
+    - Stop
+    tags:
+    - context
+    - simplify
+    - code-folding
+    - efficiency
+    category: operations
+    difficulty: intermediate
   rules:
   - name: commit-standards
     version: 1.0.0
@@ -1584,12 +1645,13 @@ packages:
     difficulty: beginner
   - name: token-efficiency
     version: 1.0.0
-    description: Enforces token-efficient tool usage patterns to reduce context waste and lower session costs. Covers file
+    description: 'Enforces token-efficient tool usage patterns to reduce context waste and lower session costs. Covers file
       reading strategies (targeted line-range reads, avoiding re-reads of in-context files), search-first patterns (Grep/Glob
       before full Read), write discipline (never write unchanged content, append without full read), and context management
       (check summaries before committing to full reads). Use this rule when optimizing Claude Code session efficiency, reducing
-      token consumption, or establishing tool-usage best practices. Triggers on "token efficiency", "reduce tokens", "context
-      waste", "tool usage", "read efficiency", "minimize reads".
+      token consumption, or establishing tool-usage best practices. Triggers on: "token efficiency", "reduce tokens", "context
+      waste", "tool usage", "read efficiency", "minimize reads", "save tokens", "optimize reads", "how to reduce token usage",
+      "session cost", "context window management".'
     path: rules/token-efficiency
     source: https://github.com/Mathews-Tom/armory/blob/main/rules/token-efficiency/RULE.md
     scope: global
@@ -1633,6 +1695,23 @@ packages:
     - simplification
     category: development
     difficulty: intermediate
+    phase: review
+  - name: route
+    version: 1.0.0
+    description: 'Skill router that maps user tasks to the best armory packages. Provides a decision-tree organized by development
+      lifecycle phase (define, plan, build, verify, review, ship) plus cross-cutting domains (research, content, business).
+      Triggers on: "/route", "which skill", "what package", "find the right skill", "help me pick a skill", "discover packages".
+      Use this command when unsure which armory skill, agent, or command to use for a task.'
+    path: commands/route
+    source: https://github.com/Mathews-Tom/armory/blob/main/commands/route/COMMAND.md
+    tags:
+    - discovery
+    - routing
+    - meta
+    - navigation
+    category: operations
+    difficulty: beginner
+    phase: plan
   - name: security-scan
     version: 1.0.0
     description: 'Security audit workflow that scans a codebase path or scope for vulnerabilities across six categories: hardcoded
@@ -1649,6 +1728,7 @@ packages:
     - audit
     category: review
     difficulty: intermediate
+    phase: review
   - name: tdd
     version: 1.0.0
     description: 'Test-driven development workflow for functions, modules, or features. Guides Claude through the red-green-refactor
@@ -1665,6 +1745,7 @@ packages:
     - test-first
     category: development
     difficulty: intermediate
+    phase: build
   utilities:
   - name: arxiv-search
     version: 1.0.0
@@ -1875,10 +1956,11 @@ packages:
     difficulty: advanced
   - name: terse-mode
     version: 1.0.0
-    description: Enforces terse, no-narration output from Claude Code. Bundles the prompt-context hook with a curated terse
+    description: 'Enforces terse, no-narration output from Claude Code. Bundles the prompt-context hook with a curated terse
       rules file that strips hedging, praise, soft language, meta-commentary, engagement phrases, and unsolicited offers from
       every response. Use this preset when you want action-only output without preambles, postambles, or trailing questions
-      — code over prose, facts over hedging, stop at the information boundary.
+      — code over prose, facts over hedging, stop at the information boundary. Triggers on: terse mode, concise output, minimal
+      responses, quiet mode, no narration, brief output style.'
     path: presets/terse-mode
     source: https://github.com/Mathews-Tom/armory/blob/main/presets/terse-mode/PRESET.md
     tags:

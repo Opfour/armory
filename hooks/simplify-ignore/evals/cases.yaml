@@ -1,0 +1,39 @@
+cases:
+  - id: collapse_marked_python_file
+    prompt: "Read a Python file containing simplify-ignore-start and simplify-ignore-end markers"
+    fixtures: []
+    rubric:
+      - "detects simplify-ignore markers in the file"
+      - "replaces marked block with collapsed placeholder showing line count"
+      - "preserves all content outside the markers"
+    trigger_expected: true
+
+  - id: collapse_multiple_blocks
+    prompt: "Read a file with multiple simplify-ignore regions"
+    fixtures: []
+    rubric:
+      - "collapses each marked block independently"
+      - "reports total collapsed lines in stderr"
+    trigger_expected: true
+
+  - id: passthrough_unmarked_file
+    prompt: "Read a regular file with no simplify-ignore markers"
+    fixtures: []
+    rubric:
+      - "exits immediately without modifying content"
+      - "no stderr output"
+    trigger_expected: false
+
+  - id: negative_edit_without_markers
+    prompt: "Edit a file that has no simplify-ignore markers"
+    fixtures: []
+    rubric:
+      - "does not activate simplify-ignore (no markers present, normal edit passthrough)"
+    trigger_expected: false
+
+  - id: cleanup_on_stop
+    prompt: "Session ends after reading files with simplify-ignore markers"
+    fixtures: []
+    rubric:
+      - "removes session cache directory on Stop event"
+    trigger_expected: true

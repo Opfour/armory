@@ -15,6 +15,23 @@ if str(_REPO_ROOT) not in sys.path:
 from scripts.frontmatter import parse_frontmatter
 
 
+def _resolve_hook_command(command: str, hook_dir: Path) -> str:
+    """Rewrite relative script references in a hook command to absolute paths.
+
+    Handles patterns like ``bash handler.sh`` or ``bash helper.sh`` where the
+    script is a bare filename (no slashes, no ``~``).  Already-absolute paths
+    and paths containing ``~`` or ``/`` are left untouched.
+    """
+    import re
+
+    def _replace(m: re.Match[str]) -> str:
+        prefix, script = m.group(1), m.group(2)
+        return f"{prefix}{hook_dir / script}"
+
+    # Match: <word-boundary>bash <bare-script.sh> — only bare filenames
+    return re.sub(r"(bash\s+)([A-Za-z0-9_.-]+\.sh)\b", _replace, command)
+
+
 def install_hook(hook_dir: Path, claude_dir: Path) -> None:
     """Install a hook package.
 
@@ -45,7 +62,7 @@ def install_hook(hook_dir: Path, claude_dir: Path) -> None:
     if settings_path.exists():
         settings = json.loads(settings_path.read_text(encoding="utf-8"))
 
-    settings = merge_hook_config(settings, name, hook_config)
+    settings = merge_hook_config(settings, name, hook_config, claude_dir)
     settings_path.write_text(
         json.dumps(settings, indent=2) + "\n", encoding="utf-8"
     )
@@ -71,7 +88,10 @@ def uninstall_hook(name: str, claude_dir: Path) -> None:
 
 
 def merge_hook_config(
-    settings: dict[str, Any], hook_name: str, hook_meta: dict[str, Any]
+    settings: dict[str, Any],
+    hook_name: str,
+    hook_meta: dict[str, Any],
+    claude_dir: Path | None = None,
 ) -> dict[str, Any]:
     """Add hook configuration to settings dict. Returns modified settings.
 
@@ -86,6 +106,10 @@ def merge_hook_config(
 
     Each hook package gets its own matcher entry tagged with _hook_name for
     tracking which package owns it.
+
+    When *claude_dir* is provided, relative script references (e.g.
+    ``bash handler.sh``) are rewritten to absolute paths pointing at the
+    installed hook directory so the command works regardless of CWD.
     """
     hooks_section = settings.setdefault("hooks", {})
     events = hook_meta.get("events", [])
@@ -94,6 +118,13 @@ def merge_hook_config(
 
     hook_entry = dict(handler)
     hook_entry["_hook_name"] = hook_name
+
+    # Rewrite relative script paths to absolute installed paths
+    if claude_dir is not None:
+        cmd = hook_entry.get("command", "")
+        if cmd:
+            hook_dir = claude_dir / "hooks" / hook_name
+            hook_entry["command"] = _resolve_hook_command(cmd, hook_dir)
 
     for event in events:
         event_list: list[dict[str, Any]] = hooks_section.setdefault(event, [])

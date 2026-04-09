@@ -15,6 +15,7 @@ metadata:
   category: review
   tags: [security, scanning, vulnerabilities, audit]
   difficulty: intermediate
+  phase: review
 command:
   syntax: /security-scan [path-or-scope]
   handler: inline

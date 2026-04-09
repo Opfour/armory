@@ -19,6 +19,7 @@ metadata:
   category: research
   tags: [market-sizing, tam-sam-som, trends, industry]
   difficulty: intermediate
+  phase: define
 ---
 
 # Market Analyzer

@@ -244,4 +244,32 @@ Flag: debug mode in production as HIGH, missing CORS restrictions as MEDIUM.
 6. Check for existing sanitization/validation before flagging
 7. Rate severity based on exploitability and impact, not just pattern matching
 8. Flag framework-specific issues (Django ORM vs raw SQL, React vs vanilla DOM)
-```
+
+## Rationalizations
+
+| Rationalization | Reality |
+|---|---|
+| "It's internal only, no external access" | Internal services get compromised via lateral movement — SSRF, stolen credentials, supply chain attacks all start internal |
+| "We'll add auth later" | "Later" is after the breach — unauthenticated endpoints in any environment are exploitable from day one |
+| "The framework sanitizes input" | Frameworks sanitize for their default context — template injection, SQL in raw queries, and deserialization bypasses are framework-blind |
+| "It's behind a VPN" | VPNs are a network boundary, not an authorization layer — compromised VPN credentials grant full access |
+| "No one would think to exploit this" | Security through obscurity is not security — automated scanners and bots don't "think", they enumerate |
+| "The risk is theoretical" | All exploits were theoretical until the first breach — if data flows from user input to a dangerous sink, it's exploitable |
+
+## Red Flags
+
+- Reporting vulnerabilities without tracing the data flow from source to sink
+- Flagging patterns without checking for existing sanitization/validation
+- Rating severity based on pattern matching alone without considering exploitability
+- No remediation code provided — findings without fixes are not actionable
+- Missing OWASP Top 10 mapping for findings
+- Ignoring framework-specific security features (CSRF tokens, parameterized queries, CSP headers)
+
+## Verification
+
+- [ ] Every finding includes: vulnerability description, exploit scenario, affected file:line, OWASP category
+- [ ] Every finding includes remediation code in the target language
+- [ ] Data flow traced: user input → intermediate processing → vulnerable sink
+- [ ] Existing sanitization/validation checked before flagging
+- [ ] Severity rated by exploitability AND impact, not just pattern match
+- [ ] No theoretical vulnerabilities without concrete data flow evidence

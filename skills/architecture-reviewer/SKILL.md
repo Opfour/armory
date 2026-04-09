@@ -18,6 +18,7 @@ metadata:
   category: review
   tags: [architecture, scalability, enterprise, security-audit]
   difficulty: advanced
+  phase: review
 ---
 # Architecture Reviewer
 
@@ -343,3 +344,33 @@ Apply these rules to ensure fair, useful reviews:
 
 7. **Honest about unknowns:** If the input doesn't provide enough information to evaluate a
    sub-criterion, say so explicitly. Don't guess. Flag it as requiring more information.
+
+## Rationalizations
+
+| Rationalization | Reality |
+|---|---|
+| "It works in production already" | Working today doesn't mean it scales, maintains, or survives team turnover — architecture debt compounds silently |
+| "We'll refactor when it becomes a problem" | By then the cost is 10x higher — refactoring under load with accumulated dependencies is surgical, not routine |
+| "The framework handles that" | Frameworks provide defaults, not architecture — you're still responsible for boundaries, error propagation, and data flow |
+| "It's an internal service, standards don't apply" | Internal services become external faster than you expect — technical debt migrates across boundaries |
+| "Performance is fine for our current scale" | Architecture reviews evaluate the next 10x, not the current state — O(n^2) at 1k rows is invisible at 100k rows |
+| "We don't have time for a full review" | Partial reviews create false confidence — better to review fewer dimensions thoroughly than all dimensions superficially |
+
+## Red Flags
+
+- Evaluating only the happy path without tracing error propagation
+- No scalability assessment (missing load projection, bottleneck identification)
+- Scoring a dimension without reading the relevant code — relying on documentation alone
+- Marking dimensions as N/A without justification
+- Recommendations that are generic ("add caching", "use a queue") without specifying what, where, and why
+- Reviewing implementation details instead of architectural decisions
+
+## Verification
+
+- [ ] All 7 dimensions evaluated with sub-criterion scores
+- [ ] Each finding includes specific file/component references
+- [ ] Scalability assessment includes concrete load projections or growth assumptions
+- [ ] Cross-cutting analysis identifies at least one inter-dimension concern
+- [ ] Every recommendation specifies what to change, where, and expected impact
+- [ ] N/A dimensions justified explicitly — not silently skipped
+- [ ] Final score is a weighted composite, not an average of vibes

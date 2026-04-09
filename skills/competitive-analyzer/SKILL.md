@@ -20,6 +20,7 @@ metadata:
   category: business
   tags: [competitive-analysis, market, porters-five-forces, positioning]
   difficulty: advanced
+  phase: define
 ---
 
 # Competitive Analyzer

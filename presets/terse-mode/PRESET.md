@@ -7,7 +7,8 @@ description:
   meta-commentary, engagement phrases, and unsolicited offers from every response.
   Use this preset when you want action-only output without preambles, postambles,
   or trailing questions — code over prose, facts over hedging, stop at the information
-  boundary.
+  boundary. Triggers on: terse mode, concise output, minimal responses, quiet mode,
+  no narration, brief output style.
 
   "
 metadata:

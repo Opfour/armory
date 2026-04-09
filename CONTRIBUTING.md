@@ -275,6 +275,75 @@ Add 3-6 lowercase kebab-case tags that help users discover the package. Include:
 | `intermediate` | Multi-step workflows, some domain knowledge needed         |
 | `advanced`     | Complex multi-phase analysis, deep domain expertise needed |
 
+### Phase (optional)
+
+Lifecycle phase indicating when in the development workflow this package is used. Helps the `/route` command and orchestrator agents sequence work correctly.
+
+| Phase      | When                                                          |
+| ---------- | ------------------------------------------------------------- |
+| `define`   | Idea validation, requirements gathering, market research      |
+| `plan`     | Task breakdown, estimation, architecture decisions            |
+| `build`    | Writing code, generating tests, debugging, optimization       |
+| `verify`   | Running benchmarks, QA testing, validation                    |
+| `review`   | Code review, security audit, architecture review, refactoring |
+| `ship`     | Release, changelog, documentation, deployment                 |
+
+```yaml
+metadata:
+  version: 1.0.0
+  category: review
+  tags: [code-review, quality]
+  difficulty: intermediate
+  phase: review
+```
+
+## Optional Content Sections
+
+Skills and agents may include three optional sections that improve agent compliance. These are recommended for review, quality, and security packages.
+
+### Rationalizations
+
+A table of common excuses agents use to skip the skill's workflow, paired with factual rebuttals. Preemptively closes escape hatches.
+
+```markdown
+## Rationalizations
+
+| Rationalization | Reality |
+|---|---|
+| "Tests pass, so the code is fine" | Tests are necessary but insufficient — they miss architecture and security |
+| "It's a small diff" | Small changes cause most production incidents |
+```
+
+**When to include:** Recommended for any skill where partial compliance is dangerous (review, security, testing, migration).
+
+### Red Flags
+
+Observable patterns indicating the skill isn't being followed correctly during execution. Provides runtime self-correction signals.
+
+```markdown
+## Red Flags
+
+- Approving without reading every changed file in full
+- No file:line references in findings
+- Skipping a review dimension because "it looks fine"
+```
+
+**When to include:** Recommended for skills with multi-step workflows where steps can be silently skipped.
+
+### Verification
+
+Concrete evidence requirements proving the skill was executed correctly. Demands artifacts (test output, build logs, scores), not subjective assessment.
+
+```markdown
+## Verification
+
+- [ ] All tests pass with output captured
+- [ ] Coverage meets thresholds: 80% overall, 90% new code
+- [ ] Linter exits clean: `ruff check` + `mypy --strict`
+```
+
+**When to include:** Recommended for skills that produce measurable outcomes (testing, review, deployment).
+
 ## Quality Gate — Skill Evaluator
 
 Before submitting a PR, run the [skill-evaluator](skills/skill-evaluator/) against your package:

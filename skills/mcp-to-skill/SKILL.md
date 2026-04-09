@@ -18,6 +18,7 @@ metadata:
   category: data
   tags: [mcp, skill-conversion, context-optimization, token-reduction]
   difficulty: intermediate
+  phase: build
 ---
 
 # MCP-to-Skill Converter

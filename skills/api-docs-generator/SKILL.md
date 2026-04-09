@@ -16,6 +16,7 @@ metadata:
   category: review
   tags: [api, documentation, openapi, fastapi]
   difficulty: intermediate
+  phase: ship
 ---
 
 # API Docs Generator

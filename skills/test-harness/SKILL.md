@@ -16,6 +16,7 @@ metadata:
   category: development
   tags: [testing, pytest, test-generation, python]
   difficulty: intermediate
+  phase: build
 ---
 
 # Test Harness
@@ -239,3 +240,33 @@ Push back if:
 - The request is for UI/E2E tests — this skill generates unit and integration tests only
 - The code has no clear behavior to test (pure configuration, constant definitions)
 - The user wants tests for third-party library code — test your usage of the library, not the library itself
+
+## Rationalizations
+
+| Rationalization | Reality |
+|---|---|
+| "Manual testing is sufficient" | Manual testing doesn't run in CI, doesn't catch regressions, and doesn't scale with the codebase |
+| "This code is too simple to test" | Simple code becomes complex code — tests document expected behavior and catch regressions from future changes |
+| "I'll add tests later" | Tests are specifications; without them, code behavior is undefined and later never comes |
+| "Mocking everything makes the test fast" | Over-mocked tests pass when the real system fails — mock at boundaries, not deep in the call chain |
+| "100% coverage means the code is correct" | Coverage measures execution, not correctness — a test that runs code without meaningful assertions adds no value |
+| "The happy path test is enough" | Edge cases and error paths cause most production incidents — happy-path-only testing is false confidence |
+
+## Red Flags
+
+- Tests that only cover the happy path with no edge cases or error paths
+- Test names that describe implementation ("test_calls_function") instead of behavior ("test_returns_404_when_not_found")
+- More than two mocks per test — indicates the unit under test is too coupled
+- Tests that depend on execution order or shared mutable state
+- Assertions on implementation details (mock call counts) instead of observable behavior
+- Skipping integration tests because "unit tests cover it"
+
+## Verification
+
+- [ ] Tests follow Arrange-Act-Assert structure with clear phase separation
+- [ ] Test names describe behavior: `test_<unit>_<scenario>_<expected_outcome>`
+- [ ] Edge cases covered: empty input, boundary values, error paths, null/None
+- [ ] Coverage meets thresholds: 80% overall, 90% new code, 95% critical paths
+- [ ] All tests pass: `pytest` / `npm test` exits 0 with output captured
+- [ ] No test depends on execution order — can run in any sequence
+- [ ] Mocks used only at boundaries (external APIs, system clock, filesystem in unit tests)

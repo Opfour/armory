@@ -17,6 +17,7 @@ metadata:
   category: review
   tags: [feasibility, unit-economics, viability, business-case]
   difficulty: advanced
+  phase: define
 ---
 
 # Feasibility Assessor

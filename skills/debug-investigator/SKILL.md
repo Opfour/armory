@@ -18,6 +18,7 @@ metadata:
   category: development
   tags: [debugging, root-cause, hypothesis, bisect]
   difficulty: intermediate
+  phase: build
 ---
 
 # Debug Investigator

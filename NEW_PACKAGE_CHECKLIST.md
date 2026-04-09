@@ -33,6 +33,10 @@ Follow this checklist every time you build a new package for the armory. Items a
   description: <200-800 chars> # See description rules below
   metadata:
     version: 1.0.0
+    category: development     # required
+    tags: [keyword1, keyword2] # required
+    difficulty: intermediate   # required
+    phase: build               # optional — define/plan/build/verify/review/ship
   ---
   ```
 - [ ] **Create `references/`** — add reference documents the package needs (setup guides, compatibility matrices, command references).
@@ -55,6 +59,9 @@ Write the definition file body with these sections (in order):
 - [ ] **Troubleshooting** — common failure modes with diagnostic commands and fixes
 - [ ] **Reference table** — links to all files in `references/`
 - [ ] **Template table** — links to all files in `templates/` with descriptions
+- [ ] **Rationalizations** (optional, recommended for review/quality/security skills) — table of common excuses agents use to skip steps, paired with factual rebuttals
+- [ ] **Red Flags** (optional, recommended for multi-step workflows) — observable patterns indicating the skill isn't being followed correctly
+- [ ] **Verification** (optional, recommended for skills with measurable outcomes) — checklist of concrete evidence requirements proving correct execution
 
 ## Phase 4: Eval Cases
 

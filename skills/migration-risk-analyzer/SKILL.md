@@ -16,6 +16,7 @@ metadata:
   category: review
   tags: [database, migration, ddl, rollback]
   difficulty: advanced
+  phase: review
 ---
 
 # Migration Risk Analyzer
@@ -199,4 +200,32 @@ Push back if:
 - The migration is for a development/staging database — risk analysis is for production
 - The migration only creates new tables (no ALTER, no existing data) — low risk by definition
 - The user wants migration execution, not analysis — this skill assesses risk, it doesn't run migrations
-```
+
+## Rationalizations
+
+| Rationalization | Reality |
+|---|---|
+| "It's backwards compatible" | Backwards compatible at the schema level doesn't mean backwards compatible at the application level — query plans, ORM mappings, and application code all interact |
+| "We can roll back" | Rollback is not free — data written after migration may not survive rollback; DROP COLUMN has no rollback without backup |
+| "It's a small table" | Table size is one factor — lock duration, concurrent write rate, and replication lag matter more than row count |
+| "We've run this migration type before" | Past success doesn't predict future success — different data distribution, different load, different constraints |
+| "Downtime window is long enough" | Estimate based on dev data, not production — migration on 10k rows takes seconds; on 50M rows with indexes, it takes hours |
+| "The ORM handles it" | ORMs generate SQL, they don't guarantee safety — `ALTER TABLE` locking behavior is engine-specific and ORM-opaque |
+
+## Red Flags
+
+- No estimate of migration duration based on production data volume
+- No rollback plan or rollback plan that doesn't account for data written post-migration
+- Analyzing migration SQL without checking the current table size and write rate
+- No consideration of replication lag in multi-replica setups
+- Assuming zero downtime without verifying lock behavior for the specific DDL operation
+- Skipping index analysis — adding an index on a large table can lock writes for minutes to hours
+
+## Verification
+
+- [ ] Production table sizes and row counts documented for all affected tables
+- [ ] Lock behavior identified for each DDL statement (exclusive lock, no lock, etc.)
+- [ ] Migration duration estimated using production-scale data, not dev fixtures
+- [ ] Rollback plan documented with specific steps and data preservation guarantees
+- [ ] Concurrent write impact assessed — what happens to in-flight transactions during migration
+- [ ] Replication lag impact assessed for multi-replica configurations
