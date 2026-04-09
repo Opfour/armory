@@ -51,10 +51,11 @@ Tools, libraries, and projects that armory packages wrap, depend on, or were ins
 | ---------------------------------------------------------------------------------------------------------- | -------------------------------------------------- |
 | [claude-code-skills](https://github.com/notmanas/claude-code-skills)                                       | [@notmanas](https://github.com/notmanas)           |
 | [EvoSkills: Self-Evolving Agent Skills via Co-Evolutionary Verification](https://arxiv.org/abs/2604.01687) | Zhang, Fan, Zou, Chen et al.                       |
+| [Memento-Skills: Let Agents Design Agents](https://arxiv.org/abs/2603.18743)                               | Zhou, Guo, Liu, Yu et al.                          |
 | [gitagent](https://github.com/open-gitagent/gitagent)                                                      | [@shreyaskapale](https://github.com/shreyaskapale) |
 
 ## Notes
 
 - Remotion's license has commercial use restrictions. Lightpanda is AGPL-3.0 — armory wraps these as skills without distributing their binaries.
 - Skills that are pure prompt engineering (e.g., `humanize`, `code-refiner`, `architecture-reviewer`) have no upstream library dependency.
-- The `immune` skill's Cheatsheet/Immune pattern draws from Stephanie Forrest's original Artificial Immune Systems research.
+- The `immune` skill's Cheatsheet/Immune pattern draws from Stephanie Forrest's original Artificial Immune Systems research and aligns with Memento-Skills' stateful-prompt concept (arXiv 2603.18743) — cheatsheet entries act as positive-pattern memory, antibodies as negative-pattern memory.
