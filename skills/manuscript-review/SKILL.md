@@ -19,6 +19,7 @@ metadata:
   category: review
   tags: [manuscript, pre-publication, citation-hygiene, submission]
   difficulty: advanced
+  phase: review
 ---
 
 # Manuscript Review Skill

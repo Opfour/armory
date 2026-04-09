@@ -17,6 +17,7 @@ metadata:
   category: operations
   tags: [env, configuration, validation, dotenv, deployment]
   difficulty: intermediate
+  phase: build
 ---
 
 # Env Validator

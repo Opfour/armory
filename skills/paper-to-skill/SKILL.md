@@ -18,6 +18,7 @@ metadata:
   category: research
   tags: [paper, arxiv, research, skill-generation, methodology-extraction]
   difficulty: advanced
+  phase: build
 ---
 
 # Paper-to-Skill Pipeline

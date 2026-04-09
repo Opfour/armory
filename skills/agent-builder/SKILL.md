@@ -14,6 +14,7 @@ metadata:
   category: development
   tags: [agent-sdk, headless, automation, mcp]
   difficulty: intermediate
+  phase: build
 ---
 
 # Agent Builder - Claude SDK & CLI Expert

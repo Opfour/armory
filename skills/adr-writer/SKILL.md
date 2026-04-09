@@ -16,6 +16,7 @@ metadata:
   category: operations
   tags: [architecture, decision-record, documentation, adr]
   difficulty: intermediate
+  phase: plan
 ---
 
 # ADR Writer

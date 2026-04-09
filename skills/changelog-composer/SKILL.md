@@ -16,6 +16,7 @@ metadata:
   category: content
   tags: [changelog, release-notes, git-history, versioning]
   difficulty: intermediate
+  phase: ship
 ---
 
 # Changelog Composer

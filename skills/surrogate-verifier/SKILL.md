@@ -18,6 +18,7 @@ metadata:
   category: review
   tags: [verification, assertions, testing, co-evolution, diagnostics, eval]
   difficulty: advanced
+  phase: verify
 ---
 
 # Surrogate Verifier

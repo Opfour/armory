@@ -17,6 +17,7 @@ metadata:
   category: development
   tags: [estimation, pert, confidence-interval, planning]
   difficulty: intermediate
+  phase: plan
 ---
 
 # Estimate Calibrator

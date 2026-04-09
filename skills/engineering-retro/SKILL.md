@@ -15,6 +15,7 @@ metadata:
   category: review
   tags: [retrospective, velocity, git-analysis, sprint]
   difficulty: intermediate
+  phase: ship
 ---
 
 # Engineering Retrospective

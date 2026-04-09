@@ -12,6 +12,7 @@ metadata:
   category: data
   tags: [gpu, cuda, vram, pytorch]
   difficulty: advanced
+  phase: build
 ---
 
 # GPU Optimizer

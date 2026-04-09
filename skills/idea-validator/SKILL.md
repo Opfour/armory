@@ -21,6 +21,7 @@ metadata:
   category: review
   tags: [idea-validation, lean-canvas, jtbd, swot]
   difficulty: advanced
+  phase: define
 ---
 
 # Business Idea Validator

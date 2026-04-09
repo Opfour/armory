@@ -16,6 +16,7 @@ metadata:
   category: data
   tags: [benchmarking, performance, comparison, metrics]
   difficulty: intermediate
+  phase: verify
 ---
 
 # Benchmark Runner

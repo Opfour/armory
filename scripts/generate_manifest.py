@@ -169,6 +169,9 @@ def collect_packages(pkg_type: PackageType, repo: str) -> list[dict[str, Any]]:
             difficulty = metadata.get("difficulty")
             if isinstance(difficulty, str) and difficulty:
                 entry["difficulty"] = difficulty
+            phase = metadata.get("phase")
+            if isinstance(phase, str) and phase:
+                entry["phase"] = phase
 
         entries.append(entry)
 

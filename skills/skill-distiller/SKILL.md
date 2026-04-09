@@ -18,6 +18,7 @@ metadata:
   category: development
   tags: [distillation, cross-model, optimization, haiku, deterministic]
   difficulty: advanced
+  phase: build
 ---
 
 # Skill Distiller

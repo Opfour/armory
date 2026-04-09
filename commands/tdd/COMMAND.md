@@ -15,6 +15,7 @@ metadata:
   category: development
   tags: [tdd, testing, red-green-refactor, test-first]
   difficulty: intermediate
+  phase: build
 command:
   syntax: /tdd [function-or-module]
   handler: inline

@@ -20,6 +20,7 @@ metadata:
   category: review
   tags: [research, methodology, claims-evidence, peer-review]
   difficulty: intermediate
+  phase: review
 ---
 
 # Research Paper Critique

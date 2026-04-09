@@ -14,6 +14,7 @@ metadata:
   category: review
   tags: [pre-merge, safety-gate, code-review, checklist]
   difficulty: intermediate
+  phase: review
 ---
 
 # Pre-Landing Review

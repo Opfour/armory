@@ -15,6 +15,7 @@ metadata:
   category: data
   tags: [sql, performance, database, optimization]
   difficulty: intermediate
+  phase: build
 ---
 
 # SQL Optimizer

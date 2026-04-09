@@ -18,6 +18,7 @@ metadata:
   category: review
   tags: [quality, audit, scoring, frontmatter]
   difficulty: intermediate
+  phase: review
 ---
 
 # Package Evaluator

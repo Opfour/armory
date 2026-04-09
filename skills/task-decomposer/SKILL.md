@@ -17,6 +17,7 @@ metadata:
   category: development
   tags: [task-breakdown, dependencies, planning, phased]
   difficulty: intermediate
+  phase: plan
 ---
 
 # Task Decomposer

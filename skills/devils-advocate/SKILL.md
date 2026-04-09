@@ -16,6 +16,7 @@ metadata:
   category: review
   tags: [review, critical-thinking, blind-spots, decision-review, pre-mortem]
   difficulty: intermediate
+  phase: review
 ---
 # Devil's Advocate
 

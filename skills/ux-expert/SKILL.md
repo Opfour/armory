@@ -18,6 +18,7 @@ metadata:
   category: review
   tags: [ux, dashboard, audit, redesign, b2b-saas]
   difficulty: intermediate
+  phase: review
 ---
 # UX Expert
 

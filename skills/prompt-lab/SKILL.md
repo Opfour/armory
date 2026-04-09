@@ -17,6 +17,7 @@ metadata:
   category: development
   tags: [prompt-engineering, evaluation, few-shot, chain-of-thought]
   difficulty: intermediate
+  phase: build
 ---
 
 # Prompt Lab
