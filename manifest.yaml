@@ -1416,6 +1416,50 @@ packages:
     - sonnet
     category: security
     difficulty: advanced
+  - name: skill-librarian
+    version: 1.0.0
+    description: 'Reflective write-phase orchestrator that observes completed task transcripts and proposes additions or augmentations
+      to the armory skill library. Implements the write phase of the Memento-Skills reflective loop (arXiv 2603.18743): given
+      a conversation where novel problem-solving occurred, classify whether an existing skill handled it, an existing skill
+      needs augmentation, or no skill existed and a new one should be drafted. Routes drafts through paper-to-skill''s specification
+      stage and test-engineer''s generate-verify loop, gates on package-evaluator, and opens a pull request tagged for human
+      review. Triggers on: "librarian review", "review this transcript for new skills", "propose a skill from this conversation",
+      "draft skill from transcript", "what skills did we just use", "catalog this workflow", "suggest skill addition", "analyze
+      conversation for skill gaps", "skill-librarian", "reflective skill review". NOT for refining existing skills that are
+      already in progress (use test-engineer directly). NOT for wholesale library reorganization (that is a human decision).
+      NOT for creating skills from research papers (use paper-to-skill directly).'
+    path: agents/skill-librarian
+    source: https://github.com/Mathews-Tom/armory/blob/main/agents/skill-librarian/AGENT.md
+    model: sonnet
+    tags:
+    - memento-skills
+    - reflective-learning
+    - write-phase
+    - skill-generation
+    - sonnet
+    category: development
+    difficulty: advanced
+  - name: skill-router
+    version: 1.0.0
+    description: 'Outcome-weighted package selector that maps a task prompt to the armory packages most likely to handle it
+      successfully, ranked by historical pass rate rather than static description matching. Implements the read phase of the
+      Memento-Skills reflective loop (arXiv 2603.18743): consults dist/router_index.json (built nightly from evals/history.jsonl)
+      to find packages that have historically succeeded on signature-similar tasks, and falls back to the static /route command
+      when no history exists or confidence is low. Triggers on: "route this task", "which skill for this", "best package for",
+      "skill router", "pick the best package", "recommend packages for", "rank packages for this task", "outcome-weighted
+      routing". NOT for static decision-tree lookup (use /route command directly). NOT for installing or managing packages
+      (use skill-library skill).'
+    path: agents/skill-router
+    source: https://github.com/Mathews-Tom/armory/blob/main/agents/skill-router/AGENT.md
+    model: haiku
+    tags:
+    - memento-skills
+    - routing
+    - retrieval
+    - haiku
+    - read-phase
+    category: operations
+    difficulty: beginner
   - name: team-lead
     version: 1.0.0
     description: 'Meta-orchestrator agent that analyzes complex requests, decomposes them into agent-sized tasks, delegates
