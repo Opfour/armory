@@ -45,16 +45,18 @@ jobs:
         run: |
           echo "### Router Index Rebuild" >> "$GITHUB_STEP_SUMMARY"
           if [ -f dist/router_index.json ]; then
-            python -c '
-          import json, pathlib
+            python - <<'PY' >> "$GITHUB_STEP_SUMMARY"
+          import json
+          import pathlib
+
           data = json.loads(pathlib.Path("dist/router_index.json").read_text())
           meta = data["metadata"]
-          print(f"- Built at: {meta[\"built_at\"]}")
-          print(f"- Source entries: {meta[\"source_entries\"]}")
-          print(f"- Unique signatures: {meta[\"unique_signatures\"]}")
-          print(f"- Unique packages: {meta[\"unique_packages\"]}")
-          print(f"- Min samples: {meta[\"min_samples\"]}")
-            ' >> "$GITHUB_STEP_SUMMARY"
+          print(f"- Built at: {meta['built_at']}")
+          print(f"- Source entries: {meta['source_entries']}")
+          print(f"- Unique signatures: {meta['unique_signatures']}")
+          print(f"- Unique packages: {meta['unique_packages']}")
+          print(f"- Min samples: {meta['min_samples']}")
+          PY
           else
             echo "- Index build failed." >> "$GITHUB_STEP_SUMMARY"
             exit 1
