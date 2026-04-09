@@ -1,0 +1,31 @@
+# SkillsBench task schema reference.
+#
+# Every file under evals/skillsbench/tasks/ is a single task with this shape.
+# The runner (scripts/run_skillsbench.py) loads and validates tasks against
+# this schema before executing.
+
+id: string                   # Unique task identifier. Filename stem must match.
+description: string          # One-line human-readable summary.
+category: string             # development | research | review | content | ops
+difficulty: string           # easy | medium | hard
+prompt: string               # The task prompt delivered to the assistant (block).
+
+# Success criterion. Only `assertion` is supported in the seed harness.
+# Additional types (artifact_check, llm_judge) may be added later.
+success_criterion:
+  type: assertion
+  assertions:
+    # Each assertion mirrors the schema from scripts/eval_assertions.py:
+    - type: contains | not_contains | matches_regex | json_path
+      target: string         # Literal, regex, or JSONPath expression
+      weight: 0.0-1.0        # Contribution to the task's weighted score
+  pass_threshold: 0.0-1.0    # Weighted score required to mark the task "pass"
+
+# Execution bounds. The runner enforces these caps per attempt.
+limits:
+  max_turns: int             # Max conversation turns
+  max_tokens: int            # Max total tokens (input + output, approximate)
+  timeout_seconds: int       # Wall-clock cap
+
+# Tags for later analysis. Keep short and consistent.
+tags: [string]

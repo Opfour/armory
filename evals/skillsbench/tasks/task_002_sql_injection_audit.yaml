@@ -1,0 +1,42 @@
+id: task_002_sql_injection_audit
+description: Identify SQL injection risk in a code snippet and recommend remediation.
+category: review
+difficulty: easy
+prompt: |
+  Audit this TypeScript endpoint handler for security issues. Report every
+  issue you find, classify severity, and provide the specific code change
+  required to fix each issue.
+
+  ```typescript
+  export async function GET(request: Request) {
+    const url = new URL(request.url);
+    const userId = url.searchParams.get("id");
+    const query = `SELECT * FROM users WHERE id = '${userId}'`;
+    const result = await db.execute(query);
+    return Response.json(result);
+  }
+  ```
+
+success_criterion:
+  type: assertion
+  assertions:
+    - type: matches_regex
+      target: "(?i)(sql injection|injection attack)"
+      weight: 0.35
+    - type: matches_regex
+      target: "(?i)(critical|high severity)"
+      weight: 0.2
+    - type: matches_regex
+      target: "(?i)(parameterized|prepared statement|parameter binding|\\?)"
+      weight: 0.25
+    - type: not_contains
+      target: "string interpolation is fine"
+      weight: 0.2
+  pass_threshold: 0.75
+
+limits:
+  max_turns: 3
+  max_tokens: 5000
+  timeout_seconds: 120
+
+tags: [security, sql, typescript, review]

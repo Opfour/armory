@@ -1,0 +1,47 @@
+id: task_003_pytest_generation
+description: Generate a pytest test suite for a small pure function with edge cases.
+category: development
+difficulty: easy
+prompt: |
+  Generate a comprehensive pytest test suite for this function. Cover the
+  happy path, at least two edge cases, and at least one error condition.
+  Return only the test file content (no commentary).
+
+  ```python
+  def parse_version(version_string: str) -> tuple[int, int, int]:
+      """Parse a semantic version string like '1.2.3' into (major, minor, patch).
+
+      Raises ValueError if the string is malformed.
+      """
+      parts = version_string.strip().lstrip("v").split(".")
+      if len(parts) != 3:
+          raise ValueError(f"Expected MAJOR.MINOR.PATCH, got {version_string!r}")
+      try:
+          return (int(parts[0]), int(parts[1]), int(parts[2]))
+      except ValueError as exc:
+          raise ValueError(f"Version components must be integers: {exc}") from exc
+  ```
+
+success_criterion:
+  type: assertion
+  assertions:
+    - type: matches_regex
+      target: "def test_\\w+"
+      weight: 0.3
+    - type: matches_regex
+      target: "(?i)(parse_version)"
+      weight: 0.2
+    - type: matches_regex
+      target: "(?i)(pytest\\.raises|with\\s+pytest\\.raises|ValueError)"
+      weight: 0.25
+    - type: matches_regex
+      target: "(?i)(assert\\s+)"
+      weight: 0.25
+  pass_threshold: 0.7
+
+limits:
+  max_turns: 3
+  max_tokens: 5000
+  timeout_seconds: 120
+
+tags: [python, testing, pytest]
