@@ -1,0 +1,47 @@
+id: task_005_migration_risk
+description: Assess the risk of a database migration and recommend a rollout strategy.
+category: review
+difficulty: medium
+prompt: |
+  A team wants to run this migration on a production PostgreSQL database:
+
+  ```sql
+  ALTER TABLE orders ADD COLUMN customer_tier TEXT NOT NULL DEFAULT 'standard';
+  CREATE INDEX CONCURRENTLY idx_orders_customer_tier ON orders(customer_tier);
+  ```
+
+  The `orders` table has approximately 200 million rows and sustains about
+  2000 writes per second during peak hours. The application has zero
+  tolerance for extended downtime and uses a single primary PostgreSQL 14
+  instance with streaming replicas.
+
+  Assess the migration risk. Specifically cover: lock behavior and blocking
+  risk, estimated downtime or degradation, rollback options if it goes
+  wrong, and a safer phased rollout plan.
+
+success_criterion:
+  type: assertion
+  assertions:
+    - type: matches_regex
+      target: "(?i)(access exclusive|full table|lock)"
+      weight: 0.25
+    - type: matches_regex
+      target: "(?i)(downtime|block|degrad)"
+      weight: 0.2
+    - type: matches_regex
+      target: "(?i)(phased|batch|backfill|nullable|default expression)"
+      weight: 0.3
+    - type: matches_regex
+      target: "(?i)(rollback|revert|undo)"
+      weight: 0.15
+    - type: matches_regex
+      target: "(?i)(concurrently|non-blocking)"
+      weight: 0.1
+  pass_threshold: 0.7
+
+limits:
+  max_turns: 5
+  max_tokens: 10000
+  timeout_seconds: 180
+
+tags: [database, migration, risk-assessment, postgresql]

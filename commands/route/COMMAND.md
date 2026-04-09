@@ -29,6 +29,11 @@ When the user invokes `/route [task]`, match their task to the best armory packa
 2. Match to the most specific category below
 3. Recommend the **primary** package and any **complementary** packages
 4. If the MCP armory server is available, cross-reference with `search_packages` for confirmation
+5. **Outcome-weighted routing (optional):** if `dist/router_index.json` exists
+   and the user wants rankings by historical pass rate rather than the static
+   tree, delegate to the `skill-router` agent. The agent falls back to this
+   static tree when the index is missing or confidence is low. See
+   `agents/skill-router/AGENT.md`.
 
 ---
 

@@ -155,6 +155,8 @@ Orchestrator agents compose skills and other agents into multi-phase workflows. 
 | [skill-distiller](skills/skill-distiller/)             | Distill Opus-quality skill packages into deterministic, Haiku-executable workflows via trace-driven distillation |
 | [surrogate-verifier](skills/surrogate-verifier/)       | Information-isolated verification generating structured test assertions and failure diagnostics for skills        |
 
+> _Research lineage:_ the EvoSkills pipeline (arXiv 2604.01687) handles offline co-evolutionary refinement. The `immune` skill together with armory's auto-memory system implements the **stateful-prompt** concept from Memento-Skills (arXiv 2603.18743) — the read-write reflective loop for continual learning without parameter updates.
+
 ### Skills — Deprecated
 
 Skills below are superseded by base model capabilities. They remain installable but receive no further updates.

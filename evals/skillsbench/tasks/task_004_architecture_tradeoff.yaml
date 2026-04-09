@@ -1,0 +1,47 @@
+id: task_004_architecture_tradeoff
+description: Evaluate a concrete architecture tradeoff with structured reasoning.
+category: review
+difficulty: medium
+prompt: |
+  A team is choosing between two approaches for session storage in a new
+  web application:
+
+  A) Server-side sessions in Redis, with a session ID stored in an
+     httpOnly, Secure, SameSite=strict cookie.
+  B) Stateless JWTs signed with RS256, stored in localStorage, refreshed
+     via a `/refresh` endpoint.
+
+  The application expects 50k daily active users, runs on 3 web servers
+  behind a load balancer, and will integrate with a single-page React
+  frontend. Security is important but not life-critical.
+
+  Produce a structured comparison that covers: security tradeoffs (at
+  least 3 distinct points), operational complexity, horizontal scaling,
+  and a final recommendation with justification.
+
+success_criterion:
+  type: assertion
+  assertions:
+    - type: matches_regex
+      target: "(?i)(security|xss|csrf|token theft)"
+      weight: 0.25
+    - type: matches_regex
+      target: "(?i)(horizontal scal|sticky session|stateless)"
+      weight: 0.2
+    - type: matches_regex
+      target: "(?i)(localstorage.*risk|httponly|cookie)"
+      weight: 0.2
+    - type: matches_regex
+      target: "(?i)(recommend|suggest|prefer|choose)"
+      weight: 0.2
+    - type: matches_regex
+      target: "(?i)(refresh token|rotation|expir)"
+      weight: 0.15
+  pass_threshold: 0.7
+
+limits:
+  max_turns: 5
+  max_tokens: 10000
+  timeout_seconds: 180
+
+tags: [architecture, security, tradeoff]

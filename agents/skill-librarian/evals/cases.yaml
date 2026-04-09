@@ -1,0 +1,76 @@
+cases:
+  # --- Positive cases ---
+  - id: review_transcript_for_new_skill
+    prompt: "Librarian review: we just spent 15 turns solving a database migration rollback problem with ad-hoc sql and manual rollback scripts. Should this become a skill?"
+    fixtures: []
+    rubric:
+      - "Activates skill-librarian agent"
+      - "Runs Phase 1 transcript ingestion and extracts the task under reflection"
+      - "Produces Phase 2 classification verdict with evidence"
+      - "If draft_new or augment_existing, proceeds through Phase 3-6"
+      - "Does not directly edit any skill file — drafts only"
+    trigger_expected: true
+
+  - id: propose_skill_from_conversation
+    prompt: "Propose a skill from this conversation if the workflow is reusable. We just built a custom approach for auditing GraphQL schemas for deprecation risks."
+    fixtures: []
+    rubric:
+      - "Performs Phase 2 overlap check against manifest.yaml"
+      - "If no overlap, drafts new skill spec via paper-to-skill extractor stage"
+      - "Hands off to test-engineer for generate-verify loop"
+      - "Opens PR only after package-evaluator >= 70% gate"
+    trigger_expected: true
+
+  - id: augment_existing_skill_from_gap
+    prompt: "We kept working around a gap in the code-reviewer skill — it never checks for SQL injection in TypeScript string templates. Librarian, suggest an augmentation."
+    fixtures: []
+    rubric:
+      - "Classifies as augment_existing with target skill code-reviewer"
+      - "Checks for open PRs labeled evoskills-in-progress on code-reviewer"
+      - "Drafts augmentation, not new skill"
+      - "Runs quality gate before opening PR"
+    trigger_expected: true
+
+  - id: no_action_verdict_on_trivial
+    prompt: "Skill-librarian: review this conversation. We just ran a git status and committed three files."
+    fixtures: []
+    rubric:
+      - "Classifies as no_action (trivial task, nothing to reflect on)"
+      - "Exits without invoking paper-to-skill or test-engineer"
+      - "Returns only the decision log"
+    trigger_expected: true
+
+  - id: deferred_verdict_on_concurrent_refinement
+    prompt: "Librarian review: we found a gap in the debug-investigator skill that should be augmented. There is already an open PR refining debug-investigator."
+    fixtures: []
+    rubric:
+      - "Detects the evoskills-in-progress label on the existing PR"
+      - "Returns verdict deferred per Rule 2 (librarian-test-engineer ownership boundary)"
+      - "Does not spawn test-engineer"
+      - "Logs the conflict in the decision log"
+    trigger_expected: true
+
+  # --- Negative cases ---
+  - id: refine_existing_skill_directly
+    prompt: "Refine the existing code-reviewer skill to be faster. Run 5 rounds of co-evolutionary refinement."
+    fixtures: []
+    rubric:
+      - "Direct refinement of an existing skill is test-engineer's job, not librarian"
+      - "Should activate test-engineer agent, not skill-librarian"
+    trigger_expected: false
+
+  - id: create_skill_from_arxiv_paper
+    prompt: "Create a skill from the arXiv paper on retrieval-augmented generation. Use the paper's methodology."
+    fixtures: []
+    rubric:
+      - "Creating skills from papers is paper-to-skill's job, not librarian"
+      - "Librarian reviews transcripts, not papers"
+    trigger_expected: false
+
+  - id: reorganize_skill_directory_structure
+    prompt: "Reorganize the skills directory — move all review-related skills into a review/ subdirectory and update manifest.yaml."
+    fixtures: []
+    rubric:
+      - "Library reorganization is a human decision, not a librarian task"
+      - "Librarian drafts skills only, it does not restructure the repo"
+    trigger_expected: false

@@ -297,6 +297,57 @@ metadata:
   phase: review
 ```
 
+## Task-Conditioned Entries (Memento-Skills)
+
+The `immune` skill (v3.1.0+) supports optional task-conditioned retrieval,
+which implements the read phase of the Memento-Skills reflective loop
+(arXiv 2603.18743). Antibodies and cheatsheet strategies may carry an
+optional `triggers` field that filters and ranks them per-task, so that
+unrelated entries are excluded from the active context.
+
+**Adding a task-conditioned entry to immune memory:**
+
+```json
+{
+  "id": "AB-042",
+  "domains": ["code"],
+  "pattern": "SQL injection via string concatenation",
+  "severity": "critical",
+  "correction": "Use parameterized queries (?, $1, bind)",
+  "seen_count": 12,
+  "first_seen": "2026-03-01",
+  "last_seen": "2026-04-05",
+  "triggers": {
+    "task_signatures": ["code query review sql", "audit code sql"],
+    "domains": ["code"]
+  }
+}
+```
+
+**Field reference:**
+
+| Field                      | Type          | Purpose                                                                                             |
+| -------------------------- | ------------- | --------------------------------------------------------------------------------------------------- |
+| `triggers.task_signatures` | `list[str]`   | Canonical task signatures where this entry has historically been relevant. Use `task_signature()`. |
+| `triggers.domains`         | `list[str]`   | Hard filter — prompts outside these domains skip the entry entirely (unless the list contains `_global`). |
+
+**Back-compatibility:** entries without a `triggers` field behave as
+always-on (the v3.0.0 default). Adding `triggers` is purely additive — do
+not remove or change existing entries without understanding downstream
+scanner behavior.
+
+**Producing canonical signatures:**
+
+```bash
+python -c 'from scripts.task_signature import task_signature; print(task_signature("Review this SQL query for injection"))'
+# -> "injection query review sql"
+```
+
+The signature string is the space-joined, sorted set of normalized content
+tokens. Always produce signatures through `scripts.task_signature` rather
+than writing them by hand, so that the same normalization rules apply at
+write time and at retrieval time.
+
 ## Optional Content Sections
 
 Skills and agents may include three optional sections that improve agent compliance. These are recommended for review, quality, and security packages.

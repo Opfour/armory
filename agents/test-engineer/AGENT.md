@@ -285,3 +285,12 @@ When spawned by another agent (e.g., `team-lead`, or `paper-to-skill`):
 8. Test escalation triggers only when surrogate passes but oracle fails — not on every failure
 9. Immune system feedback is advisory — the generator decides which patterns to apply
 10. The evolution log is append-only within a session — never overwrite prior iteration records
+11. **Ownership boundary with `skill-librarian` (Memento-Skills integration):** the
+    librarian drafts new skills and augmentations; test-engineer refines them.
+    While test-engineer is actively refining a skill (PR labeled
+    `evoskills-in-progress`), the librarian will not queue a concurrent draft
+    against the same target. Conversely, test-engineer never originates new
+    skills without an upstream specification — either from a human request,
+    `paper-to-skill`, or `skill-librarian`. This prevents the two agents from
+    silently racing on the same files. See `agents/skill-librarian/AGENT.md`
+    Rule 2 for the matching constraint.

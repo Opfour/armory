@@ -46,6 +46,7 @@ site/dist/
 # ── Skill packaging ──────────────────────────
 *.skill
 evals/results/
+evals/skillsbench/results/
 
 # ── Editors & IDE ─────────────────────────────
 .vscode/

@@ -1,0 +1,81 @@
+name: Router Index
+
+on:
+  # Nightly rebuild picks up any new eval history appended during the day.
+  schedule:
+    - cron: '15 3 * * *'  # 03:15 UTC nightly
+  # On-demand rebuild from the Actions tab.
+  workflow_dispatch:
+  # Rebuild whenever the history log or the builder script itself changes.
+  push:
+    branches:
+      - main
+    paths:
+      - 'evals/history.jsonl'
+      - 'scripts/build_router_index.py'
+      - 'scripts/task_signature.py'
+
+jobs:
+  build:
+    name: Build router index from eval history
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+
+      - name: Set up Python 3.12
+        uses: actions/setup-python@a309ff8b426b58ec0e2a45f0f869d46889d02405 # v6.2.0
+        with:
+          python-version: '3.12'
+
+      - name: Install dependencies
+        run: pip install pyyaml
+
+      - name: Build router index
+        run: |
+          python scripts/build_router_index.py \
+            --history evals/history.jsonl \
+            --output dist/router_index.json \
+            --min-samples 3
+
+      - name: Summary
+        run: |
+          echo "### Router Index Rebuild" >> "$GITHUB_STEP_SUMMARY"
+          if [ -f dist/router_index.json ]; then
+            python -c '
+          import json, pathlib
+          data = json.loads(pathlib.Path("dist/router_index.json").read_text())
+          meta = data["metadata"]
+          print(f"- Built at: {meta[\"built_at\"]}")
+          print(f"- Source entries: {meta[\"source_entries\"]}")
+          print(f"- Unique signatures: {meta[\"unique_signatures\"]}")
+          print(f"- Unique packages: {meta[\"unique_packages\"]}")
+          print(f"- Min samples: {meta[\"min_samples\"]}")
+            ' >> "$GITHUB_STEP_SUMMARY"
+          else
+            echo "- Index build failed." >> "$GITHUB_STEP_SUMMARY"
+            exit 1
+          fi
+
+      - name: Upload router index artifact
+        uses: actions/upload-artifact@b4b15b8c7c6ac21ea08fcf65892d2ee8f75cf882 # v4.4.3
+        with:
+          name: router-index
+          path: dist/router_index.json
+          retention-days: 14
+
+      - name: Check index gate for Phase 3 (≥500 entries)
+        run: |
+          python - <<'PY'
+          import json, pathlib, sys
+          data = json.loads(pathlib.Path("dist/router_index.json").read_text())
+          source = data["metadata"]["source_entries"]
+          gate = 500
+          if source < gate:
+              print(f"::warning::Router index below P3 gate ({source}/{gate}). Skill-router remains advisory until the gate is met.")
+          else:
+              print(f"Router index P3 gate met: {source} >= {gate} entries.")
+          PY

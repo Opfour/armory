@@ -1,0 +1,40 @@
+id: task_001_code_review_simple
+description: Review a small Python function for a concrete bug and suggest a fix.
+category: review
+difficulty: easy
+prompt: |
+  Review this Python function and identify any bugs. If you find a bug,
+  explain what it is, why it happens, and provide a corrected version.
+
+  ```python
+  def get_user_balance(user_id, accounts):
+      for account in accounts:
+          if account["user_id"] == user_id:
+              return account["balance"]
+      return 0
+  ```
+
+  The expected behavior: return the balance for the matching user, or None
+  if no account exists for that user. The current implementation has at
+  least one defect — find it and fix it.
+
+success_criterion:
+  type: assertion
+  assertions:
+    - type: matches_regex
+      target: "(?i)(return\\s+none|instead of 0|should return none)"
+      weight: 0.4
+    - type: matches_regex
+      target: "(?i)(return none|return\\s+None)"
+      weight: 0.3
+    - type: contains
+      target: "def get_user_balance"
+      weight: 0.3
+  pass_threshold: 0.7
+
+limits:
+  max_turns: 3
+  max_tokens: 5000
+  timeout_seconds: 120
+
+tags: [python, bug-fix, review]
