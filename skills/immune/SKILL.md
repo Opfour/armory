@@ -64,6 +64,51 @@ If no inline text is provided, scan the last substantive output in the conversat
 
 **Domain auto-detection:** Read `config.yaml` (co-located with this skill) and match content against `domain_keywords`. If no strong match, use `["_global"]`. If single `domain` string provided, wrap in array: `domains = [domain]`.
 
+## Task-Conditioned Retrieval (v3.1.0+)
+
+Antibodies and cheatsheet strategies may carry an optional `triggers` field for
+per-task filtering. This implements the read phase of the Memento-Skills
+reflective loop (arXiv 2603.18743) — entries are ranked by lexical overlap
+between the current task and their historical contexts.
+
+**Schema (additive, optional):**
+
+```json
+{
+  "id": "AB-042",
+  "domains": ["code"],
+  "pattern": "SQL injection via string concatenation",
+  "severity": "critical",
+  "correction": "Use parameterized queries",
+  "triggers": {
+    "task_signatures": ["code query review sql", "audit code sql"],
+    "domains": ["code"]
+  }
+}
+```
+
+**Back-compat:** entries without `triggers` behave as always-on (the v3.0.0
+behavior). The `task_conditioned_retrieval: true` flag in `config.yaml` enables
+the filter. When disabled, all entries load regardless of task.
+
+**Ranking helper:** `scripts/retrieve.py` implements the scoring logic. Callers
+(including the scanner agent, the skill-librarian in P2, and the skill-router
+in P3) invoke `retrieve(prompt, entries, active_domains, historical_success)`
+to obtain the ranked subset before tier classification. Scoring uses Jaccard
+similarity over normalized task signatures from `scripts/task_signature.py`,
+multiplied by an optional per-entry success rate derived from
+`evals/history.jsonl`.
+
+During load (Phase 0 cheatsheet, Phase 1 antibodies), after the domain filter
+and before Hot/Cold tier classification, apply the retrieve step:
+
+1. Compute `task_signature(prompt)` for the current task.
+2. Pass entries through `retrieve(...)` with the active domains set.
+3. Feed only the returned subset into the tier classification below.
+
+Entries filtered out at retrieval never reach Hot/Cold — this is what keeps
+the scan context lean and task-focused.
+
 ## Execution
 
 ### Step 0 — Cheatsheet Injection (positive patterns)

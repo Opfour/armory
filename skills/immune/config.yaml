@@ -6,7 +6,7 @@
 # ============================================================
 
 immune:
-  version: "3.0.0"
+  version: "3.1.0"
   scan_model: "haiku"
   memory_path: "immune_memory.json"
   cheatsheet_path: "cheatsheet_memory.json"
@@ -14,6 +14,11 @@ immune:
   auto_add_strategies: true
   severity_levels: [critical, warning, info]
   domains_multi: true  # antibodies/strategies use "domains" array, not single "domain"
+  # Task-conditioned retrieval (Memento-Skills alignment, arXiv 2603.18743).
+  # When enabled, antibodies and strategies with an optional `triggers` field
+  # are filtered and ranked per-task via scripts/retrieve.py. Entries without
+  # `triggers` remain always-on for back-compat with v3.0.0 memory files.
+  task_conditioned_retrieval: true
 
 # Tiered memory — keeps active set small for optimal Haiku performance
 # Benchmark showed sweet spot at 13-20 antibodies (F1=0.94)
