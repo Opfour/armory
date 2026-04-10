@@ -15,7 +15,7 @@ description:
 
   '
 metadata:
-  version: 1.1.1
+  version: 1.2.0
   category: visualization
   tags: [video, manim, animation, explainer]
   difficulty: advanced
@@ -265,6 +265,76 @@ If LaTeX is not available, avoid `MathTex` and `Tex`. Use `Text` with Unicode ma
 # Instead of: MathTex(r"\frac{1}{n} \sum_{i=1}^{n} x_i")
 # Use:        Text("(1/n) Σ xᵢ", font_size=36)
 ```
+
+## Agentic Mode (Opt-In)
+
+Single-shot mode (default) is fast and cheap — the coder writes scene.py directly from a concept. Use agentic mode for production-quality renders where layout correctness and asset resolution matter enough to justify additional LLM and VLM calls.
+
+### Pipeline
+
+```
+concept
+  └─► plan_storyboard.py ──► storyboard.json
+            │
+            ▼
+      fetch_assets.py (optional)
+            │
+            ▼
+      coder writes scene.py
+            │
+            ▼
+      render_video.py --max-fix-attempts N
+            │  ▲
+            │  └─ LLM fixup loop (on failure, up to N retries)
+            ▼
+      critic_pass.py --critic
+            │  ▲
+            │  └─ VLM layout patch (1 call with M image blocks)
+            ▼
+       final MP4
+```
+
+### Flag Reference
+
+| Script            | Flag                  | Default     | Hard cap | Effect                                                        | Cost impact                                    |
+| ----------------- | --------------------- | ----------- | -------- | ------------------------------------------------------------- | ---------------------------------------------- |
+| `render_video.py` | `--max-fix-attempts`  | `0`         | `3`      | LLM-assisted auto-fix on render failure; 0 = disabled         | +1 LLM call per retry                          |
+| `critic_pass.py`  | `--critic`            | disabled    | —        | Enable the VLM critic pass; noop without this flag            | +1 VLM call (N image blocks)                   |
+| `critic_pass.py`  | `--critic-budget`     | `50000`     | —        | Token budget for critic call; aborts loudly if exceeded       | Sets ceiling; use to prevent runaway spend     |
+| `critic_pass.py`  | `--frames`            | `5`         | `10`     | Frames sampled from the rendered video for the critic         | More frames → higher token cost per critic run |
+| `fetch_assets.py` | `--adapter`           | `none`      | —        | Asset backend: `local`, `iconfinder`, `none`                  | `iconfinder` adds external API calls           |
+| `fetch_assets.py` | `--asset-dir`         | —           | —        | Root directory for `--adapter=local`; required with local     | None                                           |
+
+### Cost Tradeoffs
+
+The fixup loop adds one LLM call per failed render attempt — with `--max-fix-attempts 3` you may pay up to 3 extra calls before the loop exhausts or succeeds. The critic pass adds one VLM call containing N PNG image blocks (default 5, max 10); each frame adds roughly 1 token per 800 bytes of base64-encoded PNG, so complex scenes at high resolution are materially more expensive. Setting `--critic-budget` to a conservative token ceiling (e.g. `20000`) causes `BudgetExceededError` before the API call is made, so you never pay for an accidentally oversized request — the error is loud and non-recoverable by design.
+
+### Invocation Example
+
+```bash
+# 1. Plan
+python3 scripts/plan_storyboard.py "explain transformer self-attention" \
+    --output storyboard.json
+
+# 2. (Optional) Fetch assets
+python3 scripts/fetch_assets.py storyboard.json \
+    --adapter local --asset-dir ./assets --output resolved.json
+
+# 3. Coder writes scene.py (Claude writes this from storyboard.json)
+
+# 4. Render with auto-fix
+python3 scripts/render_video.py scene.py AttentionScene \
+    --quality high --format mp4 --max-fix-attempts 3 \
+    --output final.mp4
+
+# 5. Critic pass
+python3 scripts/critic_pass.py scene.py final.mp4 \
+    --critic --critic-budget 40000 --frames 5
+```
+
+### Attribution
+
+Agentic pipeline design (storyboard planner, auto-fix loop, VLM critic) is adapted from Code2Video (arXiv 2510.01174, MIT). See [`references/code2video/ATTRIBUTION.md`](references/code2video/ATTRIBUTION.md) for vendoring details and re-sync policy.
 
 ## Limitations
 

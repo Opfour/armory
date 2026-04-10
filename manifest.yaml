@@ -190,7 +190,7 @@ packages:
     category: business
     difficulty: intermediate
   - name: concept-to-video
-    version: 1.1.1
+    version: 1.2.0
     description: 'Turn any concept into an animated explainer video using Manim (Python). Use whenever the user wants animated
       visualizations, motion graphics, or video output (MP4/GIF) for technical concepts. Covers: architecture animations,
       data flows, algorithm step-throughs, pipeline explainers, math proofs, comparisons, agent interactions, training loops,
