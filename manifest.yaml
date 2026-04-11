@@ -493,6 +493,22 @@ packages:
     complements:
     - competitive-analyzer
     - idea-validator
+  - name: marp-slides
+    version: 1.0.0
+    description: 'Author MARP markdown slide decks exportable to PDF, PPTX, and HTML via marp-cli. Covers Marpit directives,
+      custom CSS themes, SVG chart recipes, and dashboard components. Triggers on: "marp", "marp deck", "markdown slides",
+      "slides from markdown", "marp-cli", "pdf from markdown", "pptx from markdown".'
+    path: skills/marp-slides
+    source: https://github.com/Mathews-Tom/armory/blob/main/skills/marp-slides/SKILL.md
+    tags:
+    - slides
+    - presentation
+    - marp
+    - markdown
+    - pdf
+    - pptx
+    category: visualization
+    difficulty: intermediate
   - name: mcp-to-skill
     version: 1.1.1
     description: 'Converts MCP servers into on-demand skills to cut context window usage, classifying each tool by replacement

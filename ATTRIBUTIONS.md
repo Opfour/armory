@@ -32,6 +32,7 @@ Tools, libraries, and projects that armory packages wrap, depend on, or were ins
 | **KaTeX**                                | [KaTeX/KaTeX](https://github.com/KaTeX/KaTeX)                                                                 | MIT                       | `md-to-pdf`                          |
 | **Mermaid**                              | [mermaid-js/mermaid](https://github.com/mermaid-js/mermaid)                                                   | MIT                       | `md-to-pdf`, `architecture-diagram`  |
 | **Playwright** (Microsoft)               | [microsoft/playwright](https://github.com/microsoft/playwright)                                               | Apache-2.0                | `qa-systematic`                      |
+| **Marp** (marp-team)                     | [marp-team/marpit](https://github.com/marp-team/marpit) · [marp-team/marp-core](https://github.com/marp-team/marp-core) · [marp-team/marp-cli](https://github.com/marp-team/marp-cli) | MIT                       | `marp-slides`                        |
 
 ## Conceptual Inspiration
 
