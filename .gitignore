@@ -63,3 +63,12 @@ Thumbs.db
 # ── Exceptions ────────────────────────────────
 !.env.example
 !*.tfvars.example
+
+# Agentic Systems
+.agent
+.claude/
+.gemini
+.opencode/
+
+# Developer workspace
+.docs/
