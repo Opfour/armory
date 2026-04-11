@@ -34,6 +34,46 @@ Tools, libraries, and projects that armory packages wrap, depend on, or were ins
 | **Playwright** (Microsoft)               | [microsoft/playwright](https://github.com/microsoft/playwright)                                               | Apache-2.0                | `qa-systematic`                      |
 | **Marp** (marp-team)                     | [marp-team/marpit](https://github.com/marp-team/marpit) · [marp-team/marp-core](https://github.com/marp-team/marp-core) · [marp-team/marp-cli](https://github.com/marp-team/marp-cli) | MIT                       | `marp-slides`                        |
 
+## Vendoring Records
+
+Records of upstream content that was copied or adapted directly into armory skills, with pinned commits and re-sync policies. Each record documents exactly what was taken, what was reimplemented from paper descriptions, and what was skipped.
+
+### Code2Video — used by `concept-to-video`
+
+**Paper:** [Code2Video: A Code-Centric Paradigm for Educational Video Generation](https://arxiv.org/abs/2510.01174)
+**Authors:** Anno Yanzhe Chen et al., Show Lab, National University of Singapore
+**Venue:** NeurIPS 2025 Workshop on Deep Learning for Code (DL4C)
+**Upstream repo:** [showlab/Code2Video](https://github.com/showlab/Code2Video)
+**License:** MIT (text preserved at `skills/concept-to-video/references/code2video/LICENSE`)
+**Pinned commit:** `f579f1e527f9d6684eb581853f8739b6b39f2914`
+
+**What we vendored (prompt logic only — no code):**
+
+The three prompt templates in `skills/concept-to-video/references/code2video/` are adapted from the following upstream files, with variable names and output schemas rewritten for armory's `concept-to-video` schema:
+
+| Armory file  | Upstream source(s)                       |
+|--------------|------------------------------------------|
+| `planner.md` | `prompts/stage1.py`, `prompts/stage2.py` |
+| `coder.md`   | `prompts/stage3.py`                      |
+| `critic.md`  | `prompts/stage4.py`                      |
+
+The upstream repo structures prompts as Python functions returning f-strings. We extracted the prompt text, adapted variable names to match our schema, and reformatted as markdown template files. No upstream Python code is included.
+
+**What we reimplemented (described in paper, no code copied):**
+
+- **Auto-fix loop** (paper §3.3): captures `manim render` stderr, extracts offending line range, calls the coder fixup prompt, patches the scene file in-place, retries up to N times. Lives in `scripts/render_video.py`, uses Python `subprocess`.
+- **VLM critic loop** (paper §3.4): samples rendered frames, sends to a vision model with the critic prompt, receives anchor-based layout patches, re-renders. Calls Claude vision or Gemini via the existing Anthropic SDK — not Code2Video's custom wrapper.
+
+**What we skipped:**
+
+- **MMMC benchmark** (`eval_TQ.py`, `eval_AES.py`): research evaluation harness, not relevant to a production skill. Would belong in `evals/skillsbench/` if ever adopted.
+- **TeachQuiz metric**: research artifact — no end-user value.
+- **IconFinder integration**: broke October 2025 per the upstream README. Replaced by the pluggable asset sourcing design in P4 (`scripts/fetch_assets.py`), which defaults to local SVG directories with IconFinder as an optional API-key-gated adapter.
+- **Shell entry points** (`run_agent.sh`, `run_agent_single.sh`): our entry point is the SKILL.md workflow, not shell scripts.
+- **3D ThreeDScene support**: excluded upstream and here; unreliable in headless containers.
+
+**Re-sync policy:** Prompt templates are pinned to the commit SHA above. Re-sync opportunistically when the upstream repo makes substantive prompt changes — do not auto-update. Compare diffs against the pinned commit before merging any upstream changes.
+
 ## Conceptual Inspiration
 
 | Concept                                        | Source                                                                                                                  | Used by                                  |
