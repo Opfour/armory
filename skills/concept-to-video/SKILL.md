@@ -319,9 +319,7 @@ python3 scripts/critic_pass.py scene.py final.mp4 \
     --critic --critic-budget 40000 --frames 5
 ```
 
-### Attribution
-
-Agentic pipeline design (storyboard planner, auto-fix loop, VLM critic) is adapted from Code2Video (arXiv 2510.01174, MIT). See [`references/code2video/ATTRIBUTION.md`](references/code2video/ATTRIBUTION.md) for vendoring details and re-sync policy.
+Agentic pipeline design (storyboard planner, auto-fix loop, VLM critic) is adapted from Code2Video (arXiv 2510.01174, MIT). Vendored prompt templates live in `references/code2video/` alongside the upstream LICENSE. Full vendoring record, pinned commit, and re-sync policy are tracked in root [`ATTRIBUTIONS.md`](../../ATTRIBUTIONS.md#code2video--used-by-concept-to-video).
 
 ## Limitations
 
