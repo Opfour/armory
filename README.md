@@ -269,7 +269,28 @@ uv run scripts/install.py
 
 Displays a version-aware table of all packages, detects installed versions, and lets you select which to install or upgrade. Profiles install curated bundles of packages across all types.
 
-**Option 3 — Manual**
+**Option 3 — Claude Code plugin marketplace (skills, agents, commands only)**
+
+```bash
+claude plugin marketplace add Mathews-Tom/armory
+/plugin install armory
+```
+
+This uses Claude Code's native plugin system and loads a subset of armory's catalog.
+
+| Package type | Supported via plugin marketplace |
+| ------------ | -------------------------------- |
+| skills       | ✅ yes                            |
+| agents       | ✅ yes                            |
+| commands     | ✅ yes                            |
+| hooks        | ❌ no — requires `npx skills` or the profile installer |
+| rules        | ❌ no — armory-specific type, not a Claude Code plugin concept |
+| utilities    | ❌ no — armory-specific type, not a Claude Code plugin concept |
+| presets      | ❌ no — use `just install-profile` instead |
+
+For the full catalog across all seven package types, use Option 1 (Skills CLI) or Option 2 (profile installer).
+
+**Option 4 — Manual**
 
 Clone the repo and symlink individual package folders:
 
