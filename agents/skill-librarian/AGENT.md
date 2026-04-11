@@ -4,19 +4,16 @@ type: agent
 description:
   'Reflective write-phase orchestrator that observes completed task transcripts
   and proposes additions or augmentations to the armory skill library. Implements
-  the write phase of the Memento-Skills reflective loop (arXiv 2603.18743): given
-  a conversation where novel problem-solving occurred, classify whether an existing
-  skill handled it, an existing skill needs augmentation, or no skill existed and
-  a new one should be drafted. Routes drafts through paper-to-skill''s specification
-  stage and test-engineer''s generate-verify loop, gates on package-evaluator,
-  and opens a pull request tagged for human review. Triggers on: "librarian review",
+  the write phase of the Memento-Skills reflective loop (arXiv 2603.18743):
+  classifies a conversation as handled by an existing skill, needing augmentation,
+  or requiring a new draft. Routes drafts through paper-to-skill''s specification
+  stage and test-engineer''s generate-verify loop, gates on package-evaluator, and
+  opens a pull request tagged for human review. Triggers on: "librarian review",
   "review this transcript for new skills", "propose a skill from this conversation",
-  "draft skill from transcript", "what skills did we just use", "catalog this workflow",
-  "suggest skill addition", "analyze conversation for skill gaps", "skill-librarian",
-  "reflective skill review". NOT for refining existing skills that are already in
-  progress (use test-engineer directly). NOT for wholesale library reorganization
-  (that is a human decision). NOT for creating skills from research papers (use
-  paper-to-skill directly).
+  "draft skill from transcript", "catalog this workflow", "suggest skill addition",
+  "analyze conversation for skill gaps", "reflective skill review". NOT for
+  refining in-progress skills (use test-engineer directly) or creating skills from
+  research papers (use paper-to-skill directly).
 
   '
 model: sonnet
