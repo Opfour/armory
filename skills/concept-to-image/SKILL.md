@@ -109,7 +109,9 @@ python3 scripts/render_to_image.py <input.html> <output.png|.svg> [--width 1200]
 
 ### PNG export
 
-Uses Playwright to launch headless Chromium and screenshot the `.canvas` element at the specified scale factor. Scale 2 produces retina-quality output (e.g., 1200×630 CSS pixels → 2400×1260 PNG).
+Uses Playwright to launch headless Chromium and screenshot the `.canvas` element at the specified scale factor. Scale 2 produces retina-quality output (e.g., 1200×630 CSS pixels → 2400×1260 PNG ≈ 3.02 MP).
+
+> **Opus 4.7 feedback loop:** Retina-scale exports (e.g., 2400×1260) fit within Opus 4.7's ~3.75 MP vision ceiling, so you can feed the rendered PNG back to the model for iterate-by-critique loops without downsampling. Under Opus 4.6 these outputs would have been downscaled on ingestion.
 
 ### SVG export
 

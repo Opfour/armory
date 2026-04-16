@@ -117,6 +117,8 @@ md = MarkItDown(llm_client=client, llm_model="claude-sonnet-4-6")
 result = md.convert("presentation.pptx")
 ```
 
+> **Opus 4.7 vision ceiling:** Opus 4.7 accepts images up to 2,576 pixels on the long edge (~3.75 MP), roughly 3× prior Claude models. When routing image-heavy documents through `llm_model="claude-opus-4-7"`, retain higher-resolution source images rather than pre-downsampling — text in screenshots and diagrams that previously required OCR may now be readable directly.
+
 ## Error Handling
 
 | Severity     | Condition                                     | Action                                                           |
