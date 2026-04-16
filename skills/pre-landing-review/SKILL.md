@@ -15,6 +15,8 @@ Gate-oriented safety audit for code changes before landing. Uses a structured ch
 
 **Distinct from `pr-review`**: pr-review is a multi-dimension code quality review. This skill is a **gate-oriented safety audit** — it uses an external checklist with two-pass severity triage and a blocking/non-blocking classification.
 
+> **Native alternative:** Claude Code's `/ultrareview` runs a dedicated native review session optimized for bug-finding (Anthropic ships three free per month on Pro/Max plans at Opus 4.7's launch). Use this skill for checklist-driven, gate-oriented blocking classification with a documented triage protocol; use `/ultrareview` for lightweight bug-hunting on a single change.
+
 ## Workflow
 
 ### 1. Determine Diff
