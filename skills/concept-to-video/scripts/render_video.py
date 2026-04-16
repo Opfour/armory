@@ -24,25 +24,23 @@ from datetime import datetime, timezone
 from pathlib import Path
 
 QUALITY_MAP = {
-    "low":    ("-ql",  "480p15"),
-    "medium": ("-qm",  "720p30"),
-    "high":   ("-qh",  "1080p60"),
-    "4k":     ("-qk",  "2160p60"),
+    "low": ("-ql", "480p15"),
+    "medium": ("-qm", "720p30"),
+    "high": ("-qh", "1080p60"),
+    "4k": ("-qk", "2160p60"),
 }
 
 FORMAT_MAP = {
-    "mp4":  "--format=mp4",
-    "gif":  "--format=gif",
+    "mp4": "--format=mp4",
+    "gif": "--format=gif",
     "webm": "--format=webm",
-    "png":  "--format=png",   # renders each frame as PNG sequence
+    "png": "--format=png",  # renders each frame as PNG sequence
 }
 
 _MAX_FIX_ATTEMPTS_HARD_CAP = 3
 
 # Match lines like:  File "/path/to/file.py", line 42, in ...
-_TRACEBACK_LINE_RE = re.compile(
-    r'File "([^"]+)", line (\d+)'
-)
+_TRACEBACK_LINE_RE = re.compile(r'File "([^"]+)", line (\d+)')
 
 # Match the exception class on the last non-blank line of stderr
 _EXCEPTION_CLASS_RE = re.compile(
@@ -51,7 +49,9 @@ _EXCEPTION_CLASS_RE = re.compile(
 )
 
 
-def find_rendered_file(media_dir: Path, scene_name: str, quality_dir: str, fmt: str) -> Path | None:
+def find_rendered_file(
+    media_dir: Path, scene_name: str, quality_dir: str, fmt: str
+) -> Path | None:
     """
     Locate the rendered file in Manim's nested output structure.
     Manim outputs to: media/videos/<script_name>/<quality_dir>/<SceneName>.<ext>
@@ -81,7 +81,9 @@ def ensure_manim_installed() -> bool:
     try:
         result = subprocess.run(
             [sys.executable, "-c", "import manim; print(manim.__version__)"],
-            capture_output=True, text=True, timeout=10
+            capture_output=True,
+            text=True,
+            timeout=10,
         )
         if result.returncode == 0:
             print(f"Manim version: {result.stdout.strip()}")
@@ -178,7 +180,9 @@ def run_with_autofix(
         return result
 
     original_result = result
-    log_path = scene_path.with_suffix("").with_name(scene_path.stem + ".render-log.jsonl")
+    log_path = scene_path.with_suffix("").with_name(
+        scene_path.stem + ".render-log.jsonl"
+    )
 
     # Deferred import — only needed when autofix is active
     from _fixup_client import request_patch  # noqa: PLC0415
@@ -226,16 +230,36 @@ def run_with_autofix(
 
 def main() -> None:
     parser = argparse.ArgumentParser(description="Render Manim scene to video")
-    parser.add_argument("scene_file", help="Path to the .py file containing the Scene class")
+    parser.add_argument(
+        "scene_file", help="Path to the .py file containing the Scene class"
+    )
     parser.add_argument("scene_name", help="Name of the Scene class to render")
-    parser.add_argument("--quality", choices=QUALITY_MAP.keys(), default="high",
-                        help="Render quality preset (default: high)")
-    parser.add_argument("--format", dest="fmt", choices=FORMAT_MAP.keys(), default="mp4",
-                        help="Output format (default: mp4)")
-    parser.add_argument("--output", "-o", type=str, default=None,
-                        help="Output file path. If not specified, outputs next to scene file.")
-    parser.add_argument("--media-dir", type=str, default=None,
-                        help="Custom media directory for Manim output")
+    parser.add_argument(
+        "--quality",
+        choices=QUALITY_MAP.keys(),
+        default="high",
+        help="Render quality preset (default: high)",
+    )
+    parser.add_argument(
+        "--format",
+        dest="fmt",
+        choices=FORMAT_MAP.keys(),
+        default="mp4",
+        help="Output format (default: mp4)",
+    )
+    parser.add_argument(
+        "--output",
+        "-o",
+        type=str,
+        default=None,
+        help="Output file path. If not specified, outputs next to scene file.",
+    )
+    parser.add_argument(
+        "--media-dir",
+        type=str,
+        default=None,
+        help="Custom media directory for Manim output",
+    )
     parser.add_argument(
         "--max-fix-attempts",
         type=int,
@@ -260,7 +284,10 @@ def main() -> None:
         sys.exit(1)
 
     if not ensure_manim_installed():
-        print("ERROR: Manim is not installed. Run: pip install manim --break-system-packages", file=sys.stderr)
+        print(
+            "ERROR: Manim is not installed. Run: pip install manim --break-system-packages",
+            file=sys.stderr,
+        )
         sys.exit(1)
 
     quality_flag, quality_dir = QUALITY_MAP[args.quality]
@@ -270,7 +297,10 @@ def main() -> None:
     media_dir = Path(args.media_dir) if args.media_dir else scene_path.parent / "media"
 
     cmd = [
-        sys.executable, "-m", "manim", "render",
+        sys.executable,
+        "-m",
+        "manim",
+        "render",
         quality_flag,
         format_flag,
         f"--media_dir={media_dir}",
@@ -285,14 +315,20 @@ def main() -> None:
     result = run_with_autofix(cmd, scene_path, args.max_fix_attempts)
 
     if result.returncode != 0:
-        print(f"\nERROR: Manim render failed with exit code {result.returncode}", file=sys.stderr)
+        print(
+            f"\nERROR: Manim render failed with exit code {result.returncode}",
+            file=sys.stderr,
+        )
         sys.exit(result.returncode)
 
     # Find the rendered file
     rendered = find_rendered_file(media_dir, args.scene_name, quality_dir, args.fmt)
 
     if not rendered:
-        print(f"\nWARNING: Could not locate rendered file. Check {media_dir} manually.", file=sys.stderr)
+        print(
+            f"\nWARNING: Could not locate rendered file. Check {media_dir} manually.",
+            file=sys.stderr,
+        )
         # List what's there for debugging
         print("Contents of media dir:", file=sys.stderr)
         for p in sorted(media_dir.rglob("*")):

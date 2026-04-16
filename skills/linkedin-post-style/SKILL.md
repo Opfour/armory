@@ -30,7 +30,7 @@ Posts follow a 5-act structure. Not rigidly, but as gravitational pull:
 
 1. **Hook** — Specific metric + compressed timeframe. No adjective, no opinion. Just the fact.
    - "This is what 3,982 commits in 14 days looks like."
-   - "Anthropic just announced Opus 4.6 and published a piece about it building a C compiler from scratch."
+   - "Anthropic just announced Opus 4.7 and published a piece about it building a C compiler from scratch."
    - Target 150–210 characters for the hook sentence. LinkedIn mobile truncates at this point with a "See more" fold. Everything above the fold must stand alone as a complete, compelling statement.
 
 2. **Legend** — Orient the reader. Visual or contextual decoder. Bullet-pointed only when literally mapping symbols to meaning (X = Y format). Terse.
@@ -168,7 +168,7 @@ When the user provides raw content, notes, or an existing draft:
 
 | Situation                                           | Resolution                                                                                                                                                      |
 | --------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| No metric available for Hook                        | Use a declarative framing statement instead — a specific claim or event, not a number. "Anthropic just announced Opus 4.6" works without a metric.              |
+| No metric available for Hook                        | Use a declarative framing statement instead — a specific claim or event, not a number. "Anthropic just announced Opus 4.7" works without a metric.              |
 | Source material too thin for 5 acts                 | Collapse to 3 acts: Hook, Observation, Meaning. Do not pad.                                                                                                     |
 | User draft has multiple anti-pattern violations     | Prioritize removal: superlatives first, then CTAs/audience questions, then formatting (emoji, hashtags, exclamation marks). Rewrite in passes, not all at once. |
 | Content is an experience/review, not an observation | Switch to early first-person mode (see "For Me" Move). The 5-act structure still applies but the Reporter voice carries personal authority from the start.      |
@@ -246,6 +246,8 @@ Baseline LinkedIn engagement rates by format: text-only ~4%, text+image ~4.85%, 
 ## Reference Examples
 
 These are the author's actual posts. Pattern-match against the writing, not just the rules.
+
+> **Dated context:** Examples 1 and 2 were drafted at Opus 4.6's launch (2026-03) and reference that announcement. The technique (Hook, Credibility Spike, Observation, Meaning) is model-version-independent — swap "Opus 4.6" for the current model when applying the pattern to a fresh announcement.
 
 ### Example 1: Gource Visualization Post
 

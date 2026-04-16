@@ -228,7 +228,9 @@ def test_iconfinderadapter_resolve_successful_fetch_returns_path(
                 "vector_sizes": [
                     {
                         "formats": [
-                            {"download_url": "https://cdn.iconfinder.com/data/icons/db.svg"}
+                            {
+                                "download_url": "https://cdn.iconfinder.com/data/icons/db.svg"
+                            }
                         ]
                     }
                 ],
@@ -303,7 +305,9 @@ def test_iconfinderadapter_resolve_url_contains_encoded_query(
                 "vector_sizes": [
                     {
                         "formats": [
-                            {"download_url": "https://cdn.iconfinder.com/data/icons/db.svg"}
+                            {
+                                "download_url": "https://cdn.iconfinder.com/data/icons/db.svg"
+                            }
                         ]
                     }
                 ],

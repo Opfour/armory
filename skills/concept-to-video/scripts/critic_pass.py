@@ -156,12 +156,7 @@ def _build_message_content(
     content: list[TextBlockParam | ImageBlockParam] = [
         TextBlockParam(
             type="text",
-            text=(
-                "## Scene Source\n\n"
-                "```python\n"
-                f"{scene_source}\n"
-                "```\n\n"
-            ),
+            text=(f"## Scene Source\n\n```python\n{scene_source}\n```\n\n"),
         )
     ]
     for i, fp in enumerate(frame_paths):
@@ -171,7 +166,9 @@ def _build_message_content(
             data=_encode_frame(fp),
         )
         content.append(ImageBlockParam(type="image", source=source))
-        content.append(TextBlockParam(type="text", text=f"(frame {i + 1} of {len(frame_paths)})"))
+        content.append(
+            TextBlockParam(type="text", text=f"(frame {i + 1} of {len(frame_paths)})")
+        )
 
     content.append(TextBlockParam(type="text", text=critic_prompt))
     return content
@@ -185,7 +182,9 @@ _CHARS_PER_TOKEN_ESTIMATE = 4
 _BYTES_PER_IMAGE_TOKEN_ESTIMATE = 800  # rough: ~1 token per 800 bytes of base64
 
 
-def _estimate_tokens(scene_source: str, frame_paths: list[Path], critic_prompt: str) -> int:
+def _estimate_tokens(
+    scene_source: str, frame_paths: list[Path], critic_prompt: str
+) -> int:
     """Rough token estimate to check against budget before making the API call."""
     text_chars = len(scene_source) + len(critic_prompt)
     text_tokens = text_chars // _CHARS_PER_TOKEN_ESTIMATE

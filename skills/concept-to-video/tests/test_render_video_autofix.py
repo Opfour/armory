@@ -30,7 +30,17 @@ from render_video import (  # noqa: E402
 # Fixtures
 # ---------------------------------------------------------------------------
 
-MANIM_CMD = ["python3", "-m", "manim", "render", "-qh", "--format=mp4", "--media_dir=/tmp", "scene.py", "MyScene"]
+MANIM_CMD = [
+    "python3",
+    "-m",
+    "manim",
+    "render",
+    "-qh",
+    "--format=mp4",
+    "--media_dir=/tmp",
+    "scene.py",
+    "MyScene",
+]
 
 SAMPLE_TRACEBACK = textwrap.dedent("""\
     Traceback (most recent call last):
@@ -88,6 +98,7 @@ FENCED_RESPONSE = f"Here is the fix:\n\n```python\n{PATCHED_SCENE}```\n"
 # FakeAnthropicClient
 # ---------------------------------------------------------------------------
 
+
 class FakeMessage:
     def __init__(self, text: str) -> None:
         self.content = [SimpleNamespace(text=text)]
@@ -109,6 +120,7 @@ class FakeAnthropicClient:
 # ---------------------------------------------------------------------------
 # Unit tests: extract_error_class
 # ---------------------------------------------------------------------------
+
 
 def test_extract_error_class_name_error_returns_correct_class() -> None:
     # Arrange
@@ -147,6 +159,7 @@ def test_extract_error_class_attribute_error_detected() -> None:
 # Unit tests: parse_offending_lines
 # ---------------------------------------------------------------------------
 
+
 def test_parse_offending_lines_extracts_range_from_traceback(scene_file: Path) -> None:
     # Arrange — patch traceback to reference our scene_file
     stderr = SAMPLE_TRACEBACK.replace("/path/to/scene.py", str(scene_file))
@@ -175,6 +188,7 @@ def test_parse_offending_lines_returns_none_when_no_match(scene_file: Path) -> N
 # Unit tests: _fixup_client.request_patch
 # ---------------------------------------------------------------------------
 
+
 def test_request_patch_returns_patched_scene_content(
     scene_file: Path,
     coder_prompt_file: Path,
@@ -182,6 +196,7 @@ def test_request_patch_returns_patched_scene_content(
 ) -> None:
     # Arrange
     import _fixup_client as fc
+
     monkeypatch.setattr(fc, "_CODER_PROMPT_PATH", coder_prompt_file)
     fake_client = FakeAnthropicClient()
 
@@ -199,6 +214,7 @@ def test_request_patch_missing_prompt_file_raises_file_not_found(
 ) -> None:
     # Arrange
     import _fixup_client as fc
+
     monkeypatch.setattr(fc, "_CODER_PROMPT_PATH", Path("/nonexistent/coder.md"))
     fake_client = FakeAnthropicClient()
 
@@ -214,6 +230,7 @@ def test_request_patch_no_fenced_block_raises_value_error(
 ) -> None:
     # Arrange — response has no ```python block
     import _fixup_client as fc
+
     monkeypatch.setattr(fc, "_CODER_PROMPT_PATH", coder_prompt_file)
     fake_client = FakeAnthropicClient(response_text="I cannot fix this scene.")
 
@@ -229,6 +246,7 @@ def test_request_patch_includes_offending_lines_in_prompt(
 ) -> None:
     # Arrange
     import _fixup_client as fc
+
     monkeypatch.setattr(fc, "_CODER_PROMPT_PATH", coder_prompt_file)
 
     captured_messages: list[dict[str, object]] = []
@@ -253,6 +271,7 @@ def test_request_patch_includes_offending_lines_in_prompt(
 # ---------------------------------------------------------------------------
 # Integration tests: run_with_autofix
 # ---------------------------------------------------------------------------
+
 
 def test_run_with_autofix_n0_does_not_call_fixup_on_failure(
     scene_file: Path,
@@ -304,13 +323,17 @@ def test_run_with_autofix_n1_fixup_called_then_succeeds(
     ok_result.stdout = ""
 
     import _fixup_client as fc
+
     monkeypatch.setattr(fc, "_CODER_PROMPT_PATH", coder_prompt_file)
     fake_client = FakeAnthropicClient()
     monkeypatch.setattr(fc, "AnthropicClient", lambda: fake_client)
 
     subprocess_results = iter([fail_result, ok_result])
 
-    with patch("render_video.subprocess.run", side_effect=lambda *a, **kw: next(subprocess_results)):
+    with patch(
+        "render_video.subprocess.run",
+        side_effect=lambda *a, **kw: next(subprocess_results),
+    ):
         # Act
         result = run_with_autofix(MANIM_CMD, scene_file, max_fix_attempts=1)
 
@@ -336,13 +359,17 @@ def test_run_with_autofix_n1_backup_created_on_attempt(
     ok_result.stdout = ""
 
     import _fixup_client as fc
+
     monkeypatch.setattr(fc, "_CODER_PROMPT_PATH", coder_prompt_file)
     fake_client = FakeAnthropicClient()
     monkeypatch.setattr(fc, "AnthropicClient", lambda: fake_client)
 
     subprocess_results = iter([fail_result, ok_result])
 
-    with patch("render_video.subprocess.run", side_effect=lambda *a, **kw: next(subprocess_results)):
+    with patch(
+        "render_video.subprocess.run",
+        side_effect=lambda *a, **kw: next(subprocess_results),
+    ):
         run_with_autofix(MANIM_CMD, scene_file, max_fix_attempts=1)
 
     # Assert
@@ -363,6 +390,7 @@ def test_run_with_autofix_n3_persistent_failure_raises_original_error(
     fail_result.stdout = ""
 
     import _fixup_client as fc
+
     monkeypatch.setattr(fc, "_CODER_PROMPT_PATH", coder_prompt_file)
     fake_client = FakeAnthropicClient()
     monkeypatch.setattr(fc, "AnthropicClient", lambda: fake_client)
@@ -389,6 +417,7 @@ def test_run_with_autofix_n3_log_file_has_three_entries(
     fail_result.stdout = ""
 
     import _fixup_client as fc
+
     monkeypatch.setattr(fc, "_CODER_PROMPT_PATH", coder_prompt_file)
     fake_client = FakeAnthropicClient()
     monkeypatch.setattr(fc, "AnthropicClient", lambda: fake_client)
@@ -400,7 +429,9 @@ def test_run_with_autofix_n3_log_file_has_three_entries(
     log_path = scene_file.with_name(scene_file.stem + ".render-log.jsonl")
     assert log_path.exists(), f"Log file not found at {log_path}"
 
-    entries = [json.loads(line) for line in log_path.read_text().splitlines() if line.strip()]
+    entries = [
+        json.loads(line) for line in log_path.read_text().splitlines() if line.strip()
+    ]
     assert len(entries) == 3
 
     for i, entry in enumerate(entries, start=1):
@@ -424,6 +455,7 @@ def test_run_with_autofix_n3_backups_created_for_each_attempt(
     fail_result.stdout = ""
 
     import _fixup_client as fc
+
     monkeypatch.setattr(fc, "_CODER_PROMPT_PATH", coder_prompt_file)
     monkeypatch.setattr(fc, "AnthropicClient", lambda: FakeAnthropicClient())
 

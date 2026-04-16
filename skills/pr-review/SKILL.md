@@ -15,6 +15,8 @@ Diff-based code review across five dimensions. Reads the changed files, selects
 applicable review methodologies, and produces an aggregated report with severity-ranked
 findings.
 
+> **Native alternative:** Claude Code's `/ultrareview` runs a lightweight native bug-focused review (three free per month on Pro/Max plans at Opus 4.7's launch). Use this skill for five-dimension severity-ranked analysis (code quality + tests + error handling + types + comments) with file:line references; use `/ultrareview` for a quick bug-hunting pass on a diff.
+
 ## Reference Files
 
 | File                            | Contents                                                | Load When                       |

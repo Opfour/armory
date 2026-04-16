@@ -21,6 +21,7 @@ from plan_storyboard import StoryboardPlanner, validate_storyboard  # noqa: E402
 # Helpers / fixtures
 # ---------------------------------------------------------------------------
 
+
 def _make_valid_storyboard(concept: str = "Test concept") -> dict[str, Any]:
     return {
         "concept": concept,
@@ -62,6 +63,7 @@ def prompt_file(tmp_path: Path) -> Path:
 # validate_storyboard — happy path
 # ---------------------------------------------------------------------------
 
+
 def test_validate_storyboard_valid_input_returns_dict() -> None:
     # Arrange
     data = _make_valid_storyboard()
@@ -77,6 +79,7 @@ def test_validate_storyboard_valid_input_returns_dict() -> None:
 # ---------------------------------------------------------------------------
 # validate_storyboard — schema violations
 # ---------------------------------------------------------------------------
+
 
 def test_validate_storyboard_missing_concept_raises_value_error() -> None:
     # Arrange
@@ -198,6 +201,7 @@ def test_validate_storyboard_root_not_dict_raises_value_error() -> None:
 # StoryboardPlanner.plan — happy path
 # ---------------------------------------------------------------------------
 
+
 def test_plan_valid_concept_returns_storyboard(prompt_file: Path) -> None:
     # Arrange
     storyboard = _make_valid_storyboard("Binary search algorithm")
@@ -234,6 +238,7 @@ def test_plan_substitutes_concept_into_prompt(prompt_file: Path) -> None:
 # StoryboardPlanner.plan — JSON parse failure
 # ---------------------------------------------------------------------------
 
+
 def test_plan_non_json_response_raises_value_error_with_raw_output(
     prompt_file: Path,
 ) -> None:
@@ -262,6 +267,7 @@ def test_plan_partial_json_raises_value_error(prompt_file: Path) -> None:
 # StoryboardPlanner — prompt file loading
 # ---------------------------------------------------------------------------
 
+
 def test_plan_missing_prompt_file_raises_file_not_found_error() -> None:
     # Arrange
     client = _fake_client("{}")
@@ -287,6 +293,7 @@ def test_plan_prompt_file_path_included_in_error_message() -> None:
 # ---------------------------------------------------------------------------
 # StoryboardPlanner — model override
 # ---------------------------------------------------------------------------
+
 
 def test_plan_uses_custom_model_when_provided(prompt_file: Path) -> None:
     # Arrange

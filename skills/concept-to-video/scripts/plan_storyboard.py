@@ -56,7 +56,10 @@ def _validate_scene(scene: Any, path: str) -> None:
         raise ValueError(f"{path}.index: must be an integer")
     if not isinstance(scene["title"], str) or not scene["title"].strip():
         raise ValueError(f"{path}.title: must be a non-empty string")
-    if not isinstance(scene["duration_seconds"], int | float) or scene["duration_seconds"] <= 0:
+    if (
+        not isinstance(scene["duration_seconds"], int | float)
+        or scene["duration_seconds"] <= 0
+    ):
         raise ValueError(f"{path}.duration_seconds: must be a positive number")
     if not isinstance(scene["beats"], list) or len(scene["beats"]) == 0:
         raise ValueError(f"{path}.beats: must be a non-empty list")
@@ -146,6 +149,7 @@ class StoryboardPlanner:
 # ---------------------------------------------------------------------------
 # CLI
 # ---------------------------------------------------------------------------
+
 
 def _build_arg_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
