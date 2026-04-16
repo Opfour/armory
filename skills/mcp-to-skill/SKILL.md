@@ -184,6 +184,8 @@ python3 scripts/estimate_tokens.py --mcp-tools TOOL_COUNT --avg-schema-chars AVG
 
 This shows before/after token savings per turn and across a typical conversation.
 
+> **Opus 4.7 note:** Input tokens run 1.0–1.35× Opus 4.6 for the same text due to a tokenizer update. Treat pre-4.7 baselines as a lower bound — actual savings on Opus 4.7 may be larger than the estimator reports.
+
 **Generate 2-3 test scenarios** — realistic prompts that would trigger the new skill
 and show the replacement commands in action. Present them to the user.
 
