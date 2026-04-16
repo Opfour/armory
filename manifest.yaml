@@ -1437,6 +1437,27 @@ packages:
     category: operations
     difficulty: intermediate
   rules:
+  - name: adaptive-thinking-control
+    version: 1.0.0
+    description: 'Controls reasoning depth on Claude Opus 4.7 via prompt-level directives, replacing the removed fixed-budget
+      Extended Thinking feature. Opus 4.7 uses adaptive thinking — the model chooses whether to think at each step — so the
+      lever moved from a numeric budget_tokens parameter to specific prompt phrases that nudge depth up or down. Covers the
+      deeper-reasoning cue, the lower-latency cue, anti-patterns (setting budget_tokens on 4.7, assuming the model will always
+      think by default), and effort-level interactions. Use this rule when prompting Opus 4.7 for tasks where reasoning depth
+      or latency materially affects the outcome. Triggers on: "adaptive thinking", "thinking budget", "extended thinking",
+      "budget_tokens", "Opus 4.7 thinking", "make Claude think harder", "make Claude faster", "reasoning depth", "latency
+      vs reasoning", "xhigh effort", "max effort".'
+    path: rules/adaptive-thinking-control
+    source: https://github.com/Mathews-Tom/armory/blob/main/rules/adaptive-thinking-control/RULE.md
+    scope: global
+    tags:
+    - opus-4-7
+    - adaptive-thinking
+    - prompting
+    - effort
+    - extended-thinking
+    category: development
+    difficulty: beginner
   - name: commit-standards
     version: 1.0.0
     description: Enforces conventional commit format, branch naming conventions, and commit message structure for consistent

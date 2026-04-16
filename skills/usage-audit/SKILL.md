@@ -39,7 +39,9 @@ independent checks in parallel.
 ### MCP Servers
 
 Each connected server loads full tool definitions into context every turn
-(~15,000-20,000 tokens each), whether you invoke a tool or not.
+(~15,000-20,000 tokens each), whether you invoke a tool or not. Under Opus 4.7 this
+figure can run 1.0–1.35× higher for the same schemas due to a tokenizer update —
+prefer measured values from `/context` over these static estimates.
 
 - Count configured servers in `settings.json` and `~/.claude/settings.json`.
 - Report total MCP overhead from `/context`.

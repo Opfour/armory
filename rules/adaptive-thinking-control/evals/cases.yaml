@@ -1,0 +1,66 @@
+cases:
+  - id: deeper_reasoning_request
+    prompt: "How do I make Claude Opus 4.7 think more carefully on a hard architecture decision?"
+    fixtures: []
+    rubric:
+      - "recommends the deeper-reasoning cue phrase"
+      - "explains that Opus 4.7 uses adaptive thinking, not fixed budget"
+      - "notes the cue should be placed early in the first-turn prompt"
+    trigger_expected: true
+
+  - id: budget_tokens_migration
+    prompt: "My code sets budget_tokens=8000 on the Anthropic API. Does this still work on Opus 4.7?"
+    fixtures: []
+    rubric:
+      - "states that fixed-budget Extended Thinking is not supported on Opus 4.7"
+      - "recommends removing the budget_tokens parameter"
+      - "points to prompt-level directives as the replacement control"
+    trigger_expected: true
+
+  - id: latency_priority
+    prompt: "This prompt is in a bulk loop and I need Opus 4.7 to respond faster without thinking deeply"
+    fixtures: []
+    rubric:
+      - "recommends the lower-latency cue phrase"
+      - "explains that adaptive thinking can be biased toward direct response"
+      - "mentions effort-level interaction (high or lower for bulk work)"
+    trigger_expected: true
+
+  - id: effort_vs_thinking_confusion
+    prompt: "What's the difference between xhigh effort and the deeper-reasoning prompt cue in Opus 4.7?"
+    fixtures: []
+    rubric:
+      - "explains effort sets the ceiling, adaptive thinking operates within it"
+      - "states the deeper-reasoning cue biases the per-step choice"
+      - "notes the cue has largest effect at xhigh and max"
+    trigger_expected: true
+
+  - id: migration_from_opus_4_6
+    prompt: "My skill worked great on Opus 4.6 with extended thinking enabled. How do I port it to 4.7?"
+    fixtures: []
+    rubric:
+      - "removes budget_tokens from any SDK calls"
+      - "adds the deeper-reasoning cue where depth was load-bearing"
+      - "reviews assumptions about default verbose output"
+    trigger_expected: true
+
+  - id: negative_commit_format
+    prompt: "How should I format my commit message for a bug fix?"
+    fixtures: []
+    rubric:
+      - "commit formatting is covered by commit-standards, not adaptive thinking control"
+    trigger_expected: false
+
+  - id: negative_general_prompt_engineering
+    prompt: "What are good few-shot prompting patterns for classification tasks?"
+    fixtures: []
+    rubric:
+      - "general prompt engineering patterns are in prompt-lab, not this rule"
+    trigger_expected: false
+
+  - id: negative_api_pricing
+    prompt: "How much does Opus 4.7 cost per million tokens?"
+    fixtures: []
+    rubric:
+      - "pricing is a billing question, not an adaptive thinking control concern"
+    trigger_expected: false

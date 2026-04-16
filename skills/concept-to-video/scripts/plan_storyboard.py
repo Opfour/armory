@@ -11,6 +11,8 @@ from typing import Any
 import anthropic
 from anthropic.types import TextBlock
 
+from _config import model_for
+
 # ---------------------------------------------------------------------------
 # Types
 # ---------------------------------------------------------------------------
@@ -92,7 +94,7 @@ def validate_storyboard(data: Any) -> Storyboard:
 # Core planner
 # ---------------------------------------------------------------------------
 
-DEFAULT_MODEL = "claude-sonnet-4-6"
+DEFAULT_MODEL = model_for("planner")
 _PROMPT_PATH = Path(__file__).parent.parent / "references" / "code2video" / "planner.md"
 
 

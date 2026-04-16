@@ -379,7 +379,7 @@ class TestRunCriticPass:
                 output_path=output_file,
                 n_frames=n_frames,
                 critic_budget=critic_budget,
-                model="claude-sonnet-4-6",
+                model="test-model-override",
                 prompt_path=prompt_file,
                 client=fake_client,  # type: ignore[arg-type]
             )
