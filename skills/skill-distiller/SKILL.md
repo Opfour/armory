@@ -150,7 +150,7 @@ Produce the final comparison:
 
 ## Limitations
 
-- Cannot distill skills that rely on extended thinking or multi-turn reasoning
+- Cannot distill skills that rely on open-ended adaptive reasoning at many decision points or multi-turn reasoning
 - Visual/interactive skills (HTML generation, browser automation) may not distill well
 - Distillation optimizes for determinism, not creativity — skills requiring open-ended generation
   (writing, brainstorming) are poor candidates

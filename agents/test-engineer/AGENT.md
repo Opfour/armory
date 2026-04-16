@@ -104,7 +104,7 @@ convergence.
 
 ### Phase 2: Initial Generation (Generator Role)
 
-The generator produces the first version of the skill package.
+The generator produces the first version of the skill package. Emit complete files in one pass: Opus 4.7's terser default can truncate SKILL.md bodies or omit phases when the spec is ambiguous — state length and completeness requirements up front.
 
 1. Invoke the `immune` skill in `cheatsheet-only` mode for the target domain:
    - Extract positive patterns that improve skill quality

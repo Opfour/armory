@@ -10,7 +10,7 @@ from anthropic import Anthropic
 
 client = Anthropic(api_key="sk-...")  # Requires separate API key
 response = client.messages.create(   # Bypasses agent loop
-    model="claude-sonnet-4-5",
+    model="claude-sonnet-4-6",
     messages=[{"role": "user", "content": "Hello"}]
 )
 ```

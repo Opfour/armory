@@ -161,7 +161,7 @@ research-analyst → content-strategist → media-producer
 Execute the delegation plan:
 
 1. **Sequential steps:** Spawn each agent via the Agent tool, wait for completion, pass output to the next agent
-2. **Parallel steps:** Spawn multiple agents simultaneously using parallel Agent tool calls, wait for all to complete
+2. **Parallel steps:** Spawn multiple agents simultaneously by issuing all Agent tool calls in a **single assistant message**, wait for all to complete. Opus 4.7 defaults toward judicious delegation and will serialize or skip spawns if the independence is not stated — name the topology explicitly.
 3. **Conditional steps:** After each agent completes, evaluate whether the next step should proceed:
    - If `codebase-auditor` returns FAIL → do not proceed to `release-captain`, report issues
    - If `idea-scout` returns NO-GO → do not proceed to `project-architect`, report findings

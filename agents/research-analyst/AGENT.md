@@ -109,7 +109,7 @@ If the research question is vague, ask up to 3 clarifying questions to narrow sc
 
 ### Phase 2: Parallel Source Investigation
 
-Spawn parallel research agents using the Agent tool. Each agent targets a different source type based on the plan from Phase 1.
+Spawn parallel research agents using the Agent tool. Issue all relevant Agent calls in a **single assistant message** so Opus 4.7 actually fans them out — its default judicious delegation otherwise tends to serialize. Each agent targets a different source type based on the plan from Phase 1.
 
 **Agent A — Web Research:**
 

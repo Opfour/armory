@@ -114,7 +114,7 @@ If the idea description is missing critical elements (problem, solution, target 
 
 ### Phase 3: Parallel Research
 
-Spawn three research agents in parallel using the Agent tool. Each receives the structured idea and Lean Canvas from Phases 1-2.
+Spawn three research agents in parallel using the Agent tool, **all in a single assistant message** — Opus 4.7's judicious-delegation default will serialize them otherwise. Each receives the structured idea and Lean Canvas from Phases 1-2.
 
 **Agent A — Market Research:**
 

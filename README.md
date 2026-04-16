@@ -49,6 +49,8 @@ Orchestrator agents compose skills and other agents into multi-phase workflows. 
 | [secret-scanner](agents/secret-scanner/)       | haiku  | Pre-commit detection of hardcoded credentials         |
 | [test-engineer](agents/test-engineer/)         | sonnet | Co-evolutionary skill evolution with generate-verify-refine loops |
 
+> **Model routing:** Agents marked `opus` run on Claude Opus 4.7 with `xhigh` effort by default in Claude Code. Use `max` effort only for genuinely hard novel problems (diminishing returns, overthinking risk); `high` when running concurrent sessions or for cost-sensitive work. Opus 4.7 uses adaptive thinking — there is no fixed thinking budget to tune.
+
 ### Skills — Development & Tooling
 
 | Skill                                            | Description                                                                                                                                                 |

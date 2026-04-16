@@ -51,10 +51,10 @@ cases:
         weight: 0.3
 
   - id: reduce_skill_cost
-    prompt: "Optimize this skill for cost by making it Haiku-compatible. It currently uses too much reasoning and extended thinking."
+    prompt: "Optimize this skill for cost by making it Haiku-compatible. It currently uses too much open-ended reasoning at each decision point."
     fixtures: []
     rubric:
-      - "Identifies sections requiring extended thinking and replaces with explicit steps"
+      - "Identifies sections requiring open-ended adaptive reasoning and replaces with explicit steps"
       - "Produces cross-model performance comparison table"
       - "Outputs a recommendation (SHIP, ITERATE, or MANUAL_REVIEW_NEEDED)"
     trigger_expected: true

@@ -45,7 +45,7 @@ body:
       label: Environment
       description: Claude version, OS, and any other relevant context.
       placeholder: |
-        Claude version: claude-sonnet-4-6
+        Claude version: claude-opus-4-7
         OS: macOS 15.3
     validations:
       required: false
