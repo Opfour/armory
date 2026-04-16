@@ -113,7 +113,7 @@ import anthropic
 from markitdown import MarkItDown
 
 client = anthropic.Anthropic()
-md = MarkItDown(llm_client=client, llm_model="claude-sonnet-4-20250514")
+md = MarkItDown(llm_client=client, llm_model="claude-sonnet-4-6")
 result = md.convert("presentation.pptx")
 ```
 
