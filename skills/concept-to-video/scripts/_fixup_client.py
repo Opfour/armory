@@ -43,8 +43,7 @@ class ClientProtocol(Protocol):
     """Structural type accepted by request_patch for DI."""
 
     @property
-    def messages(self) -> _MessagesAPI:
-        ...
+    def messages(self) -> _MessagesAPI: ...
 
 
 # The concrete real type — exported for callers that want to hint explicitly.

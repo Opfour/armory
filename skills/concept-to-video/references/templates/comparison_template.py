@@ -40,7 +40,7 @@ RIGHT_ITEMS = [
 ]
 # ───────────────────────────────────────────────────────────────────────────
 
-PANEL_X = 3.2   # horizontal distance from center for each panel
+PANEL_X = 3.2  # horizontal distance from center for each panel
 PANEL_Y = -0.3  # vertical center for content
 
 
@@ -66,28 +66,38 @@ class ComparisonScene(Scene):
         self.play(Write(left_title), Write(right_title))
 
         # Left items
-        left_group = VGroup(*[
-            Text(f"• {item}", font_size=20, color=LEFT_COLOR)
-            for item in LEFT_ITEMS
-        ]).arrange(DOWN, aligned_edge=LEFT, buff=0.35)
+        left_group = VGroup(
+            *[Text(f"• {item}", font_size=20, color=LEFT_COLOR) for item in LEFT_ITEMS]
+        ).arrange(DOWN, aligned_edge=LEFT, buff=0.35)
         left_group.move_to(LEFT * PANEL_X + DOWN * 0.3)
 
         # Right items (rendered as separate boxes to convey independence)
-        right_group = VGroup(*[
-            VGroup(
-                RoundedRectangle(width=2.8, height=0.55, corner_radius=0.08,
-                                 color=RIGHT_COLOR, fill_opacity=0.1),
-                Text(item, font_size=18, color=RIGHT_COLOR),
-            )
-            for item in RIGHT_ITEMS
-        ])
+        right_group = VGroup(
+            *[
+                VGroup(
+                    RoundedRectangle(
+                        width=2.8,
+                        height=0.55,
+                        corner_radius=0.08,
+                        color=RIGHT_COLOR,
+                        fill_opacity=0.1,
+                    ),
+                    Text(item, font_size=18, color=RIGHT_COLOR),
+                )
+                for item in RIGHT_ITEMS
+            ]
+        )
         right_group.arrange(DOWN, buff=0.18)
         right_group.move_to(RIGHT * PANEL_X + DOWN * 0.3)
 
         # Animate both sides
         self.play(
-            LaggedStart(*[FadeIn(item, shift=LEFT * 0.2) for item in left_group], lag_ratio=0.15),
-            LaggedStart(*[FadeIn(item, scale=0.85) for item in right_group], lag_ratio=0.15),
+            LaggedStart(
+                *[FadeIn(item, shift=LEFT * 0.2) for item in left_group], lag_ratio=0.15
+            ),
+            LaggedStart(
+                *[FadeIn(item, scale=0.85) for item in right_group], lag_ratio=0.15
+            ),
         )
 
         self.wait(2)

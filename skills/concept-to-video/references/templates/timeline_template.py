@@ -15,16 +15,16 @@ from manim import *
 TITLE = "Evolution of Language Models"
 
 EVENTS: list[tuple[str, str, ManimColor]] = [
-    ("2017", "Transformer architecture introduced",  BLUE),
-    ("2018", "BERT: bidirectional pretraining",      TEAL),
+    ("2017", "Transformer architecture introduced", BLUE),
+    ("2018", "BERT: bidirectional pretraining", TEAL),
     ("2019", "GPT-2: 1.5B parameter language model", GREEN),
-    ("2020", "GPT-3: few-shot learning at scale",    YELLOW),
-    ("2022", "InstructGPT & ChatGPT launch",         ORANGE),
-    ("2023", "GPT-4 & multimodal models",            RED),
+    ("2020", "GPT-3: few-shot learning at scale", YELLOW),
+    ("2022", "InstructGPT & ChatGPT launch", ORANGE),
+    ("2023", "GPT-4 & multimodal models", RED),
 ]
 # ───────────────────────────────────────────────────────────────────────────
 
-LINE_Y     = 0.0   # vertical position of the timeline axis
+LINE_Y = 0.0  # vertical position of the timeline axis
 DOT_RADIUS = 0.12
 LABEL_BUFF = 0.35  # space between dot and year label
 
@@ -39,7 +39,7 @@ class TimelineScene(Scene):
 
         n = len(EVENTS)
         x_start = -5.5
-        x_end   = 5.5
+        x_end = 5.5
         xs = [x_start + i * (x_end - x_start) / (n - 1) for i in range(n)]
 
         # Draw the main timeline axis
@@ -59,7 +59,7 @@ class TimelineScene(Scene):
             dot = Dot(pos, radius=DOT_RADIUS, color=color)
 
             # Year label (alternates above/below to avoid overlap)
-            above = (i % 2 == 0)
+            above = i % 2 == 0
             year_text = Text(label, font_size=22, color=color, weight=BOLD)
             year_text.next_to(dot, UP * (1 if above else -1), buff=LABEL_BUFF)
 

@@ -432,7 +432,11 @@ class TestRunCriticPass:
         # Act / Assert
         with pytest.raises(FileNotFoundError, match="Video file not found"):
             self._full_run(
-                scene_file, tmp_path / "ghost.mp4", output_file, prompt_file, fake_client
+                scene_file,
+                tmp_path / "ghost.mp4",
+                output_file,
+                prompt_file,
+                fake_client,
             )
 
     def test_run_critic_pass_prompt_missing_raises_file_not_found(

@@ -106,9 +106,7 @@ class IconFinderAdapter:
 
     def resolve(self, query: str, kind: str) -> Path | None:
         del kind
-        params = urllib.parse.urlencode(
-            {"query": query, "count": 1, "vector": 1}
-        )
+        params = urllib.parse.urlencode({"query": query, "count": 1, "vector": 1})
         url = f"{ICONFINDER_SEARCH_URL}?{params}"
         req = urllib.request.Request(
             url,

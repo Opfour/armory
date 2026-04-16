@@ -52,15 +52,22 @@ def build_ffmpeg_command(
 
     cmd = [
         "ffmpeg",
-        "-y",                    # overwrite output without asking
-        "-i", str(video),        # input video
-        "-i", str(audio),        # input audio
-        "-filter_complex", f"[1:a]{audio_filter}[aout]",
-        "-map", "0:v",           # video from first input
-        "-map", "[aout]",        # filtered audio
-        "-c:v", "copy",          # copy video stream (no re-encode)
-        "-c:a", "aac",           # encode audio as AAC
-        "-shortest",             # end at shortest stream
+        "-y",  # overwrite output without asking
+        "-i",
+        str(video),  # input video
+        "-i",
+        str(audio),  # input audio
+        "-filter_complex",
+        f"[1:a]{audio_filter}[aout]",
+        "-map",
+        "0:v",  # video from first input
+        "-map",
+        "[aout]",  # filtered audio
+        "-c:v",
+        "copy",  # copy video stream (no re-encode)
+        "-c:a",
+        "aac",  # encode audio as AAC
+        "-shortest",  # end at shortest stream
         str(output),
     ]
 
@@ -72,9 +79,12 @@ def get_video_duration(video: Path) -> float:
     result = subprocess.run(
         [
             "ffprobe",
-            "-v", "quiet",
-            "-show_entries", "format=duration",
-            "-of", "default=noprint_wrappers=1:nokey=1",
+            "-v",
+            "quiet",
+            "-show_entries",
+            "format=duration",
+            "-of",
+            "default=noprint_wrappers=1:nokey=1",
             str(video),
         ],
         capture_output=True,
@@ -89,23 +99,34 @@ def main() -> None:
         description="Overlay audio onto a Manim-rendered video using ffmpeg."
     )
     parser.add_argument("video", type=Path, help="Input video file (MP4)")
-    parser.add_argument("audio", type=Path, help="Audio file to overlay (MP3, WAV, etc.)")
-    parser.add_argument("--output", "-o", type=Path, required=True, help="Output video file")
     parser.add_argument(
-        "--volume", type=float, default=1.0,
-        help="Audio volume multiplier (default: 1.0, use 0.3 for background music)"
+        "audio", type=Path, help="Audio file to overlay (MP3, WAV, etc.)"
     )
     parser.add_argument(
-        "--fade-in", type=float, default=0.0,
-        help="Fade-in duration in seconds (default: 0, no fade)"
+        "--output", "-o", type=Path, required=True, help="Output video file"
     )
     parser.add_argument(
-        "--fade-out", type=float, default=0.0,
-        help="Fade-out duration in seconds (default: 0, no fade)"
+        "--volume",
+        type=float,
+        default=1.0,
+        help="Audio volume multiplier (default: 1.0, use 0.3 for background music)",
     )
     parser.add_argument(
-        "--trim-to-video", action="store_true",
-        help="Trim audio to match video length (default: ffmpeg uses -shortest)"
+        "--fade-in",
+        type=float,
+        default=0.0,
+        help="Fade-in duration in seconds (default: 0, no fade)",
+    )
+    parser.add_argument(
+        "--fade-out",
+        type=float,
+        default=0.0,
+        help="Fade-out duration in seconds (default: 0, no fade)",
+    )
+    parser.add_argument(
+        "--trim-to-video",
+        action="store_true",
+        help="Trim audio to match video length (default: ffmpeg uses -shortest)",
     )
 
     args = parser.parse_args()

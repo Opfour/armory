@@ -16,16 +16,16 @@ from manim import *
 TITLE = "RAG Pipeline"
 
 STAGES: list[tuple[str, ManimColor]] = [
-    ("Ingest",    BLUE),
-    ("Embed",     TEAL),
-    ("Index",     GREEN),
-    ("Retrieve",  YELLOW),
-    ("Generate",  RED),
+    ("Ingest", BLUE),
+    ("Embed", TEAL),
+    ("Index", GREEN),
+    ("Retrieve", YELLOW),
+    ("Generate", RED),
 ]
 
 ARROW_COLOR = WHITE
-BOX_WIDTH   = 1.9
-BOX_HEIGHT  = 1.0
+BOX_WIDTH = 1.9
+BOX_HEIGHT = 1.0
 # ───────────────────────────────────────────────────────────────────────────
 
 
