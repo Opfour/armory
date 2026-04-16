@@ -293,7 +293,7 @@ def test_plan_uses_custom_model_when_provided(prompt_file: Path) -> None:
     storyboard = _make_valid_storyboard()
     client = _fake_client(json.dumps(storyboard))
     planner = StoryboardPlanner(
-        client=client, model="claude-opus-4-5", prompt_path=prompt_file
+        client=client, model="test-model-override", prompt_path=prompt_file
     )
 
     # Act
@@ -301,4 +301,4 @@ def test_plan_uses_custom_model_when_provided(prompt_file: Path) -> None:
 
     # Assert
     call_kwargs = client.messages.create.call_args
-    assert call_kwargs.kwargs["model"] == "claude-opus-4-5"
+    assert call_kwargs.kwargs["model"] == "test-model-override"

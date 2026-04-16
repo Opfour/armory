@@ -21,11 +21,13 @@ from anthropic.types import (
     TextBlockParam,
 )
 
+from _config import model_for
+
 # ---------------------------------------------------------------------------
 # Constants
 # ---------------------------------------------------------------------------
 
-DEFAULT_MODEL = "claude-sonnet-4-6"
+DEFAULT_MODEL = model_for("critic")
 DEFAULT_FRAMES = 5
 MAX_FRAMES = 10
 DEFAULT_CRITIC_BUDGET = 50_000

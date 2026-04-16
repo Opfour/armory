@@ -13,10 +13,14 @@ from typing import Any, Protocol, cast, runtime_checkable
 
 import anthropic
 
+from _config import model_for
+
 _FENCED_PYTHON_RE = re.compile(
     r"```python\s*\n(.*?)```",
     re.DOTALL,
 )
+
+_DEFAULT_FIXUP_MODEL = model_for("fixup")
 
 _CODER_PROMPT_PATH = (
     Path(__file__).parent.parent / "references" / "code2video" / "coder.md"
@@ -63,7 +67,7 @@ def request_patch(
     offending_lines: tuple[int, int] | None,
     *,
     client: ClientProtocol | None = None,
-    model: str = "claude-sonnet-4-6",
+    model: str = _DEFAULT_FIXUP_MODEL,
 ) -> str:
     """
     Send scene source + stderr to the LLM and return the patched scene content.
