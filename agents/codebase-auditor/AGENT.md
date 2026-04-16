@@ -93,7 +93,7 @@ If no scope is specified, determine scope from context: if recent changes exist 
 
 ### Phase 2: Parallel Agent Spawning
 
-Spawn three specialized review agents in parallel using the Agent tool. Each agent receives the determined scope from Phase 1.
+Spawn three specialized review agents in parallel using the Agent tool, **all in a single assistant message** so Opus 4.7 fans them out rather than serializing. Each agent receives the determined scope from Phase 1.
 
 **Agent 1 — Code Quality Review:**
 
