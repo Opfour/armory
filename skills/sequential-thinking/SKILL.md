@@ -1,9 +1,11 @@
 ---
 name: sequential-thinking
 description:
-  "DEPRECATED: Use the model's native extended thinking instead. Structured,
+  "DEPRECATED: Opus 4.7's adaptive thinking covers most cases natively. Structured,
   reflective problem-solving through sequential chain-of-thought reasoning that replaced
-  the Sequential Thinking MCP server.
+  the Sequential Thinking MCP server. Retained as a reference pattern when deterministic,
+  reviewable reasoning traces are required regardless of the model's adaptive-thinking
+  choice.
 
   "
 metadata:
@@ -14,9 +16,12 @@ metadata:
   difficulty: intermediate
 ---
 
-> **DEPRECATED** — Sonnet 4 and Opus 4 handle structured chain-of-thought natively,
-> including revision, branching, and scope adjustment. This skill no longer provides
-> meaningful uplift over the base model. Retained for reference only.
+> **DEPRECATED** — Opus 4.7 uses adaptive thinking (optional at each step) and Sonnet 4.6
+> handles structured chain-of-thought natively. For most tasks, prompting "Think carefully
+> and step-by-step; this is harder than it looks" elicits the required depth. This
+> methodology is retained as a reference pattern when deterministic, reviewable reasoning
+> traces are required (audits, proofs, post-hoc analysis) regardless of the model's
+> adaptive-thinking choice.
 
 # Sequential Thinking
 

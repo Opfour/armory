@@ -747,8 +747,9 @@ packages:
     - literature-review
   - name: sequential-thinking
     version: 1.1.1
-    description: 'DEPRECATED: Use the model''s native extended thinking instead. Structured, reflective problem-solving through
-      sequential chain-of-thought reasoning that replaced the Sequential Thinking MCP server.'
+    description: 'DEPRECATED: Opus 4.7''s adaptive thinking covers most cases natively. Structured, reflective problem-solving
+      through sequential chain-of-thought reasoning that replaced the Sequential Thinking MCP server. Retained as a reference
+      pattern when deterministic, reviewable reasoning traces are required regardless of the model''s adaptive-thinking choice.'
     path: skills/sequential-thinking
     source: https://github.com/Mathews-Tom/armory/blob/main/skills/sequential-thinking/SKILL.md
     tags:
