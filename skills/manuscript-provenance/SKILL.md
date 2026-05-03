@@ -2,7 +2,15 @@
 name: manuscript-provenance
 description: 'Computational provenance audit verifying every number, table, and figure in a manuscript derives from code, not manual entry. Triggers on: "check provenance", "verify reproducibility", "audit my pipeline", "are my numbers from code", "provenance audit". Companion to manuscript-review (prose audit).'
 metadata:
-  version: 1.1.1
+  version: 1.2.0
+  complements:
+    [
+      manuscript-review,
+      manuscript-typography,
+      figure-rhetoric,
+      figure-table-quality,
+      arxiv-preflight,
+    ]
   category: review
   tags: [provenance, reproducibility, computational, verification]
   difficulty: advanced
@@ -10,6 +18,8 @@ metadata:
 ---
 
 # Manuscript Provenance Audit
+
+**Pipeline position:** Phase 2a (grounding audit). Runs in parallel with `manuscript-typography`. Depends on: content settled after Phase 1 fixes. Produces macro manifest consumed by `manuscript-review` Pass 13 (Cross-Element Coherence).
 
 ## Purpose
 

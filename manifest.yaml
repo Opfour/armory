@@ -75,6 +75,71 @@ packages:
     category: review
     difficulty: advanced
     phase: review
+  - name: arxiv-figures
+    version: 1.0.0
+    description: 'Optimize and prepare figures for arXiv submission: format conversion (EPS/PDF/PNG/JPG), size reduction,
+      metadata stripping, processor compatibility (DVI vs PDFLaTeX). Triggers on: "optimize figures for arXiv", "reduce figure
+      size", "convert figures for arXiv", "fix arXiv figures", "figure too large", "arxiv image compression". Companion to
+      arxiv-preflight and arxiv-package.'
+    path: skills/arxiv-figures
+    source: https://github.com/Mathews-Tom/armory/blob/main/skills/arxiv-figures/SKILL.md
+    complements:
+    - arxiv-preflight
+    - arxiv-package
+    - manuscript-review
+    tags:
+    - arxiv
+    - figures
+    - optimization
+    - latex
+    - submission
+    category: review
+    difficulty: intermediate
+    phase: ship
+  - name: arxiv-package
+    version: 1.0.0
+    description: 'Package a TeX/LaTeX project into a clean tarball or zip for arXiv upload: file selection, build-artifact
+      exclusion, 00README.XXX generation, ancillary file organization, archive validation. Triggers on: "package for arXiv",
+      "create arXiv tarball", "bundle submission", "zip for arXiv", "prepare arXiv upload", "arXiv submission archive". Companion
+      to arxiv-preflight and arxiv-figures.'
+    path: skills/arxiv-package
+    source: https://github.com/Mathews-Tom/armory/blob/main/skills/arxiv-package/SKILL.md
+    complements:
+    - arxiv-preflight
+    - arxiv-figures
+    - manuscript-review
+    tags:
+    - arxiv
+    - packaging
+    - tarball
+    - latex
+    - submission
+    category: review
+    difficulty: intermediate
+    phase: ship
+  - name: arxiv-preflight
+    version: 1.0.0
+    description: 'Pre-submission validation audit for arXiv papers across TeX source, PDF, figures, metadata, bibliography,
+      file organization, and common-error scans. Produces pass/fail report with specific fixes per arXiv requirement. Triggers
+      on: "check my arXiv submission", "validate for arXiv", "arXiv preflight", "ready for arXiv", "arxiv check", "arxiv submission
+      readiness". Companion to manuscript-review (prose), manuscript-provenance (code), arxiv-figures, arxiv-package.'
+    path: skills/arxiv-preflight
+    source: https://github.com/Mathews-Tom/armory/blob/main/skills/arxiv-preflight/SKILL.md
+    complements:
+    - manuscript-review
+    - manuscript-provenance
+    - arxiv-figures
+    - arxiv-package
+    - manuscript-typography
+    tags:
+    - arxiv
+    - preflight
+    - latex
+    - validation
+    - submission
+    category: review
+    difficulty: advanced
+    phase: review
   - name: benchmark-runner
     version: 1.1.1
     description: 'Designs structured benchmarks comparing algorithms, models, or implementations with metrics, test cases,
@@ -105,6 +170,28 @@ packages:
     category: content
     difficulty: intermediate
     phase: ship
+  - name: citation-audit
+    version: 1.0.0
+    description: 'Verify that every citation in a manuscript is real, correctly attributed, and accurately described. Detects
+      ghost papers, wrong arXiv IDs, inverted claims, and dead links by fetching each cited work. Optional fix mode applies
+      bib metadata corrections and surfaces prose rewrites for claim errors. Triggers on: "check my citations", "verify references",
+      "citation audit", "are my references real", "check bib", "reference check", "bib audit", "citation verification". Companion
+      to manuscript-review (Pass 5 hygiene); this skill audits factual truth.'
+    path: skills/citation-audit
+    source: https://github.com/Mathews-Tom/armory/blob/main/skills/citation-audit/SKILL.md
+    complements:
+    - manuscript-review
+    - research-critique
+    - literature-review
+    tags:
+    - citations
+    - bibliography
+    - fact-check
+    - hallucination
+    - references
+    category: review
+    difficulty: advanced
+    phase: review
   - name: code-refiner
     version: 1.1.1
     description: 'Deep code simplification and refactoring preserving behavior across Python, Go, TypeScript, Rust. Targets
@@ -290,6 +377,52 @@ packages:
     phase: define
     complements:
     - idea-validator
+  - name: figure-rhetoric
+    version: 1.0.0
+    description: 'Evaluate whether figures and plots in a manuscript effectively communicate the claims they support. Audits
+      chart-type fit, axis design, visual hierarchy, data density, caption interpretation, perceptual accuracy, and narrative
+      arc across 8 dimensions. Triggers on: "do my figures work", "check my plots", "are my graphs clear", "figure audit",
+      "do my figures support my claims", "visualization review", "figure rhetoric", "plot review", "chart critique", "visual
+      argument check". Companion to manuscript-review §12 (legibility) and figure-table-quality (rendering).'
+    path: skills/figure-rhetoric
+    source: https://github.com/Mathews-Tom/armory/blob/main/skills/figure-rhetoric/SKILL.md
+    complements:
+    - manuscript-review
+    - figure-table-quality
+    - manuscript-typography
+    - manuscript-provenance
+    tags:
+    - figures
+    - visualization
+    - rhetoric
+    - plots
+    - charts
+    category: review
+    difficulty: advanced
+    phase: review
+  - name: figure-table-quality
+    version: 1.0.0
+    description: 'Readability and rendering audit for figures and tables in academic manuscripts. Computes effective font/marker
+      sizes at display scale from generation scripts, checks label collisions, color/hatch accessibility, axis-range efficiency,
+      table formatting, and cross-figure consistency. Triggers on: "check figure quality", "audit plots", "readability check",
+      "figure rendering", "are my figures readable", "table formatting check". Companion to figure-rhetoric (visual argument)
+      and manuscript-typography (typesetting).'
+    path: skills/figure-table-quality
+    source: https://github.com/Mathews-Tom/armory/blob/main/skills/figure-table-quality/SKILL.md
+    complements:
+    - figure-rhetoric
+    - manuscript-review
+    - manuscript-typography
+    - manuscript-provenance
+    tags:
+    - figures
+    - tables
+    - readability
+    - rendering
+    - latex
+    category: review
+    difficulty: advanced
+    phase: review
   - name: filesystem
     version: 1.1.1
     description: 'File and directory operations via Claude Code built-in tools, replacing the Filesystem MCP server. Triggers
@@ -434,6 +567,7 @@ packages:
     - research-critique
     - manuscript-review
     - manuscript-provenance
+    - citation-audit
     tags:
     - academic
     - literature
@@ -442,12 +576,19 @@ packages:
     category: review
     difficulty: intermediate
   - name: manuscript-provenance
-    version: 1.1.1
+    version: 1.2.0
     description: 'Computational provenance audit verifying every number, table, and figure in a manuscript derives from code,
       not manual entry. Triggers on: "check provenance", "verify reproducibility", "audit my pipeline", "are my numbers from
       code", "provenance audit". Companion to manuscript-review (prose audit).'
     path: skills/manuscript-provenance
     source: https://github.com/Mathews-Tom/armory/blob/main/skills/manuscript-provenance/SKILL.md
+    complements:
+    - manuscript-review
+    - manuscript-typography
+    - figure-rhetoric
+    - figure-table-quality
+    - arxiv-preflight
+    - literature-review
     tags:
     - provenance
     - reproducibility
@@ -456,15 +597,23 @@ packages:
     category: review
     difficulty: advanced
     phase: review
-    complements:
-    - literature-review
   - name: manuscript-review
-    version: 1.2.2
+    version: 1.3.0
     description: 'Pre-publication manuscript audit producing a section-level refactoring report with citation hygiene and
       submission-readiness checks. Triggers on: "review my paper", "check before submission", "is this ready to submit", "pre-pub
       checklist", "refactor my paper", "check my references", "does the abstract work".'
     path: skills/manuscript-review
     source: https://github.com/Mathews-Tom/armory/blob/main/skills/manuscript-review/SKILL.md
+    complements:
+    - manuscript-provenance
+    - manuscript-typography
+    - figure-rhetoric
+    - figure-table-quality
+    - citation-audit
+    - arxiv-preflight
+    - arxiv-figures
+    - arxiv-package
+    - literature-review
     tags:
     - manuscript
     - pre-publication
@@ -473,8 +622,29 @@ packages:
     category: review
     difficulty: advanced
     phase: review
+  - name: manuscript-typography
+    version: 1.0.0
+    description: 'Audit academic manuscripts for typographic design conventions: booktabs table style, caption placement,
+      dashes/quotes, units and numbers, cross-reference style, page layout, typographic hierarchy, professional polish. Triggers
+      on: "check typography", "fix formatting", "polish my paper", "check my LaTeX", "typographic review", "make it look professional",
+      "check tables", "fix captions". Companion to manuscript-review (content) and arxiv-preflight (compliance).'
+    path: skills/manuscript-typography
+    source: https://github.com/Mathews-Tom/armory/blob/main/skills/manuscript-typography/SKILL.md
     complements:
-    - literature-review
+    - manuscript-review
+    - arxiv-preflight
+    - figure-table-quality
+    - figure-rhetoric
+    - manuscript-provenance
+    tags:
+    - typography
+    - latex
+    - formatting
+    - booktabs
+    - polish
+    category: review
+    difficulty: advanced
+    phase: review
   - name: market-analyzer
     version: 1.0.1
     description: 'Structured market analysis with TAM/SAM/SOM sizing, trends, and competitive landscape via WebSearch, producing
@@ -762,6 +932,7 @@ packages:
     difficulty: intermediate
     phase: review
     complements:
+    - citation-audit
     - literature-review
   - name: sequential-thinking
     version: 1.1.1

@@ -2,7 +2,16 @@
 name: manuscript-review
 description: 'Pre-publication manuscript audit producing a section-level refactoring report with citation hygiene and submission-readiness checks. Triggers on: "review my paper", "check before submission", "is this ready to submit", "pre-pub checklist", "refactor my paper", "check my references", "does the abstract work".'
 metadata:
-  version: 1.2.2
+  version: 1.3.0
+  complements:
+    [
+      manuscript-provenance,
+      manuscript-typography,
+      figure-rhetoric,
+      figure-table-quality,
+      citation-audit,
+      arxiv-preflight,
+    ]
   category: review
   tags: [manuscript, pre-publication, citation-hygiene, submission]
   difficulty: advanced
@@ -10,6 +19,8 @@ metadata:
 ---
 
 # Manuscript Review Skill
+
+**Pipeline position:** Phase 1a (content audit). Runs in parallel with `figure-rhetoric`. No prior dependencies. Outputs consumed by `manuscript-provenance` (macro manifest feedback) and `figure-rhetoric` (claims map for visual argument assessment). See companion skills for full pre-publication coverage: `manuscript-typography` (typographic conventions), `citation-audit` (citation truth), `arxiv-preflight` (submission compliance).
 
 ## Purpose
 
