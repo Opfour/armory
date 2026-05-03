@@ -75,6 +75,70 @@ packages:
     category: review
     difficulty: advanced
     phase: review
+  - name: arxiv-figures
+    version: 1.0.0
+    description: 'Optimize and prepare figures for arXiv submission: format conversion (EPS/PDF/PNG/JPG), size reduction,
+      metadata stripping, processor compatibility (DVI vs PDFLaTeX). Triggers on: "optimize figures for arXiv", "reduce figure
+      size", "convert figures for arXiv", "fix arXiv figures", "figure too large", "arxiv image compression". Companion to
+      arxiv-preflight and arxiv-package.'
+    path: skills/arxiv-figures
+    source: https://github.com/Mathews-Tom/armory/blob/main/skills/arxiv-figures/SKILL.md
+    complements:
+    - arxiv-preflight
+    - arxiv-package
+    - manuscript-review
+    tags:
+    - arxiv
+    - figures
+    - optimization
+    - latex
+    - submission
+    category: review
+    difficulty: intermediate
+    phase: ship
+  - name: arxiv-package
+    version: 1.0.0
+    description: 'Package a TeX/LaTeX project into a clean tarball or zip for arXiv upload: file selection, build-artifact
+      exclusion, 00README.XXX generation, ancillary file organization, archive validation. Triggers on: "package for arXiv",
+      "create arXiv tarball", "bundle submission", "zip for arXiv", "prepare arXiv upload", "arXiv submission archive". Companion
+      to arxiv-preflight and arxiv-figures.'
+    path: skills/arxiv-package
+    source: https://github.com/Mathews-Tom/armory/blob/main/skills/arxiv-package/SKILL.md
+    complements:
+    - arxiv-preflight
+    - arxiv-figures
+    - manuscript-review
+    tags:
+    - arxiv
+    - packaging
+    - tarball
+    - latex
+    - submission
+    category: review
+    difficulty: intermediate
+    phase: ship
+  - name: arxiv-preflight
+    version: 1.0.0
+    description: 'Pre-submission validation audit for arXiv papers across TeX source, PDF, figures, metadata, bibliography,
+      file organization, and common-error scans. Produces pass/fail report with specific fixes per arXiv requirement. Triggers
+      on: "check my arXiv submission", "validate for arXiv", "arXiv preflight", "ready for arXiv", "arxiv check", "arxiv submission
+      readiness". Companion to manuscript-review (prose), manuscript-provenance (code), arxiv-figures, arxiv-package.'
+    path: skills/arxiv-preflight
+    source: https://github.com/Mathews-Tom/armory/blob/main/skills/arxiv-preflight/SKILL.md
+    complements:
+    - manuscript-review
+    - manuscript-provenance
+    - arxiv-figures
+    - arxiv-package
+    tags:
+    - arxiv
+    - preflight
+    - latex
+    - validation
+    - submission
+    category: review
+    difficulty: advanced
+    phase: review
   - name: benchmark-runner
     version: 1.1.1
     description: 'Designs structured benchmarks comparing algorithms, models, or implementations with metrics, test cases,
@@ -477,6 +541,8 @@ packages:
     - figure-table-quality
     - citation-audit
     - arxiv-preflight
+    - arxiv-figures
+    - arxiv-package
     - literature-review
     tags:
     - manuscript
