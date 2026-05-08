@@ -1,0 +1,41 @@
+cases:
+  - id: handoff_refresh
+    prompt: "/handoff"
+    fixtures: []
+    rubric:
+      - "Invokes the handoff skill in refresh mode"
+      - "Writes .docs/handoff.md"
+      - "Preserves the authority-boundary line"
+    trigger_expected: true
+
+  - id: handoff_init
+    prompt: "/handoff init"
+    fixtures: []
+    rubric:
+      - "Invokes the handoff skill in scaffold mode"
+      - "Creates a schema stub when absent"
+      - "Does not overwrite an existing handoff during init"
+    trigger_expected: true
+
+  - id: implicit_refresh
+    prompt: "Refresh handoff before we stop"
+    fixtures: []
+    rubric:
+      - "Recognizes refresh intent"
+      - "Delegates to handoff skill"
+    trigger_expected: true
+
+  - id: negative_changelog
+    prompt: "Write release notes for the last ten commits"
+    fixtures: []
+    rubric:
+      - "Does not activate; release notes belong to changelog-composer"
+    trigger_expected: false
+
+  - id: negative_adr
+    prompt: "Write an ADR for choosing PostgreSQL over SQLite"
+    fixtures: []
+    rubric:
+      - "Does not activate; durable decisions belong to adr-writer"
+    trigger_expected: false
+

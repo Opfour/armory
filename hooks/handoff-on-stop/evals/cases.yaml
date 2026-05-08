@@ -1,0 +1,40 @@
+cases:
+  - id: refreshes_when_present
+    prompt: "A Stop event fires in a project with .docs/handoff.md"
+    fixtures: []
+    rubric:
+      - "Hook checks for .docs/handoff.md"
+      - "Hook invokes the handoff refresh path silently"
+      - "Hook exits 0"
+    trigger_expected: true
+
+  - id: noops_when_absent
+    prompt: "A Stop event fires in a project without .docs/handoff.md"
+    fixtures: []
+    rubric:
+      - "Hook exits 0 without creating a handoff"
+      - "Hook produces no user-visible output"
+    trigger_expected: true
+
+  - id: logs_and_continues_on_failure
+    prompt: "The handoff generator fails during a Stop event"
+    fixtures: []
+    rubric:
+      - "Hook records the failure"
+      - "Hook does not block the Stop event"
+    trigger_expected: true
+
+  - id: negative_user_prompt
+    prompt: "The user sends a normal coding prompt"
+    fixtures: []
+    rubric:
+      - "Hook should not fire because the event is not Stop"
+    trigger_expected: false
+
+  - id: negative_pre_tool
+    prompt: "A PreToolUse event fires before editing a file"
+    fixtures: []
+    rubric:
+      - "Hook should not fire on PreToolUse"
+    trigger_expected: false
+
