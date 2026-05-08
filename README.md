@@ -1,7 +1,7 @@
 # armory
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
-[![packages: 106](https://img.shields.io/badge/packages-106-informational)](manifest.yaml)
+[![packages: 125](https://img.shields.io/badge/packages-125-informational)](manifest.yaml)
 [![evals: 100%](https://img.shields.io/badge/eval_coverage-100%25-success)](skills/)
 [![GitHub stars](https://img.shields.io/github/stars/Mathews-Tom/armory?style=social)](https://github.com/Mathews-Tom/armory/stargazers)
 [![catalog](https://img.shields.io/badge/catalog-browse_packages-58a6ff)](https://mathews-tom.github.io/armory/)
@@ -68,6 +68,7 @@ Orchestrator agents compose skills and other agents into multi-phase workflows. 
 | [lightpanda-browser](skills/lightpanda-browser/) | Lightweight headless browser automation via Lightpanda + agent-browser CDP — 9x lower memory, 11x faster, for scraping, DOM extraction, and form automation |
 | [skill-library](skills/skill-library/)           | Agent-native catalog for browsing, installing, updating, syncing, and removing armory skills from within a Claude Code session                              |
 | [env-validator](skills/env-validator/)           | Validate `.env` files against project requirements — missing vars, type mismatches, insecure defaults, `.env.example` drift                                 |
+| [handoff](skills/handoff/)                       | Maintain `.docs/handoff.md` as a 200-line session-continuity runbook for in-flight work, blockers, decisions, validation state, and resume steps           |
 
 ### Skills — Research & Analysis
 
@@ -190,6 +191,7 @@ Skills below are superseded by base model capabilities. They remain installable 
 | [security-scan](commands/security-scan/) | Security vulnerability audit     |
 | [refactor](commands/refactor/)           | Code simplification workflow     |
 | [evolve](commands/evolve/)               | Co-evolutionary skill generation |
+| [handoff](commands/handoff/)             | Refresh or scaffold `.docs/handoff.md` |
 
 ## Hooks
 
@@ -201,6 +203,7 @@ Skills below are superseded by base model capabilities. They remain installable 
 | [anatomy-index](hooks/anatomy-index/)     | Maintain project file index with token estimates     |
 | [read-dedup](hooks/read-dedup/)           | Warn on duplicate file reads within a session        |
 | [prompt-context](hooks/prompt-context/)   | Inject text file as additionalContext on every prompt |
+| [handoff-on-stop](hooks/handoff-on-stop/) | Refresh `.docs/handoff.md` on Stop when present      |
 
 ## Utilities
 
@@ -222,6 +225,7 @@ Presets install curated bundles of passive packages (rules, hooks, commands) in 
 | [ai-builder](presets/ai-builder/)       | 6 skills                                         | AI/ML development toolkit — agent building, prompt engineering, GPU optimization, RAG auditing. |
 | [skill-evolution](presets/skill-evolution/) | 6 skills, 1 agent, 1 command               | EvoSkills pipeline — co-evolutionary skill factory with paper-to-skill, distillation, and verification. |
 | [terse-mode](presets/terse-mode/)       | 1 hook                                           | Terse output enforcement via prompt-context hook with compaction-immune rule injection.          |
+| [session-continuity](presets/session-continuity/) | 1 skill, 1 command, 1 hook          | Atomic handoff install: `/handoff`, greenfield scaffold, and opt-in Stop refresh gated by `.docs/handoff.md`. |
 
 ### Deprecated Presets
 
