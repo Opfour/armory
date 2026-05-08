@@ -1,0 +1,57 @@
+cases:
+  - id: refresh_existing_handoff
+    prompt: "/handoff"
+    fixtures: ["fixtures/known-git-state"]
+    rubric:
+      - "Rewrites .docs/handoff.md using the locked schema"
+      - "Includes branch, short HEAD, working-tree counts, validation state, decisions, blockers, and refs"
+      - "Preserves the authority-boundary line"
+    trigger_expected: true
+    assertions:
+      - type: contains
+        target: "## Resume checklist"
+        weight: 1.0
+      - type: contains
+        target: "Authority: this file owns *transient session state*"
+        weight: 1.0
+
+  - id: greenfield_scaffold
+    prompt: "/handoff init"
+    fixtures: ["fixtures/greenfield"]
+    rubric:
+      - "Creates .docs/handoff.md if absent"
+      - "Uses empty placeholders without claiming tests passed"
+      - "Includes every schema heading"
+    trigger_expected: true
+    assertions:
+      - type: contains
+        target: "No session changes recorded yet."
+        weight: 0.8
+
+  - id: line_cap_truncation
+    prompt: "refresh handoff with a very long session change list"
+    fixtures: ["fixtures/line-cap"]
+    rubric:
+      - "Generated handoff is no more than 200 lines"
+      - "Oldest What changed bullets are truncated first"
+      - "Warning comment is emitted"
+    trigger_expected: true
+    assertions:
+      - type: contains
+        target: "handoff exceeded 200 lines"
+        weight: 1.0
+
+  - id: negative_durable_memory
+    prompt: "Store this project architecture fact in long-term memory"
+    fixtures: []
+    rubric:
+      - "Does not activate handoff because durable facts belong in memory or CLAUDE.md"
+    trigger_expected: false
+
+  - id: negative_changelog
+    prompt: "Generate release notes from the commits since v1.2.0"
+    fixtures: []
+    rubric:
+      - "Does not activate handoff because committed-history summaries belong to changelog-composer"
+    trigger_expected: false
+
