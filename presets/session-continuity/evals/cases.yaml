@@ -1,0 +1,32 @@
+cases:
+  - id: install_session_continuity
+    prompt: "Install the handoff preset for session continuity"
+    fixtures: []
+    rubric:
+      - "Includes the handoff skill"
+      - "Includes the /handoff command"
+      - "Includes the handoff-on-stop hook"
+    trigger_expected: true
+
+  - id: atomic_handoff_bundle
+    prompt: "I want atomic install and uninstall of the handoff command and stop hook"
+    fixtures: []
+    rubric:
+      - "Routes to session-continuity preset"
+      - "Explains that the Stop hook is opt-in by .docs/handoff.md presence"
+    trigger_expected: true
+
+  - id: negative_only_changelog
+    prompt: "Install tools for generating changelogs and release notes"
+    fixtures: []
+    rubric:
+      - "Does not activate; this preset is for session handoff, not release documentation"
+    trigger_expected: false
+
+  - id: negative_security_stack
+    prompt: "Install the strict security review preset"
+    fixtures: []
+    rubric:
+      - "Does not activate; security review belongs to sec-strict"
+    trigger_expected: false
+

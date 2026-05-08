@@ -466,6 +466,22 @@ packages:
     category: data
     difficulty: advanced
     phase: build
+  - name: handoff
+    version: 0.1.0
+    description: 'Produces and refreshes `.docs/handoff.md`, a 200-line session-continuity runbook for coding agents. Captures
+      git state, working-tree changes, last validation commands, session decisions, blockers, resume checklist, references,
+      and greenfield scaffolds. Triggers on: "update handoff", "session handoff", "refresh handoff", "/handoff", "/handoff
+      init", "resume checklist", "cold-start primer". Use this skill when ending, pausing, resuming, or transferring in-flight
+      project work across agent sessions.'
+    path: skills/handoff
+    source: https://github.com/Mathews-Tom/armory/blob/main/skills/handoff/SKILL.md
+    tags:
+    - session-continuity
+    - runbook
+    - context
+    category: development
+    difficulty: intermediate
+    phase: ship
   - name: html-presentation
     version: 1.1.1
     description: 'Converts documents, outlines, or notes into self-contained HTML slide decks with horizontal (Reveal.js)
@@ -1551,6 +1567,25 @@ packages:
     - hooks
     category: operations
     difficulty: beginner
+  - name: handoff-on-stop
+    version: 0.1.0
+    description: 'Refreshes `.docs/handoff.md` on session Stop when a project has opted in by already having that file. Invokes
+      the handoff skill silently, logs failures, and continues without blocking shutdown. Triggers on: "handoff on stop",
+      "session end handoff", "auto refresh handoff", "Stop hook", "session continuity hook", "save context on stop". Use this
+      hook when projects need automatic session-continuity updates at the end of coding-agent sessions without creating handoff
+      files everywhere.'
+    path: hooks/handoff-on-stop
+    source: https://github.com/Mathews-Tom/armory/blob/main/hooks/handoff-on-stop/HOOK.md
+    events:
+    - Stop
+    tags:
+    - handoff
+    - session-continuity
+    - stop-hook
+    - runbook
+    category: operations
+    difficulty: intermediate
+    phase: ship
   - name: pre-edit-backup
     version: 1.0.0
     description: Creates a backup copy of any file before Claude Code edits it. Fires on PreToolUse for the Edit tool, reads
@@ -1739,6 +1774,22 @@ packages:
     - command
     category: meta
     difficulty: intermediate
+  - name: handoff
+    version: 0.1.0
+    description: 'Slash-command wrapper for the handoff skill. `/handoff` refreshes `.docs/handoff.md`; `/handoff init` scaffolds
+      the schema in greenfield projects; both preserve the 200-line cap and authority boundary. Triggers on: "/handoff", "/handoff
+      init", "update handoff", "refresh handoff", "session handoff", "create handoff", "resume checklist". Use this command
+      when pausing, ending, transferring, or resuming in-flight coding work across agent sessions.'
+    path: commands/handoff
+    source: https://github.com/Mathews-Tom/armory/blob/main/commands/handoff/COMMAND.md
+    tags:
+    - handoff
+    - slash-command
+    - session-continuity
+    - runbook
+    category: development
+    difficulty: intermediate
+    phase: ship
   - name: refactor
     version: 1.0.0
     description: 'Code simplification workflow that identifies and cleans recently modified files. Uses git diff to find changed
@@ -1995,6 +2046,23 @@ packages:
     - strict
     category: review
     difficulty: intermediate
+  - name: session-continuity
+    version: 0.1.0
+    description: 'Bundles the handoff skill, `/handoff` command, and opt-in Stop hook for maintaining `.docs/handoff.md` as
+      a project-local session-continuity runbook. Covers refresh, greenfield scaffold, automatic Stop-event rewrite, authority-boundary
+      enforcement, and 200-line cap. Triggers on: "session continuity", "handoff preset", "install handoff", "preserve session
+      state", "cold-start primer", "resume checklist". Use this preset when teams want atomic install/uninstall of handoff
+      capture across coding agents.'
+    path: presets/session-continuity
+    source: https://github.com/Mathews-Tom/armory/blob/main/presets/session-continuity/PRESET.md
+    tags:
+    - session-continuity
+    - handoff
+    - preset
+    - runbook
+    category: operations
+    difficulty: intermediate
+    phase: ship
   - name: skill-evolution
     version: 1.0.0
     description: 'Skill generation and co-evolutionary refinement tools. Bundles the test-engineer agent (co-evolutionary
