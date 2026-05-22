@@ -1,0 +1,124 @@
+cases:
+  - id: create_three_branch_stack
+    prompt: "Create stacked PRs for feat/parser-core, feat/parser-cache, and feat/parser-cli based on main."
+    fixtures: []
+    rubric:
+      - "activates stacked-prs"
+      - "publishes each branch against its parent branch"
+      - "checks for dirty worktree before PR creation or push"
+    trigger_expected: true
+    assertions:
+      - type: matches_regex
+        target: "gh pr create[\\s\\S]*--base"
+        weight: 1.0
+      - type: matches_regex
+        target: "(feat/parser-core.*main|main.*feat/parser-core)"
+        weight: 0.8
+      - type: matches_regex
+        target: "git status --porcelain"
+        weight: 0.8
+
+  - id: split_single_branch_stack
+    prompt: "Split feat/parser-system into stacked PRs for core, cache, and CLI, then validate and publish the stack."
+    fixtures: []
+    rubric:
+      - "activates stacked-prs"
+      - "inspects source branch relative to base"
+      - "uses conservative split modes and verifies leaf equivalence before publishing"
+    trigger_expected: true
+    assertions:
+      - type: matches_regex
+        target: "git log --oneline --reverse"
+        weight: 0.8
+      - type: matches_regex
+        target: "(commit-range|commit-list|patch-guided|refuse)"
+        weight: 1.0
+      - type: matches_regex
+        target: "git diff --exit-code"
+        weight: 0.8
+
+  - id: sync_stack_after_main_moves
+    prompt: "Sync my PR stack after main moved and push the rebased stack safely."
+    fixtures: []
+    rubric:
+      - "activates stacked-prs"
+      - "fetches current remote state before rebasing"
+      - "uses force-with-lease for rewritten stack branches"
+    trigger_expected: true
+    assertions:
+      - type: matches_regex
+        target: "git fetch origin --prune"
+        weight: 0.8
+      - type: matches_regex
+        target: "git rebase"
+        weight: 0.8
+      - type: matches_regex
+        target: "--force-with-lease"
+        weight: 1.0
+
+  - id: merge_stack_bottom_up
+    prompt: "Merge the stack once checks pass, then clean up the branches."
+    fixtures: []
+    rubric:
+      - "activates stacked-prs"
+      - "merges root PR before children"
+      - "retargets each child after the parent lands"
+    trigger_expected: true
+    assertions:
+      - type: matches_regex
+        target: "(root|parent).*(merge|PR)"
+        weight: 0.8
+      - type: matches_regex
+        target: "gh pr merge"
+        weight: 0.8
+      - type: matches_regex
+        target: "gh pr edit[\\s\\S]*--base"
+        weight: 0.8
+
+  - id: retarget_existing_stack
+    prompt: "Retarget the child PRs so each PR points at the correct parent branch in the stack."
+    fixtures: []
+    rubric:
+      - "activates stacked-prs"
+      - "inspects existing provider PR bases"
+      - "uses provider edit operation instead of recreating PRs"
+    trigger_expected: true
+    assertions:
+      - type: matches_regex
+        target: "gh pr list"
+        weight: 0.8
+      - type: matches_regex
+        target: "gh pr edit[\\s\\S]*--base"
+        weight: 1.0
+
+  - id: validate_stack_slices
+    prompt: "Validate every slice in this stacked PR sequence and update the PR bodies with what ran."
+    fixtures: []
+    rubric:
+      - "activates stacked-prs"
+      - "validates stack slices rather than only the leaf"
+      - "records exact validation commands"
+    trigger_expected: true
+    assertions:
+      - type: matches_regex
+        target: "(validate|validation).*(branch|slice|stack)"
+        weight: 0.8
+      - type: matches_regex
+        target: "(PR body|Validation)"
+        weight: 0.8
+
+  - id: negative_single_pr
+    prompt: "Open a normal PR for my current branch against main."
+    fixtures: []
+    rubric:
+      - "normal one-branch PR creation belongs to the standard PR workflow"
+      - "does not activate stacked-prs"
+    trigger_expected: false
+
+  - id: negative_git_rebase_tutorial
+    prompt: "Explain how Git rebase works with a simple example."
+    fixtures: []
+    rubric:
+      - "general Git education is not a stacked PR workflow"
+      - "does not activate stacked-prs"
+    trigger_expected: false
