@@ -1,0 +1,73 @@
+cases:
+  - id: block_plain_force_push
+    prompt: "Run git push --force origin feat/parser-cache after rebasing the stack."
+    fixtures: []
+    rubric:
+      - "Hook blocks plain force push"
+      - "Diagnostic recommends force-with-lease"
+    trigger_expected: true
+    assertions:
+      - type: matches_regex
+        target: "BLOCKED"
+        weight: 0.8
+      - type: matches_regex
+        target: "--force-with-lease"
+        weight: 1.0
+
+  - id: allow_force_with_lease
+    prompt: "Run git push --force-with-lease origin feat/parser-cache after a clean stack rebase."
+    fixtures: []
+    rubric:
+      - "Hook allows force-with-lease"
+      - "Hook does not block safe stack rebase pushes"
+    trigger_expected: true
+    assertions:
+      - type: matches_regex
+        target: "allow|exit 0|force-with-lease"
+        weight: 0.8
+
+  - id: warn_wrong_stack_base
+    prompt: "With .stack-prs.yaml declaring feat/parser-cache parent feat/parser-core, run gh pr create --base main --head feat/parser-cache."
+    fixtures: []
+    rubric:
+      - "Hook warns that the PR base conflicts with stack metadata"
+      - "Hook exits 0 because wrong-base detection is warning-only in v1"
+    trigger_expected: true
+    assertions:
+      - type: matches_regex
+        target: "WARNING"
+        weight: 0.8
+      - type: matches_regex
+        target: "parent|base"
+        weight: 0.8
+
+  - id: warn_child_parent_unpushed
+    prompt: "With .stack-prs.yaml declaring feat/parser-cache parent feat/parser-core, run git push origin feat/parser-cache while the parent has unpushed commits."
+    fixtures: []
+    rubric:
+      - "Hook warns about pushing a child before its parent"
+      - "Hook does not block the push"
+    trigger_expected: true
+    assertions:
+      - type: matches_regex
+        target: "WARNING"
+        weight: 0.8
+      - type: matches_regex
+        target: "push parent before child|unpushed"
+        weight: 0.8
+
+  - id: allow_status
+    prompt: "Run git status --short in a repo with .stack-prs.yaml."
+    fixtures: []
+    rubric:
+      - "Hook allows unrelated Git status commands"
+      - "Hook emits no stack warning"
+    trigger_expected: false
+
+  - id: allow_normal_push_without_metadata
+    prompt: "Run git push origin feat/simple-branch in a repo without .stack-prs.yaml."
+    fixtures: []
+    rubric:
+      - "Hook allows normal push"
+      - "Hook does not require stack metadata"
+    trigger_expected: false
