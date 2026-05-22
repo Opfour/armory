@@ -1,0 +1,86 @@
+cases:
+  - id: slash_split
+    prompt: "/stack-pr split --source feat/parser-system --base main feat/parser-core feat/parser-cache feat/parser-cli"
+    fixtures: []
+    rubric:
+      - "activates stack-pr command"
+      - "delegates to skills/stacked-prs split workflow"
+      - "preserves source branch, base branch, and ordered target branches"
+    trigger_expected: true
+    assertions:
+      - type: matches_regex
+        target: "skills/stacked-prs"
+        weight: 0.8
+      - type: matches_regex
+        target: "split"
+        weight: 0.8
+      - type: matches_regex
+        target: "feat/parser-system"
+        weight: 0.8
+
+  - id: slash_publish
+    prompt: "/stack-pr publish --base main feat/parser-core feat/parser-cache feat/parser-cli"
+    fixtures: []
+    rubric:
+      - "activates stack-pr command"
+      - "delegates to skills/stacked-prs publish workflow"
+      - "uses positional branch order as stack order"
+    trigger_expected: true
+    assertions:
+      - type: matches_regex
+        target: "publish"
+        weight: 0.8
+      - type: matches_regex
+        target: "positional|order"
+        weight: 0.8
+      - type: matches_regex
+        target: "gh pr create"
+        weight: 0.8
+
+  - id: slash_sync
+    prompt: "/stack-pr sync --base main feat/parser-core feat/parser-cache"
+    fixtures: []
+    rubric:
+      - "activates stack-pr command"
+      - "delegates to skills/stacked-prs sync workflow"
+      - "uses force-with-lease for rewritten branches"
+    trigger_expected: true
+    assertions:
+      - type: matches_regex
+        target: "sync"
+        weight: 0.8
+      - type: matches_regex
+        target: "--force-with-lease"
+        weight: 1.0
+
+  - id: slash_validate
+    prompt: "/stack-pr validate --base main feat/parser-core feat/parser-cache feat/parser-cli"
+    fixtures: []
+    rubric:
+      - "activates stack-pr command"
+      - "delegates to skills/stacked-prs validation workflow"
+      - "records exact validation commands"
+    trigger_expected: true
+    assertions:
+      - type: matches_regex
+        target: "validate|validation"
+        weight: 0.8
+      - type: matches_regex
+        target: "commands executed|exact"
+        weight: 0.6
+
+  - id: negative_ship_it
+    prompt: "Ship it: merge main, run tests, open the release PR, and write the changelog."
+    fixtures: []
+    rubric:
+      - "release workflow belongs to ship-workflow, not stack-pr"
+      - "does not activate stack-pr command"
+    trigger_expected: false
+
+  - id: negative_single_pr
+    prompt: "Create one PR for the current branch against main."
+    fixtures: []
+    rubric:
+      - "normal PR creation is outside stack-pr"
+      - "does not activate stack-pr command"
+    trigger_expected: false

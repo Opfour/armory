@@ -1,0 +1,64 @@
+cases:
+  - id: install_stack_workflow
+    prompt: "Install the stacked PR workflow preset for this team."
+    fixtures: []
+    rubric:
+      - "activates stack-workflow preset"
+      - "includes stacked-prs skill and stack-pr command"
+      - "includes stack-guard and git-protection hooks"
+    trigger_expected: true
+    assertions:
+      - type: matches_regex
+        target: "stacked-prs"
+        weight: 0.8
+      - type: matches_regex
+        target: "stack-pr"
+        weight: 0.8
+      - type: matches_regex
+        target: "stack-guard|git-protection"
+        weight: 0.8
+
+  - id: enable_stack_guard
+    prompt: "Enable the stack guard and stacked PR command for our repo."
+    fixtures: []
+    rubric:
+      - "routes to stack-workflow when the user asks for the bundled setup"
+      - "mentions stack-guard and stack-pr"
+    trigger_expected: true
+    assertions:
+      - type: matches_regex
+        target: "stack-guard"
+        weight: 0.8
+      - type: matches_regex
+        target: "stack-pr"
+        weight: 0.8
+
+  - id: team_stacked_branch_setup
+    prompt: "Our team uses dependent PR chains every week; install the workflow that protects those branches."
+    fixtures: []
+    rubric:
+      - "activates stack-workflow preset"
+      - "explains that it is for repeated stacked PR work"
+      - "does not create .stack-prs.yaml automatically"
+    trigger_expected: true
+    assertions:
+      - type: matches_regex
+        target: "dependent PR|stacked PR|branch stack"
+        weight: 0.8
+      - type: matches_regex
+        target: "does not create|metadata"
+        weight: 0.6
+
+  - id: negative_single_pr
+    prompt: "Open one normal pull request for my current branch."
+    fixtures: []
+    rubric:
+      - "does not activate stack-workflow because one normal PR does not need the preset"
+    trigger_expected: false
+
+  - id: negative_core_quality
+    prompt: "Install the basic code review and commit hygiene preset."
+    fixtures: []
+    rubric:
+      - "does not activate stack-workflow; core preset owns basic review and commit hygiene"
+    trigger_expected: false
