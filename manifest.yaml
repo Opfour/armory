@@ -1042,6 +1042,23 @@ packages:
     category: data
     difficulty: intermediate
     phase: build
+  - name: stacked-prs
+    version: 0.1.0
+    description: 'Manages dependent branch stacks and stacked pull requests using safe Git topology rules. Triggers on: "create
+      stacked PRs", "publish this stack", "sync my PR stack", "rebase this stack", "merge the stack", "retarget child PRs",
+      "split this branch into stacked PRs", "validate this stack", "cleanup stacked branches". Use when local branches or
+      one source branch need to become a dependency-ordered PR stack with correct parent bases, validation, synchronization,
+      merge order, and cleanup.'
+    path: skills/stacked-prs
+    source: https://github.com/Mathews-Tom/armory/blob/main/skills/stacked-prs/SKILL.md
+    tags:
+    - git
+    - pull-requests
+    - stacked-prs
+    - workflow
+    category: development
+    difficulty: advanced
+    phase: ship
   - name: static-web-artifacts-builder
     version: 1.1.1
     description: 'Build self-contained static HTML artifacts opened in a browser: interactive diagrams, dashboards, infographics.
@@ -1677,6 +1694,24 @@ packages:
     - efficiency
     category: operations
     difficulty: intermediate
+  - name: stack-guard
+    version: 0.1.0
+    description: 'PreToolUse Bash hook that adds stacked-PR-specific safety checks. Triggers on: "stack guard", "stacked PR
+      safety hook", "block git push --force", "warn wrong stack base", "protect stacked branches", "stack workflow hook".
+      Use this hook with stacked-prs workflows to block plain force pushes, allow force-with-lease, and warn when commands
+      appear to violate `.stack-prs.yaml` branch topology.'
+    path: hooks/stack-guard
+    source: https://github.com/Mathews-Tom/armory/blob/main/hooks/stack-guard/HOOK.md
+    events:
+    - PreToolUse
+    tags:
+    - git
+    - stacked-prs
+    - hooks
+    - safety
+    category: operations
+    difficulty: intermediate
+    phase: ship
   rules:
   - name: adaptive-thinking-control
     version: 1.0.0
@@ -1856,6 +1891,22 @@ packages:
     category: review
     difficulty: intermediate
     phase: review
+  - name: stack-pr
+    version: 0.1.0
+    description: 'Slash-command wrapper for the stacked-prs skill. Triggers on: "/stack-pr inspect", "/stack-pr split", "/stack-pr
+      publish", "/stack-pr sync", "/stack-pr validate", "/stack-pr merge", "/stack-pr cleanup", "stack-pr publish", "stack-pr
+      split". Use this command when a user wants a concise command surface for inspecting, creating, publishing, synchronizing,
+      validating, merging, or cleaning up stacked pull requests while delegating topology decisions to skills/stacked-prs.'
+    path: commands/stack-pr
+    source: https://github.com/Mathews-Tom/armory/blob/main/commands/stack-pr/COMMAND.md
+    tags:
+    - git
+    - pull-requests
+    - stacked-prs
+    - slash-command
+    category: development
+    difficulty: advanced
+    phase: ship
   - name: tdd
     version: 1.0.0
     description: 'Test-driven development workflow for functions, modules, or features. Guides Claude through the red-green-refactor
@@ -2098,6 +2149,22 @@ packages:
     - pipeline
     category: meta
     difficulty: advanced
+  - name: stack-workflow
+    version: 0.1.0
+    description: 'Bundles stacked pull request workflow packages for teams that regularly ship dependent PR chains. Triggers
+      on: "stack workflow preset", "install stacked PR workflow", "stacked PR team setup", "enable stack guard", "stack-pr
+      preset", "stacked branch workflow". Use this preset when a project wants the stacked-prs skill, /stack-pr command, stack-guard
+      hook, git-protection hook, and PR review packages installed as one workflow.'
+    path: presets/stack-workflow
+    source: https://github.com/Mathews-Tom/armory/blob/main/presets/stack-workflow/PRESET.md
+    tags:
+    - git
+    - pull-requests
+    - stacked-prs
+    - preset
+    category: development
+    difficulty: advanced
+    phase: ship
   - name: terse-mode
     version: 1.0.0
     description: 'Enforces terse, no-narration output from Claude Code. Bundles the prompt-context hook with a curated terse
